@@ -1,8 +1,8 @@
 <h1 align="center">Welcome to myURL 👋</h1>
 
 [![CircleCI](https://img.shields.io/circleci/build/github/JaneJeon/myURL)](https://circleci.com/gh/JaneJeon/myURL)
-[![Coverage](https://codecov.io/gh/JaneJeon/myURL/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/myURL)
-[![Maintainability](https://api.codeclimate.com/v1/badges/78bae22810143ad84ef1/maintainability)](https://codeclimate.com/github/JaneJeon/myURL/maintainability)
+[![Coverage](https://codecov.io/gh/JaneJeon/myurl/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/myurl)
+[![Maintainability](https://api.codeclimate.com/v1/badges/075998f9f2125e6b7961/maintainability)](https://codeclimate.com/github/JaneJeon/myURL/maintainability)
 [![Version](https://img.shields.io/npm/v/myurl)](https://www.npmjs.com/package/myurl)
 [![Downloads](https://img.shields.io/npm/dt/myurl)](https://www.npmjs.com/package/myurl)
 [![Dependencies](https://img.shields.io/david/JaneJeon/myurl)](https://david-dm.org/JaneJeon/myurl)
