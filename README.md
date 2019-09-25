@@ -51,17 +51,23 @@ This aggressive caching of redirects should make requests instantaneous, while t
 
 ## TODO (for MVP)
 
+The feature set is more tuned for internal use:
+
 - [ ] Implement atomic counter on DDB
 - [ ] hash(id) => url
-- [ ] set of normalized URLs?
+- [ ] set of normalized URLs? (one of these have to be global secondary index. Warning: eventual consistency!)
 - [ ] static page (S3) to actually make these requests
 - [ ] Some form of access control
 - [ ] Infrastructure as Code (some way to deploy and configure all this)
 
 ## Features that'd be nice to have
 
+- [ ] check malware links, and ban people when they do it too much
+- [ ] Banned domains & hosts
+- [ ] Visitor risk management (something like CloudFlare's security level, bot fight mode, scrape protection, etc)
 - [ ] Option to have "the panel" on the root domain
-- [ ] Finer-grained, more fully-featured user/team control
+- [ ] Finer-grained, more fully-featured user/team control (e.g. rate limiting on users that aren't signed in)
+- [ ] Option to make this public?
 - [ ] Built-in analytics (that can be disabled if the user chooses to use their own analytics platform)
 
 ## Run tests

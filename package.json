@@ -1,7 +1,7 @@
 {
   "name": "myurl",
   "version": "0.1.2",
-  "description": "A blazing fast, planet-scale, easy-to-use serverless URL shortener!",
+  "description": "A blazing-fast, planet-scale, and easy-to-use serverless URL shortener!",
   "bin": "./bin/deploy.js",
   "repository": "JaneJeon/myURL",
   "author": "Jane Jeon <JaneJeon9719@gmail.com>",
@@ -15,14 +15,12 @@
     "lint:fix:eslint": "yarn lint:all:eslint --fix",
     "lint:fix:prettier": "yarn lint:all:prettier --write",
     "test": "jest --passWithNoTests",
-    "test:watch": "yarn test --watch",
     "coverage": "is-ci && codecov",
     "clean": "rimraf build"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
@@ -63,7 +61,8 @@
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
     "dotenv": "^8.1.0",
-    "hashids": "^2.0.1"
+    "hashids": "^2.0.1",
+    "normalize-url": "^4.4.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",

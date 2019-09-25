@@ -4,6 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:lts
+      - image: localstack/localstack
 
     steps:
       - checkout
@@ -15,7 +16,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn --frozen-lockfile
+      - run:
+          name: Install Dependencies
+          command: yarn --frozen-lockfile
 
       - save_cache:
           paths:
@@ -24,15 +27,17 @@ jobs:
 
       - run:
           name: Lint
-          command: yarn lint --format junit -o reports/junit/eslint/results.xml
+          command: yarn lint
 
       - run:
           name: Test
+          environment:
+            JEST_JUNIT_OUTPUT_NAME: reports/junit/jest/results.xml
           command: yarn test --coverage --ci --runInBand --reporters=default --reporters=jest-junit
 
       - store_test_results:
           path: reports/junit
 
       - run:
-          name: Uploading coverage
+          name: Upload Coverage
           command: yarn coverage
