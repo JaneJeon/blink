@@ -22,7 +22,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
-      - run: |
+      - run:
           name: Lint
           command: yarn lint --format junit -o reports/junit/eslint/results.xml
 
