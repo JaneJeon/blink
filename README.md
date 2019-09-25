@@ -1,6 +1,18 @@
 # myURL
 
-A blazing fast, serverless URL shortener that is easy to use and deploy!
+A blazing fast, planet-scale, easy-to-use serverless URL shortener!
+
+The secret sauce is deep integration with CDN and aggressively caching everything.
+
+## Prerequisites
+
+Unfortunately some things can't be automated. e.g. migrating to Route53?
+
+## Usage
+
+```sh
+npx myurl domain.name
+```
 
 ## Architecture
 

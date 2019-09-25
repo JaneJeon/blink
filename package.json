@@ -1,0 +1,103 @@
+{
+  "name": "myurl",
+  "version": "0.1.0",
+  "description": "A blazing fast, planet-scale, easy-to-use serverless URL shortener!",
+  "bin": "./bin/deploy.js",
+  "repository": "JaneJeon/myURL",
+  "author": "Jane Jeon <JaneJeon9719@gmail.com>",
+  "license": "AGPL-3.0",
+  "scripts": {
+    "deploy": "node ./bin/deploy",
+    "lint": "run-s 'lint:all:* {@}' -- --",
+    "lint:fix": "run-s lint:fix:*",
+    "lint:all:eslint": "eslint .",
+    "lint:all:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
+    "lint:fix:eslint": "yarn lint:all:eslint --fix",
+    "lint:fix:prettier": "yarn lint:all:prettier --write",
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test --watch",
+    "coverage": "is-ci && codecov",
+    "clean": "rimraf build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{js,md,json,yml,yaml}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "prettier",
+      "prettier/standard"
+    ],
+    "plugins": [
+      "prettier",
+      "standard"
+    ],
+    "overrides": [
+      {
+        "files": "*.test.js",
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "aws-sdk": "^2.536.0",
+    "chalk": "^2.4.2",
+    "commander": "^3.0.1",
+    "dotenv": "^8.1.0",
+    "hashids": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "codecov": "^3.6.1",
+    "cross-env": "^6.0.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.5",
+    "is-ci": "^2.0.0",
+    "jest": "^24.9.0",
+    "jest-junit": "^8.0.0",
+    "lint-staged": "^9.3.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "bitly",
+    "domain",
+    "name",
+    "aws",
+    "cloudfront",
+    "cdn",
+    "lambda",
+    "serverless",
+    "dynamodb",
+    "S3"
+  ]
+}

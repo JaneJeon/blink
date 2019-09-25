@@ -1,0 +1,38 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:lts
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn --frozen-lockfile
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+
+      - run: |
+          name: Lint
+          command: yarn lint --format junit -o reports/junit/eslint/results.xml
+
+      - run: |
+          name: Test
+          command: yarn test --coverage --ci --runInBand --reporters=default --reporters=jest-junit
+
+      - store_test_results:
+          path: reports/junit
+
+      - run: |
+          name: Uploading coverage
+          command: yarn coverage
