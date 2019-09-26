@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv-defaults').config()
 const Link = require('../models/link')
 
 describe('Link model', () => {
