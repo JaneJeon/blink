@@ -53,9 +53,9 @@ This aggressive caching of redirects should make requests instantaneous, while t
 
 The feature set is more tuned for internal use:
 
-- [ ] Implement atomic counter on DDB
-- [ ] hash(id) => url
-- [ ] set of normalized URLs? (one of these have to be global secondary index. Warning: eventual consistency!)
+- [ ] ~~Implement atomic counter on DDB~~
+- [x] hash(id) => url
+- [x] set of normalized URLs? (one of these have to be global secondary index. Warning: eventual consistency!)
 - [ ] static page (S3) to actually make these requests
 - [ ] Some form of access control
 - [ ] Infrastructure as Code (some way to deploy and configure all this)

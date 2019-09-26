@@ -8,15 +8,15 @@
   "license": "AGPL-3.0",
   "scripts": {
     "deploy": "node ./bin/deploy",
-    "lint": "run-s 'lint:all:* {@}' -- --",
-    "lint:fix": "run-s lint:fix:*",
-    "lint:all:eslint": "eslint .",
-    "lint:all:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
-    "lint:fix:eslint": "yarn lint:all:eslint --fix",
-    "lint:fix:prettier": "yarn lint:all:prettier --write",
-    "test": "jest --passWithNoTests",
+    "lint": "run-s lint:*",
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
+    "test": "jest --forceExit",
     "coverage": "is-ci && codecov",
     "clean": "rimraf build"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "husky": {
     "hooks": {
@@ -57,17 +57,19 @@
     "singleQuote": true
   },
   "dependencies": {
-    "aws-sdk": "^2.536.0",
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
-    "dotenv": "^8.1.0",
     "hashids": "^2.0.1",
+    "mongoose": "^5.7.1",
+    "mongoose-sequence": "^5.2.1",
+    "mongoose-unique-validator": "^2.0.3",
     "normalize-url": "^4.4.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "codecov": "^3.6.1",
     "cross-env": "^6.0.0",
+    "dotenv": "^8.1.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
