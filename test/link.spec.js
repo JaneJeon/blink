@@ -1,5 +1,5 @@
 require('dotenv-defaults').config()
-const Link = require('./link')
+const Link = require('../models/link')
 
 describe('Link model', () => {
   const url = 'www.nodejs.org'
