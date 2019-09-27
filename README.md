@@ -65,9 +65,9 @@ The feature set is more tuned for internal use:
 - [ ] check malware links, and ban people when they do it too much
 - [ ] Banned domains & hosts
 - [ ] Visitor risk management (something like CloudFlare's security level, bot fight mode, scrape protection, etc)
-- [ ] Option to have "the panel" on the root domain
+- [ ] ~~Option to have "the panel" on the root domain~~
 - [ ] Finer-grained, more fully-featured user/team control (e.g. rate limiting on users that aren't signed in)
-- [ ] Option to make this public?
+- [ ] ~~Option to make this public?~~
 - [ ] Built-in analytics (that can be disabled if the user chooses to use their own analytics platform)
 
 ## Run tests

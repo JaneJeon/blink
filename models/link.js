@@ -8,10 +8,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const schema = new mongoose.Schema(
   {
-    _id: {
-      type: Number,
-      get: id => hash.encode(id)
-    },
+    _id: { type: Number, immutable: true },
     url: {
       type: String,
       required: true,

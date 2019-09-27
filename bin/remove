@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
 console.log('WIP!')
-// serverless deploy -v
+// serverless remove
