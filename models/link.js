@@ -8,7 +8,11 @@ const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const schema = new mongoose.Schema(
   {
-    _id: { type: Number, immutable: true },
+    _id: {
+      type: Number,
+      immutable: true,
+      get: id => hash.encode(id)
+    },
     url: {
       type: String,
       required: true,
@@ -28,7 +32,6 @@ const schema = new mongoose.Schema(
   { _id: false }
 )
 
-schema.plugin(require('mongoose-unique-validator'))
 schema.plugin(AutoIncrement)
 schema.statics.findByHashId = function(hashId) {
   return this.findById(hash.decode(hashId)[0])
