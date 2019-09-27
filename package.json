@@ -12,8 +12,9 @@
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
     "test": "jest --forceExit",
+    "test:watch": "yarn test --watch",
     "coverage": "is-ci && codecov",
-    "clean": "rimraf build"
+    "clean": "rimraf reports coverage"
   },
   "jest": {
     "testEnvironment": "node"
@@ -60,6 +61,7 @@
   "dependencies": {
     "@casl/ability": "^3.2.0",
     "@casl/mongoose": "^2.3.2",
+    "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
     "connect-mongo": "^3.0.0",
@@ -70,17 +72,19 @@
     "got": "^9.6.0",
     "hashids": "^2.0.1",
     "helmet": "^3.21.1",
+    "lodash": "^4.17.15",
     "mongoose": "^5.7.1",
     "mongoose-hidden": "^1.8.0",
     "mongoose-sequence": "^5.2.1",
-    "mongoose-type-email": "^1.0.11",
     "mongoose-unique-validator": "^2.0.3",
+    "morgan": "^1.9.1",
     "normalize-url": "^4.4.1",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "passport-remember-me": "^0.0.1",
     "rate-limit-redis": "^1.6.0",
-    "restana": "^3.3.1"
+    "restana": "^3.3.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
