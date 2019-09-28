@@ -6,6 +6,8 @@ const express = require('express')
 const app = express()
 
 app
+  .set('views', 'views')
+  .set('view engine', 'hbs')
   .use(require('helmet')())
   .use(require('cors')({ origin: true }))
   .use(express.json())
