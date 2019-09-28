@@ -1,39 +1,27 @@
 require('dotenv-defaults').config()
+require('express-async-errors')
 
-const app = require('restana')({
-  errorHandler: require('./middlewares/error-handler')
-})
 const passport = require('./lib/passport')
+const express = require('express')
+const app = express()
 
 app
   .use(require('helmet')())
   .use(require('cors')({ origin: true }))
-  .use(require('body-parser').json())
+  .use(express.json())
+  .use(require('./middlewares/session'))
   .use(passport.initialize())
   .use(passport.session())
-  .get('/')
-  .get('/login')
-  .get('/auth/github', passport.authenticate('github'))
-  .get(
-    '/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/login' }),
-    (req, res) => {
-      res.redirect(req.session.returnTo || '/')
-    }
-  ) // TODO: subdomain?!?
+  .use(express.static('public', { index: false }))
+  .use(require('./routes'))
+  .use(require('./middlewares/error-handler'))
 
-app
-  .start(process.env.PORT)
-  .then(server => {
-    console.log(`Server listening at ${server.address}`)
+if (process.env.NODE_ENV !== 'test')
+  app.listen(process.env.PORT, function(err) {
+    if (err) {
+      console.error('Could not start server:', err)
+      process.exit(1)
+    } else console.log(`Server listening at ${this.address()}`)
   })
-  .catch(err => {
-    console.error(err)
-    process.exit(1)
-  })
-
-process.on('SIGINT', () => {
-  app.close().then(() => process.exit())
-})
 
 module.exports = app
