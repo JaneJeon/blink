@@ -1,3 +1,4 @@
 - [ ] Setup logger
 - [ ] Remember-me cookie?
 - [ ] Put the dependencies separately on www and dash?
+- [ ] mount express-status-monitor since we're either going with free Heroku or now.sh
