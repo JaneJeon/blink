@@ -61,6 +61,7 @@ The feature set is more tuned for internal use:
 - [ ] Some form of access control
 - [ ] Infrastructure as Code (some way to deploy and configure all this)
 - [ ] Configure cache headers for static, render, and redirects (etag?)
+- [x] service factory to share www and dash?
 
 ## Features that'd be nice to have
 
