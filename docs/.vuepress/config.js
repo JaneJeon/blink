@@ -5,6 +5,7 @@ const pkg = require('../../package')
 module.exports = {
   title: pkg.name,
   description: pkg.description,
+  theme: 'default-prefers-color-scheme',
   themeConfig: {
     repo: pkg.repository,
     docsDir: 'docs',
