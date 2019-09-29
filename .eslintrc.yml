@@ -1,0 +1,16 @@
+extends:
+  - standard
+  - prettier
+  - prettier/standard
+
+plugins:
+  - prettier
+  - standard
+
+rules:
+  no-console: error
+
+overrides:
+  - files: '*.test.js'
+    env:
+      jest: true

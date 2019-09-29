@@ -13,7 +13,7 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
-    "test": "jest --forceExit",
+    "test": "jest --forceExit --env=node",
     "test:watch": "yarn test --watch",
     "coverage": "is-ci && codecov",
     "docs": "vuepress dev docs",
@@ -21,48 +21,6 @@
     "clean": "run-p clean:*",
     "clean:logs": "rimraf logs/*.log",
     "clean:docs": "docs/.vuepress/dist"
-  },
-  "jest": {
-    "testEnvironment": "node"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{js,md,json,yml,yaml}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "standard",
-      "prettier",
-      "prettier/standard"
-    ],
-    "plugins": [
-      "prettier",
-      "standard"
-    ],
-    "overrides": [
-      {
-        "files": "*.test.js",
-        "env": {
-          "jest": true
-        }
-      }
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
   },
   "dependencies": {
     "@casl/ability": "^3.2.0",
@@ -99,8 +57,7 @@
     "restana": "^3.3.1",
     "serve-static": "^1.14.1",
     "styled-components": "^4.4.0",
-    "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^4.1.0"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
@@ -127,7 +84,8 @@
     "supertest": "^4.0.2",
     "supertest-session": "^4.0.0",
     "vuepress": "^1.1.0",
-    "vuepress-theme-default-prefers-color-scheme": "^1.0.2"
+    "vuepress-theme-default-prefers-color-scheme": "^1.0.2",
+    "winston-daily-rotate-file": "^4.1.0"
   },
   "keywords": [
     "url",

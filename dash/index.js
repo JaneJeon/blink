@@ -4,6 +4,7 @@ const service = require('../lib/service-factory')()
 const passport = require('../lib/passport')
 const ensureLogin = require('../middlewares/ensure-login')
 const Link = require('../models/link')
+const log = require('../lib/logger')
 
 service
   .useMiddlewares([
@@ -24,7 +25,7 @@ service
   .get('/logout', (req, res) => {
     req.logout()
     req.session.destroy(err => {
-      if (err) console.error('Failed to destroy the session during logout', err)
+      if (err) log.error('Failed to destroy the session during logout', err)
       req.user = null
       res.redirect('/')
     })
