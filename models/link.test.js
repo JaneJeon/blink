@@ -6,11 +6,13 @@ const hashIds = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
 
 describe('Link model', () => {
   const url = 'www.nodejs.org'
+  const url2 = 'example.com'
   const normalizedURL = 'https://nodejs.org'
+  const normalizedURL2 = 'https://example.com'
   let hash
 
   beforeAll(async () => {
-    return Link.deleteMany({})
+    await Link.deleteMany({ url: { $in: [normalizedURL, normalizedURL2] } })
   })
 
   test('shorten URL', async () => {
@@ -21,6 +23,17 @@ describe('Link model', () => {
     expect(doc.hash.length).toBeGreaterThanOrEqual(6)
   })
 
+  test('prevent duplicate URLs', async () => {
+    let error
+    try {
+      await Link.create({ url })
+    } catch (err) {
+      error = err
+    } finally {
+      expect(error).toBeDefined()
+    }
+  })
+
   test('fetch URL', async () => {
     const doc = await Link.findOne({ hash })
 
@@ -29,9 +42,15 @@ describe('Link model', () => {
   })
 
   test('set custom hash', async () => {
-    await Link.create({ url: 'example.com', hash: 'FooBar' })
+    let error
+    try {
+      await Link.create({ url: url2, hash: hashIds.encode(500) })
+    } catch (err) {
+      error = err
+    } finally {
+      expect(error).toBeDefined()
+    }
 
-    // eslint-disable-next-line no-unused-expressions
-    expect(new Link({ url, hash: hashIds.encode(500) }).validate()).rejects
+    await Link.create({ url: url2, hash: 'FooBar' })
   })
 })

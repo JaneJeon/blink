@@ -1,7 +1,7 @@
 const omit = require('lodash/omit')
 
 // https://mongoosejs.com/docs/api/error.html
-module.exports = (err, req, res, next) => {
+module.exports = (err, req, res) => {
   let { status, message, errors } = err
   if (status) status = Math.min(status, 500)
   else
@@ -16,7 +16,5 @@ module.exports = (err, req, res, next) => {
           errors[prop] = omit(errors[prop], ['properties', 'path', 'value'])
     }
 
-  console.error({ status, message: message, errors })
-
-  res.status(status).send(message)
+  res.send(message, status, errors)
 }

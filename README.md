@@ -60,7 +60,7 @@ The feature set is more tuned for internal use:
 - [ ] static page (S3) to actually make these requests
 - [ ] Some form of access control
 - [ ] Infrastructure as Code (some way to deploy and configure all this)
-- [ ] Configure cache headers for static, render, and redirects
+- [ ] Configure cache headers for static, render, and redirects (etag?)
 
 ## Features that'd be nice to have
 

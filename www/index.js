@@ -1,13 +1,15 @@
 require('dotenv-defaults').config()
 
-const app = require('restana')()
+const app = require('restana')({
+  errorHandler: require('../middlewares/error-handler')
+})
 const Link = require('../models/link')
 
 app.use(require('helmet')())
 app.use(require('cors')({ origin: true }))
 app.get('/', (req, res) => res.redirect(process.env.HOMEPAGE))
-app.get('/:url', async (req, res) => {
-  const link = await Link.findOne(req.params.url)
+app.get('/:hash', async (req, res) => {
+  const link = await Link.findOne(req.params)
   res.redirect(link.redirectTo)
 })
 
