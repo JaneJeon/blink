@@ -56,9 +56,11 @@ The feature set is more tuned for internal use:
 - [ ] ~~Implement atomic counter on DDB~~
 - [x] hash(id) => url
 - [x] set of normalized URLs? (one of these have to be global secondary index. Warning: eventual consistency!)
+- [x] allow URLs to be manually set
 - [ ] static page (S3) to actually make these requests
 - [ ] Some form of access control
 - [ ] Infrastructure as Code (some way to deploy and configure all this)
+- [ ] Configure cache headers for static, render, and redirects
 
 ## Features that'd be nice to have
 
