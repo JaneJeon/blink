@@ -53,7 +53,7 @@ This aggressive caching of redirects should make requests instantaneous, while t
 
 The feature set is more tuned for internal use:
 
-- [ ] ~~Implement atomic counter on DDB~~
+- [x] Implement atomic counter
 - [x] hash(id) => url
 - [x] set of normalized URLs? (one of these have to be global secondary index. Warning: eventual consistency!)
 - [x] allow URLs to be manually set
