@@ -1,2 +1,3 @@
-TODO: setup logger
-TODO: remember me cookie?
+- [ ] Setup logger
+- [ ] Remember-me cookie?
+- [ ] Put the dependencies separately on www and dash?
