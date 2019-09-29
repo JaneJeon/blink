@@ -1,6 +1,6 @@
 {
   "name": "myurl",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A blazing-fast, planet-scale, and easy-to-use serverless URL shortener!",
   "bin": "./bin/deploy.js",
   "repository": "JaneJeon/myURL",
