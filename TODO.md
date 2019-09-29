@@ -1,3 +1,4 @@
 - [ ] Setup logger
 - [ ] Remember-me cookie?
 - [ ] Put the dependencies separately on www and dash?
+- [ ] service factory to share www and dash?
