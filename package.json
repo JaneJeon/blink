@@ -16,7 +16,11 @@
     "test": "jest --forceExit",
     "test:watch": "yarn test --watch",
     "coverage": "is-ci && codecov",
-    "clean": "rimraf reports coverage logs/*.log"
+    "docs": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "clean": "run-p clean:*",
+    "clean:logs": "rimraf logs/*.log",
+    "clean:docs": "docs/.vuepress/dist"
   },
   "jest": {
     "testEnvironment": "node"
