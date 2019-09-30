@@ -10,5 +10,6 @@ module.exports = app
   .use(require('body-parser').json())
   .use(passport.initialize())
   .use(passport.session())
-  .use(require('./routes'))
+  .use(require('./routes/users'))
+  .use(require('./routes/links'))
   .finalize()
