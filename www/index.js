@@ -4,6 +4,7 @@ const app = require('../lib/express-factory')()
 const Link = require('../models/link')
 
 app
+  .use(require('../middlewares/access-logger'))
   .use(require('helmet')())
   .use(require('cors')()) // is this even necessary?
   .get('/', (req, res) => res.redirect(301, process.env.HOMEPAGE))

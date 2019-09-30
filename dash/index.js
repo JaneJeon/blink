@@ -7,6 +7,7 @@ const Link = require('../models/link')
 const log = require('../lib/logger')
 
 app
+  .use(require('../middlewares/access-logger'))
   .use(require('helmet')())
   .use(require('cors')())
   .use(require('serve-static')('../public', { index: false }))
