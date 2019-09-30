@@ -9,8 +9,8 @@
 - [ ] Infrastructure as Code (some way to deploy and configure all this)
 - [ ] Configure cache headers for static, render, and redirects (etag?)
 - [x] service factory to share www and dash?
-- [ ] Ban common words that might be used later (e.g. signup) and might be misleading
-- [ ] 404 by default when a resource is not found
+- [ ] Ban common words that might be used later (e.g. signup, account) and might be misleading (https://github.com/thedevs-network/kutt/blob/develop/server/controllers/validateBodyController.js#L43)
+- [x] 404 by default when a resource is not found
 
 ## Nice-to-have
 
