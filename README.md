@@ -49,30 +49,6 @@ And the plan here is to have CloudFront trigger lambdas on any URLs, the lambdas
 
 This aggressive caching of redirects should make requests instantaneous, while the use of Lambda and DynamoDB would make it 1. serverless (you don't have to maintain anything), and 2. planet-scale!
 
-## TODO (for MVP)
-
-The feature set is more tuned for internal use:
-
-- [x] Implement atomic counter
-- [x] hash(id) => url
-- [x] set of normalized URLs? (one of these have to be global secondary index. Warning: eventual consistency!)
-- [x] allow URLs to be manually set
-- [ ] static page (S3) to actually make these requests
-- [ ] Some form of access control
-- [ ] Infrastructure as Code (some way to deploy and configure all this)
-- [ ] Configure cache headers for static, render, and redirects (etag?)
-- [x] service factory to share www and dash?
-
-## Features that'd be nice to have
-
-- [ ] check malware links, and ban people when they do it too much
-- [ ] Banned domains & hosts
-- [ ] Visitor risk management (something like CloudFlare's security level, bot fight mode, scrape protection, etc)
-- [ ] ~~Option to have "the panel" on the root domain~~
-- [ ] Finer-grained, more fully-featured user/team control (e.g. rate limiting on users that aren't signed in)
-- [ ] ~~Option to make this public?~~
-- [ ] Built-in analytics (that can be disabled if the user chooses to use their own analytics platform)
-
 ## Run tests
 
 ```sh
