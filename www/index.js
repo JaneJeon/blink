@@ -1,9 +1,7 @@
-require('dotenv-defaults').config()
-
 const app = require('../lib/express-factory')()
 const Link = require('../models/link')
 
-app
+module.exports = app
   .use(require('../middlewares/access-logger'))
   .use(require('helmet')())
   .use(require('cors')()) // is this even necessary?
@@ -13,5 +11,3 @@ app
     res.redirect(301, link.redirectTo)
   })
   .finalize()
-
-module.exports = app

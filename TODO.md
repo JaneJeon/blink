@@ -9,12 +9,13 @@
 - [ ] Infrastructure as Code (some way to deploy and configure all this)
 - [ ] Configure cache headers for static, render, and redirects (etag?)
 - [x] service factory to share www and dash?
-- [ ] Remember-me cookie?
-- [ ] Put the dependencies separately on www and dash?
-- [ ] mount express-status-monitor since we're going with free Heroku
 
 ## Nice-to-have
 
+- [ ] Remember-me cookie?
+- [ ] Put the dependencies separately on www and dash?
+- [ ] mount express-status-monitor since we're going with free Heroku
+- [ ] rate limiting
 - [ ] check malware links, and ban people when they do it too much
 - [ ] Banned domains & hosts
 - [ ] Visitor risk management (something like CloudFlare's security level, bot fight mode, scrape protection, etc)
