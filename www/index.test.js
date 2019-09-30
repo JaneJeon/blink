@@ -14,12 +14,12 @@ describe('www', () => {
   test('GET /', done => {
     request(app)
       .get('/')
-      .expect(200, done)
+      .expect(301, done)
   })
 
   test('GET /:hash', done => {
     request(app)
       .get(`/${hash}`)
-      .expect(200, done)
+      .expect(301, done)
   })
 })
