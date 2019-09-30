@@ -5,7 +5,8 @@ const schema = new mongoose.Schema({
   emailVerified: Boolean,
 
   github: {
-    hide: true,
+    // can't do this
+    // hide: true,
     id: String,
     token: String
   },
