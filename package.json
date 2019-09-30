@@ -39,6 +39,7 @@
     "got": "^9.6.0",
     "hashids": "^2.0.1",
     "helmet": "^3.21.1",
+    "http-errors": "^1.7.3",
     "lodash": "^4.17.15",
     "mongoose": "^5.7.1",
     "mongoose-hidden": "^1.8.0",
