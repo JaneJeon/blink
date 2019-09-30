@@ -1,6 +1,6 @@
 require('dotenv-defaults').config()
 
-const Link = require('./link')
+const Link = require('../../models/link')
 const HashIds = require('hashids/cjs')
 const hashIds = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
 
@@ -56,3 +56,5 @@ describe('Link model', () => {
     await Link.create({ originalURL: originalURL2, _id: 'FooBar' })
   })
 })
+
+module.exports = Link
