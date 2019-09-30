@@ -1,17 +1,16 @@
 require('dotenv-defaults').config()
 
-const service = require('../lib/service-factory')()
+const app = require('../lib/express-factory')()
 const Link = require('../models/link')
 
-service
-  .useMiddlewares([
-    require('helmet')(),
-    require('cors')({ origin: true }) // is this even necessary?
-  ])
-  .get('/', (req, res) => res.redirect(process.env.HOMEPAGE))
+app
+  .use(require('helmet')())
+  .use(require('cors')()) // is this even necessary?
+  .get('/', (req, res) => res.redirect(301, process.env.HOMEPAGE))
   .get('/:hash', async (req, res) => {
     const link = await Link.findOne(req.params)
-    res.redirect(link.redirectTo)
+    res.redirect(301, link.redirectTo)
   })
+  .finalize()
 
-module.exports = service.server
+module.exports = app

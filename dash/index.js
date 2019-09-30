@@ -1,21 +1,19 @@
 require('dotenv-defaults').config()
 
-const service = require('../lib/service-factory')()
+const app = require('../lib/express-factory')()
 const passport = require('../lib/passport')
 const ensureLogin = require('../middlewares/ensure-login')
 const Link = require('../models/link')
 const log = require('../lib/logger')
 
-service
-  .useMiddlewares([
-    require('helmet')(),
-    require('cors')({ origin: true }),
-    require('serve-static')('../public', { index: false }),
-    require('../middlewares/session'),
-    require('body-parser').json(),
-    passport.initialize(),
-    passport.session()
-  ])
+app
+  .use(require('helmet')())
+  .use(require('cors')())
+  .use(require('serve-static')('../public', { index: false }))
+  .use(require('../middlewares/session'))
+  .use(require('body-parser').json())
+  .use(passport.initialize())
+  .use(passport.session())
   .get('/') // TODO:
   .get(
     '/login',
@@ -48,5 +46,6 @@ service
     )
     res.send(link, 201)
   })
+  .finalize()
 
-module.exports = service.server
+module.exports = app

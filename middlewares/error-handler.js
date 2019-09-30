@@ -2,7 +2,7 @@ const omit = require('lodash/omit')
 const log = require('../lib/logger')
 
 // https://mongoosejs.com/docs/api/error.html
-module.exports = (err, req, res) => {
+module.exports = (err, req, res, next) => {
   if (err.status) err.status = Math.min(err.status, 500)
   else
     switch (err.name) {
@@ -21,6 +21,5 @@ module.exports = (err, req, res) => {
     }
 
   log[err.status < 500 ? 'warn' : 'error'](err)
-
-  res.send(err.message, err.status, err.errors)
+  res.status(err.status).send({ message: err.message, errors: err.errors })
 }
