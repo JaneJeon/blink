@@ -6,8 +6,9 @@ module.exports = app
   .use(require('helmet')())
   .use(require('cors')()) // is this even necessary?
   .get('/', (req, res) => res.redirect(301, process.env.HOMEPAGE))
-  .get('/:hash', async (req, res) => {
-    const link = await Link.findOne(req.params)
-    res.redirect(301, link.redirectTo)
+  .get('/:id', async (req, res) => {
+    const link = await Link.findById(req.params.id)
+
+    link ? res.redirect(301, link.redirectTo) : res.sendStatus(404)
   })
   .finalize()

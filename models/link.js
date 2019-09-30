@@ -8,7 +8,19 @@ const hash = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
 
 const schema = new mongoose.Schema(
   {
-    url: {
+    _id: {
+      hide: true,
+      type: String,
+      trim: true,
+      minlength: process.env.HASH_MIN_LENGTH,
+      maxlength: process.env.HASH_MAX_LENGTH,
+      match: /^\w+$/,
+      validate: {
+        validator: val => !hash.decode(val).length,
+        msg: 'Cannot use this hash'
+      }
+    },
+    originalURL: {
       type: String,
       required: true,
       unique: true,
@@ -21,35 +33,21 @@ const schema = new mongoose.Schema(
       },
       set: url => normalizeUrl(url, { forceHttps: true })
     },
-    hash: {
-      hide: true,
-      type: String,
-      unique: true,
-      trim: true,
-      minlength: process.env.HASH_MIN_LENGTH,
-      maxlength: process.env.HASH_MAX_LENGTH,
-      match: /^\w+$/,
-      immutable: true,
-      validate: {
-        validator: val => !hash.decode(val).length,
-        msg: 'Cannot use this hash'
-      }
-    },
     creator: {
-      hide: true,
       type: mongoose.Schema.Types.ObjectId,
       immutable: true,
       index: true
+      // TODO: ref?
     }
   },
-  { toJSON: { virtuals: true }, timestamps: true }
+  { _id: false, toJSON: { virtuals: true }, timestamps: true }
 )
 
 schema.pre('save', async function() {
-  if (!this.hash) this.hash = hash.encode(await Sequence.next())
+  if (!this.id) this._id = hash.encode(await Sequence.next())
 })
-schema.virtual('redirectTo').get(function() {
-  return `${process.env.DOMAIN}/${this.hash}`
+schema.virtual('brandedURL').get(function() {
+  return `${process.env.DOMAIN}/${this.id}`
 })
 
 module.exports = mongoose.model('Link', schema)

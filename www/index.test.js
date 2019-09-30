@@ -3,12 +3,12 @@ const app = require('.')
 const Link = require('../models/link')
 
 describe('www', () => {
-  const url = 'medium.com'
-  const hash = 'www_Test1'
+  const originalURL = 'medium.com'
+  const _id = 'www_Test1'
 
   beforeAll(async () => {
-    await Link.deleteOne({ url })
-    await Link.create({ url, hash })
+    await Link.deleteOne({ originalURL })
+    await Link.create({ originalURL, _id })
   })
 
   test('GET /', done => {
@@ -17,9 +17,9 @@ describe('www', () => {
       .expect(301, done)
   })
 
-  test('GET /:hash', done => {
+  test('GET /:id', done => {
     request(app)
-      .get(`/${hash}`)
+      .get(`/${_id}`)
       .expect(301, done)
   })
 })

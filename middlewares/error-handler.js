@@ -18,6 +18,12 @@ module.exports = (err, req, res, next) => {
             'path',
             'value'
           ])
+        break
+      case 'MongoError':
+        err.status = err.code === 11000 ? 409 : 500
+        break
+      default:
+        err.status = 500
     }
 
   log[err.status < 500 ? 'warn' : 'error'](err)
