@@ -7,9 +7,8 @@
   "author": "Jane Jeon <JaneJeon9719@gmail.com>",
   "license": "AGPL-3.0",
   "scripts": {
-    "start:www": "node www",
-    "start:dash": "node dash",
-    "deploy": "node ./bin/deploy",
+    "start": "node app",
+    "dev": "nodemon app",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
