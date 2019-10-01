@@ -19,7 +19,9 @@
     "docs:build": "vuepress build docs",
     "clean": "run-p clean:*",
     "clean:logs": "rimraf logs/*.log",
-    "clean:docs": "docs/.vuepress/dist"
+    "clean:docs": "docs/.vuepress/dist",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "@casl/ability": "^3.2.0",
@@ -55,7 +57,8 @@
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
     "styled-components": "^4.4.0",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "snyk": "^1.230.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
@@ -101,5 +104,6 @@
     "mongoose",
     "react",
     "nextjs"
-  ]
+  ],
+  "snyk": true
 }
