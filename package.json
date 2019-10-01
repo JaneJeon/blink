@@ -52,10 +52,11 @@
     "normalize-url": "^4.4.1",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
+    "pino": "^5.13.4",
+    "pino-pretty": "^3.2.1",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
-    "styled-components": "^4.4.0",
-    "winston": "^3.2.1"
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
@@ -82,8 +83,7 @@
     "supertest": "^4.0.2",
     "supertest-session": "^4.0.0",
     "vuepress": "^1.1.0",
-    "vuepress-theme-default-prefers-color-scheme": "^1.0.2",
-    "winston-daily-rotate-file": "^4.1.0"
+    "vuepress-theme-default-prefers-color-scheme": "^1.0.2"
   },
   "keywords": [
     "url",
