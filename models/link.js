@@ -36,8 +36,8 @@ const schema = new mongoose.Schema(
     creator: {
       type: mongoose.Schema.Types.ObjectId,
       immutable: true,
-      index: true
-      // TODO: ref?
+      index: true,
+      ref: 'User'
     }
   },
   { _id: false, toJSON: { virtuals: true }, timestamps: true }

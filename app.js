@@ -9,7 +9,6 @@ const log = require('./lib/logger')
 module.exports = app
   .use(require('./middlewares/access-logger'))
   .use(require('helmet')())
-  .use(require('cors')())
   .use(express.static('public', { index: false }))
   .use(require('./middlewares/session'))
   .use(express.json())
