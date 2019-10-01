@@ -1,4 +1,5 @@
 const mongoose = require('../lib/mongoose')
+const cachegoose = require('cachegoose')
 
 const schema = new mongoose.Schema({
   email: { type: String, unique: true },
@@ -18,6 +19,12 @@ const schema = new mongoose.Schema({
     website: String,
     picture: String
   }
+})
+
+const cacheKey = id => `cache:user:${id}`
+schema.static('cacheKey', cacheKey)
+schema.post('save', function(doc) {
+  cachegoose.clearCache(cacheKey(doc.id))
 })
 
 module.exports = mongoose.model('User', schema)

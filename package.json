@@ -25,6 +25,7 @@
     "@casl/ability": "^3.2.0",
     "@casl/mongoose": "^2.3.2",
     "@primer/components": "^14.2.0",
+    "cachegoose": "^8.0.0",
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
     "connect-ensure-login": "^0.1.1",
