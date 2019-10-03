@@ -4,6 +4,11 @@
   "repository": "https://github.com/JaneJeon/myURL",
   "website": "https://janejeon.github.io/myURL",
   "success_url": "/",
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
   "addons": [
     {
       "plan": "heroku-redis"
