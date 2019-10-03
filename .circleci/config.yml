@@ -31,9 +31,7 @@ jobs:
 
       - run:
           name: Test
-          environment:
-            JEST_JUNIT_OUTPUT_NAME: reports/junit/jest/results.xml
-          command: yarn test --coverage --ci --runInBand --reporters=default --reporters=jest-junit
+          command: yarn test --ci --runInBand
 
       - store_test_results:
           path: reports/junit

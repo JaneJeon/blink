@@ -1,7 +1,16 @@
 require('dotenv-defaults').config()
+const isCI = require('is-ci')
+process.env.JEST_JUNIT_OUTPUT_NAME = 'reports/junit/jest/results.xml'
 
 module.exports = {
+  collectCoverage: isCI,
+  collectCoverageFrom: [
+    'models/*.js',
+    'routes/*.js',
+    '!**/node_modules/**',
+    '!**/vendor/**'
+  ],
   errorOnDeprecated: true,
-  notify: true,
+  reporters: isCI ? ['default', 'jest-junit'] : undefined,
   testEnvironment: 'node'
 }
