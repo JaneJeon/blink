@@ -6,6 +6,9 @@
   "success_url": "/",
   "addons": [
     {
+      "plan": "heroku-redis"
+    },
+    {
       "plan": "mongolab:sandbox"
     },
     {
