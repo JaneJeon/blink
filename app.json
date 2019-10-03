@@ -4,6 +4,11 @@
   "repository": "https://github.com/JaneJeon/myURL",
   "website": "https://janejeon.github.io/myURL",
   "success_url": "/",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
   "formation": {
     "web": {
       "quantity": 1
