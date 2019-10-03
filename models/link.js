@@ -2,7 +2,7 @@ const mongoose = require('../lib/mongoose')
 const Sequence = require('./sequence')
 
 const { URL } = require('url')
-const normalizeUrl = require('normalize-url')
+const normalizeURL = require('normalize-url')
 const HashIds = require('hashids/cjs')
 const hash = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
 
@@ -31,7 +31,7 @@ const schema = new mongoose.Schema(
         validator: url => new URL(url).host !== process.env.DOMAIN,
         msg: `Cannot shorten ${process.env.DOMAIN} URLs`
       },
-      set: url => normalizeUrl(url, { forceHttps: true })
+      set: url => normalizeURL(url, { forceHttps: true })
     },
     creator: {
       type: mongoose.Schema.Types.ObjectId,
