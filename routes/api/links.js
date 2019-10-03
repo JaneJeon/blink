@@ -1,22 +1,17 @@
-const express = require('express')
+const { Router } = require('express')
 const Link = require('../../models/link')
 
-module.exports = express
-  .Router()
-  .get('/links', async (req, res) => {
-    res.send(
-      await Link.paginate(
-        { creator: req.user.id },
-        { sort: '-updatedAt', page: req.query.page, limit: 25 }
-      )
+module.exports = Router()
+  .get('/', async (req, res) => {
+    const links = await Link.paginate(
+      { creator: req.user.id },
+      { sort: '-updatedAt', page: req.query.page, limit: 25 }
     )
+    res.send(links)
   })
-  .get('/links/:id', async (req, res) => {
-    res.send(await Link.findById(req.params.id))
+  .get('/:linkId', async (req, res) => {
+    res.send(await Link.findById(req.params.linkId))
   })
-  .post('/links', async (req, res) => {
-    const link = await Link.create(
-      Object.assign(req.body, { creator: req.user.id })
-    )
-    res.send(link, 201)
+  .post('/', async (req, res) => {
+    res.send(await req.user.createLink(req.body), 201)
   })

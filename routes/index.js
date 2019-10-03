@@ -1,8 +1,7 @@
-const express = require('express')
+const { Router } = require('express')
 
-module.exports = express
-  .Router()
-  .use(require('./redirect'))
+module.exports = Router()
+  .use('/', require('./redirect'))
   .use('/api', require('./api'))
   .use('/app', require('./app'))
   .use('/auth', require('./auth'))
