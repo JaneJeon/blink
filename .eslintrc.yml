@@ -11,6 +11,6 @@ rules:
   no-console: error
 
 overrides:
-  - files: '__tests__/**/*.js'
+  - files: tests/**/*.js
     env:
       jest: true

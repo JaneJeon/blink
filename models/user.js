@@ -21,5 +21,8 @@ schema.statics.cacheKey = id => `cache:user:${id}`
 schema.post('save', doc => {
   cachegoose.clearCache(doc.schema.statics.cacheKey(doc.id))
 })
+schema.methods.links = function() {
+  return this.model('Link').find({ creator: this.id })
+}
 
 module.exports = mongoose.model('User', schema)
