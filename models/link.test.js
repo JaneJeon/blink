@@ -1,20 +1,16 @@
-require('dotenv-defaults').config()
-
 const Link = require('./link')
 const HashIds = require('hashids/cjs')
 const hashIds = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
 
-describe('Link model', () => {
+describe('Link', () => {
   const originalURL = 'www.nodejs.org'
   const originalURL2 = 'example.com'
   const normalizedURL = 'https://nodejs.org'
-  const normalizedURL2 = 'https://example.com'
+  // const normalizedURL2 = 'https://example.com'
   let id
 
   beforeAll(async () => {
-    await Link.deleteMany({
-      originalURL: { $in: [normalizedURL, normalizedURL2] }
-    })
+    await Link.deleteMany()
   })
 
   test('shorten URL', async () => {
