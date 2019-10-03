@@ -4,9 +4,9 @@ const hashIds = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
 
 describe('Link', () => {
   const originalURL = 'www.nodejs.org'
-  const originalURL2 = 'example.com'
   const normalizedURL = 'https://nodejs.org'
-  // const normalizedURL2 = 'https://example.com'
+  const originalURL2 = 'example.com'
+  const originalURL3 = 'www.google.com'
   let id
 
   beforeAll(async () => {
@@ -50,5 +50,27 @@ describe('Link', () => {
     }
 
     await Link.create({ originalURL: originalURL2, _id: 'FooBar' })
+  })
+
+  test('preserve hashes corresponding to public folders', async () => {
+    let error
+    try {
+      await Link.create({ originalURL: originalURL3, _id: '_test' })
+    } catch (err) {
+      error = err
+    } finally {
+      expect(error).toBeDefined()
+    }
+  })
+
+  test('preserve hashes corresponding to static redirects', async () => {
+    let error
+    try {
+      await Link.create({ originalURL: originalURL3, _id: 'login' })
+    } catch (err) {
+      error = err
+    } finally {
+      expect(error).toBeDefined()
+    }
   })
 })

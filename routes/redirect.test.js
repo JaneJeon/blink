@@ -22,4 +22,10 @@ describe('/', () => {
       .get(`/${_id}`)
       .expect(301, done)
   })
+
+  test('GET /:redirects', done => {
+    request(app)
+      .get('/login')
+      .expect(301, done)
+  })
 })

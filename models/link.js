@@ -15,10 +15,17 @@ const schema = new mongoose.Schema(
       minlength: process.env.HASH_MIN_LENGTH,
       maxlength: process.env.HASH_MAX_LENGTH,
       match: /^\w+$/,
-      validate: {
-        validator: val => !hash.decode(val).length,
-        msg: 'Cannot use this hash'
-      }
+      validate: [
+        {
+          validator: val => !hash.decode(val).length,
+          msg: 'Cannot use this hash'
+        },
+        {
+          validator: url =>
+            !(routes.public.includes(url) || routes.redirect[url]),
+          msg: 'This URL is preserved'
+        }
+      ]
     },
     originalURL: {
       type: String,
@@ -27,17 +34,10 @@ const schema = new mongoose.Schema(
       trim: true,
       maxlength: process.env.URL_MAX_LENGTH,
       immutable: true,
-      validate: [
-        {
-          validator: url => new URL(url).host !== process.env.DOMAIN,
-          msg: `Cannot shorten ${process.env.DOMAIN} URLs`
-        },
-        {
-          validator: url =>
-            !routes.public.includes(url) && !routes.redirect[url],
-          msg: 'This URL is preserved'
-        }
-      ],
+      validate: {
+        validator: url => new URL(url).host !== process.env.DOMAIN,
+        msg: `Cannot shorten ${process.env.DOMAIN} URLs`
+      },
       set: url => normalizeURL(url, { forceHttps: true })
     },
     creator: {
@@ -45,6 +45,7 @@ const schema = new mongoose.Schema(
       immutable: true,
       index: true,
       ref: 'User'
+      // required: true
     }
   },
   { _id: false, toJSON: { virtuals: true }, timestamps: true }
