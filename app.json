@@ -1,0 +1,36 @@
+{
+  "name": "myURL",
+  "description": "TODO:",
+  "repository": "https://github.com/JaneJeon/myURL",
+  "website": "https://janejeon.github.io/myURL",
+  "success_url": "/",
+  "addons": [
+    {
+      "plan": "heroku-redis"
+    },
+    {
+      "plan": "mongolab:sandbox"
+    },
+    {
+      "plan": "papertrail:choklad"
+    }
+  ],
+  "env": {
+    "SESSION_SECRET": {
+      "description": "the session encryption key",
+      "generator": "secret"
+    },
+    "DOMAIN": {
+      "description": "the custom domain (required) of this app; e.g. bit.ly"
+    },
+    "HOMEPAGE": {
+      "description": "where the root domain should redirect to; e.g. bitly.com"
+    },
+    "GITHUB_CLIENT_ID": {
+      "description": "needed for 'sign in with github'"
+    },
+    "GITHUB_CLIENT_SECRET": {
+      "description": "needed for 'sign in with github'"
+    }
+  }
+}

@@ -1,4 +1,4 @@
 // TODO: mount next.js
-const express = require('express')
+const { Router } = require('express')
 
-module.exports = express.Router()
+module.exports = Router()

@@ -2,14 +2,10 @@ const mongoose = require('../lib/mongoose')
 const cachegoose = require('cachegoose')
 
 const schema = new mongoose.Schema({
-  email: { type: String, unique: true },
-  emailVerified: Boolean,
-
   github: {
-    // can't do this
-    // hide: true,
-    id: String,
-    token: String
+    type: String,
+    hidden: true,
+    unique: true
   },
 
   profile: {
@@ -21,10 +17,15 @@ const schema = new mongoose.Schema({
   }
 })
 
-const cacheKey = id => `cache:user:${id}`
-schema.static('cacheKey', cacheKey)
-schema.post('save', function(doc) {
-  cachegoose.clearCache(cacheKey(doc.id))
+schema.statics.cacheKey = id => `cache:user:${id}`
+schema.post('save', doc => {
+  cachegoose.clearCache(doc.schema.statics.cacheKey(doc.id))
 })
+schema.methods.links = function() {
+  return this.model('Link').find({ creator: this.id })
+}
+schema.methods.createLink = function(body) {
+  return this.model('Link').create(Object.assign(body, { creator: this.id }))
+}
 
 module.exports = mongoose.model('User', schema)

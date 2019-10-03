@@ -1,8 +1,8 @@
-const express = require('express')
+const { Router } = require('express')
 const passport = require('../../lib/passport')
+const log = require('../../lib/logger')
 
-module.exports = express
-  .Router()
+module.exports = Router()
   .get('/github', passport.authenticate('github'))
   .get(
     '/github/callback',
@@ -11,3 +11,11 @@ module.exports = express
       successReturnToOrRedirect: '/'
     })
   )
+  .get('/logout', (req, res) => {
+    req.logout()
+    req.session.destroy(err => {
+      if (err) log.error('Failed to destroy the session during logout', err)
+      req.user = null
+      res.redirect('/app')
+    })
+  })

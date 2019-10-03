@@ -1,6 +1,6 @@
 {
   "name": "myurl",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "description": "A blazing-fast, planet-scale, and easy-to-use serverless URL shortener!",
   "bin": "./bin/deploy.js",
   "repository": "JaneJeon/myURL",
@@ -12,8 +12,10 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
-    "test": "jest --forceExit --env=node",
-    "test:watch": "yarn test --watch",
+    "test": "run-s 'test:* {@}' -- -- --forceExit",
+    "test:models": "jest models",
+    "test:routes": "jest routes",
+    "test:watch:all": "yarn test --watch",
     "coverage": "is-ci && codecov",
     "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs",
@@ -32,10 +34,11 @@
     "commander": "^3.0.1",
     "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^3.0.0",
-    "cors": "^2.8.5",
     "dotenv-defaults": "^1.0.2",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "express-pino-logger": "^4.0.0",
+    "express-rate-limit": "^5.0.0",
     "express-request-id": "^1.4.1",
     "express-session": "^1.16.2",
     "express-status-monitor": "^1.2.6",
@@ -43,6 +46,7 @@
     "hashids": "^2.0.1",
     "helmet": "^3.21.1",
     "http-errors": "^1.7.3",
+    "ioredis": "^4.14.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.7.1",
     "mongoose-hidden": "^1.8.0",
@@ -54,11 +58,12 @@
     "normalize-url": "^4.4.1",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
+    "pino": "^5.13.4",
+    "pino-pretty": "^3.2.1",
+    "rate-limit-redis": "^1.6.0",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
-    "styled-components": "^4.4.0",
-    "winston": "^3.2.1",
-    "snyk": "^1.230.0"
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
@@ -85,8 +90,7 @@
     "supertest": "^4.0.2",
     "supertest-session": "^4.0.0",
     "vuepress": "^1.1.0",
-    "vuepress-theme-default-prefers-color-scheme": "^1.0.2",
-    "winston-daily-rotate-file": "^4.1.0"
+    "vuepress-theme-default-prefers-color-scheme": "^1.0.2"
   },
   "keywords": [
     "url",

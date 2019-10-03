@@ -1,11 +1,17 @@
-const express = require('express')
-const log = require('../../lib/logger')
+const { Router } = require('express')
+const User = require('../../models/user')
 
-module.exports = express.Router().get('/logout', (req, res) => {
-  req.logout()
-  req.session.destroy(err => {
-    if (err) log.error('Failed to destroy the session during logout', err)
-    req.user = null
-    res.redirect('/')
+module.exports = Router()
+  .param('userId', (req, res, next, id) => {
+    if (id === req.user.id) req.requestedUser = req.user
+    else
+      User.findById(id, (err, user) => {
+        if (err) next(err)
+        req.requestedUser = user
+      })
+    next()
   })
-})
+  .get('/:userId', (req, res) => res.send(req.requestedUser))
+  .get('/:userId/links', async (req, res) => {
+    res.send(await req.requestedUser.links().paginate())
+  })
