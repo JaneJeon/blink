@@ -11,12 +11,14 @@
 - [x] service factory to share www and dash?
 - [x] Ban common words that might be used later (e.g. signup, account) and might be misleading (https://github.com/thedevs-network/kutt/blob/develop/server/controllers/validateBodyController.js#L43)
 - [x] 404 by default when a resource is not found
-- [ ] Add redis support (rate limiting, caching, etc.)
+- [ ] Add redis support (counter?, rate limiting, caching, etc.)
+- [ ] Investigate why coverage is not updated correctly (only models/routes)
+- [ ] Built-in analytics (that can be disabled if the user chooses to use their own analytics platform)
 
 ## Nice-to-have
 
 - [ ] Remember-me cookie?
-- [ ] Put the dependencies separately on www and dash?
+- [ ] ~~Put the dependencies separately on www and dash?~~
 - [ ] mount express-status-monitor since we're going with free Heroku
 - [ ] rate limiting
 - [ ] check malware links, and ban people when they do it too much
@@ -25,4 +27,3 @@
 - [ ] ~~Option to have "the panel" on the root domain~~
 - [ ] Finer-grained, more fully-featured user/team control (e.g. rate limiting on users that aren't signed in)
 - [ ] ~~Option to make this public?~~
-- [ ] Built-in analytics (that can be disabled if the user chooses to use their own analytics platform)

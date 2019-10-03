@@ -1,25 +1,10 @@
 const mongoose = require('../lib/mongoose')
 const Sequence = require('./sequence')
-
+const routes = require('../config/routes')
 const { URL } = require('url')
 const normalizeURL = require('normalize-url')
 const HashIds = require('hashids/cjs')
 const hash = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
-
-const preservedURLs = [
-  'dashboard',
-  'signup',
-  'authorize',
-  'authenticate',
-  'logout',
-  'settings',
-  'verify',
-  'static',
-  'images',
-  'banned',
-  'report',
-  'account'
-]
 
 const schema = new mongoose.Schema(
   {
@@ -48,7 +33,8 @@ const schema = new mongoose.Schema(
           msg: `Cannot shorten ${process.env.DOMAIN} URLs`
         },
         {
-          validator: url => !preservedURLs.includes(url),
+          validator: url =>
+            !routes.public.includes(url) && !routes.redirect[url],
           msg: 'This URL is preserved'
         }
       ],
