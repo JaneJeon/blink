@@ -18,7 +18,7 @@ describe('Link', () => {
     id = doc.id
 
     expect(typeof id).toBe('string')
-    expect(id.length).toBeGreaterThanOrEqual(process.env.HASH_MIN_LENGTH)
+    expect(id.length).toBeGreaterThanOrEqual(process.env.HASH_MIN_LENGTH - 0)
   })
 
   test('prevent duplicate URLs', async () => {
