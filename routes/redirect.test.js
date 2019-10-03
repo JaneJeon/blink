@@ -1,8 +1,8 @@
 const request = require('supertest')
 const app = require('../app')
-const Link = require('./models/link')
+const Link = require('../models/link')
 
-describe('app', () => {
+describe('/', () => {
   const originalURL = 'medium.com'
   const _id = 'www_Test1'
 
