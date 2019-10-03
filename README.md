@@ -11,6 +11,7 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=JaneJeon/myURL)](https://dependabot.com)
 [![License](https://img.shields.io/npm/l/myurl)](https://github.com/JaneJeon/myURL/blob/master/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-github-blue)](https://janejeon.github.io/myURL)
+[![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
 
 > A blazing fast, planet-scale, easy-to-use serverless URL shortener!
 
