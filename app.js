@@ -8,6 +8,8 @@ const log = require('./lib/logger')
 
 module.exports = app
   .use(require('./middlewares/access-logger'))
+  .use(require('express-request-id')())
+  .use(require('./middlewares/express-logger'))
   .use(require('helmet')())
   .use(express.static('public', { index: false }))
   .use(require('./middlewares/session'))

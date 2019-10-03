@@ -11,6 +11,7 @@
 - [x] service factory to share www and dash?
 - [ ] Ban common words that might be used later (e.g. signup, account) and might be misleading (https://github.com/thedevs-network/kutt/blob/develop/server/controllers/validateBodyController.js#L43)
 - [x] 404 by default when a resource is not found
+- [ ] Add redis support (session, rate limiting, caching, etc.)
 
 ## Nice-to-have
 
