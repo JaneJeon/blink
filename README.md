@@ -2,7 +2,7 @@
 
 [![CircleCI](https://img.shields.io/circleci/build/github/JaneJeon/myURL)](https://circleci.com/gh/JaneJeon/myURL)
 [![Coverage](https://codecov.io/gh/JaneJeon/myurl/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/myurl)
-[![Maintainability](https://api.codeclimate.com/v1/badges/075998f9f2125e6b7961/maintainability)](https://codeclimate.com/github/JaneJeon/myURL/maintainability)
+[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaneJeon/myURL)](https://codeclimate.com/github/JaneJeon/myURL/maintainability)
 [![Version](https://img.shields.io/npm/v/myurl)](https://www.npmjs.com/package/myurl)
 [![Downloads](https://img.shields.io/npm/dt/myurl)](https://www.npmjs.com/package/myurl)
 [![Dependencies](https://img.shields.io/david/JaneJeon/myurl)](https://david-dm.org/JaneJeon/myurl)
