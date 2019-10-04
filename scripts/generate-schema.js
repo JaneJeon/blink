@@ -1,4 +1,4 @@
-require('dotenv-defaults').config()
+require('../config')
 
 const fs = require('fs')
 const { execSync } = require('child_process')
