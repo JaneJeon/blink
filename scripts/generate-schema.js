@@ -1,6 +1,7 @@
 require('dotenv-defaults').config()
 
 const fs = require('fs')
+const { execSync } = require('child_process')
 const omit = require('lodash/omit')
 
 const schema = {}
@@ -18,5 +19,7 @@ fs.readdirSync('models')
     ])
   })
 
-fs.writeFileSync('config/schema.json', JSON.stringify(schema, null, 2) + '\n')
+fs.writeFileSync('config/schema.json', JSON.stringify(schema))
+execSync('git add config/schema.json')
+
 process.exit(0) // needed since mongoose won't shut down on its own

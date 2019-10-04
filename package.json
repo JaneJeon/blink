@@ -15,6 +15,7 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
+    "pretest": "cross-env NEXT_TELEMETRY_DISABLED=1 yarn build",
     "test": "run-s 'test:* {@}' -- -- --forceExit",
     "test:models": "jest models",
     "test:routes": "jest routes",
@@ -22,9 +23,7 @@
     "coverage": "is-ci && codecov",
     "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "clean": "run-p clean:*",
-    "clean:logs": "rimraf logs/*.log",
-    "clean:docs": "docs/.vuepress/dist"
+    "clean": "rimraf logs/*.log docs/.vuepress/dist .next"
   },
   "dependencies": {
     "@casl/ability": "^3.2.0",
