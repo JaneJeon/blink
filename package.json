@@ -8,7 +8,9 @@
   "license": "AGPL-3.0",
   "scripts": {
     "dev": "nodemon app",
-    "build": "next build",
+    "build": "run-s build:*",
+    "build:schema": "node scripts/generate-schema",
+    "build:next": "next build",
     "start": "node app",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",

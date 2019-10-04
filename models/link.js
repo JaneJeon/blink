@@ -40,6 +40,7 @@ const schema = new mongoose.Schema(
       },
       set: url => normalizeURL(url, { forceHttps: true })
     },
+
     creator: {
       type: mongoose.Schema.Types.ObjectId,
       immutable: true,
