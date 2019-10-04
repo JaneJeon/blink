@@ -1152,9 +1152,9 @@
     fastq "^1.6.0"
 
 "@primer/components@^14.2.0":
-  version "14.3.0"
-  resolved "https://registry.yarnpkg.com/@primer/components/-/components-14.3.0.tgz#9d85ce91a1655b200783daf94bffad5fdc869b99"
-  integrity sha512-lnYfEFyujIgU0hi0h5GmzUO0r78FK2iLub4U/uM65COREu6wi+VTWRNdnXVwbS5/+2+s46ZVrXZcx/61SEhihw==
+  version "14.3.1"
+  resolved "https://registry.yarnpkg.com/@primer/components/-/components-14.3.1.tgz#283cf6fc9aa0bf04770e6fe5394bd0f5dbf9e849"
+  integrity sha512-5VS4/47CPaHPgzNvYg8abDU/YIOYPLpKddezmk4VsR/gLPDCX4BW2q++/GbgSvmzh522NQJyHWJJ5KdoDAqaEw==
   dependencies:
     "@babel/polyfill" "7.4.4"
     "@primer/octicons-react" "^9.1.1"
