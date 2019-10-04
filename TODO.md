@@ -15,7 +15,7 @@
 - [ ] Investigate why coverage is not updated correctly (only models/routes)
 - [ ] Built-in analytics (that can be disabled if the user chooses to use their own analytics platform)
 - [ ] Canonicize user-defined hashes (e.g. /blah and /BlAh should both lead to the same place)
-- [ ] Central place for loading environment
+- [x] Central place for loading environment
 - [x] Automatically add built files to git so that they may be formatted
 
 ## Nice-to-have

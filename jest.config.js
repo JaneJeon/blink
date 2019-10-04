@@ -1,4 +1,4 @@
-require('dotenv-defaults').config()
+require('./config')
 const isCI = require('is-ci')
 process.env.JEST_JUNIT_OUTPUT_NAME = 'reports/junit/jest/results.xml'
 
