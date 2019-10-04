@@ -10,6 +10,7 @@ module.exports = {
     account: '/app/account',
     settings: '/app/settings'
   },
+  // the folders in the public directory
   public: fs
     .readdirSync('public')
     .filter(f => fs.statSync(path.join('public', f)).isDirectory())

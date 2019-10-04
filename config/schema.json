@@ -1,0 +1,67 @@
+{
+  "link": {
+    "title": "Link",
+    "type": "object",
+    "properties": {
+      "_id": {
+        "type": "string",
+        "pattern": "^\\w+$"
+      },
+      "originalURL": {
+        "type": "string"
+      },
+      "creator": {
+        "type": "string",
+        "x-ref": "User",
+        "description": "Refers to User",
+        "pattern": "^[0-9a-fA-F]{24}$"
+      },
+      "brandedURL": {},
+      "id": {}
+    },
+    "required": ["originalURL"]
+  },
+  "user": {
+    "title": "User",
+    "type": "object",
+    "properties": {
+      "profile": {
+        "title": "profile",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "picture": {
+            "type": "string"
+          }
+        }
+      },
+      "github": {
+        "type": "string"
+      },
+      "links": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "x-ref": "Link",
+          "description": "Refers to Link",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        }
+      },
+      "_id": {
+        "type": "string",
+        "pattern": "^[0-9a-fA-F]{24}$"
+      }
+    }
+  }
+}
