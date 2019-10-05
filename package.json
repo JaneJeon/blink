@@ -23,7 +23,7 @@
     "coverage": "is-ci && codecov",
     "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "surge docs/.vuepress/dist 'https://myurl.surge.sh'",
+    "docs:deploy": "surge docs/.vuepress/dist \"$SURGE_URL\"",
     "clean": "rimraf logs/*.log docs/.vuepress/dist .next out"
   },
   "dependencies": {
