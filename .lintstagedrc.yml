@@ -1,10 +1,8 @@
 '*.js':
   - eslint --fix
+  - prettier --write
   - git add
 
-models/*.js:
-  - node scripts/generate-schema
-
-'*.{js,md,json,yml,yaml}':
+'*.{md,json,yml,yaml,css,html}':
   - prettier --write
   - git add

@@ -16,7 +16,7 @@
     "build:docs": "vuepress build docs",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
-    "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
+    "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
     "test": "cross-env LOG_LEVEL=error run-s 'test:* {@}' -- -- --forceExit",
     "test:models": "jest models",
     "test:routes": "jest routes",
