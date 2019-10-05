@@ -11,6 +11,8 @@
         "description": "Refers to User",
         "pattern": "^[0-9a-fA-F]{24}$"
       },
+      "updatedAt": { "type": "string", "format": "date-time" },
+      "createdAt": { "type": "string", "format": "date-time" },
       "brandedURL": {},
       "id": {}
     },

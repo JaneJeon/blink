@@ -11,12 +11,11 @@ model = path.basename(model).split('.')[0]
 
 const schema = require('../config/schema.json') || {}
 const modelSchema = omit(require(`../models/${model}`).jsonSchema(), [
-  'properties.createdAt',
-  'properties.updatedAt',
   'properties.__v'
 ])
 schema[model] = modelSchema
 
 fs.writeFileSync('config/schema.json', JSON.stringify(schema))
 execSync('git add config/schema.json')
-process.exit()
+
+process.exit() // for some reason process doesn't end without this
