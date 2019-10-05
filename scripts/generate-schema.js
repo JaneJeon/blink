@@ -19,3 +19,4 @@ schema[model] = modelSchema
 
 fs.writeFileSync('config/schema.json', JSON.stringify(schema))
 execSync('git add config/schema.json')
+process.exit()
