@@ -11,9 +11,8 @@
     "dev": "run-p dev:*",
     "dev:client": "next dev",
     "dev:server": "nodemon app",
-    "dev:docs": "vuepress dev docs",
-    "build:client": "next build && next export",
-    "build:docs": "vuepress build docs",
+    "build": "next build && next export",
+    "heroku-postbuild": "echo 'Skip build on Heroku'",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
@@ -22,6 +21,9 @@
     "test:routes": "jest routes",
     "test:watch:all": "yarn test --watch",
     "coverage": "is-ci && codecov",
+    "docs": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:deploy": "surge docs/.vuepress/dist 'https://myurl.surge.sh'",
     "clean": "rimraf logs/*.log docs/.vuepress/dist .next out"
   },
   "dependencies": {
@@ -85,6 +87,7 @@
     "string-natural-compare": "^2.0.3",
     "supertest": "^4.0.2",
     "supertest-session": "^4.0.0",
+    "surge": "^0.21.3",
     "vuepress": "^1.1.0",
     "vuepress-theme-default-prefers-color-scheme": "^1.0.2"
   },

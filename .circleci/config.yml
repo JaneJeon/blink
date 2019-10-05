@@ -39,3 +39,11 @@ jobs:
       - run:
           name: Upload Coverage
           command: yarn coverage
+
+      - run:
+          name: Build docs
+          command: yarn docs:build
+
+      - run:
+          name: Deploy docs
+          command: yarn docs:deploy

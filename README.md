@@ -11,6 +11,8 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=JaneJeon/myURL)](https://dependabot.com)
 [![License](https://img.shields.io/npm/l/myurl)](https://github.com/JaneJeon/myURL/blob/master/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-github-blue)](https://janejeon.github.io/myURL)
+[![Docs](https://img.shields.io/badge/docs-surge-yellowgreen)](https://myurl.surge.sh)
+[![Frontend Status](https://img.shields.io/netlify/03c1ca61-fcec-48e4-919a-a4b971ef294f)](https://app.netlify.com/sites/my-url/deploys)
 [![Standard code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Prettier code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
