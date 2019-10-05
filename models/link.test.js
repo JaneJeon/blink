@@ -1,6 +1,10 @@
 const Link = require('./link')
 const HashIds = require('hashids/cjs')
-const hashIds = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
+const hashIds = new HashIds(
+  process.env.DOMAIN,
+  process.env.HASH_MIN_LENGTH - 0,
+  process.env.HASH_ALPHABET
+)
 
 describe('Link', () => {
   const originalURL = 'www.nodejs.org'
