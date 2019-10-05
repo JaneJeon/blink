@@ -12,7 +12,6 @@ module.exports = app
   .use(require('./middlewares/express-logger'))
   .use(require('helmet')())
   .use(require('cors')())
-  .use(express.static('public', { index: false }))
   .use(require('express-prometheus-middleware')())
   .use(require('./middlewares/session'))
   .use(express.json())
