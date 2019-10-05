@@ -5,3 +5,6 @@
 '*.{js,md,json,yml,yaml}':
   - prettier --write
   - git add
+
+models/*.js:
+  - node scripts/generate-schema

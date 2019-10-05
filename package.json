@@ -15,7 +15,7 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
-    "test": "run-s 'test:* {@}' -- -- --forceExit",
+    "test": "run-s 'test:* {@}' -- --",
     "test:models": "jest models",
     "test:routes": "jest routes",
     "test:watch:all": "yarn test --watch",
