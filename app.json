@@ -34,7 +34,7 @@
       "description": "the custom domain (required) of this app; e.g. bit.ly"
     },
     "HOMEPAGE": {
-      "description": "where the root domain should redirect to; e.g. bitly.com"
+      "description": "where the root domain should redirect to; e.g. https://bitly.com (http/https required)"
     },
     "GITHUB_CLIENT_ID": {
       "description": "needed for 'sign in with github'"
