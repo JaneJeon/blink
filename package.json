@@ -12,7 +12,7 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml}'",
-    "test": "cross-env LOG_LEVEL=error run-s 'test:* {@}' -- --",
+    "test": "cross-env LOG_LEVEL=error run-s 'test:* {@}' -- -- --forceExit",
     "test:models": "jest models",
     "test:routes": "jest routes",
     "test:watch:all": "yarn test --watch",
