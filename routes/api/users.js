@@ -11,7 +11,11 @@ module.exports = Router()
       })
     next()
   })
-  .get('/:userId', (req, res) => res.send(req.requestedUser))
+  .get('/:userId', async (req, res) => {
+    const user = await User.findById(req.params.userId)
+    res.send(user)
+  })
   .get('/:userId/links', async (req, res) => {
-    res.send(await req.requestedUser.links().paginate())
+    // TODO:
+    res.send(await req.requestedUser.populate('links').paginate())
   })
