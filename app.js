@@ -28,9 +28,5 @@ if (process.env.NODE_ENV !== 'test') {
     } else log.info(`Server listening on port ${this.address().port}`)
   })
 
-  const mongoose = require('./lib/mongoose')
-  process.on('SIGINT', async () => {
-    server.close()
-    await mongoose.connection.close()
-  })
+  process.on('SIGINT', () => server.close()).on('SIGTERM', () => server.close())
 }
