@@ -52,7 +52,7 @@ describe('Link', () => {
     await Link.create({ originalURL: originalURL2, _id: 'FooBar' })
   })
 
-  test('preserve hashes corresponding to public folders', async () => {
+  test.skip('preserve hashes corresponding to public folders', async () => {
     let error
     try {
       await Link.create({ originalURL: originalURL3, _id: '_test' })
@@ -63,7 +63,7 @@ describe('Link', () => {
     }
   })
 
-  test('preserve hashes corresponding to static redirects', async () => {
+  test.skip('preserve hashes corresponding to static redirects', async () => {
     let error
     try {
       await Link.create({ originalURL: originalURL3, _id: 'login' })

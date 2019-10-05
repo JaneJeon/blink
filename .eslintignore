@@ -2,3 +2,4 @@ coverage
 reports
 docs/.vuepress/dist
 .next
+out

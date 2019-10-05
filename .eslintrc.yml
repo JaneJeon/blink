@@ -2,6 +2,7 @@ extends:
   - standard
   - prettier
   - prettier/standard
+  - plugin:react/recommended
 
 plugins:
   - prettier

@@ -1,10 +1,13 @@
 const mongoose = require('../lib/mongoose')
 const Sequence = require('./sequence')
-const routes = require('../config/routes')
 const { URL } = require('url')
 const normalizeURL = require('normalize-url')
 const HashIds = require('hashids/cjs')
-const hash = new HashIds(process.env.DOMAIN, process.env.HASH_MIN_LENGTH - 0)
+const hash = new HashIds(
+  process.env.DOMAIN,
+  process.env.HASH_MIN_LENGTH - 0,
+  process.env.HASH_ALPHABET
+)
 
 const schema = new mongoose.Schema(
   {
@@ -12,6 +15,7 @@ const schema = new mongoose.Schema(
       hide: true,
       type: String,
       trim: true,
+      lowercase: true,
       minlength: process.env.HASH_MIN_LENGTH,
       maxlength: process.env.HASH_MAX_LENGTH,
       match: /^\w+$/,
@@ -19,12 +23,11 @@ const schema = new mongoose.Schema(
         {
           validator: val => !hash.decode(val).length,
           msg: 'Cannot use this hash'
-        },
-        {
-          validator: url =>
-            !(routes.public.includes(url) || routes.redirect[url]),
-          msg: 'This URL is preserved'
         }
+        // {
+        //   validator: url => !preservedURLs.includes(url),
+        //   msg: 'This URL is preserved'
+        // }
       ]
     },
     originalURL: {
