@@ -54,11 +54,11 @@
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "pino": "^5.13.4",
-    "pino-pretty": "^3.2.1"
+    "pino-pretty": "^3.2.1",
+    "react-bootstrap": "^1.0.0-beta.14"
   },
   "devDependencies": {
     "@casl/react": "^1.0.4",
-    "@primer/components": "^14.2.0",
     "@types/jest": "^24.0.18",
     "codecov": "^3.6.1",
     "cross-env": "^6.0.0",
