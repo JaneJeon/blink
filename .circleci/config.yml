@@ -50,7 +50,7 @@ workflows:
             - lint
       - docs:
           requires:
-            - docs
+            - lint
           filters:
             branches:
               only:
