@@ -7,7 +7,7 @@ module.exports = Router()
     res.send(links)
   })
   .get('/:linkId', async (req, res) => {
-    res.send(await Link.findById(req.params.linkId))
+    res.send(await Link.findOne().byLowerId(req.params.linkId))
   })
   .post('/', async (req, res) => {
     res.status(201).send(await req.user.createLink(req.body))

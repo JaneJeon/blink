@@ -61,5 +61,8 @@ schema.pre('save', async function() {
 schema.virtual('brandedURL').get(function() {
   return `${process.env.DOMAIN}/${this.id}`
 })
+schema.query.byLowerId = function(id) {
+  return this.where({ _id: id.toLowerCase() })
+}
 
 module.exports = mongoose.model('Link', schema)

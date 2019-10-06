@@ -37,13 +37,13 @@ describe('Link', () => {
   })
 
   test('fetch URL', async () => {
-    const doc = await Link.findById(id)
+    const doc = await Link.findOne().byLowerId(id)
 
     expect(doc.originalURL).toBe(normalizedURL)
     expect(doc.brandedURL.startsWith(process.env.DOMAIN)).toBe(true)
   })
 
-  test('set custom hash', async () => {
+  test('set custom hash (which is lowercased)', async () => {
     let error
     try {
       await Link.create({ originalURL: originalURL2, _id: hashIds.encode(500) })
@@ -53,7 +53,8 @@ describe('Link', () => {
       expect(error).toBeDefined()
     }
 
-    await Link.create({ originalURL: originalURL2, _id: 'FooBar' })
+    const link = await Link.create({ originalURL: originalURL2, _id: 'FooBar' })
+    expect(link.id).toBe('foobar')
   })
 
   test.skip('preserve hashes corresponding to public folders', async () => {
