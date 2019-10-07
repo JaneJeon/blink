@@ -3,7 +3,7 @@ require('express-async-errors')
 
 const express = require('express')
 const app = express()
-const passport = require('./lib/passport')
+const passport = require('./config/passport')
 const log = require('./lib/logger')
 
 module.exports = app

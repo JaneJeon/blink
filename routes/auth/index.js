@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const passport = require('../../lib/passport')
+const passport = require('../../config/passport')
 const log = require('../../lib/logger')
 
 module.exports = Router()
