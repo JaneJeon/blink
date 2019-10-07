@@ -7682,9 +7682,9 @@ mongodb@3.3.2, mongodb@^3.1.0:
     safe-buffer "^5.1.2"
 
 mongoose-hidden@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/mongoose-hidden/-/mongoose-hidden-1.8.0.tgz#ba672b60c7335ecfab82b89f5f8e5b8c0264684f"
-  integrity sha512-L76yNMFYnqCmeCWMEw453sl8kjkc8+OMXCKLdOO08FCUGys8F0nJfR7kw0ylPnJajpvicSslcJW4OzZAsvZt0w==
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/mongoose-hidden/-/mongoose-hidden-1.8.1.tgz#5042efa66267d6f2b9647b50d8713e9f0a6500e2"
+  integrity sha512-JyMXbmM0b9gSCLum9mA+4doZ3QaJGKiuhVe1gkSPLooOm83+Ez+5JfTJpk2ob0V8zfLw9ddykgS2pekbl3l6nQ==
   dependencies:
     debug "^4.1.1"
     mpath "^0.6.0"
