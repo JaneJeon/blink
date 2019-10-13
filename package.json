@@ -27,8 +27,6 @@
     "clean": "rimraf logs/*.log docs/.vuepress/dist .next out"
   },
   "dependencies": {
-    "@casl/ability": "^3.2.0",
-    "@casl/mongoose": "^2.3.2",
     "cachegoose": "^8.0.0",
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
@@ -58,7 +56,6 @@
     "react-bootstrap": "^1.0.0-beta.14"
   },
   "devDependencies": {
-    "@casl/react": "^1.0.4",
     "@types/jest": "^24.0.18",
     "codecov": "^3.6.1",
     "cross-env": "^6.0.0",

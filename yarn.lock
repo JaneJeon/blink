@@ -914,23 +914,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@casl/ability@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@casl/ability/-/ability-3.2.0.tgz#b723abb17202619874dcf13bf912f8d597ba47a7"
-  integrity sha512-MoU+fm8Bfx37DCM2r7BtkyYTy3T6x+2d9zaVESe4y+Q7BKZsWeyKLhF8Yh+fZHBcAC5RDupmk88ckoBSHpiOtQ==
-  dependencies:
-    sift "^7.0.1"
-
-"@casl/mongoose@^2.3.2":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@casl/mongoose/-/mongoose-2.3.2.tgz#b54b99be53fa59b9da563df62c3ab7270109a64b"
-  integrity sha512-bEqx+IjNTDp1CevM11wcY7v01Mk4i5odcreHXJS/yQ9Cj0XbDyNON3CwZ3wOGxfMU+0Nu4XY6x2o4peneBXHkQ==
-
-"@casl/react@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@casl/react/-/react-1.0.4.tgz#7e3adad4c811c51b787e8573aa747c60bfa18cfe"
-  integrity sha512-vdFkjlqFM7FaBPja8LZ/E8/jYiln/r/ol9eARwSR2NkT358Q8SdvVLg9TkIm3kOh17P1irOcT8U5za+VscNRHA==
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -10736,7 +10719,7 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
-sift@7.0.1, sift@^7.0.1:
+sift@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"
   integrity sha512-oqD7PMJ+uO6jV9EQCl0LrRw1OwsiPsiFQR5AR30heR+4Dl7jBBbDLnNvWiak20tzZlSE1H7RB30SX/1j/YYT7g==

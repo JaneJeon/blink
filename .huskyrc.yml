@@ -1,3 +1,3 @@
 hooks:
-  pre-commit: node scripts/generate-schema && lint-staged
+  pre-commit: lint-staged
   pre-push: run-s lint test

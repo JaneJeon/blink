@@ -81,3 +81,7 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2019 [Jane Jeon](https://github.com/JaneJeon).<br />
 This project is [AGPL-3.0](https://github.com/JaneJeon/myURL/blob/master/LICENSE) licensed.
+
+---
+
+This project is based off of [Express-Objection-Template](https://github.com/JaneJeon/express-objection-template)
