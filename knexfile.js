@@ -1,3 +1,5 @@
+require('./config')
+
 // istanbul ignore file
 if (process.env.DATABASE_CLIENT === 'pg') {
   const { types } = require('pg')
