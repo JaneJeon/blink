@@ -24,6 +24,7 @@
     "lint": "run-s lint:*",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
+    "pretest": "yarn migrate",
     "test": "cross-env LOG_LEVEL=error run-s 'test:* {@}' -- -- --forceExit",
     "test:models": "jest models",
     "test:routes": "jest routes",
