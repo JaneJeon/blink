@@ -7,8 +7,7 @@ jobs:
         image: circleci/node:lts
     steps:
       - checkout
-      - &restore-cache
-        restore-cache:
+      - restore-cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
@@ -18,6 +17,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn lint
+      - persist_to_workspace:
+          root: '.'
+          paths:
+            - node_modules
 
   test:
     docker:
@@ -25,7 +28,9 @@ jobs:
       - image: circleci/mongo
     steps:
       - checkout
-      - *restore-cache
+      - &attach-workspace
+        attach_workspace:
+          at: '.'
       - run: yarn test --ci --runInBand
       - store_test_results:
           path: reports/junit
@@ -36,7 +41,7 @@ jobs:
       - *node
     steps:
       - checkout
-      - *restore-cache
+      - *attach-workspace
       - run: yarn docs:build
       - run: yarn docs:deploy
 
