@@ -32,6 +32,7 @@
     "connect-ensure-login": "^0.1.1",
     "connect-redis": "^4.0.3",
     "cors": "^2.8.5",
+    "dayjs": "^1.8.16",
     "dotenv-defaults": "^1.0.2",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
@@ -69,8 +70,7 @@
     "pm2": "^4.0.0",
     "rate-limit-redis": "^1.6.0",
     "react-bootstrap": "^1.0.0-beta.14",
-    "role-acl": "^4.1.2",
-    "sqlite3": "^4.1.0"
+    "role-acl": "^4.1.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
