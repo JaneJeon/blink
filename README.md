@@ -16,7 +16,7 @@
 [![Standard code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Prettier code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
-[![Issues](https://img.shields.io/badge/issues-trello-blue)](https://trello.com/b/FDOEWRJo)
+[![Issues](https://img.shields.io/badge/issues-trello-blue)](https://trello.com/b/QCCf001W)
 [![Issues](https://img.shields.io/badge/issues-github-blue)](https://github.com/JaneJeon/myURL/issues)
 
 > A blazing fast, planet-scale, easy-to-use serverless URL shortener!
