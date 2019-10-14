@@ -62,3 +62,5 @@ typings/
 reports
 docs/.vuepress/dist
 out
+
+test.db

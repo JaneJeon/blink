@@ -1,6 +1,6 @@
+// istanbul ignore file
 require('./config')
 
-// istanbul ignore file
 if (process.env.DATABASE_CLIENT === 'pg') {
   const { types } = require('pg')
   const dayjs = require('dayjs')
@@ -14,7 +14,11 @@ const log = require('./lib/logger')
 
 module.exports = {
   ...knexSnakeCaseMappers(),
-  client: process.env.DATABASE_CLIENT,
+  client: process.env.DATABASE_FILE
+    ? {
+        filename: process.env.DATABASE_FILE
+      }
+    : process.env.DATABASE_CLIENT,
   connection: process.env.DATABASE_URL,
   log: {
     warn: msg => log.warn(msg),
