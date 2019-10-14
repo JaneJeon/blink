@@ -1,0 +1,54 @@
+User:
+  type: object
+  properties:
+    id:
+      type: integer
+      readOnly: true
+    role:
+      type: string
+      enum: [user, admin]
+    githubId:
+      type: string
+      writeOnly: true
+    gitlabId:
+      type: string
+      writeOnly: true
+    profile:
+      type: object
+  additionalProperties: false
+
+Email:
+  type: object
+  properties:
+    address:
+      type: string
+      format: email
+    verified:
+      type: boolean
+      default: false
+    primary:
+      type: boolean
+      default: false
+    visibility:
+      type: string
+      enum: [public, private]
+      default: private
+  required: [address]
+  additionalProperties: false
+
+Link:
+  type: object
+  properties:
+    id:
+      type: integer
+      readOnly: true
+    hash:
+      type: string
+      minLength: 4
+      maxLength: 20
+      pattern: ^\w+$
+    originalURL:
+      type: string
+      maxLength: 100
+  required: [originalURL]
+  additionalProperties: false
