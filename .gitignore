@@ -59,8 +59,9 @@ typings/
 # next.js build output
 .next
 
+# Built files
+config/**/*.json
 reports
 docs/.vuepress/dist
 out
-
 test.db

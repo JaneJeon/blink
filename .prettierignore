@@ -3,3 +3,4 @@ reports
 docs/.vuepress/dist
 .next
 out
+config/**/*.json
