@@ -31,7 +31,7 @@
     "test:integration": "jest routes",
     "test:watch:all": "yarn test --watch",
     "coverage": "is-ci && codecov",
-    "clean": "rimraf logs/*.log website/build .next out"
+    "clean": "rimraf logs/*.log website/build .next out config/**.json"
   },
   "dependencies": {
     "chalk": "^2.4.2",
