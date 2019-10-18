@@ -1,15 +1,13 @@
-const tableName = 'users'
+const tableName = 'organizations'
 
 exports.up = knex =>
   knex.schema.createTable(tableName, table => {
-    table.increments()
-    table.text('role').notNullable()
-
+    table
+      .text('id')
+      .notNullable()
+      .primary()
     table.text('name')
     table.text('avatar')
-
-    table.text('github_id').unique()
-    table.text('slack_id').unique()
 
     table.timestamps(true, true)
   })
