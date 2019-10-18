@@ -8,6 +8,7 @@ exports.up = knex =>
       .primary()
     table.text('name')
     table.text('avatar')
+    table.text('type').notNullable()
 
     table.timestamps(true, true)
   })
