@@ -6,34 +6,21 @@ User:
       readOnly: true
     role:
       type: string
-      enum: [user, admin]
+      enum:
+        - user
+        - admin
+      default: user
+    name:
+      type: string
+    avatar:
+      type: string
+      format: uri
     githubId:
       type: string
       writeOnly: true
-    gitlabId:
+    slackId:
       type: string
       writeOnly: true
-    profile:
-      type: object
-  additionalProperties: false
-
-Email:
-  type: object
-  properties:
-    address:
-      type: string
-      format: email
-    verified:
-      type: boolean
-      default: false
-    primary:
-      type: boolean
-      default: false
-    visibility:
-      type: string
-      enum: [public, private]
-      default: private
-  required: [address]
   additionalProperties: false
 
 Link:
@@ -50,5 +37,6 @@ Link:
     originalURL:
       type: string
       maxLength: 100
-  required: [originalURL]
+  required:
+    - originalURL
   additionalProperties: false
