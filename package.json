@@ -31,10 +31,7 @@
     "test:integration": "jest routes",
     "test:watch:all": "yarn test --watch",
     "coverage": "is-ci && codecov",
-    "docs": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "docs:deploy": "surge docs/.vuepress/dist \"$SURGE_URL\"",
-    "clean": "rimraf logs/*.log docs/.vuepress/dist .next out"
+    "clean": "rimraf logs/*.log website/build .next out"
   },
   "dependencies": {
     "chalk": "^2.4.2",
