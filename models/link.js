@@ -1,68 +1,73 @@
-const mongoose = require('../lib/mongoose')
-const Sequence = require('./sequence')
+const BaseModel = require('./base')
+const hashId = require('objection-hashid')
+const createError = require('http-errors')
+
 const { URL } = require('url')
 const normalizeURL = require('normalize-url')
-const HashIds = require('hashids/cjs')
-const hash = new HashIds(
-  process.env.DOMAIN,
-  process.env.HASH_MIN_LENGTH - 0,
-  process.env.HASH_ALPHABET
-)
 
-const schema = new mongoose.Schema(
-  {
-    _id: {
-      hide: true,
-      type: String,
-      trim: true,
-      lowercase: true,
-      minlength: process.env.HASH_MIN_LENGTH,
-      maxlength: process.env.HASH_MAX_LENGTH,
-      match: /^\w+$/,
-      validate: [
-        {
-          validator: val => !hash.decode(val).length,
-          msg: 'Cannot use this hash'
+class Link extends hashId(BaseModel) {
+  static get relationMappings() {
+    return {
+      user: {
+        type: BaseModel.BelongsToOneRelation,
+        modelClass: 'user',
+        join: {
+          from: 'links.creatorId',
+          to: 'users.id'
         }
-        // {
-        //   validator: url => !preservedURLs.includes(url),
-        //   msg: 'This URL is preserved'
-        // }
-      ]
-    },
-    originalURL: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      maxlength: process.env.URL_MAX_LENGTH,
-      immutable: true,
-      validate: {
-        validator: url => new URL(url).host !== process.env.DOMAIN,
-        msg: `Cannot shorten ${process.env.DOMAIN} URLs`
-      },
-      set: url => normalizeURL(url, { forceHttps: true })
-    },
-
-    creator: {
-      type: mongoose.Schema.Types.ObjectId,
-      immutable: true,
-      index: true,
-      ref: 'User'
-      // required: true
+      }
     }
-  },
-  { _id: false, toJSON: { virtuals: true }, timestamps: true }
-)
+  }
 
-schema.pre('save', async function() {
-  if (!this.id) this._id = hash.encode(await Sequence.next())
-})
-schema.virtual('brandedURL').get(function() {
-  return `${process.env.DOMAIN}/${this.id}`
-})
-schema.query.byLowerId = function(id) {
-  return this.where({ _id: id.toLowerCase() })
+  processInput() {
+    if (this.hash) this.hash = this.hash.toLowerCase().trim()
+    if (this.originalURL) {
+      try {
+        // normalize URL so that we can search by URL.
+        // The process of normalization also involves validating the (normalized) URL.
+        this.originalURL = normalizeURL(this.originalURL, { forceHttps: true })
+        if (new URL(this.originalURL).host === process.env.DOMAIN)
+          throw new Error(`Cannot shorten ${process.env.DOMAIN} URLs`)
+      } catch (err) {
+        throw createError(400, err)
+      }
+    }
+  }
+
+  static get virtualAttributes() {
+    return ['shortenedURL', 'brandedURL']
+  }
+
+  get shortenedURL() {
+    return `${process.env.DOMAIN}/${this.hashId}`
+  }
+
+  get brandedURL() {
+    return `${process.env.DOMAIN}/${this.hash}`
+  }
+
+  static get hashIdSalt() {
+    return process.env.DOMAIN
+  }
+
+  static get hashIdMinLength() {
+    return this.jsonSchema.properties.hash.minLength
+  }
+
+  static get hashIdAlphabet() {
+    return 'abcdefghijklmnopqrstuvwxyz0123456789' // lowercase
+  }
+
+  static get QueryBuilder() {
+    return class extends super.QueryBuilder {
+      // if the hash is encoded, search for the id, else search hash directly
+      findByHashId(hash) {
+        const ids = this.modelClass()._hashIdInstance.decode(hash)
+
+        return ids.length ? this.findById(ids[0]) : this.findOne({ hash })
+      }
+    }
+  }
 }
 
-module.exports = mongoose.model('Link', schema)
+module.exports = Link
