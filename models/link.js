@@ -1,6 +1,6 @@
 const BaseModel = require('./base')
 const hashId = require('objection-hashid')
-const createError = require('http-errors')
+const httpError = require('http-errors')
 
 const { URL } = require('url')
 const normalizeURL = require('normalize-url')
@@ -25,11 +25,15 @@ class Link extends hashId(BaseModel) {
       try {
         // normalize URL so that we can search by URL.
         // The process of normalization also involves validating the (normalized) URL.
-        this.originalURL = normalizeURL(this.originalURL, { forceHttps: true })
+        this.originalURL = normalizeURL(this.originalURL, {
+          forceHttps: true,
+          stripWWW: true
+        })
+
         if (new URL(this.originalURL).host === process.env.DOMAIN)
           throw new Error(`Cannot shorten ${process.env.DOMAIN} URLs`)
       } catch (err) {
-        throw createError(400, err)
+        throw httpError(400, err)
       }
     }
   }

@@ -6,7 +6,7 @@ exports.up = knex =>
     table.text('hash').unique()
     table.text('originalURL').notNullable()
     table
-      .integer('creator_id')
+      .text('creator_id')
       .references('users.id')
       .notNullable()
 

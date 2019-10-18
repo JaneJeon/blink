@@ -1,14 +1,11 @@
-const tableName = 'organizations'
+const tableName = 'teams'
 
 exports.up = knex =>
   knex.schema.createTable(tableName, table => {
-    table
-      .text('id')
-      .notNullable()
-      .primary()
+    table.text('id').notNullable()
+
     table.text('name')
     table.text('avatar')
-    table.text('type').notNullable()
 
     table.timestamps(true, true)
   })

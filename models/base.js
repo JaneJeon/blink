@@ -55,13 +55,22 @@ class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
     await this.processInput(opt, queryContext)
   }
 
+  static async findOrCreate(id, body) {
+    const instance = await this.query().findById(id, true)
+    if (instance) return instance
+
+    return this.query().insertAndFetch(body)
+  }
+
   static get QueryBuilder() {
     return class extends super.QueryBuilder {
       insertAndFetch(body) {
         return supportsReturning
-          ? this.insert(body)
-              .returning('*')
-              .first()
+          ? Array.isArray(body)
+            ? this.insert(body).returning('*')
+            : this.insert(body)
+                .returning('*')
+                .first()
           : super.insertAndFetch(body)
       }
 
@@ -72,6 +81,16 @@ class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
               .returning('*')
               .first()
           : super.patchAndFetchById(id, body)
+      }
+
+      patchAndFetch(body) {
+        return supportsReturning
+          ? Array.isArray(body)
+            ? this.patch(body).returning('*')
+            : this.patch(body)
+                .returning('*')
+                .first()
+          : super.patchAndFetch(body)
       }
 
       findById(id, silence = false) {

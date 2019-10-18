@@ -11,23 +11,19 @@ class User extends BaseModel {
           to: 'links.creatorId'
         }
       },
-      organizations: {
+      teams: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: 'organization',
+        modelClass: 'team',
         join: {
           from: 'users.id',
           through: {
-            from: 'affiliations.user_id',
-            to: 'affiliations.organization_id'
+            from: 'membership.userId',
+            to: 'membership.teamId'
           },
-          to: 'organizations.id'
+          to: 'teams.id'
         }
       }
     }
-  }
-
-  static get hidden() {
-    return ['githubId', 'slackId']
   }
 }
 

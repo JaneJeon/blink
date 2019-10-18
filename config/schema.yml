@@ -2,25 +2,20 @@ User:
   type: object
   properties:
     id:
-      type: integer
-      readOnly: true
+      type: string
     role:
       type: string
       enum:
         - user
         - admin
+        - owner
       default: user
     name:
       type: string
     avatar:
       type: string
-      format: uri
-    githubId:
-      type: string
-      writeOnly: true
-    slackId:
-      type: string
-      writeOnly: true
+  required:
+    - id
   additionalProperties: false
 
 Link:
