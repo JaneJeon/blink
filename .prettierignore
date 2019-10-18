@@ -1,6 +1,6 @@
 coverage
 reports
-docs/.vuepress/dist
+website/build
 .next
 out
 config/**/*.json
