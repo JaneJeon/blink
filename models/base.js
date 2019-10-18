@@ -6,7 +6,6 @@ const authorize = require('objection-authorize')(require('../lib/acl'))
 const visibility = require('objection-visibility').default
 
 const schema = require('../config/schema')
-const relations = require('../config/relations')
 
 Model.knex(require('knex')(require('../knexfile')))
 
@@ -31,7 +30,6 @@ class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
 
   static createValidator() {
     this.jsonSchema = schema[this.name]
-    this.relationMappings = relations[this.name]
 
     return new AjvValidator({
       // eslint-disable-next-line no-unused-vars
