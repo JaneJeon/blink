@@ -74,12 +74,14 @@ class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
           : super.patchAndFetchById(id, body)
       }
 
-      findById(id) {
-        return super.findById(id).throwIfNotFound()
+      findById(id, silence = false) {
+        const q = super.findById(id)
+        return silence ? q : q.throwIfNotFound()
       }
 
-      findOne(obj) {
-        return super.findOne(obj).throwIfNotFound()
+      findOne(obj, silence = false) {
+        const q = super.findOne(obj)
+        return silence ? q : q.throwIfNotFound()
       }
 
       paginate(after, sortField = 'id', direction = 'desc') {

@@ -9,13 +9,37 @@ class Organization extends BaseModel {
         join: {
           from: 'organizations.id',
           through: {
-            from: 'users-organizations.organization_id',
-            to: 'users-organizations.user_id'
+            from: 'affiliations.organization_id',
+            to: 'affiliations.user_id'
           },
           to: 'users.id'
         }
       }
     }
+  }
+
+  static async createSlackOrg(team) {
+    return this.query().insertAndFetch({
+      id: team.id,
+      name: team.name,
+      avatar: team.image_230,
+      type: 'slack'
+    })
+  }
+
+  static async updateSlackOrg(team) {
+    return this.query().updateAndFetchById(team.id, {
+      name: team.name,
+      avatar: team.image_230
+    })
+  }
+
+  static async createGitHubOrg(org) {
+    // TODO:
+  }
+
+  static async updateGitHubOrg(org) {
+    // TODO:
   }
 }
 

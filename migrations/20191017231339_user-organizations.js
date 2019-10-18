@@ -1,4 +1,4 @@
-const tableName = 'users-organizations'
+const tableName = 'affiliations'
 
 exports.up = knex =>
   knex.schema.createTable(tableName, table => {
