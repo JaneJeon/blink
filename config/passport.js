@@ -1,40 +1,51 @@
 const passport = require('passport')
-const GitHubStrategy = require('passport-github2').Strategy
+const SlackStrategy = require('passport-slack-fixed').Strategy
+const httpError = require('http-errors')
+
 const User = require('../models/user')
-const ms = require('ms')
+const Team = require('../models/team')
+const slack = require('../lib/slack')
 
 passport.serializeUser((user, done) => done(null, user.id))
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .cache(ms('1h') / 1000, User.cacheKey(id))
-    .exec((err, user) => done(err, user))
+passport.deserializeUser(async (id, done) => {
+  try {
+    done(null, await User.query().findById(id, true))
+  } catch (err) {
+    done(err)
+  }
 })
 
+const allowedTeams = process.env.SLACK_TEAMS.toLowerCase().split(',')
 passport.use(
-  new GitHubStrategy(
+  new SlackStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `${process.env.DOMAIN}/auth/github/callback`
+      clientID: process.env.SLACK_CLIENT_ID,
+      clientSecret: process.env.SLACK_CLIENT_SECRET,
+      callbackURL: `${process.env.BASE_URL}/auth/slack/callback`
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ github: profile.id }, (err, existingUser) => {
-        if (err) return done(err)
-        if (existingUser) return done(null, existingUser)
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        if (!allowedTeams.includes(profile.team.domain))
+          throw httpError(400, 'Cannot sign in with this team')
 
-        User.create(
-          {
-            github: profile.id,
-            profile: {
-              name: profile.displayName,
-              picture: profile._json.avatar_url,
-              location: profile._json.location,
-              website: profile._json.blog
-            }
-          },
-          (err, user) => done(err, user)
-        )
-      })
+        const [user, team] = await Promise.all([
+          User.findOrCreate(profile.user.id, {
+            id: profile.user.id,
+            name: profile.user.name,
+            avatar: slack.largestIcon(profile.user)
+          }),
+          Team.findOrCreate(profile.team.id, {
+            id: profile.team.id,
+            name: profile.team.name,
+            avatar: slack.largestIcon(profile.team)
+          })
+        ])
+
+        await user.$relatedQuery('teams').relate(team.id)
+        done(null, user)
+      } catch (err) {
+        done(err)
+      }
     }
   )
 )
