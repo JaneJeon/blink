@@ -1,4 +1,4 @@
-const tableName = 'links'
+const tableName = require('../models/link').tableName
 
 exports.up = knex =>
   knex.schema.createTable(tableName, table => {

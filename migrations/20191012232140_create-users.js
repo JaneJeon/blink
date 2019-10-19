@@ -1,4 +1,4 @@
-const tableName = 'users'
+const tableName = require('../models/user').tableName
 
 exports.up = knex =>
   knex.schema.createTable(tableName, table => {

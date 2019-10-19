@@ -41,7 +41,7 @@ passport.use(
           })
         ])
 
-        await user.$relatedQuery('teams').relate(team.id)
+        await user.$relatedQuery('teams').relate(team)
         done(null, user)
       } catch (err) {
         done(err)
