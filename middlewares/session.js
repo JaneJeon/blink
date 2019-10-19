@@ -3,7 +3,7 @@ const MongoStore = require('connect-mongo')(session)
 const ms = require('ms')
 
 module.exports = session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET || 'keyboard cat',
   resave: false,
   rolling: false,
   saveUninitialized: false,
