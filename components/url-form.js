@@ -47,7 +47,7 @@ export default class URLBox extends React.Component {
           <Form.Row>
             <InputGroup as={Col} size="lg" md="10">
               <InputGroup.Prepend>
-                <InputGroup.Text>{process.env.DOMAIN}</InputGroup.Text>
+                <InputGroup.Text>{process.env.BASE_URL}</InputGroup.Text>
                 <InputGroup.Text>/</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control

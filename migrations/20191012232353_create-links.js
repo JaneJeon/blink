@@ -4,7 +4,7 @@ exports.up = knex =>
   knex.schema.createTable(tableName, table => {
     table.increments()
     table.text('hash').unique()
-    table.text('originalURL').notNullable()
+    table.text('original_URL').notNullable()
     table
       .text('creator_id')
       .references('users.id')

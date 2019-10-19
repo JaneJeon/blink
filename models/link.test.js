@@ -1,10 +1,5 @@
 const Link = require('./link')
-const HashIds = require('hashids/cjs')
-const hashIds = new HashIds(
-  process.env.DOMAIN,
-  process.env.HASH_MIN_LENGTH - 0,
-  process.env.HASH_ALPHABET
-)
+const hashIds = Link._hashIdInstance
 
 describe('Link', () => {
   const originalURL = 'www.nodejs.org'
@@ -40,7 +35,7 @@ describe('Link', () => {
     const doc = await Link.findOne().byLowerId(id)
 
     expect(doc.originalURL).toBe(normalizedURL)
-    expect(doc.brandedURL.startsWith(process.env.DOMAIN)).toBe(true)
+    expect(doc.brandedURL.startsWith(process.env.BASE_URL)).toBe(true)
   })
 
   test('set custom hash (which is lowercased)', async () => {
