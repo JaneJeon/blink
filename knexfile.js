@@ -1,13 +1,8 @@
 // istanbul ignore file
 require('./config')
 
-if (process.env.DATABASE_CLIENT === 'pg') {
-  const { types } = require('pg')
-  const dayjs = require('dayjs')
-  types.setTypeParser(20, parseInt) // cast SELECT COUNT(*) to integer
-  // to get around jsonschema validation quirks regarding date objects vs. strings
-  types.setTypeParser(1082, obj => dayjs(obj).format('YYYY-MM-DD'))
-}
+if (process.env.DATABASE_CLIENT === 'pg')
+  require('pg').types.setTypeParser(20, parseInt) // cast SELECT COUNT(*) to integer
 
 const { knexSnakeCaseMappers } = require('objection')
 const log = require('./lib/logger')

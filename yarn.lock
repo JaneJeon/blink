@@ -7750,6 +7750,14 @@ passport-oauth@~0.1.1:
     passport "~0.1.1"
     pkginfo "0.2.x"
 
+passport-remember-me-extended@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/passport-remember-me-extended/-/passport-remember-me-extended-0.0.3.tgz#ea1a76209419ed3e2a1fc1849dfe4d1641289c34"
+  integrity sha1-6hp2IJQZ7T4qH8GEnf5NFkEonDQ=
+  dependencies:
+    passport "0.3.x"
+    pkginfo "0.2.x"
+
 passport-slack-fixed@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/passport-slack-fixed/-/passport-slack-fixed-0.0.8.tgz#b8459739afe76469d25a6e2302cd361a95975d3e"
@@ -7762,6 +7770,14 @@ passport-strategy@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
   integrity sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=
+
+passport@0.3.x:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/passport/-/passport-0.3.2.tgz#9dd009f915e8fe095b0124a01b8f82da07510102"
+  integrity sha1-ndAJ+RXo/glbASSgG4+C2gdRAQI=
+  dependencies:
+    passport-strategy "1.x.x"
+    pause "0.0.1"
 
 passport@^0.4.0:
   version "0.4.0"
