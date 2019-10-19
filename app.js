@@ -15,6 +15,7 @@ module.exports = app
   .use(express.json())
   .use(passport.initialize())
   .use(passport.session())
+  .use(passport.authenticate('remember-me'))
   .use(require('./routes'))
   .use((req, res) => res.sendStatus(404))
   .use(require('./middlewares/error-handler'))

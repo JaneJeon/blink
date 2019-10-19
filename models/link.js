@@ -36,10 +36,7 @@ class Link extends hashId(BaseModel) {
       try {
         // normalize URL so that we can search by URL.
         // The process of normalization also involves validating the (normalized) URL.
-        this.originalURL = normalizeURL(this.originalURL, {
-          forceHttps: true,
-          stripWWW: true
-        })
+        this.originalURL = normalizeURL(this.originalURL, { forceHttps: true })
 
         if (new URL(this.originalURL).host === domain)
           throw new Error(`Cannot shorten ${domain} URLs`)
