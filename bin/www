@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var app = require('../app')
-const log = require('../lib/logger')
+var log = require('../lib/logger')
 var http = require('http')
 
 /**
