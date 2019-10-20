@@ -2,20 +2,42 @@ const { Router } = require('express')
 const User = require('../../models/user')
 
 module.exports = Router()
-  .param('userId', (req, res, next, id) => {
-    if (id === req.user.id) req.requestedUser = req.user
-    else
-      User.findById(id, (err, user) => {
-        if (err) next(err)
-        req.requestedUser = user
-      })
-    next()
+  .get('/', async (req, res) => {
+    const users = await User.query()
+      .authorize(req.user)
+      .paginate(req.query.after)
+
+    res.send(users)
   })
-  .get('/:userId', async (req, res) => {
-    const user = await User.findById(req.params.userId)
+  .get('/:id', async (req, res) => {
+    const user = await User.query()
+      .authorize(req.user)
+      .findById(req.params.id)
+
     res.send(user)
   })
-  .get('/:userId/links', async (req, res) => {
+  .get('/:id/links', async (req, res) => {
+    const user = User.fromJson(req.params, { skipValidation: true })
+    const links = await user.$relatedQuery('links').paginate(req.query.after)
+
+    res.send(links)
+  })
+  .patch('/:id', async (req, res) => {
+    let user = await User.query().findById(req.params.id)
+    user = await user
+      .$query()
+      .authorize(req.user)
+      .patchAndFetch(req.body)
+
+    res.send(user)
+  })
+  .delete('/:id', async (req, res) => {
     // TODO:
-    res.send(await req.requestedUser.populate('links').paginate())
+    const user = await User.query().findById(req.params.id)
+    await user
+      .$query()
+      .authorize(req.user)
+      .delete()
+
+    res.sendStatus(204)
   })
