@@ -9,7 +9,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node bin/www",
     "dev": "yarn build && run-p dev:*",
-    "dev:backend": "nodemin bin/www",
+    "dev:backend": "DEBUG=knex:query nodemin bin/www",
     "dev:frontend": "next dev",
     "migrate": "knex migrate:latest",
     "migrate:one": "knex migrate:up",
