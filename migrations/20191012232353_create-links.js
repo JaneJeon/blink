@@ -5,11 +5,11 @@ exports.up = knex =>
     table.increments()
     table.text('hash').unique()
     table
-      .text('original_URL')
+      .text('originalURL')
       .notNullable()
       .unique()
     table
-      .text('creator_id')
+      .text('creatorId')
       .references('users.id')
       .notNullable()
 

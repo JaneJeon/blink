@@ -46,13 +46,9 @@ user:
           - Fn: EQUALS
             args:
               hash: $.undefined
-          - &is-creator
-            Fn: EQUALS
+          - Fn: EQUALS
             args:
               creatorId: $.req.user.id
-    - resource: Link
-      action: delete
-      condition: *is-creator
 
 admin:
   extends:
@@ -72,14 +68,15 @@ admin:
       action: delete
       condition: *is-user
 
-    # An admin can delete a link
-    - resource: Link
-      action: delete
-
 owner:
   extends:
     role: admin
   grants:
+    # The owner can promote/demote any user
+    - resource: User
+      action: update
+      attributes:
+        - role
     # The owner can delete admins
     - resource: User
       action: delete
