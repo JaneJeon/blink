@@ -10,18 +10,6 @@ class User extends BaseModel {
           from: 'users.id',
           to: 'links.creatorId'
         }
-      },
-      teams: {
-        relation: BaseModel.ManyToManyRelation,
-        modelClass: 'team',
-        join: {
-          from: 'users.id',
-          through: {
-            from: 'membership.userId',
-            to: 'membership.teamId'
-          },
-          to: 'teams.id'
-        }
       }
     }
   }

@@ -32,7 +32,6 @@ module.exports = Router()
     res.send(user)
   })
   .delete('/:id', async (req, res) => {
-    // TODO:
     const user = await User.query().findById(req.params.id)
     await user
       .$query()
