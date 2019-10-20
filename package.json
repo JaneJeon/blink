@@ -57,7 +57,7 @@
     "next": "^9.0.7",
     "normalize-url": "^4.4.1",
     "objection": "^1.6.11",
-    "objection-authorize": "^1.1.0",
+    "objection-authorize": "^1.1.2",
     "objection-db-errors": "^1.1.1",
     "objection-hashid": "^1.0.0",
     "objection-table-name": "^1.1.0",

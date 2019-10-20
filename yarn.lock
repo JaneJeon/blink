@@ -7343,10 +7343,10 @@ object.values@^1.1.0:
     function-bind "^1.1.1"
     has "^1.0.3"
 
-objection-authorize@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/objection-authorize/-/objection-authorize-1.1.1.tgz#8c34b400cfcc421907e6778a90ed30177c6e6a9e"
-  integrity sha512-luy92Wa+5P9oiowDqlwlZPTAj9nmm5IQ9F0rkGm+tEcanqsLb78GnBzdIb9XZxr/hzpsomU3H3MQV7Ei8/1FWw==
+objection-authorize@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/objection-authorize/-/objection-authorize-1.1.2.tgz#bc6853a21ca982695fa12e1466376ee2fe967eaa"
+  integrity sha512-MQAgDb88/Xhugn1mqq/JgG/abAEy9dUwPUu3X2LB77yuii5JWFtCS8DLDIBePz2BZ7YZEpjaRbapyHgjN7/L9g==
   dependencies:
     http-assert "^1.4.1"
 

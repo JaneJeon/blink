@@ -1,37 +1,41 @@
 user:
   grants:
-    # everyone in a team can see each other
+    # "create" action is not in here since you don't "create" a user manually.
+    # You just sign in with Slack.
+
+    # Everyone in a team can see each other
     - resource: User
       action: read
-    # only a user can update itself, but not the id nor the role
+    # A user can update only itself, but not the id nor the role
     - resource: User
       action: update
       attributes:
         - '*'
         - '!id'
         - '!role'
-      condition:
+      condition: &is-self
         Fn: EQUALS
         args:
           id: $.req.user.id
-    # only a user can delete itself
+    # A user can delete only itself, with explicit confirmation
     - resource: User
       action: delete
-      condition: &confirm
-        Fn: EQUALS
+      condition:
+        Fn: AND
         args:
-          true: $.req.body.confirm
+          - *is-self
+          - Fn: EQUALS
+            args:
+              true: $.req.body.confirm
 
+    # Everyone can read each other's links
     - resource: Link
       action: read
+    # Anyone can create a link - the specific conditions are handled by the model
+    # since we do URL normalization AFTER the query has been built
     - resource: Link
       action: create
-      condition:
-        Fn: NOT
-        args:
-          - Fn: STARTS_WITH
-            args:
-              originalURL: $.env.DOMAIN
+    # You can only update a link when it's yours, and even then only to add a manual hash.
     - resource: Link
       action: update
       attributes:
@@ -39,25 +43,43 @@ user:
       condition:
         Fn: AND
         args:
-          - Fn: doesnotexist
-            args:
-              hash: 0
           - Fn: EQUALS
+            args:
+              hash: $.undefined
+          - &is-creator
+            Fn: EQUALS
             args:
               creatorId: $.req.user.id
     - resource: Link
       action: delete
-      condition: *confirm
+      condition: *is-creator
 
 admin:
   extends:
     role: user
   grants:
+    # An admin can promote a user
     - resource: User
       action: update
       attributes:
         - role
-      condition:
-        Fn: NOT_EQUALS
+      condition: &is-user
+        Fn: EQUALS
         args:
-          role: admin
+          role: user
+    # An admin can 'delete' a user
+    - resource: User
+      action: delete
+      condition: *is-user
+
+    # An admin can delete a link
+    - resource: Link
+      action: delete
+
+owner:
+  extends:
+    role: admin
+  grants:
+    # The owner can delete admins
+    - resource: User
+      action: delete
