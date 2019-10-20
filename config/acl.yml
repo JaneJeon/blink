@@ -1,0 +1,63 @@
+user:
+  grants:
+    # everyone in a team can see each other
+    - resource: User
+      action: read
+    # only a user can update itself, but not the id nor the role
+    - resource: User
+      action: update
+      attributes:
+        - '*'
+        - '!id'
+        - '!role'
+      condition:
+        Fn: EQUALS
+        args:
+          id: $.req.user.id
+    # only a user can delete itself
+    - resource: User
+      action: delete
+      condition: &confirm
+        Fn: EQUALS
+        args:
+          true: $.req.body.confirm
+
+    - resource: Link
+      action: read
+    - resource: Link
+      action: create
+      condition:
+        Fn: NOT
+        args:
+          - Fn: STARTS_WITH
+            args:
+              originalURL: $.env.DOMAIN
+    - resource: Link
+      action: update
+      attributes:
+        - hash
+      condition:
+        Fn: AND
+        args:
+          - Fn: doesnotexist
+            args:
+              hash: 0
+          - Fn: EQUALS
+            args:
+              creatorId: $.req.user.id
+    - resource: Link
+      action: delete
+      condition: *confirm
+
+admin:
+  extends:
+    role: user
+  grants:
+    - resource: User
+      action: update
+      attributes:
+        - role
+      condition:
+        Fn: NOT_EQUALS
+        args:
+          role: admin
