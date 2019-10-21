@@ -13,6 +13,8 @@ exports.up = knex =>
       .references('users.id')
       .notNullable()
 
+    table.jsonb('meta')
+
     table.timestamps(true, true)
   })
 

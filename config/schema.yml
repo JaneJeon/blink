@@ -21,9 +21,6 @@ User:
 Link:
   type: object
   properties:
-    id:
-      type: integer
-      readOnly: true
     hash:
       type: string
       minLength: 4
@@ -31,6 +28,8 @@ Link:
     originalURL:
       type: string
       maxLength: 100
+    meta:
+      type: object
   required:
     - originalURL
   additionalProperties: false

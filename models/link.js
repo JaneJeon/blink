@@ -2,6 +2,7 @@ const BaseModel = require('./base')
 const hashId = require('objection-hashid')
 const httpError = require('http-errors')
 const camelCase = require('lodash/camelCase')
+const scrape = require('../lib/scrape')
 
 const { URL } = require('url')
 const normalizeURL = require('normalize-url')
@@ -21,7 +22,7 @@ class Link extends hashId(BaseModel) {
     }
   }
 
-  processInput() {
+  async processInput() {
     if (this.hash) {
       // We want custom hash to be case-insensitive.
       // However, we can't realistically check ALL combinations of
@@ -41,6 +42,9 @@ class Link extends hashId(BaseModel) {
 
         if (new URL(this.originalURL).host === domain)
           throw new Error(`Cannot shorten ${domain} URLs`)
+
+        // update metadata by visiting the URL
+        this.meta = Object.assign(await scrape(this.originalURL), this.meta)
       } catch (err) {
         throw httpError(400, err)
       }
