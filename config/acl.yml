@@ -48,6 +48,7 @@ user:
       action: update
       attributes:
         - hash
+        - meta
       condition:
         Fn: AND
         args:

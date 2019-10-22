@@ -34,6 +34,22 @@ Link:
       maxLength: 100
     meta:
       type: object
+      properties:
+        author:
+          type: string
+        date:
+          type: string
+        description:
+          type: string
+        lang:
+          type: string
+        logo:
+          type: string
+        publichser:
+          type: string
+        title:
+          type: string
+      additionalProperties: false
   required:
     - originalURL
   additionalProperties: false
