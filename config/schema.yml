@@ -45,7 +45,7 @@ Link:
           type: string
         logo:
           type: string
-        publichser:
+        publisher:
           type: string
         title:
           type: string
