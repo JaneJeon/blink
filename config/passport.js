@@ -5,8 +5,8 @@ const httpError = require('http-errors')
 const ms = require('ms')
 
 const User = require('../models/user')
-const slack = require('./slack')
-const { createToken, consumeToken } = require('./token')
+const slack = require('../lib/slack')
+const { createToken, consumeToken } = require('../lib/token')
 
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (id, done) => {
