@@ -34,6 +34,7 @@
     "clean": "rimraf logs/*.log website/build .next out config/**.json"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
     "connect-ensure-login": "^0.1.1",
@@ -44,7 +45,6 @@
     "express-async-errors": "^3.1.1",
     "express-request-id": "^1.4.1",
     "express-session": "^1.16.2",
-    "got": "^9.6.0",
     "helmet": "^3.21.1",
     "http-errors": "^1.7.3",
     "ioredis": "^4.14.1",
