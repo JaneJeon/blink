@@ -20,23 +20,29 @@ user:
           id: $.req.user.id
     # A user can delete only itself, with explicit confirmation
     - resource: User
-      action: delete
+      action: update
+      attributes:
+        - deleted
       condition:
         Fn: AND
         args:
           - *is-self
+          - &not-deleted
+            Fn: EQUALS
+            args:
+              deleted: false
           - &confirm
             Fn: EQUALS
             args:
               true: $.req.body.confirm
 
-    # Everyone can read each other's links
-    - resource: Link
-      action: read
-    # Anyone can create a link - the specific conditions are handled by the model
+    # Everyone can read each other's links. Also, anyone can create a link -
+    # the specific conditions are handled by the model
     # since we do URL normalization AFTER the query has been built
     - resource: Link
-      action: create
+      action:
+        - read
+        - create
     # You can only update a link when it's yours, and even then only to add a manual hash.
     - resource: Link
       action: update
@@ -47,7 +53,7 @@ user:
         args:
           - Fn: EQUALS
             args:
-              hash: $.undefined
+              hash: $.undefined # TODO: check if hash is supposed to be null or undefined
           - Fn: EQUALS
             args:
               creatorId: $.req.user.id
@@ -67,12 +73,23 @@ admin:
           role: user
     # An admin can 'delete' a user, and re-enable 'deleted' accounts
     - resource: User
-      action: [create, delete]
+      action: update
+      attributes:
+        - deleted
       condition:
         Fn: AND
         args:
           - *is-user
-          - *confirm
+          - &require-confirmation-when-deleting
+            Fn: OR
+            args:
+              - Fn: EQUALS
+                args:
+                  deleted: true
+              - Fn: AND
+                args:
+                  - *not-deleted
+                  - *confirm
 
 owner:
   extends:
@@ -85,4 +102,7 @@ owner:
         - role
     # The owner can delete/restore admins
     - resource: User
-      action: [create, delete]
+      action: update
+      attributes:
+        - deleted
+      condition: *require-confirmation-when-deleting
