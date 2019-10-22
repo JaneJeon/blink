@@ -11,6 +11,8 @@ exports.up = knex =>
     table.text('name')
     table.text('avatar')
 
+    table.boolean('deleted').notNullable()
+
     table.timestamps(true, true)
   })
 

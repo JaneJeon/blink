@@ -13,6 +13,7 @@ user:
         - '*'
         - '!id'
         - '!role'
+        - '!deleted'
       condition: &is-self
         Fn: EQUALS
         args:
@@ -63,9 +64,9 @@ admin:
         Fn: EQUALS
         args:
           role: user
-    # An admin can 'delete' a user
+    # An admin can 'delete' a user, and re-enable 'deleted' accounts
     - resource: User
-      action: delete
+      action: [create, delete]
       condition: *is-user
 
 owner:
@@ -77,6 +78,6 @@ owner:
       action: update
       attributes:
         - role
-    # The owner can delete admins
+    # The owner can delete/restore admins
     - resource: User
-      action: delete
+      action: [create, delete]

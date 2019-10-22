@@ -6,6 +6,7 @@ module.exports = Router()
     const users = await User.query()
       .authorize(req.user)
       .paginate(req.query.after)
+      .whereNotDeleted()
 
     res.send(users)
   })
@@ -13,17 +14,23 @@ module.exports = Router()
     const user = await User.query()
       .authorize(req.user)
       .findById(req.params.id)
+      .whereNotDeleted()
 
     res.send(user)
   })
   .get('/:id/links', async (req, res) => {
     const user = User.fromJson(req.params, { skipValidation: true })
+    // TODO: access control on the links
     const links = await user.$relatedQuery('links').paginate(req.query.after)
 
     res.send(links)
   })
   .patch('/:id', async (req, res) => {
-    let user = await User.query().findById(req.params.id)
+    // load the full user context since admins' ability to edit a user's role
+    // is affected by his/her role (but otherwise the user.id suffices)
+    let user = await User.query()
+      .findById(req.params.id)
+      .whereNotDeleted()
     user = await user
       .$query()
       .authorize(req.user)
@@ -32,7 +39,10 @@ module.exports = Router()
     res.send(user)
   })
   .delete('/:id', async (req, res) => {
-    const user = await User.query().findById(req.params.id)
+    // ditto
+    const user = await User.query()
+      .findById(req.params.id)
+      .whereNotDeleted()
     await user
       .$query()
       .authorize(req.user)

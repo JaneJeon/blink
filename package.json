@@ -70,6 +70,7 @@
     "objection-authorize": "^1.1.2",
     "objection-db-errors": "^1.1.1",
     "objection-hashid": "^1.0.0",
+    "objection-soft-delete": "^1.0.7",
     "objection-table-name": "^1.1.0",
     "objection-visibility": "^0.4.0",
     "passport": "^0.4.0",

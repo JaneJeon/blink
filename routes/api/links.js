@@ -17,6 +17,7 @@ module.exports = Router()
     res.send(link)
   })
   .post('/', async (req, res) => {
+    // first check to see if there's already an existing link
     const link =
       (await Link.query()
         .authorize(req.user)
