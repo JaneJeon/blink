@@ -2,6 +2,7 @@
   publish = "out"
   command = "yarn build"
 
+# allow frontend routing
 [[redirects]]
   from    = "/*"
   to      = "/index.html"

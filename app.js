@@ -10,7 +10,7 @@ module.exports = app
   .use(require('express-request-id')())
   .use(require('./middlewares/express-logger'))
   .use(require('helmet')())
-  .use(require('cors')())
+  .use(require('cors')({ origin: process.env.FRONTEND_URL }))
   .use(require('./middlewares/session'))
   .use(express.json())
   .use(passport.initialize())

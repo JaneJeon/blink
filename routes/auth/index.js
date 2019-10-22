@@ -7,8 +7,8 @@ module.exports = Router()
   .get(
     '/slack/callback',
     passport.authenticate('slack', {
-      failureRedirect: '/login',
-      successReturnToOrRedirect: '/'
+      failureRedirect: `${process.env.FRONTEND_URL}/login`,
+      successReturnToOrRedirect: process.env.FRONTEND_URL
     })
   )
   .get('/logout', (req, res) => {
