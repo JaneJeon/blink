@@ -25,7 +25,8 @@ user:
         Fn: AND
         args:
           - *is-self
-          - Fn: EQUALS
+          - &confirm
+            Fn: EQUALS
             args:
               true: $.req.body.confirm
 
@@ -67,7 +68,11 @@ admin:
     # An admin can 'delete' a user, and re-enable 'deleted' accounts
     - resource: User
       action: [create, delete]
-      condition: *is-user
+      condition:
+        Fn: AND
+        args:
+          - *is-user
+          - *confirm
 
 owner:
   extends:
