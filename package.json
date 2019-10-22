@@ -27,8 +27,9 @@
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
     "pretest": "yarn build",
     "test": "cross-env LOG_LEVEL=error run-s 'test:* {@}' -- -- --forceExit",
-    "test:unit": "jest models",
-    "test:integration": "jest routes",
+    "test:lib": "jest lib",
+    "test:models": "jest models",
+    "test:routes": "jest routes",
     "test:watch:all": "yarn test --watch",
     "coverage": "is-ci && codecov",
     "clean": "rimraf logs/*.log website/build .next out config/**.json"
