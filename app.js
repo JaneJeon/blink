@@ -13,6 +13,7 @@ module.exports = app
   .use(require('cors')({ origin: process.env.FRONTEND_URL }))
   .use(require('./middlewares/session'))
   .use(express.json())
+  .use(require('express-query-boolean')())
   .use(passport.initialize())
   .use(passport.session())
   .use(passport.authenticate('remember-me'))

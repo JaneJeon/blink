@@ -1,3 +1,4 @@
+// istanbul ignore file
 const BaseModel = require('./base')
 const softDelete = require('objection-soft-delete')()
 
@@ -15,8 +16,12 @@ class User extends softDelete(BaseModel) {
     }
   }
 
-  static get hidden() {
-    return ['deleted']
+  static get QueryBuilder() {
+    return class extends BaseModel.QueryBuilder {
+      filterDeleted(deleted = false) {
+        return this.where({ deleted })
+      }
+    }
   }
 }
 
