@@ -6,7 +6,7 @@ user:
     # Everyone in a team can see each other
     - resource: User
       action: read
-    # A user can update only itself, but not the id nor the role
+    # A user can update only itself, but not some fields
     - resource: User
       action: update
       attributes:
@@ -63,15 +63,21 @@ admin:
   extends:
     role: user
   grants:
-    # An admin can promote a user
+    # An admin can promote a user to admin
     - resource: User
       action: update
       attributes:
         - role
-      condition: &is-user
-        Fn: EQUALS
+      condition:
+        Fn: AND
         args:
-          role: user
+          - &is-user
+            Fn: EQUALS
+            args:
+              role: user
+          - Fn: EQUALS
+            args:
+              admin: $.req.body.role # the "admin" should be a passed context
     # An admin can 'delete' a user, and re-enable 'deleted' accounts
     - resource: User
       action: update

@@ -45,7 +45,7 @@ module.exports = Router()
       .whereNotDeleted()
     user = await user
       .$query()
-      .authorize(req.user)
+      .authorize(req.user, undefined, { resourceAugments: { admin: 'admin' } })
       .patchAndFetch(req.body)
 
     res.send(user)
