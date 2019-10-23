@@ -12,8 +12,11 @@ User:
       default: user
     name:
       type: string
+      maxLength: 100
     avatar:
       type: string
+      format: uri
+      maxLength: 100
     deleted:
       type: boolean
       default: false
@@ -37,18 +40,26 @@ Link:
       properties:
         author:
           type: string
+          maxLength: 100
         date:
           type: string
+          format: date
         description:
           type: string
+          maxLength: 100
         lang:
           type: string
+          maxLength: 10
         logo:
           type: string
+          format: uri
+          maxLength: 100
         publisher:
           type: string
+          maxLength: 100
         title:
           type: string
+          maxLength: 100
       additionalProperties: false
   required:
     - originalURL
