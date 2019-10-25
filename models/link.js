@@ -54,7 +54,7 @@ class Link extends hashId(BaseModel) {
   }
 
   get brandedURL() {
-    return `${process.env.BASE_URL}/${this.hash}`
+    return this.hash ? `${process.env.BASE_URL}/${this.hash}` : undefined
   }
 
   static get hashIdSalt() {
