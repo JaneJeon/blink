@@ -1,3 +1,4 @@
+// istanbul ignore file
 require('dotenv-defaults').config()
 
 const webpack = require('webpack')
