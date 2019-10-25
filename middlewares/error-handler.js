@@ -1,32 +1,42 @@
-const omit = require('lodash/omit')
+// istanbul ignore file
+const { ValidationError, NotFoundError } = require('objection')
+const { DBError } = require('objection-db-errors')
+const { JsonWebTokenError } = require('jsonwebtoken')
 
-// https://mongoosejs.com/docs/api/error.html
+// eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
-  if (err.status) err.status = Math.min(err.status, 500)
-  else
-    switch (err.name) {
-      case 'CastError':
-      case 'StrictModeError':
-        err.status = 400
-        break
-      case 'ValidationError':
-        err.status = 400
-        for (const prop in err.errors)
-          err.errors[prop] = omit(err.errors[prop], [
-            'properties',
-            'path',
-            'value'
-          ])
-        break
-      case 'MongoError':
-        err.status = err.code === 11000 ? 409 : 500
-        break
-      default:
-        err.status = 500
-    }
+  if (res.headersSent) {
+    req.log.error({ req, err, res }, 'an error occurred after request was sent')
+    return
+  }
+
+  if (!err.statusCode) {
+    if (err instanceof ValidationError || err instanceof JsonWebTokenError) {
+      err.statusCode = 400
+    } else if (err instanceof NotFoundError) err.statusCode = 404
+    else if (err instanceof DBError) {
+      err.statusCode = (() => {
+        switch (err.name) {
+          case 'NotNullViolationError':
+          case 'CheckViolationError':
+          case 'DataError':
+          case 'ConstraintViolationError':
+            return 400
+          case 'UniqueViolationError':
+          case 'ForeignKeyViolationError':
+            return 409
+          default:
+            return 500
+        }
+      })()
+    } else err.statusCode = 500
+  }
 
   err.stack = err.stack.substring(0, err.stack.indexOf('at newFn')).trimRight()
   req.log[err.status < 500 ? 'warn' : 'error'](err)
 
-  res.status(err.status).send({ message: err.message, errors: err.errors })
+  res.status(err.statusCode).send({
+    message: err.message,
+    name: err.name
+  })
 }
