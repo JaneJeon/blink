@@ -1,7 +1,6 @@
 // istanbul ignore file
 const { ValidationError, NotFoundError } = require('objection')
 const { DBError } = require('objection-db-errors')
-const { JsonWebTokenError } = require('jsonwebtoken')
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
@@ -11,9 +10,8 @@ module.exports = (err, req, res, next) => {
   }
 
   if (!err.statusCode) {
-    if (err instanceof ValidationError || err instanceof JsonWebTokenError) {
-      err.statusCode = 400
-    } else if (err instanceof NotFoundError) err.statusCode = 404
+    if (err instanceof ValidationError) err.statusCode = 400
+    else if (err instanceof NotFoundError) err.statusCode = 404
     else if (err instanceof DBError) {
       err.statusCode = (() => {
         switch (err.name) {

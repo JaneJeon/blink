@@ -1,14 +1,23 @@
 const request = require('supertest')
 const app = require('../app')
 const Link = require('../models/link')
+const User = require('../models/user')
 
 describe('/', () => {
   const originalURL = 'medium.com'
-  const _id = 'www_Test1'
+  const hash = 'HeLlOwOrLd'
 
   beforeAll(async () => {
-    await Link.deleteOne({ originalURL })
-    await Link.create({ originalURL, _id })
+    const id = 'redirectUser'
+    await Link.query()
+      .delete()
+      .where({ originalURL })
+      .orWhere({ creatorId: id })
+    await User.query()
+      .delete()
+      .where({ id })
+    const user = await User.query().insert({ id })
+    await user.$relatedQuery('links').insert({ originalURL, hash })
   })
 
   test('GET /', done => {
@@ -19,7 +28,7 @@ describe('/', () => {
 
   test('GET /:id', done => {
     request(app)
-      .get(`/${_id}`)
+      .get(`/${hash}`)
       .expect(301, done)
   })
 })

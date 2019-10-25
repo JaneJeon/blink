@@ -12,6 +12,7 @@ module.exports = app
   .use(require('helmet')())
   .use(require('cors')({ origin: process.env.FRONTEND_URL }))
   .use(require('./middlewares/session'))
+  .use(require('cookie-parser')(process.env.SESSION_SECRET))
   .use(express.json())
   .use(require('express-query-boolean')())
   .use(passport.initialize())

@@ -37,6 +37,7 @@
     "commander": "^3.0.1",
     "connect-ensure-login": "^0.1.1",
     "connect-redis": "^4.0.3",
+    "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "dotenv-defaults": "^1.0.2",
     "express": "^4.17.1",

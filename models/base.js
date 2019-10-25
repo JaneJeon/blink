@@ -28,9 +28,11 @@ class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
     return 15
   }
 
-  static createValidator() {
-    this.jsonSchema = schema[this.name]
+  static get jsonSchema() {
+    return schema[this.name]
+  }
 
+  static createValidator() {
     return new AjvValidator({
       // eslint-disable-next-line no-unused-vars
       onCreateAjv: ajv => {}, // need an empty function
