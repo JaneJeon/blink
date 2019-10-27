@@ -1,4 +1,3 @@
-// istanbul ignore file
 const BaseModel = require('./base')
 const softDelete = require('objection-soft-delete')()
 

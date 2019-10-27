@@ -100,20 +100,22 @@ describe('Link', () => {
     ).rejects.toThrow()
   })
 
-  test('QueryBuilder#findByHashId', async () => {
-    const [link0, link1] = await Promise.all([
-      user.$relatedQuery('links').findByHashId(links[0].id),
-      user.$relatedQuery('links').findByHashId(links[1].id)
-    ])
+  describe('QueryBuilder', () => {
+    test('#findByHashId', async () => {
+      const [link0, link1] = await Promise.all([
+        user.$relatedQuery('links').findByHashId(links[0].id),
+        user.$relatedQuery('links').findByHashId(links[1].id)
+      ])
 
-    expect(link0.originalURL).toEqual(links[0].originalURL)
-    expect(link1.originalURL).toEqual(links[1].originalURL)
-  })
+      expect(link0.originalURL).toEqual(links[0].originalURL)
+      expect(link1.originalURL).toEqual(links[1].originalURL)
+    })
 
-  test('QueryBuilder#findByURL', async () => {
-    const link = await user
-      .$relatedQuery('links')
-      .findByURL(links[0].originalURL)
-    expect(link.shortenedURL).toEqual(links[0].shortenedURL)
+    test('#findByURL', async () => {
+      const link = await user
+        .$relatedQuery('links')
+        .findByURL(links[0].originalURL)
+      expect(link.shortenedURL).toEqual(links[0].shortenedURL)
+    })
   })
 })
