@@ -28,7 +28,7 @@ describe('Link', () => {
     user = await User.query().insert({ id })
   })
 
-  test('shortens URL', async () => {
+  it('shortens URL', async () => {
     let link = await user
       .$relatedQuery('links')
       .insert({ originalURL: originalURLs[0] })
@@ -46,13 +46,13 @@ describe('Link', () => {
     expect(link.meta).toBeDefined()
   })
 
-  test('prevents duplicate URLs', async () => {
+  it('prevents duplicate URLs', async () => {
     await expect(
       user.$relatedQuery('links').insert({ originalURL: originalURLs[0] })
     ).rejects.toThrow()
   })
 
-  test('prevents URL redirect loop', async () => {
+  it('prevents URL redirect loop', async () => {
     await expect(
       user
         .$relatedQuery('links')
@@ -60,20 +60,20 @@ describe('Link', () => {
     ).rejects.toThrow()
   })
 
-  test('rejects invalid URLs', async () => {
+  it('rejects invalid URLs', async () => {
     await expect(
       user.$relatedQuery('links').insert({ originalURL: '1234 0' })
     ).rejects.toThrow()
   })
 
-  test('rejects valid but nonexistent URLs', async () => {
+  it('rejects valid but nonexistent URLs', async () => {
     await expect(
       user.$relatedQuery('links').insert({ originalURL: 'nodejsssssss.org' })
     ).rejects.toThrow()
   })
 
   const hash = 'FooBar'
-  test('can set custom hash', async () => {
+  it('can set custom hash', async () => {
     const link = await user.$relatedQuery('links').insert({
       originalURL: originalURLs[1],
       hash
@@ -85,13 +85,13 @@ describe('Link', () => {
     links.push(link.toJSON())
   })
 
-  test('prevents duplicate custom hash', async () => {
+  it('prevents duplicate custom hash', async () => {
     await expect(
       user.$relatedQuery('links').insert({ originalURL: originalURLs[2], hash })
     ).rejects.toThrow()
   })
 
-  test('prevents custom hash that clashes with hashIds', async () => {
+  it('prevents custom hash that clashes with hashIds', async () => {
     const generatedHash = Link._hashIdInstance.encode(500)
     await expect(
       user
