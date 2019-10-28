@@ -38,7 +38,7 @@
     "dotenv-defaults": "^1.0.2",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "express-prometheus-middleware": "^0.6.1",
+    "express-prometheus-middleware": "^0.7.0",
     "express-request-id": "^1.4.1",
     "express-session": "^1.16.2",
     "hashids": "^2.0.1",
