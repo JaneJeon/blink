@@ -9070,9 +9070,9 @@ pinkie@^2.0.0:
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
 pino-pretty@^3.2.1:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-3.2.2.tgz#e252f964f99a0a3bd34f4a484bb4e202632eaaad"
-  integrity sha512-2SP++Wbo4EsH5RpLhcsYHOR/8CMTIJWZpU0aPiVK0Wq8SrRMQ9oHQNffVK5ZyDFZMtSuTdFCVfLVNFmtFMDEeA==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-3.3.0.tgz#7b1be8fbc25f3a3488db0cf885dd2c0c4d1b4981"
+  integrity sha512-aoQWRJscJrKG/YH8GKqvbYalp8rr0KDn/SUmt2XK7q3ovA8GTN6OqvomPan7soNXLUKuYJc4UQdh0Fx+15yQpw==
   dependencies:
     "@hapi/bourne" "^1.3.2"
     args "^5.0.1"
