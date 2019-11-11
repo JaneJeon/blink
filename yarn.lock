@@ -4875,10 +4875,10 @@ express-async-errors@^3.1.1:
   resolved "https://registry.yarnpkg.com/express-async-errors/-/express-async-errors-3.1.1.tgz#6053236d61d21ddef4892d6bd1d736889fc9da41"
   integrity sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==
 
-express-prometheus-middleware@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/express-prometheus-middleware/-/express-prometheus-middleware-0.7.0.tgz#9d66465d48a18e8554efe52b0c7d0da7c7e48290"
-  integrity sha512-bEBGQyfq9+DJRrprOa4UxINp8xRYfwxA8skRJ7jrZbR1yUDYgU/3aU6hUlO65F9cTUxjNurInQxJxKVPcZI9Fg==
+express-prometheus-middleware@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/express-prometheus-middleware/-/express-prometheus-middleware-0.8.3.tgz#8a7c8d73d80c3403f6a0e44a4ce09d470b3627ec"
+  integrity sha512-YraK43TKNu58lhkVp7S/1Mkxxb0y0INa9fqE62rXyor3l6KVwsKAV6I1/jIFWLUeirGU/SuOjc9dqiGIKyvNbA==
   dependencies:
     express "^4.16.3"
     prom-client "^11.1.1"
