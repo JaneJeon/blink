@@ -3114,9 +3114,9 @@ connect-history-api-fallback@^1.5.0, connect-history-api-fallback@^1.6.0:
   integrity sha512-e54B99q/OUoH64zYYRf3HBP5z24G38h5D3qXu23JGRoigpX5Ss4r9ZnDk3g0Z8uQC2x2lPaJ+UlWBc1ZWBWdLg==
 
 connect-mongo@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/connect-mongo/-/connect-mongo-3.1.0.tgz#2a98efa834de7e9e63005e24fec5dcf8d38b3cca"
-  integrity sha512-BDn09MMBFse7Y0uVjUW8p7jjDKHWgg0veXFeETqBeJM7Eg+aWN8YBpod5FkSLiD28YknrYjT4dgHg9fq/h62ew==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/connect-mongo/-/connect-mongo-3.1.2.tgz#c89080ac2eb4432b03ec3250127a5a11472e0e7d"
+  integrity sha512-UBHOk+T3pj1nTDIb75y/m45sWDt2j9B9nG7C4RkvxGUmK7nA8kAH9lD9FgK06MrKiBTwV25rzXPbGk9yTURzfw==
   dependencies:
     mongodb "^3.1.0"
 
