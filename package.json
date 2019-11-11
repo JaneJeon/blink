@@ -84,7 +84,7 @@
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
     "rimraf": "^3.0.0",
-    "string-natural-compare": "^2.0.3",
+    "string-natural-compare": "^3.0.0",
     "supertest": "^4.0.2",
     "supertest-session": "^4.0.0",
     "surge": "^0.21.3",
