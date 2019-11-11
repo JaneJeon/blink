@@ -30,7 +30,7 @@
     "@casl/ability": "^3.2.0",
     "@casl/mongoose": "^2.3.2",
     "cachegoose": "^8.0.0",
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "commander": "^4.0.0",
     "connect-ensure-login": "^0.1.1",
     "connect-mongo": "^3.0.0",
