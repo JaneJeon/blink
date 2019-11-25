@@ -7989,9 +7989,9 @@ mongoose-legacy-pluralize@1.0.2:
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
 mongoose-paginate-v2@^1.3.1:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/mongoose-paginate-v2/-/mongoose-paginate-v2-1.3.3.tgz#5a335750a278292db525a96ce56713b242e6c516"
-  integrity sha512-ZHuFSTNlNZCY4w7CnfCzBZem5pdtLNH6uVaobQWwY/3AxpwTlJ2icqr4CofgOrjdzAjHg9EfBwmRmpqGF8vatg==
+  version "1.3.52"
+  resolved "https://registry.yarnpkg.com/mongoose-paginate-v2/-/mongoose-paginate-v2-1.3.52.tgz#e7e6ad89d57b8afaddbf3d81ceea1b72a3096142"
+  integrity sha512-jFlmFfnQFC4/PEu8YbvM5dqa98caUdFESqyiuHjzmxCtb90HR7DtDImTS4ZdZHAwS4p9zDhtBOm69P04zXVSLQ==
 
 mongoose-schema-jsonschema@^1.2.1:
   version "1.2.1"
