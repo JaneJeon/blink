@@ -7991,10 +7991,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@0.x.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdir
   dependencies:
     minimist "0.0.8"
 
-mongodb@3.3.4, mongodb@^3.1.0:
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.3.4.tgz#f52eec4a04005101e63715d4d1f67bf784fa0aef"
-  integrity sha512-6fmHu3FJTpeZxacJcfjUGIP3BSteG0l2cxLkSrf1nnnS1OrlnVGiP9P/wAC4aB6dM6H4vQ2io8YDjkuPkje7AA==
+mongodb@3.3.5, mongodb@^3.1.0:
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.3.5.tgz#38d531013afede92b0dd282e3b9f3c08c9bdff3b"
+  integrity sha512-6NAv5gTFdwRyVfCz+O+KDszvjpyxmZw+VlmqmqKR2GmpkeKrKFRv/ZslgTtZba2dc9JYixIf99T5Gih7TIWv7Q==
   dependencies:
     bson "^1.1.1"
     require_optional "^1.0.1"
@@ -8028,13 +8028,13 @@ mongoose-schema-jsonschema@^1.2.1:
     pluralize "^7.0.0"
 
 mongoose@^5.7.1:
-  version "5.7.12"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.7.12.tgz#ef22a0f741970b6ba504995fdbe0ac9d8289d615"
-  integrity sha512-TqRiJPUeHN1u7Xs/zQmiMHcrzEb1/uKjK3uGzZhyqw25RKQiMV2vSBeBTMt5HXoYlUuDEWXE75FMjpK9X9kD0w==
+  version "5.7.13"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.7.13.tgz#d8ebbc15cfb19d014cf1fbd4b7af413d75952d46"
+  integrity sha512-MoTCETTIfXU1PqIYc+YAkhSB3uzK5xseh6ysAUnoOowkqS66OjBJtsL/bcgAKi6XfMYkFU6M1abKyuL7k//xeg==
   dependencies:
     bson "~1.1.1"
     kareem "2.3.1"
-    mongodb "3.3.4"
+    mongodb "3.3.5"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.6.0"
     mquery "3.2.2"
