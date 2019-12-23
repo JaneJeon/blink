@@ -8298,9 +8298,9 @@ mongoose-schema-jsonschema@^1.2.1:
     pluralize "^7.0.0"
 
 mongoose@^5.7.1:
-  version "5.8.1"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.8.1.tgz#9a14a17a1e764d3d3397db95326b7ba03146b8eb"
-  integrity sha512-8Cffl52cMK2iBlpLipoRKW/RdrhkxvVzXsy+xVsfbKHQBCWkFiS0T0jU4smYzomTMP4gW0sReJoRA7Gu/7VVgQ==
+  version "5.8.2"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.8.2.tgz#7b4cf4ee22a50d6771c64a01e5fb1f9e5e149631"
+  integrity sha512-g9huwQpz3K+DadNIsvaTYe/8sNKS/Sy33k/4wbK6lk+h9qfuBsqYKxK2l6YffRiDV6RO6MNJEWVMdlQx3/P7lw==
   dependencies:
     bson "~1.1.1"
     kareem "2.3.1"
