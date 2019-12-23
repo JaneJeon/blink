@@ -1371,11 +1371,11 @@
     to-fast-properties "^2.0.0"
 
 "@casl/ability@^3.2.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@casl/ability/-/ability-3.3.0.tgz#112d9c0028db9f7f3bcc78718eecb75c3a659885"
-  integrity sha512-+BxRsYHoclMwwCCSBATwkJce9gnuF/1GGoondVvDanG4JeGIVeZkVEoI/b5cyAqwhOVbyV7X468/Q1yb8/8NTA==
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@casl/ability/-/ability-3.4.0.tgz#06c9f2df0bbb257b3deecb05885e731420cca780"
+  integrity sha512-aJodlkXamBRNnb25m0xuibU6StiyWZzz7EFivqLKO5kmfLDAwrIklysa1w4K/Exi1mRt+lfOp7pSb4QtuAXx+A==
   dependencies:
-    sift "^9.0.1"
+    sift "^9.0.4"
 
 "@casl/mongoose@^2.3.2":
   version "2.3.2"
@@ -11347,7 +11347,7 @@ sift@7.0.1:
   resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"
   integrity sha512-oqD7PMJ+uO6jV9EQCl0LrRw1OwsiPsiFQR5AR30heR+4Dl7jBBbDLnNvWiak20tzZlSE1H7RB30SX/1j/YYT7g==
 
-sift@^9.0.1:
+sift@^9.0.4:
   version "9.0.4"
   resolved "https://registry.yarnpkg.com/sift/-/sift-9.0.4.tgz#9f0767230cc7d156684cd152a3f0cc7389d15a08"
   integrity sha512-mXYg5X7rMxBRG7CTOKVigbKMUzidLy2T95LwsYKTqn+BfYFxBzdyrMhKWWwiEcJViVZr2TiI6JyaSlNUVsGUfQ==
