@@ -1,3 +1,4 @@
 hooks:
   pre-commit: lint-staged
   pre-push: run-s lint test
+  post-merge: yarn && yarn build

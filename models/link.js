@@ -10,7 +10,7 @@ const domain = new URL(process.env.BASE_URL).host
 class Link extends hashId(BaseModel) {
   static get relationMappings() {
     return {
-      user: {
+      creator: {
         type: BaseModel.BelongsToOneRelation,
         modelClass: 'user',
         join: {

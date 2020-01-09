@@ -1,7 +1,7 @@
 user:
   grants:
-    # "create" action is not in here since you don't "create" a user manually.
-    # You just sign in with Slack.
+    # create/delete action is not in here since you don't "create" a user manually,
+    # and "deleting" a user involves just updating the 'deleted' property.
 
     # Everyone in a team can see each other
     - resource: User
@@ -20,9 +20,7 @@ user:
           id: $.req.user.id
     # A user can delete only itself, with explicit confirmation
     - resource: User
-      action: update
-      attributes:
-        - deleted
+      action: delete
       condition:
         Fn: AND
         args:
@@ -37,7 +35,7 @@ user:
               true: $.req.body.confirm
 
     # Everyone can read each other's links. Also, anyone can create a link -
-    # the specific conditions are handled by the model
+    # the specific conditions are handled by the model,
     # since we do URL normalization AFTER the query has been built
     - resource: Link
       action:
@@ -54,7 +52,7 @@ user:
         args:
           - Fn: EQUALS
             args:
-              hash: $.undefined # TODO: check if hash is supposed to be null or undefined
+              hash: $.undefined
           - Fn: EQUALS
             args:
               creatorId: $.req.user.id
@@ -63,21 +61,29 @@ admin:
   extends:
     role: user
   grants:
-    # An admin can promote a user to admin
+    # An admin can promote a user to admin, or recuse itself
     - resource: User
       action: update
       attributes:
         - role
       condition:
-        Fn: AND
+        Fn: OR
         args:
-          - &is-user
-            Fn: EQUALS
+          - Fn: AND
             args:
-              role: user
-          - Fn: EQUALS
+              - *is-self
+              - Fn: EQUALS
+                args:
+                  id: $.req.user.id
+          - Fn: AND
             args:
-              admin: $.req.body.role # the "admin" should be a passed context
+              - &is-user
+                Fn: EQUALS
+                args:
+                  role: user
+              - Fn: EQUALS
+                args:
+                  admin: $.req.body.role # the "admin" should be a passed context
     # An admin can 'delete' a user, and re-enable 'deleted' accounts
     - resource: User
       action: update
@@ -98,6 +104,12 @@ admin:
                   - *not-deleted
                   - *confirm
 
+    - resource: Link
+      action: delete
+      condition:
+        Fn: EQUALS
+        args: # TODO: not possible since can't do $.link.creator.role
+
 owner:
   extends:
     role: admin
@@ -113,3 +125,6 @@ owner:
       attributes:
         - deleted
       condition: *require-confirmation-when-deleting
+    # Only an owner can delete a link
+    - resource: Link
+      action: delete

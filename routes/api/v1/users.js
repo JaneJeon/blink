@@ -24,40 +24,14 @@ module.exports = Router()
 
     res.send(links)
   })
-  // to "create" a user in this context means to reactivate their account.
-  .post('/:id', async (req, res) => {
-    let user = await User.query()
-      .findById(req.params.id)
-      .whereDeleted()
-    user = await user
-      .$query()
-      .authorize(req.user)
-      .undelete()
-
-    res.send(user)
-  })
   .patch('/:id', async (req, res) => {
     // load the full user context since admins' ability to edit a user's role
     // is affected by his/her role (but otherwise the user.id suffices)
-    let user = await User.query()
-      .findById(req.params.id)
-      .whereNotDeleted()
+    let user = await User.query().findById(req.params.id)
     user = await user
       .$query()
       .authorize(req.user, undefined, { resourceAugments: { admin: 'admin' } })
       .patchAndFetch(req.body)
 
     res.send(user)
-  })
-  .delete('/:id', async (req, res) => {
-    // ditto
-    const user = await User.query()
-      .findById(req.params.id)
-      .whereNotDeleted()
-    await user
-      .$query()
-      .authorize(req.user)
-      .delete()
-
-    res.sendStatus(204)
   })
