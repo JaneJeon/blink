@@ -1,6 +1,6 @@
 const request = require('supertest')
-const app = require('../../../app')
-const User = require('../../../models/user')
+const app = require('../../app')
+const User = require('../../models/user')
 
 describe('/api/v1/users', () => {
   const id = 'userRouteTest'

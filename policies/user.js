@@ -1,0 +1,43 @@
+exports.read = (allow, forbid, user, body) => {
+  // everyone in a team can read each other
+  allow('read', 'User')
+}
+
+exports.update = (allow, forbid, user, body) => {
+  // A user can update only itself, but not some fields
+  allow('update', 'User', { id: user.id })
+  forbid('update', 'User', ['id', 'role', 'verified'])
+
+  if (user.role === 'owner') {
+    // The owner can promote/demote any user
+    allow('update', 'User', 'role')
+  } else if (user.role === 'admin' && body.role !== 'owner') {
+    // An admin can promote a user to admin, or recuse itself
+    allow('update', 'User', 'role', {
+      $or: [{ role: 'user' }, { id: user.id }]
+    })
+  }
+}
+
+// While we're not *actually* deleting a user, objection-soft-delete allows us
+// to separate out soft deletions from updates (which is what they are).
+exports.delete = (allow, forbid, user, body) => {
+  // Always require explicit confirmation whenever deleting any user by anyone
+  if (!body.confirm) return
+
+  // A user can delete only itself
+  if (body.confirm) allow('delete', 'User', { id: user.id })
+
+  if (user.role === 'admin') {
+    // An admin can 'delete' a regular user
+    allow('delete', 'User', { role: 'user' })
+  } else if (user.role === 'owner') {
+    // Owners can delete anyone
+    allow('delete', 'User')
+  }
+}
+
+exports.undelete = (allow, forbid, user, body) => {
+  // Admins and owners can recover 'deleted' accounts
+  allow('undelete', 'User')
+}

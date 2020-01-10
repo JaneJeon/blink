@@ -1,17 +1,13 @@
 // istanbul ignore file
 const { Model, AjvValidator } = require('objection')
 const tableName = require('objection-table-name')()
-const { DbErrors } = require('objection-db-errors')
-const authorize = require('objection-authorize')(require('../lib/acl'))
+const authorize = require('objection-authorize')(require('../policies'), 'casl')
 const visibility = require('objection-visibility').default
-
 const schema = require('../config/schema')
 
 Model.knex(require('knex')(require('../knexfile')))
 
-const supportsReturning = ['pg', 'mssql'].includes(process.env.DATABASE_CLIENT)
-
-class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
+class BaseModel extends visibility(authorize(tableName(Model))) {
   static get modelPaths() {
     return [__dirname]
   }
@@ -25,7 +21,7 @@ class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
   }
 
   static get pageSize() {
-    return 15
+    return 25
   }
 
   static get jsonSchema() {
@@ -59,40 +55,26 @@ class BaseModel extends visibility(authorize(DbErrors(tableName(Model)))) {
 
   static async findOrCreate(id, body) {
     const instance = await this.query().findById(id, true)
-    if (instance) return instance
-
-    return this.query().insertAndFetch(body)
+    return instance || this.query().insertAndFetch(body)
   }
 
   static get QueryBuilder() {
     return class extends super.QueryBuilder {
       insertAndFetch(body) {
-        return supportsReturning
-          ? Array.isArray(body)
-            ? this.insert(body).returning('*')
-            : this.insert(body)
-                .returning('*')
-                .first()
-          : super.insertAndFetch(body)
+        const q = this.insert(body).returning('*')
+        return Array.isArray(body) ? q : q.first()
       }
 
       patchAndFetchById(id, body) {
-        return supportsReturning
-          ? this.findById(id)
-              .patch(body)
-              .returning('*')
-              .first()
-          : super.patchAndFetchById(id, body)
+        return this.findById(id)
+          .patch(body)
+          .returning('*')
+          .first()
       }
 
       patchAndFetch(body) {
-        return supportsReturning
-          ? Array.isArray(body)
-            ? this.patch(body).returning('*')
-            : this.patch(body)
-                .returning('*')
-                .first()
-          : super.patchAndFetch(body)
+        const q = this.patch(body).returning('*')
+        return Array.isArray(body) ? q : q.first()
       }
 
       findById(id, silence = false) {

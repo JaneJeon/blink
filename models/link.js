@@ -28,6 +28,7 @@ class Link extends hashId(BaseModel) {
       const ids = this.constructor._hashIdInstance.decode(this.hash)
       if (ids.length) throw httpError(400, 'Cannot use hash ' + this.hash)
     }
+
     if (this.originalURL) {
       try {
         // normalize URL so that we can search by URL.

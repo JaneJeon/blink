@@ -10,7 +10,6 @@ module.exports = app
   .use(require('express-request-id')())
   .use(require('./middlewares/express-logger'))
   .use(require('helmet')())
-  .use(require('cors')({ origin: process.env.FRONTEND_URL }))
   .use(require('./middlewares/session'))
   .use(require('cookie-parser')(process.env.SESSION_SECRET))
   .use(express.json())
@@ -21,3 +20,31 @@ module.exports = app
   .use(require('./routes'))
   .use((req, res) => res.sendStatus(404))
   .use(require('./middlewares/error-handler'))
+
+/* -------------------- Asynchronous app init -------------------- */
+const fs = require('fs')
+const log = require('./lib/logger')
+const { Model } = require('objection')
+const { prepare } = require('./routes/app')
+
+module.exports.initialize = async () => {
+  // initialize models for use w/ objection-authorize
+  const models = await fs.promises.readdir(`${__dirname}/models`)
+  const inits = models
+    .filter(
+      file =>
+        file.endsWith('.js') && !file.endsWith('.test.js') && file !== 'base.js'
+    )
+    .map(model => {
+      const modelClass = require(`./models/${model}`)
+      if (modelClass instanceof Model) return
+      log.info(`Initializing model ${model}`)
+
+      return modelClass.fetchTableMetadata()
+    })
+
+  // mount nextjs
+  inits.push(prepare)
+
+  await Promise.all(inits)
+}

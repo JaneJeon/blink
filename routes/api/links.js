@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const Link = require('../../../models/link')
+const Link = require('../../models/link')
 
 module.exports = Router()
   .get('/', async (req, res) => {

@@ -34,7 +34,6 @@ jobs:
       - run: yarn test --ci --runInBand
       - store_test_results:
           path: reports/junit
-      - run: yarn coverage
 
   docs:
     docker:
