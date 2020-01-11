@@ -1,46 +1,33 @@
-<h1 align="center">Welcome to myURL 👋</h1>
+<h1 align="center">Welcome to Lynx 👋</h1>
 
-[![CircleCI](https://img.shields.io/circleci/build/github/JaneJeon/myURL)](https://circleci.com/gh/JaneJeon/myURL)
-[![Coverage](https://codecov.io/gh/JaneJeon/myurl/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/myurl)
-[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/JaneJeon/myURL)](https://codeclimate.com/github/JaneJeon/myURL/maintainability)
-[![Version](https://img.shields.io/npm/v/myurl)](https://www.npmjs.com/package/myurl)
-[![Downloads](https://img.shields.io/npm/dt/myurl)](https://www.npmjs.com/package/myurl)
-[![Dependencies](https://img.shields.io/david/JaneJeon/myurl)](https://david-dm.org/JaneJeon/myurl)
-[![devDependencies](https://img.shields.io/david/dev/JaneJeon/myurl)](https://david-dm.org/JaneJeon/myurl?type=dev)
-[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaneJeon/myURL)](https://snyk.io//test/github/JaneJeon/myURL?targetFile=package.json)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=JaneJeon/myURL)](https://dependabot.com)
+[![Coverage](https://codecov.io/gh/JaneJeon/Lynx/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/Lynx)
+[![Dependencies](https://img.shields.io/david/JaneJeon/Lynx)](https://david-dm.org/JaneJeon/Lynx)
+[![devDependencies](https://img.shields.io/david/dev/JaneJeon/Lynx)](https://david-dm.org/JaneJeon/Lynx?type=dev)
+[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaneJeon/Lynx)](https://snyk.io//test/github/JaneJeon/Lynx?targetFile=package.json)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=JaneJeon/Lynx)](https://dependabot.com)
 [![License](https://img.shields.io/npm/l/myurl)](https://github.com/JaneJeon/myURL/blob/master/LICENSE)
-[![Docs](https://img.shields.io/badge/docs-github-blue)](https://janejeon.github.io/myURL)
-[![Docs](https://img.shields.io/badge/docs-surge-yellowgreen)](https://my-url.surge.sh)
-[![Frontend Status](https://img.shields.io/netlify/03c1ca61-fcec-48e4-919a-a4b971ef294f)](https://app.netlify.com/sites/my-url/deploys)
+[![Docs](https://img.shields.io/badge/docs-github-blue)](https://janejeon.github.io/Lynx)
 [![Standard code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Prettier code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
 [![Issues](https://img.shields.io/badge/issues-trello-blue)](https://trello.com/b/QCCf001W)
-[![Issues](https://img.shields.io/badge/issues-github-blue)](https://github.com/JaneJeon/myURL/issues)
+[![Issues](https://img.shields.io/badge/issues-github-blue)](https://github.com/JaneJeon/Lynx/issues)
 
-> A blazing fast, planet-scale, easy-to-use serverless URL shortener!
+> Modern, lightweight, and planet-scale link shortener + analytics + management!
 
 The secret sauce is deep integration with CDN and aggressively caching everything.
 
-### 🏠 [Homepage](https://github.com/JaneJeon/myURL)
+### 🏠 [Homepage](https://github.com/JaneJeon/Lynx)
 
 ## Install
 
-```sh
-npm i -g myurl # or
-yarn global install myurl
-```
-
-## Prerequisites
-
-Unfortunately some things can't be automated. e.g. migrating to Route53?
+Server + admin panel: heroku (how to update? do we release docker images?)
+CDN/DNS: ???
+Analytics: ???
 
 ## Usage
 
-```sh
-npx myurl domain.name
-```
+// todo
 
 ## Architecture
 
@@ -71,7 +58,7 @@ yarn test
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!  
-Feel free to check [issues page](https://github.com/JaneJeon/myURL/issues).
+Feel free to check [issues page](https://github.com/JaneJeon/Lynx/issues).
 
 ## Show your support
 
@@ -80,7 +67,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2019 [Jane Jeon](https://github.com/JaneJeon).<br />
-This project is [AGPL-3.0](https://github.com/JaneJeon/myURL/blob/master/LICENSE) licensed.
+This project is [AGPL-3.0](https://github.com/JaneJeon/Lynx/blob/master/LICENSE) licensed.
 
 ---
 

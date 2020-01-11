@@ -1,5 +1,6 @@
-const policies = require('../policies')
+const policies = require('..')
 
+// simplified signature for testing
 module.exports = (user, resourceName) => {
   const checkACL = (action, resource, fields, body) => {
     resource = resource || resourceName

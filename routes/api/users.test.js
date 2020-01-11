@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../../app')
 const User = require('../../models/user')
 
-describe('/api/v1/users', () => {
+describe.skip('/api/users', () => {
   const id = 'userRouteTest'
   beforeAll(async () => {
     await User.query()
@@ -13,13 +13,13 @@ describe('/api/v1/users', () => {
 
   test('GET /', done => {
     request(app)
-      .get('/api/v1/users')
+      .get('/api/users')
       .expect(200, done)
   })
 
   test('GET /:id', done => {
     request(app)
-      .get(`/api/v1/users/${id}`)
+      .get(`/api/users/${id}`)
       .expect(200, done)
   })
 

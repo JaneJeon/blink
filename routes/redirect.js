@@ -5,5 +5,6 @@ module.exports = Router()
   .get('/', (req, res) => res.redirect(301, process.env.HOMEPAGE))
   .get('/:hash', async (req, res) => {
     const link = await Link.query().findByHashId(req.params.hash)
+
     res.redirect(301, link.originalURL)
   })

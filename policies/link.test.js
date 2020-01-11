@@ -1,4 +1,4 @@
-const policyTester = require('../test-utils/policy-tester')
+const policyTester = require('./__utils__/policy-tester')
 
 describe('link policy', () => {
   class Link {

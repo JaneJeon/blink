@@ -1,6 +1,5 @@
 // istanbul ignore file
-const { ValidationError, NotFoundError } = require('objection')
-const { DBError } = require('objection-db-errors')
+const { ValidationError, NotFoundError, DBError } = require('objection')
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
