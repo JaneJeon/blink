@@ -1,8 +1,8 @@
 {
-  "name": "myURL",
-  "description": "TODO:",
-  "repository": "https://github.com/JaneJeon/myURL",
-  "website": "https://janejeon.github.io/myURL",
+  "name": "Lynx",
+  "description": "Modern, lightweight, and planet-scale link shortener + analytics + management!",
+  "repository": "https://github.com/JaneJeon/Lynx",
+  "website": "https://janejeon.github.io/Lynx",
   "buildpacks": [
     {
       "url": "heroku/nodejs"
@@ -30,9 +30,6 @@
     },
     "HOMEPAGE": {
       "description": "where the root domain should redirect to; e.g. https://bitly.com (protocol required)"
-    },
-    "FRONTEND_URL": {
-      "description": ""
     },
     "SLACK_CLIENT_ID": {
       "description": ""

@@ -1,7 +1,6 @@
 const BaseModel = require('./base')
-const softDelete = require('objection-soft-delete')()
 
-class User extends softDelete(BaseModel) {
+class User extends BaseModel {
   static get relationMappings() {
     return {
       links: {

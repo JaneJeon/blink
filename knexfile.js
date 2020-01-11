@@ -1,17 +1,10 @@
 // istanbul ignore file
 require('./config')
-
-if (process.env.DATABASE_CLIENT === 'pg')
-  require('pg').types.setTypeParser(20, parseInt) // cast SELECT COUNT(*) to integer
-
+require('pg').types.setTypeParser(20, parseInt) // cast SELECT COUNT(*) to integer
 const log = require('./lib/logger')
 
 module.exports = {
-  client: process.env.DATABASE_FILE
-    ? {
-        filename: process.env.DATABASE_FILE
-      }
-    : process.env.DATABASE_CLIENT,
+  client: 'pg',
   connection: process.env.DATABASE_URL,
   log: {
     warn: msg => log.warn(msg),
