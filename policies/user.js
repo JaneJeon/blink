@@ -6,7 +6,7 @@ exports.read = (allow, forbid, user, body) => {
 exports.update = (allow, forbid, user, body) => {
   // A user can update only itself, but not some fields
   allow('update', 'User', { id: user.id })
-  forbid('update', 'User', ['id', 'role', 'verified'])
+  forbid('update', 'User', ['id', 'role', 'deleted'])
 
   if (user.role === 'owner') {
     // The owner can promote/demote any user
@@ -17,6 +17,9 @@ exports.update = (allow, forbid, user, body) => {
       $or: [{ role: 'user' }, { id: user.id }]
     })
   }
+
+  // disable updates to a deleted user
+  forbid('update', 'User', { deleted: true })
 }
 
 // While we're not *actually* deleting a user, objection-soft-delete allows us
@@ -26,7 +29,7 @@ exports.delete = (allow, forbid, user, body) => {
   if (!body.confirm) return
 
   // A user can delete only itself
-  if (body.confirm) allow('delete', 'User', { id: user.id })
+  allow('delete', 'User', { id: user.id })
 
   if (user.role === 'admin') {
     // An admin can 'delete' a regular user
@@ -39,5 +42,6 @@ exports.delete = (allow, forbid, user, body) => {
 
 exports.undelete = (allow, forbid, user, body) => {
   // Admins and owners can recover 'deleted' accounts
-  allow('undelete', 'User')
+  // TODO: when deleted, back to user
+  if (user.role === 'admin' || user.role === 'owner') allow('undelete', 'User')
 }
