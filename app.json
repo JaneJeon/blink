@@ -48,6 +48,10 @@
     "SESSION_SECRET": {
       "description": "the session encryption key",
       "generator": "secret"
+    },
+    "REMEMBER_ME_SECRET": {
+      "description": "the remember me cookie encryption key",
+      "generator": "secret"
     }
   }
 }

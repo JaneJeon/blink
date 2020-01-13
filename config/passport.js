@@ -1,54 +1,29 @@
 const passport = require('passport')
 const SlackStrategy = require('passport-slack-fixed').Strategy
-const RememberMeStrategy = require('passport-remember-me-extended').Strategy
+const { NotFoundError } = require('objection')
 const httpError = require('http-errors')
 const ms = require('ms')
 
 const User = require('../models/user')
 const slack = require('../lib/slack')
-const { createToken, consumeToken } = require('../lib/token')
 
 // Note that in all these strategies, we're filtering out deleted users,
 // since we don't want deleted users to be able to login.
+
 passport.serializeUser((user, done) => done(null, user.id))
-passport.deserializeUser(async (id, done) => {
+passport.deserializeUser(async (req, id, done) => {
   try {
     const user = await User.query()
-      .findById(id, true)
+      .findById(id)
       .filterDeleted()
 
+    // sticky sessions
+    req.sessionOptions.maxAge = ms(process.env.SESSION_DURATION)
     done(null, user)
   } catch (err) {
-    done(err)
+    err instanceof NotFoundError ? done(null, false) : done(err)
   }
 })
-
-const msRemember = ms(process.env.SESSION_REMEMBER_ME)
-passport.use(
-  new RememberMeStrategy(
-    // Given a remember-me token, consume it and login the user.
-    async (token, done) => {
-      try {
-        const id = await consumeToken(token)
-        const user = await User.query()
-          .findById(id, true)
-          .filterDeleted()
-
-        done(null, user)
-      } catch (err) {
-        done(err)
-      }
-    },
-    // Given a logged in user, generate a remember-me token for them.
-    async (user, done) => {
-      try {
-        done(null, await createToken(msRemember, user.id))
-      } catch (err) {
-        done(err)
-      }
-    }
-  )
-)
 
 if (!process.env.SLACK_TEAM_ID && !process.env.SLACK_TEAM_DOMAIN)
   throw new Error('Need to define either SLACK_TEAM_ID or SLACK_TEAM_DOMAIN!')
@@ -95,19 +70,9 @@ passport.use(
           })
         }
 
-        // https://github.com/dereklakin/passport-remember-me#setting-the-remember-me-cookie
-        if (req.body.rememberMe || req.body.remember_me) {
-          const token = await createToken(msRemember, user.id)
-          // default cookie options
-          req.res.cookie('remember_me', token, {
-            maxAge: msRemember,
-            sameSite: 'lax'
-          })
-        }
-
         done(null, user)
       } catch (err) {
-        done(err)
+        err instanceof NotFoundError ? done(null, false) : done(err)
       }
     }
   )

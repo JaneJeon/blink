@@ -1,2 +1,6 @@
 semi: false
 singleQuote: true
+overrides:
+  - files: '.pino-prettyrc'
+    options:
+      parser: json
