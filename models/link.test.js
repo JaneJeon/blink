@@ -68,7 +68,7 @@ describe('Link', () => {
 
   it('rejects valid but nonexistent URLs', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalURL: 'nodejsssssss.org' })
+      user.$relatedQuery('links').insert({ originalURL: 'www.timeout.com' })
     ).rejects.toThrow()
   })
 
