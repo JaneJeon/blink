@@ -23,7 +23,7 @@ module.exports = app
 const fs = require('fs')
 const log = require('./lib/logger')
 const { Model } = require('objection')
-const { prepare } = require('./routes/app')
+const next = require('./lib/next')
 
 module.exports.initialize = async () => {
   // initialize models for use w/ objection-authorize
@@ -35,14 +35,11 @@ module.exports.initialize = async () => {
     )
     .map(model => {
       const modelClass = require(`./models/${model}`)
-      if (modelClass instanceof Model) return
+      if (!(modelClass instanceof Model)) return
       log.info(`Initializing model ${model}`)
 
       return modelClass.fetchTableMetadata()
     })
 
-  // mount nextjs
-  inits.push(prepare)
-
-  await Promise.all(inits)
+  await Promise.all([...inits, next.prepare()])
 }

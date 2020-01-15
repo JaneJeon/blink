@@ -1,17 +1,32 @@
 const app = require('../../app')
 const supertest = require('supertest-session')
-// const Link = require('../../models/link')
+const User = require('../../models/user')
+const Link = require('../../models/link')
 
 describe('/api/links', () => {
-  const request = supertest(app)
+  let user, link, request
 
   beforeAll(async () => {
     await app.initialize()
+    user = await User.query().insertAndFetch({ id: 'link-test', role: 'owner' })
+
+    request = supertest(app)
   })
 
-  test.only('POST /', async () => {
-    await request.post('/api/links', {
-      //
+  describe('POST /', () => {
+    test('works', async () => {
+      const { body, status } = await request.post('/api/links', {
+        originalURL: 'nodejs.org'
+      })
+      link = body
+      expect(status).toEqual(201)
+    })
+
+    test('handles duplicates', async () => {
+      const { body } = await request.post('/api/links', {
+        originalURL: 'www.nodejs.org'
+      })
+      expect(body).toEqual(link)
     })
   })
 
