@@ -23,7 +23,6 @@ module.exports = app
 const fs = require('fs')
 const log = require('./lib/logger')
 const { Model } = require('objection')
-const next = require('./lib/next')
 
 module.exports.initialize = async () => {
   // initialize models for use w/ objection-authorize
@@ -41,5 +40,5 @@ module.exports.initialize = async () => {
       return modelClass.fetchTableMetadata()
     })
 
-  await Promise.all([...inits, next.prepare()])
+  await Promise.all(inits)
 }

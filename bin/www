@@ -3,9 +3,10 @@
 /**
  * Module dependencies.
  */
+var http = require('http')
 var app = require('../app')
 var log = require('../lib/logger')
-var http = require('http')
+var next = require('../lib/next')
 
 /**
  * Get port from environment.
@@ -22,8 +23,7 @@ var server = http.createServer(app)
  * Listen on provided port, on all network interfaces...
  * after initializing all of the model classes.
  */
-app
-  .initialize()
+Promise.all([app.initialize(), next.prepare()])
   .then(() => server.listen(port))
   .catch(err => log.error(err))
 server.on('error', onError)
