@@ -61,7 +61,9 @@ typings/
 
 # Built files
 config/**/*.json
-reports
-docs/.vuepress/dist
-out
+reports/
+docs/.vuepress/dist/
+out/
 test.db
+.yarn/
+.cache/

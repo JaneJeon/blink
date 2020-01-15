@@ -8,10 +8,14 @@ module.exports = {
     'models/*.js',
     'routes/*.js',
     'lib/*.js',
+    'policies/*.js',
     '!**/node_modules/**',
-    '!**/vendor/**'
+    '!**/vendor/**',
+    '!**/__utils__/**',
+    '!**/__mocks__/**'
   ],
   errorOnDeprecated: true,
   reporters: isCI ? ['default', 'jest-junit'] : undefined,
-  testEnvironment: 'node'
+  testEnvironment: 'node',
+  globalSetup: '<rootDir>/scripts/init-models.js'
 }

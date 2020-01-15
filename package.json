@@ -28,7 +28,6 @@
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
     "pretest": "yarn build-local",
     "test": "LOG_LEVEL=error LINK_TIMEOUT=2s jest --forceExit",
-    "test:ci": "yarn test --ci --reporters=default --reporters=jest-junit",
     "test:watch": "yarn test --watch"
   },
   "dependencies": {

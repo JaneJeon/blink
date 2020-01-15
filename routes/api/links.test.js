@@ -7,7 +7,6 @@ describe('/api/links', () => {
   let user, link, request
 
   beforeAll(async () => {
-    await app.initialize()
     user = await User.query().insertAndFetch({ id: 'link-test', role: 'owner' })
 
     request = supertest(app)
