@@ -8,7 +8,7 @@
   "scripts": {
     "start": "NODE_ENV=production node bin/www",
     "dev": "yarn build-local && run-p dev:* watch",
-    "dev:www": "DEBUG=knex:query,ioredis:* nodemon bin/www | pino-pretty",
+    "dev:www": "DEBUG=knex:query,ioredis:* nodemon bin/www",
     "migrate": "knex migrate:latest",
     "migrate:one": "knex migrate:up",
     "migrate:make": "knex migrate:make",
@@ -16,7 +16,7 @@
     "rollback": "knex migrate:rollback",
     "rollback:one": "knex migrate:down",
     "seed": "knex seed:run",
-    "seed:make": "bash ./scripts/seed-make.sh",
+    "seed:make": "bash ./scripts/make-seed.sh",
     "build": "run-p migrate build:*",
     "build:yaml": "yaml2json config --save --recursive",
     "build:frontend": "next build",
@@ -27,7 +27,7 @@
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
     "pretest": "yarn build-local",
-    "test": "LOG_LEVEL=error LINK_TIMEOUT=2s jest --forceExit --colors | pino-pretty",
+    "test": "LOG_LEVEL=error LINK_TIMEOUT=2s jest --forceExit",
     "test:ci": "yarn test --ci --reporters=default --reporters=jest-junit",
     "test:watch": "yarn test --watch"
   },
