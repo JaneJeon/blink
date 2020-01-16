@@ -76,7 +76,8 @@ class Link extends hashId(BaseModel) {
       }
 
       // find by the normalized form
-      findByURL(url) {
+      findByURL(url = '') {
+        // TODO: when url is invalid?
         return this.findOne({
           originalURL: normalizeURL(url, { forceHttps: true })
         })

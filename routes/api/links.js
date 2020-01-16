@@ -4,6 +4,7 @@ const Link = require('../../models/link')
 module.exports = Router()
   .post('/', async (req, res) => {
     // first check to see if there's already an existing link
+    // TODO: when not found?
     const link =
       (await Link.query()
         .authorize(req.user)

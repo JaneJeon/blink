@@ -1,6 +1,6 @@
 const supertest = require('supertest')
 const app = require('../../app')
-const mockSession = require('../../__utils__/mock-session')
+const mockuserSession = require('../../__utils__/mock-user-session')
 const User = require('../../models/user')
 const Link = require('../../models/link')
 
@@ -10,13 +10,14 @@ describe('/api/links', () => {
 
   beforeAll(async () => {
     user = await User.query().insertAndFetch({ id: 'link-test', role: 'owner' })
-    cookie = mockSession(user.id)
+    cookie = mockuserSession(user.id)
   })
 
   describe('POST /', () => {
     test.only('works', async () => {
       const { body, status } = await session
-        .post('/api/links', { originalURL: 'nodejs.org' })
+        .post('/api/links')
+        .send({ originalURL: 'nodejs.org' })
         .set('Cookie', cookie)
       link = body
       expect(status).toEqual(201)

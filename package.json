@@ -92,6 +92,7 @@
     "is-ci": "^2.0.0",
     "jest": "^24.9.0",
     "jest-junit": "^8.0.0",
+    "keygrip": "^1.1.0",
     "lint-staged": "^9.3.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.2",
