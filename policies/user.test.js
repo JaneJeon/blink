@@ -1,4 +1,4 @@
-const policyTester = require('./__utils__/policy-tester')
+const policyTester = require('../__utils__/policy-tester')
 
 describe('user policy', () => {
   let i = 0

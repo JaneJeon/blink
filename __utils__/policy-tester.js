@@ -1,4 +1,4 @@
-const policies = require('..')
+const policies = require('../policies')
 
 // simplified signature for testing
 module.exports = (user, resourceName) => {

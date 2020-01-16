@@ -27,7 +27,7 @@
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
     "pretest": "yarn build-local",
-    "test": "LOG_LEVEL=error LINK_TIMEOUT=2s jest --forceExit",
+    "test": "jest --forceExit",
     "test:watch": "yarn test --watch"
   },
   "dependencies": {
@@ -101,8 +101,7 @@
     "pino-pretty": "^3.2.1",
     "prettier": "^1.18.2",
     "qawolf": "^0.8.0",
-    "supertest": "^4.0.2",
-    "supertest-session": "^4.0.0"
+    "supertest": "^4.0.2"
   },
   "keywords": [
     "url",
