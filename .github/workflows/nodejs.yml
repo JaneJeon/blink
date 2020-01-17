@@ -44,7 +44,7 @@ jobs:
       - name: Test
         run: yarn test
         env:
-          DATABASE_URL: postgres://knex@localhost/lynx
+          DATABASE_URL: postgres://node@localhost/lynx
       - name: Archive Test Results
         # if: failure()
         uses: actions/upload-artifact@v1
