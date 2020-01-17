@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const Link = require('../../models/link')
+const log = require('../../lib/logger')
 
 module.exports = Router()
   // When "creating" a link, the user is trying to shorten a link.
@@ -21,6 +22,7 @@ module.exports = Router()
     } catch (err) {
       // When there's an unexpected error, throw it again for the global error handler.
       if (err.name !== 'UniqueViolationError') throw err
+      log.warn(err)
 
       // When there's a duplicate, we can now find a link by the normalized form.
       link = await Link.query().findOne({ originalURL: link.originalURL })

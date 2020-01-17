@@ -2,10 +2,6 @@ const User = require('./user')
 
 describe('User', () => {
   beforeAll(async () => {
-    await User.query()
-      .delete()
-      .whereIn('id', ['deletedUser', 'notDeletedUser'])
-
     await User.query().insert([
       { id: 'deletedUser', deleted: true },
       { id: 'notDeletedUser' }

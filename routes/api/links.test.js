@@ -8,7 +8,7 @@ describe('/api/links', () => {
   let link
 
   describe('POST /', () => {
-    test('works', async () => {
+    it('works', async () => {
       const { body, status } = await session
         .post('/api/links')
         .send({ originalURL: 'js.org' })
@@ -17,7 +17,7 @@ describe('/api/links', () => {
       link = body
     })
 
-    test('handles duplicates', async () => {
+    it('handles duplicates', async () => {
       const { body } = await session
         .post('/api/links')
         .send({ originalURL: 'www.js.org' })
@@ -27,18 +27,34 @@ describe('/api/links', () => {
   })
 
   test('GET /', async () => {
-    //
+    const { body, status } = await session
+      .get('/api/links')
+      .set('Cookie', cookie)
+    expect(status).toEqual(200)
+    expect(body).toContain(link)
   })
 
   test('GET /:id', async () => {
-    //
+    const { body, status } = await session
+      .get(`/api/links/${link.id}`)
+      .set('Cookie', cookie)
+    expect(status).toEqual(200)
+    expect(body).toEqual(link)
   })
 
   test('PATCH /', async () => {
-    //
+    const { body, status } = await session
+      .patch(`/api/links/${link.id}`)
+      .send({})
+      .set('Cookie', cookie)
+    expect(status).toEqual(200)
+    expect(body) // TODO:
   })
 
   test('DELETE /:id', async () => {
-    //
+    const { status } = await session
+      .delete(`/api/links/${link.id}`)
+      .set('Cookie', cookie)
+    expect(status).toEqual(204)
   })
 })

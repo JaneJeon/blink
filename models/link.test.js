@@ -12,20 +12,7 @@ describe('Link', () => {
   let user
 
   beforeAll(async () => {
-    const id = 'jestuser'
-    await Link.query()
-      .delete()
-      .where('creatorId', id)
-    await Promise.all([
-      Link.query()
-        .delete()
-        .whereIn('originalURL', originalURLs),
-      User.query()
-        .delete()
-        .where({ id })
-    ])
-
-    user = await User.query().insert({ id })
+    user = await User.query().insert({ id: 'model-test-user' })
   })
 
   it('shortens URL', async () => {

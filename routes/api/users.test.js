@@ -5,9 +5,6 @@ const User = require('../../models/user')
 describe.skip('/api/users', () => {
   const id = 'userRouteTest'
   beforeAll(async () => {
-    await User.query()
-      .delete()
-      .where({ id })
     await User.query().insert({ id })
   })
 
