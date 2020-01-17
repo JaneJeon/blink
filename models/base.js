@@ -41,23 +41,6 @@ class BaseModel extends visibility(authorize(tableName(Model))) {
     })
   }
 
-  processInput() {}
-
-  async $beforeInsert(queryContext) {
-    await super.$beforeInsert(queryContext)
-    await this.processInput(queryContext)
-  }
-
-  async $beforeUpdate(opt, queryContext) {
-    await super.$beforeUpdate(opt, queryContext)
-    await this.processInput(opt, queryContext)
-  }
-
-  static async findOrCreate(id, body) {
-    const instance = await this.query().findById(id, true)
-    return instance || this.query().insertAndFetch(body)
-  }
-
   static get QueryBuilder() {
     return class extends super.QueryBuilder {
       insertAndFetch(body) {

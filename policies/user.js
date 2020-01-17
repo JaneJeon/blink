@@ -1,3 +1,6 @@
+// "Creating" a user does not make sense in the context of user authorization,
+// because you "create" a user by simply signing in with your team's slack account.
+
 exports.read = (allow, forbid, user, body) => {
   // everyone in a team can read each other
   allow('read', 'User')

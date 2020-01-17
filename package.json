@@ -24,8 +24,11 @@
     "watch": "run-p watch:*",
     "watch:yaml": "yarn build:yaml --watch",
     "lint": "run-p lint:* --aggregate-output",
+    "lint-fix": "run-p lint:fix:* --aggregate-output",
     "lint:eslint": "eslint .",
+    "lint:fix:eslint": "yarn lint:eslint --fix",
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
+    "lint:fix:prettier": "yarn lint:prettier --write",
     "pretest": "yarn build-local",
     "test": "jest --forceExit",
     "test:watch": "yarn test --watch"

@@ -110,12 +110,5 @@ describe('Link', () => {
       expect(link0.originalURL).toEqual(links[0].originalURL)
       expect(link1.originalURL).toEqual(links[1].originalURL)
     })
-
-    test('#findByURL', async () => {
-      const link = await user
-        .$relatedQuery('links')
-        .findByURL(links[0].originalURL)
-      expect(link.shortenedURL).toEqual(links[0].shortenedURL)
-    })
   })
 })

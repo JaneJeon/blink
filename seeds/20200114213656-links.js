@@ -1,5 +1,5 @@
-const { tableName } = require('../models/link')
+const Link = require('../models/link')
 
 exports.seed = async knex => {
-  await knex(tableName).del()
+  await knex(Link.tableName).del()
 }

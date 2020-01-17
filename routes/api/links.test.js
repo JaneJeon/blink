@@ -1,31 +1,26 @@
 const supertest = require('supertest')
 const app = require('../../app')
-const mockuserSession = require('../../__utils__/mock-user-session')
-const User = require('../../models/user')
-const Link = require('../../models/link')
+const mockSession = require('../../__utils__/mock-user-session')
+const session = supertest.agent(app)
+const cookie = mockSession('owner')
 
 describe('/api/links', () => {
-  const session = supertest.agent(app)
-  let user, link, cookie
-
-  beforeAll(async () => {
-    user = await User.query().insertAndFetch({ id: 'link-test', role: 'owner' })
-    cookie = mockuserSession(user.id)
-  })
+  let link
 
   describe('POST /', () => {
-    test.only('works', async () => {
+    test('works', async () => {
       const { body, status } = await session
         .post('/api/links')
         .send({ originalURL: 'nodejs.org' })
         .set('Cookie', cookie)
-      link = body
       expect(status).toEqual(201)
+      link = body
     })
 
     test('handles duplicates', async () => {
       const { body } = await session
-        .post('/api/links', { originalURL: 'www.nodejs.org' })
+        .post('/api/links')
+        .send({ originalURL: 'www.nodejs.org' })
         .set('Cookie', cookie)
       expect(body).toEqual(link)
     })

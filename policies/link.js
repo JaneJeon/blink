@@ -1,9 +1,9 @@
-exports.create = (allow, forbid, user, body) => {
-  // Anyone can create a link.
-  // Note: the specific conditions are handled by the model,
-  // since we do URL normalization AFTER the query has been built
-  allow('create', 'Link')
-}
+// We skip exports.create, because /api/links is gated by ensureLogin,
+// so the public can't access it anyways, plus any member of the team
+// should be allowed to shorten a link so this check can be safely skipped.
+// By skipping user authorization checks for shortened link creation,
+// we can use $relatedQuery() in the POST /api/links route even though
+// it's not supported by objection-authorize (yet).
 
 exports.read = (allow, forbid, user, body) => {
   // Everyone can read each other's links.
