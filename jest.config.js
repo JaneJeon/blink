@@ -8,7 +8,7 @@ module.exports = {
   collectCoverage: isCI,
   collectCoverageFrom: [
     'models/*.js',
-    'routes/*.js',
+    'routes/**/*.js',
     'lib/*.js',
     'policies/*.js',
     '!**/node_modules/**',
