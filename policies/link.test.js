@@ -12,10 +12,6 @@ describe('link policy', () => {
     const self = { role: 'user', id: 1 }
     const { can, cannot } = policyTester(self, 'Link')
 
-    test('can create links', () => {
-      can('create')
-    })
-
     test('can read any links', () => {
       can('read', new Link({ creatorId: 0 }))
     })

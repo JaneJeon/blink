@@ -11,7 +11,7 @@ describe('/api/links', () => {
     test('works', async () => {
       const { body, status } = await session
         .post('/api/links')
-        .send({ originalURL: 'nodejs.org' })
+        .send({ originalURL: 'js.org' })
         .set('Cookie', cookie)
       expect(status).toEqual(201)
       link = body
@@ -20,7 +20,7 @@ describe('/api/links', () => {
     test('handles duplicates', async () => {
       const { body } = await session
         .post('/api/links')
-        .send({ originalURL: 'www.nodejs.org' })
+        .send({ originalURL: 'www.js.org' })
         .set('Cookie', cookie)
       expect(body).toEqual(link)
     })
