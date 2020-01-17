@@ -30,7 +30,7 @@
     "lint:prettier": "prettier --check '**/*.{js,md,json,yml,yaml,css,html}'",
     "lint:fix:prettier": "yarn lint:prettier --write",
     "pretest": "yarn build-local",
-    "test": "jest",
+    "test": "jest --forceExit",
     "test:watch": "yarn test --watch"
   },
   "dependencies": {
