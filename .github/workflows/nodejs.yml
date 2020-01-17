@@ -1,0 +1,59 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+env:
+  CI: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      database:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: lynx
+          POSTGRES_USER: node
+
+    steps:
+      - uses: actions/checkout@v2
+      # fix version to 13 to support ES Modules
+      - name: Use Node.js 13
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13
+
+      - name: Restore Cache
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-13-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-13-
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test
+        env:
+          DATABASE_URL: postgres://node@localhost/lynx
+      - name: Archive Test Results
+        # if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: Test Report
+          path: junit.xml
+
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+        if: github.ref == 'refs/heads/master'

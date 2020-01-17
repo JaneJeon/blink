@@ -4,30 +4,17 @@ require('express-async-errors')
 const express = require('express')
 const app = express()
 const passport = require('./config/passport')
-const log = require('./lib/logger')
 
 module.exports = app
   .use(require('./middlewares/access-logger'))
   .use(require('express-request-id')())
   .use(require('./middlewares/express-logger'))
   .use(require('helmet')())
-  .use(require('cors')())
-  .use(require('express-prometheus-middleware')())
   .use(require('./middlewares/session'))
   .use(express.json())
+  .use(require('express-query-boolean')())
   .use(passport.initialize())
   .use(passport.session())
   .use(require('./routes'))
   .use((req, res) => res.sendStatus(404))
   .use(require('./middlewares/error-handler'))
-
-if (process.env.NODE_ENV !== 'test') {
-  const server = app.listen(process.env.PORT, function(err) {
-    if (err) {
-      log.error(err)
-      process.exit(1)
-    } else log.info(`Server listening on port ${this.address().port}`)
-  })
-
-  process.on('SIGINT', () => server.close()).on('SIGTERM', () => server.close())
-}

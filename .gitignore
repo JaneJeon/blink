@@ -59,6 +59,8 @@ typings/
 # next.js build output
 .next
 
-reports
-docs/.vuepress/dist
-out
+# Built files
+config/**/*.json
+reports/
+.yarn/
+.cache/

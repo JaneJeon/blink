@@ -1,35 +1,26 @@
-const mongoose = require('../lib/mongoose')
-const cachegoose = require('cachegoose')
+const BaseModel = require('./base')
 
-const schema = new mongoose.Schema({
-  profile: {
-    name: String,
-    gender: String,
-    location: String,
-    website: String,
-    picture: String
-  },
-
-  github: {
-    type: String,
-    hidden: true,
-    unique: true
-  },
-
-  links: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Link'
+class User extends BaseModel {
+  static get relationMappings() {
+    return {
+      links: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: 'link',
+        join: {
+          from: 'users.id',
+          to: 'links.creatorId'
+        }
+      }
     }
-  ]
-})
+  }
 
-schema.statics.cacheKey = id => `cache:user:${id}`
-schema.post('save', doc => {
-  cachegoose.clearCache(doc.schema.statics.cacheKey(doc.id))
-})
-schema.methods.createLink = function(body) {
-  return this.model('Link').create(Object.assign(body, { creator: this.id }))
+  static get QueryBuilder() {
+    return class extends BaseModel.QueryBuilder {
+      filterDeleted(deleted = false) {
+        return this.where({ deleted })
+      }
+    }
+  }
 }
 
-module.exports = mongoose.model('User', schema)
+module.exports = User

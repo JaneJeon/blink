@@ -1,81 +1,101 @@
 const Link = require('./link')
-const HashIds = require('hashids/cjs')
-const hashIds = new HashIds(
-  process.env.DOMAIN,
-  process.env.HASH_MIN_LENGTH - 0,
-  process.env.HASH_ALPHABET
-)
+const User = require('./user')
+const normalizeURL = require('normalize-url')
 
 describe('Link', () => {
-  const originalURL = 'www.nodejs.org'
-  const normalizedURL = 'https://nodejs.org'
-  const originalURL2 = 'example.com'
-  const originalURL3 = 'www.google.com'
-  let id
+  const originalURLs = ['www.nodejs.org', 'example.com', 'http://google.com']
+  const normalizedURLs = originalURLs.map(url =>
+    normalizeURL(url, { forceHttps: true })
+  )
+
+  const links = []
+  let user
 
   beforeAll(async () => {
-    await Link.deleteMany()
+    user = await User.query().insert({ id: 'model-test-user' })
   })
 
-  test('shorten URL', async () => {
-    const doc = await Link.create({ originalURL })
-    id = doc.id
+  it('shortens URL', async () => {
+    let link = await user
+      .$relatedQuery('links')
+      .insert({ originalURL: originalURLs[0] })
+    link = link.toJSON()
+    links.push(link)
 
-    expect(typeof id).toBe('string')
-    expect(id.length).toBeGreaterThanOrEqual(process.env.HASH_MIN_LENGTH - 0)
+    expect(typeof link.id).toBe('string')
+    expect(link.id.length).toBeGreaterThanOrEqual(
+      Link.jsonSchema.properties.hash.minLength
+    )
+
+    expect(link.originalURL).toEqual(normalizedURLs[0])
+    expect(link.shortenedURL).toBeDefined()
+    expect(link.brandedURL).toBeUndefined()
+    expect(link.meta).toBeDefined()
   })
 
-  test('prevent duplicate URLs', async () => {
-    let error
-    try {
-      await Link.create({ originalURL })
-    } catch (err) {
-      error = err
-    } finally {
-      expect(error).toBeDefined()
-    }
+  it('prevents duplicate URLs', async () => {
+    await expect(
+      user.$relatedQuery('links').insert({ originalURL: originalURLs[0] })
+    ).rejects.toThrow()
   })
 
-  test('fetch URL', async () => {
-    const doc = await Link.findOne().byLowerId(id)
-
-    expect(doc.originalURL).toBe(normalizedURL)
-    expect(doc.brandedURL.startsWith(process.env.DOMAIN)).toBe(true)
+  it('prevents URL redirect loop', async () => {
+    await expect(
+      user
+        .$relatedQuery('links')
+        .insert({ originalURL: process.env.BASE_URL + '/hello' })
+    ).rejects.toThrow()
   })
 
-  test('set custom hash (which is lowercased)', async () => {
-    let error
-    try {
-      await Link.create({ originalURL: originalURL2, _id: hashIds.encode(500) })
-    } catch (err) {
-      error = err
-    } finally {
-      expect(error).toBeDefined()
-    }
-
-    const link = await Link.create({ originalURL: originalURL2, _id: 'FooBar' })
-    expect(link.id).toBe('foobar')
+  it('rejects invalid URLs', async () => {
+    await expect(
+      user.$relatedQuery('links').insert({ originalURL: '1234 0' })
+    ).rejects.toThrow()
   })
 
-  test.skip('preserve hashes corresponding to public folders', async () => {
-    let error
-    try {
-      await Link.create({ originalURL: originalURL3, _id: '_test' })
-    } catch (err) {
-      error = err
-    } finally {
-      expect(error).toBeDefined()
-    }
+  it('rejects valid but nonexistent URLs', async () => {
+    await expect(
+      user.$relatedQuery('links').insert({ originalURL: 'www.timeout.com' })
+    ).rejects.toThrow()
   })
 
-  test.skip('preserve hashes corresponding to static redirects', async () => {
-    let error
-    try {
-      await Link.create({ originalURL: originalURL3, _id: 'login' })
-    } catch (err) {
-      error = err
-    } finally {
-      expect(error).toBeDefined()
-    }
+  const hash = 'FooBar'
+  it('can set custom hash', async () => {
+    const link = await user.$relatedQuery('links').insert({
+      originalURL: originalURLs[1],
+      hash
+    })
+
+    expect(link.hash).toEqual(hash)
+    expect(link.brandedURL).toBeDefined()
+
+    links.push(link.toJSON())
+  })
+
+  it('prevents duplicate custom hash', async () => {
+    await expect(
+      user.$relatedQuery('links').insert({ originalURL: originalURLs[2], hash })
+    ).rejects.toThrow()
+  })
+
+  it('prevents custom hash that clashes with hashIds', async () => {
+    const generatedHash = Link._hashIdInstance.encode(500)
+    await expect(
+      user
+        .$relatedQuery('links')
+        .insert({ originalURL: originalURLs[2], hash: generatedHash })
+    ).rejects.toThrow()
+  })
+
+  describe('QueryBuilder', () => {
+    test('#findByHashId', async () => {
+      const [link0, link1] = await Promise.all([
+        user.$relatedQuery('links').findByHashId(links[0].id),
+        user.$relatedQuery('links').findByHashId(links[1].id)
+      ])
+
+      expect(link0.originalURL).toEqual(links[0].originalURL)
+      expect(link1.originalURL).toEqual(links[1].originalURL)
+    })
   })
 })

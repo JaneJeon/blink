@@ -1,40 +1,79 @@
 const passport = require('passport')
-const GitHubStrategy = require('passport-github').Strategy
-const User = require('../models/user')
+const SlackStrategy = require('passport-slack-fixed').Strategy
+const { NotFoundError } = require('objection')
+const httpError = require('http-errors')
 const ms = require('ms')
 
+const User = require('../models/user')
+const slack = require('../lib/slack')
+
+// Note that in all these strategies, we're filtering out deleted users,
+// since we don't want deleted users to be able to login.
+
 passport.serializeUser((user, done) => done(null, user.id))
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .cache(ms('1h') / 1000, User.cacheKey(id))
-    .exec((err, user) => done(err, user))
+passport.deserializeUser(async (req, id, done) => {
+  try {
+    const user = await User.query()
+      .findById(id)
+      .filterDeleted()
+
+    // sticky sessions
+    req.sessionOptions.maxAge = ms(process.env.SESSION_DURATION)
+    done(null, user)
+  } catch (err) {
+    err instanceof NotFoundError ? done(null, false) : done(err)
+  }
 })
 
+if (!process.env.SLACK_TEAM_ID && !process.env.SLACK_TEAM_DOMAIN)
+  throw new Error('Need to define either SLACK_TEAM_ID or SLACK_TEAM_DOMAIN!')
 passport.use(
-  new GitHubStrategy(
+  new SlackStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `${process.env.DOMAIN}/auth/github/callback`
+      clientID: process.env.SLACK_CLIENT_ID,
+      clientSecret: process.env.SLACK_CLIENT_SECRET,
+      callbackURL: `${process.env.BASE_URL}/auth/slack/callback`,
+      passReqToCallback: true
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ github: profile.id }, (err, existingUser) => {
-        if (err) return done(err)
-        if (existingUser) return done(null, existingUser)
+    async (req, accessToken, refreshToken, profile, done) => {
+      try {
+        // If someone's logged in, just pass them through.
+        if (req.user) done(null, req.user)
 
-        User.create(
-          {
-            github: profile.id,
-            profile: {
-              name: profile.displayName,
-              picture: profile._json.avatar_url,
-              location: profile._json.location,
-              website: profile._json.blog
-            }
-          },
-          (err, user) => done(err, user)
+        // Check that either the team ID or the domain matches.
+        if (
+          (process.env.SLACK_TEAM_ID &&
+            process.env.SLACK_TEAM_ID !== profile.team.id) ||
+          (process.env.SLACK_TEAM_DOMAIN &&
+            process.env.SLACK_TEAM_DOMAIN !== profile.team.domain)
         )
-      })
+          throw httpError(400, 'Cannot sign in with this team')
+
+        // See if the user is already registered.
+        let user = await User.query()
+          .findById(profile.user.id)
+          .filterDeleted()
+
+        // The user isn't registered, so register them.
+        if (!user) {
+          // Note: when there's no one else in the team, i.e. you're the first user,
+          // you're automatically promoted to owner status.
+          const otherUsersExist = await User.query()
+            .filterDeleted()
+            .first()
+
+          user = await User.query().insertAndFetch({
+            id: profile.user.id,
+            name: profile.user.name,
+            avatar: slack.largestIcon(profile.user),
+            role: otherUsersExist ? 'user' : 'owner'
+          })
+        }
+
+        done(null, user)
+      } catch (err) {
+        err instanceof NotFoundError ? done(null, false) : done(err)
+      }
     }
   )
 )

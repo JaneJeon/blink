@@ -1,13 +1,10 @@
-require('dotenv-defaults').config()
-
+require('./config')
 const webpack = require('webpack')
 
 module.exports = {
   webpack: config => {
     // Fixes npm packages that depend on `fs` module
-    config.node = {
-      fs: 'empty'
-    }
+    config.node = { fs: 'empty' }
 
     /**
      * Returns environment variables as an object
@@ -21,6 +18,7 @@ module.exports = {
      * at compile time, which in our case is our environment variables
      */
     config.plugins.push(new webpack.DefinePlugin(env))
+
     return config
   }
 }

@@ -16,6 +16,9 @@ overrides:
   - files: '*.test.js'
     env:
       jest: true
+  - files: '**/__utils__/**'
+    env:
+      jest: true
 
 settings:
   react:

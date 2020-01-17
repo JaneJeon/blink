@@ -1,5 +1,7 @@
 coverage
 reports
-docs/.vuepress/dist
+website/build
+website
 .next
 out
+config/**/*.json
