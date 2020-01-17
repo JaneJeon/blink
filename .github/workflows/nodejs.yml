@@ -10,6 +10,14 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      database:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: lynx
+
     steps:
       - uses: actions/checkout@v2
       # fix version to 13 to support ES Modules
