@@ -1,10 +1,11 @@
 <h1 align="center">Welcome to lynx 👋</h1>
 
+[![GitHub Actions](https://github.com/JaneJeon/lynx/actions)](https://github.com/JaneJeon/lynx/workflows/Build/badge.svg)
 [![Coverage](https://codecov.io/gh/JaneJeon/lynx/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/lynx)
 [![Dependencies](https://img.shields.io/david/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx)
 [![devDependencies](https://img.shields.io/david/dev/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx?type=dev)
 [![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaneJeon/lynx)](https://snyk.io//test/github/JaneJeon/lynx?targetFile=package.json)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=JaneJeon/lynx)](https://dependabot.com)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=JaneJeon/Lynx)](https://dependabot.com)
 [![License](https://img.shields.io/npm/l/myurl)](https://github.com/JaneJeon/myURL/blob/master/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-github-blue)](https://janejeon.github.io/lynx)
 [![Standard code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)

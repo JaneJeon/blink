@@ -1,7 +1,6 @@
 require('./config')
 const isCI = require('is-ci')
 
-process.env.JEST_JUNIT_OUTPUT_NAME = 'reports/junit/jest/results.xml'
 process.env.LOG_LEVEL = 'error'
 process.env.LINK_TIMEOUT = '2 seconds'
 
