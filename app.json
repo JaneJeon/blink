@@ -1,8 +1,8 @@
 {
   "name": "Lynx",
   "description": "Modern, lightweight, and planet-scale link shortener + analytics + management!",
-  "repository": "https://github.com/JaneJeon/Lynx",
-  "website": "https://janejeon.github.io/Lynx",
+  "repository": "https://github.com/JaneJeon/lynx",
+  "website": "https://janejeon.github.io/lynx",
   "buildpacks": [
     {
       "url": "heroku/nodejs"
@@ -47,10 +47,6 @@
     },
     "SESSION_SECRET": {
       "description": "the session encryption key",
-      "generator": "secret"
-    },
-    "REMEMBER_ME_SECRET": {
-      "description": "the remember me cookie encryption key",
       "generator": "secret"
     }
   }

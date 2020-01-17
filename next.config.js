@@ -1,4 +1,3 @@
-// istanbul ignore file
 require('./config')
 const webpack = require('webpack')
 
