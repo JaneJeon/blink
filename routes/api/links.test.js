@@ -26,35 +26,43 @@ describe('/api/links', () => {
     })
   })
 
-  test('GET /', async () => {
-    const { body, status } = await session
-      .get('/api/links')
-      .set('Cookie', cookie)
-    expect(status).toEqual(200)
-    expect(body).toContain(link)
+  describe('GET /', () => {
+    it('works', async () => {
+      const { body, status } = await session
+        .get('/api/links')
+        .set('Cookie', cookie)
+      expect(status).toEqual(200)
+      expect(body.map(link => link.id)).toContain(link.id)
+    })
   })
 
-  test('GET /:id', async () => {
-    const { body, status } = await session
-      .get(`/api/links/${link.id}`)
-      .set('Cookie', cookie)
-    expect(status).toEqual(200)
-    expect(body).toEqual(link)
+  describe('GET /:id', () => {
+    it('works', async () => {
+      const { body, status } = await session
+        .get(`/api/links/${link.id}`)
+        .set('Cookie', cookie)
+      expect(status).toEqual(200)
+      expect(body).toEqual(link)
+    })
   })
 
-  test('PATCH /', async () => {
-    const { body, status } = await session
-      .patch(`/api/links/${link.id}`)
-      .send({})
-      .set('Cookie', cookie)
-    expect(status).toEqual(200)
-    expect(body) // TODO:
+  describe('PATCH /:id', () => {
+    it('works', async () => {
+      const { body, status } = await session
+        .patch(`/api/links/${link.id}`)
+        .send({ hash: 'foobar' })
+        .set('Cookie', cookie)
+      expect(status).toEqual(200)
+      expect(body.hash).toBe('foobar')
+    })
   })
 
-  test('DELETE /:id', async () => {
-    const { status } = await session
-      .delete(`/api/links/${link.id}`)
-      .set('Cookie', cookie)
-    expect(status).toEqual(204)
+  describe('DELETE /:id', () => {
+    it('works', async () => {
+      const { status } = await session
+        .delete(`/api/links/${link.id}`)
+        .set('Cookie', cookie)
+      expect(status).toEqual(204)
+    })
   })
 })

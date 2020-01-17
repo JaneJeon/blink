@@ -15,7 +15,11 @@ exports.update = (allow, forbid, user, body) => {
   allow('update', 'Link', ['meta'], { creatorId: user.id })
 
   // The only other "change" you can make is to add a hash
-  allow('update', 'Link', ['hash'], { creatorId: user.id, hash: undefined })
+  allow('update', 'Link', ['hash'], {
+    creatorId: user.id,
+    hash: { $in: [undefined, null] }
+    // hash is undefined when the user input is empty, but null when the database column is empty
+  })
 }
 
 exports.delete = (allow, forbid, user, body) => {
