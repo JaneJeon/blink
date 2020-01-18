@@ -64,3 +64,4 @@ config/**/*.json
 reports/
 .yarn/
 .cache/
+junit.xml

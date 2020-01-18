@@ -12,7 +12,7 @@ describe('Link', () => {
   let user
 
   beforeAll(async () => {
-    user = await User.query().insert({ id: 'model-test-user' })
+    user = await User.fromJson({ id: 'admin' })
   })
 
   it('shortens URL', async () => {
