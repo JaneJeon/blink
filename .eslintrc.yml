@@ -2,12 +2,10 @@ extends:
   - standard
   - prettier
   - prettier/standard
-  - plugin:react/recommended
 
 plugins:
   - prettier
   - standard
-  - react
 
 rules:
   no-console: error
@@ -19,7 +17,3 @@ overrides:
   - files: '**/__utils__/**'
     env:
       jest: true
-
-settings:
-  react:
-    version: detect

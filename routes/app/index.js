@@ -1,5 +1,3 @@
-const { Router } = require('express')
-const app = require('../../lib/next')
-const handle = app.getRequestHandler()
+const express = require('express')
 
-module.exports = Router().get('*', (req, res) => handle(req, res))
+module.exports = express.Router().get('*', express.static('client/build'))
