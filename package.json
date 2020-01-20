@@ -65,7 +65,7 @@
     "objection-visibility": "^0.4.0",
     "passport": "^0.4.1",
     "passport-slack-fixed": "^0.0.8",
-    "pg": "^7.12.1",
+    "pg": "^7.17.1",
     "pino": "^5.13.4",
     "pm2": "^4.2.1",
     "slack": "^11.0.2",
