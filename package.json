@@ -46,7 +46,7 @@
     "ioredis": "^4.14.1",
     "knex": "^0.19.5",
     "lodash": "^4.17.15",
-    "metascraper": "^5.7.6",
+    "metascraper": "^5.10.5",
     "metascraper-author": "^5.7.6",
     "metascraper-date": "^5.7.6",
     "metascraper-description": "^5.7.6",
