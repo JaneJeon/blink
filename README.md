@@ -22,9 +22,27 @@ The secret sauce is deep integration with CDN and aggressively caching everythin
 
 ## Install
 
-Server + admin panel: heroku (how to update? do we release docker images?)
-CDN/DNS: ???
-Analytics: ???
+### The server
+
+#### Heroku
+
+##### 1-click Button
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+##### Updating (setting remote, fetching releases, etc)
+
+    heroku git:remote -a YOURAPPNAME
+    git fetch origin v1.X.Y
+    git push heroku master
+
+#### npm
+
+    npm i -g lynx-app
+
+### CDN/DNS
+
+### Analytics
 
 ## Usage
 
