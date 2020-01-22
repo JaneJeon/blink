@@ -42,7 +42,7 @@ jobs:
         run: yarn lint
 
       - name: Test
-        run: yarn test
+        run: yarn test --forceExit
         env:
           DATABASE_URL: postgres://node@localhost/lynx
       - name: Archive Test Results
