@@ -19,5 +19,6 @@ module.exports = {
   errorOnDeprecated: true,
   reporters: isCI ? ['default', 'jest-junit'] : undefined,
   testEnvironment: 'node',
-  globalSetup: '<rootDir>/scripts/init-models.js'
+  globalSetup: '<rootDir>/scripts/init-models.js',
+  testPathIgnorePatterns: ['node_modules/', 'src/']
 }

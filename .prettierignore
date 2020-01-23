@@ -1,6 +1,6 @@
-coverage
-reports
+coverage/
+reports/
 website/build
-.next
-out
+website
+build/
 config/**/*.json

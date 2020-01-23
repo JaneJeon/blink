@@ -10,6 +10,7 @@ module.exports = app
   .use(require('express-request-id')())
   .use(require('./middlewares/express-logger'))
   .use(require('helmet')())
+  .use(require('cors')())
   .use(require('./middlewares/session'))
   .use(express.json())
   .use(require('express-query-boolean')())

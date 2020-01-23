@@ -6,7 +6,6 @@
 var http = require('http')
 var app = require('../app')
 var log = require('../lib/logger')
-var next = require('../lib/next')
 var initModels = require('../scripts/init-models')
 
 /**
@@ -24,7 +23,7 @@ var server = http.createServer(app)
  * Listen on provided port, on all network interfaces...
  * after initializing all of the model classes.
  */
-Promise.all([initModels(), next.prepare()])
+initModels()
   .then(() => server.listen(port))
   .catch(err => log.error(err))
 server.on('error', onError)
