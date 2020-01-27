@@ -9034,11 +9034,11 @@ metascraper-publisher@^5.10.5:
     "@metascraper/helpers" "^5.10.6"
 
 metascraper-title@^5.10.5:
-  version "5.10.5"
-  resolved "https://registry.yarnpkg.com/metascraper-title/-/metascraper-title-5.10.5.tgz#719164bfc2d934ddad4fa3bae86eba750729a0bd"
-  integrity sha512-ukiLgQ4CNto1eA9edKB1QN0qFczJRZItBsTpmns6AEezQfDYs4M/LZyjnMCTVmZXYABliU53Ut+Yhf5g9uvX+w==
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/metascraper-title/-/metascraper-title-5.10.6.tgz#0fd9a9bed7a0b990663086cdab45d11cd8cd3c7d"
+  integrity sha512-x4P8zr0x6Gh3gt26tf2xfjikG9xNS9MC3z4N2VP+OrYNuCc7Vz6TU+DR/DLAeZphsb1flgTd3P4iUfPUcWVTEQ==
   dependencies:
-    "@metascraper/helpers" "^5.10.5"
+    "@metascraper/helpers" "^5.10.6"
     lodash "~4.17.15"
 
 metascraper@^5.10.5:
