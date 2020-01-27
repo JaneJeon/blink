@@ -1458,10 +1458,10 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@metascraper/helpers@^5.10.5":
-  version "5.10.5"
-  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.10.5.tgz#c3558533f30144bacecf9599fd02ac88d839a0cc"
-  integrity sha512-noTBDk3cF3UzKoPrC9/Sye1f9945PVEDju6br7S19YWyUpceEXoDrPF1YaqN37ku62f1s7bul11+Lv/xAYuEVQ==
+"@metascraper/helpers@^5.10.5", "@metascraper/helpers@^5.10.6":
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.10.6.tgz#0b786607212925a577926fd0cd0313a49de3499c"
+  integrity sha512-/jvhlM3RKGYMoUK8D8S1r3tN03/EYizCqWF7zDx0aBMC8Ihp33DRGs9oNdsgkgwzVF7O/YpDm55l9K+qVJlsyQ==
   dependencies:
     audio-extensions "0.0.0"
     chrono-node "~1.4.2"
@@ -1472,7 +1472,7 @@
     image-extensions "~1.1.0"
     is-relative-url "~3.0.0"
     is-uri "~1.2.0"
-    iso-639-3 "~1.2.0"
+    iso-639-3 "~2.0.0"
     isostring "0.0.1"
     lodash "~4.17.15"
     memoize-one "~5.1.1"
@@ -7609,10 +7609,10 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
-iso-639-3@~1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/iso-639-3/-/iso-639-3-1.2.0.tgz#eee1f5e6ca2bbb33e3ecc910857c1c12e8b295be"
-  integrity sha512-jNvD2P4JHNckQH7pc0R0SQ4oPCpyEtgs0nTtjB+DZCUDdygz0cOAxlcnq5KgNjjsqMHbR4Sbgwz2+DflzAZvlQ==
+iso-639-3@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/iso-639-3/-/iso-639-3-2.0.0.tgz#5844c6b885cbeac3571d407de5b5fdcb92f3505f"
+  integrity sha512-Pp+ctEs/pna6/rj05a5VR3qYxJHBZi95wp20C6Snf/WeghrkR/4G44LPJFqlbyo67XntkcUaxwrGmMeyY+F4mA==
 
 isobject@^2.0.0:
   version "2.1.0"
@@ -8985,11 +8985,11 @@ metascraper-date@^5.10.5:
     "@metascraper/helpers" "^5.10.5"
 
 metascraper-description@^5.10.5:
-  version "5.10.5"
-  resolved "https://registry.yarnpkg.com/metascraper-description/-/metascraper-description-5.10.5.tgz#5db8a3fe05ea19e75058fb55d72aed1d50539aff"
-  integrity sha512-LAEO8s0CkV5B/unBZR8hNpA/b18zedQuE0gP3KusBXQYTm0z+1wsdDdulxhoLmgEJPUjYwnn5LKS0jUME7PXaA==
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/metascraper-description/-/metascraper-description-5.10.6.tgz#ebb4459a4e1acdc473534d1b898b7958b1769eb6"
+  integrity sha512-d3d6UMsNnD8Dy7gxA05iTOj5QmJrFQTw1+IrW9CiOfdNsYq0H+m265a9lRaXcyJdqkzmGnv/d52C0BtUDOrkRw==
   dependencies:
-    "@metascraper/helpers" "^5.10.5"
+    "@metascraper/helpers" "^5.10.6"
 
 metascraper-lang@^5.10.5:
   version "5.10.5"
