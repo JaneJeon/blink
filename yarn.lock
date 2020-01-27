@@ -4831,9 +4831,9 @@ dot-prop@^4.1.0, dot-prop@^4.1.1:
     is-obj "^1.0.0"
 
 dotenv-defaults@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/dotenv-defaults/-/dotenv-defaults-1.1.0.tgz#2f67e257756c6248ca17b39a7284859fbf9f715f"
-  integrity sha512-MoWCnFZ1G6ZLww0TFmXx+CFs2X3ZFhIN5AptQBNPOmrHnvqjlzZPsiAbbISDEk4RUKCVgPF8HmvixuxnaVuNZQ==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/dotenv-defaults/-/dotenv-defaults-1.1.1.tgz#032c024f4b5906d9990eb06d722dc74cc60ec1bd"
+  integrity sha512-6fPRo9o/3MxKvmRZBD3oNFdxODdhJtIy1zcJeUSCs6HCy4tarUpd+G67UTU9tF6OWXeSPqsm4fPAB+2eY9Rt9Q==
   dependencies:
     dotenv "^6.2.0"
 
