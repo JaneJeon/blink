@@ -9027,11 +9027,11 @@ metascraper-logo@^5.10.5:
     "@metascraper/helpers" "^5.10.5"
 
 metascraper-publisher@^5.10.5:
-  version "5.10.5"
-  resolved "https://registry.yarnpkg.com/metascraper-publisher/-/metascraper-publisher-5.10.5.tgz#8797e419886f084adefcb7b8a642552b2a65ea38"
-  integrity sha512-YTY5UlkVa/htrm8t+O8qCrl2l24PffXkwvGStYJB2vA984WsR0XfhDuDqHqUZiQoSYBx/Za9wi74k6LWPnL4yA==
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/metascraper-publisher/-/metascraper-publisher-5.10.6.tgz#95dde6ecef3c7b890ac625893ab374096bebe1f4"
+  integrity sha512-4jTOpbIwXBADl6z39UzQ4DZLeVoj4Q+5dcHbEgGn9MQ9878FgxiJKyrHzYvqfe9fRNd0PcaFMuuwLyhz58haoA==
   dependencies:
-    "@metascraper/helpers" "^5.10.5"
+    "@metascraper/helpers" "^5.10.6"
 
 metascraper-title@^5.10.5:
   version "5.10.5"
