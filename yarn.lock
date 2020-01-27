@@ -6613,10 +6613,10 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-hashids@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/hashids/-/hashids-2.0.1.tgz#cdee93b6de1a6f941c955084fe82658c4fba28da"
-  integrity sha512-Hr1lPEGhCkZSniYj9jAj8gQtcTBKNhf/tF14R1tu3zvIcwCT89/ucHEyObSIUZ42Y30SlIfOt7Sq0Uw+rhs6iQ==
+hashids@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/hashids/-/hashids-1.2.2.tgz#28635c7f2f7360ba463686078eee837479e8eafb"
+  integrity sha512-dEHCG2LraR6PNvSGxosZHIRgxF5sNLOIBFEHbj8lfP9WWmu/PWPMzsip1drdVSOFi51N2pU7gZavrgn7sbGFuw==
 
 he@1.2.x:
   version "1.2.0"
@@ -9781,11 +9781,11 @@ objection-gen@^0.5.2:
     objection "^1.4.0"
 
 objection-hashid@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/objection-hashid/-/objection-hashid-1.2.1.tgz#ef5d553f97a11fe732064ef79af4e496216c477a"
-  integrity sha512-gnv0D86yeftzEq89/rCoG1BJyvAg9TTWoxcMLSJr430V9OfO0/0nNj887DA8bfHq2mGTNhoVTMtRJXtIAOo3Qg==
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/objection-hashid/-/objection-hashid-1.3.0.tgz#1f9eac0dd4bc344ffb362472ebeeaa7014ceb8e9"
+  integrity sha512-6CO+8TVlWYatgkjGZd9MuqozRD/NT5tJT9WlGcVLPLdd+d9p0ZrZ3O/iOxZAxaWNmUanDutESdqbf/OftPu54w==
   dependencies:
-    hashids "^2.0.0"
+    hashids "^1.2.2"
     lodash.memoize "^4.1.2"
 
 objection-swagger@^3.1.2:
