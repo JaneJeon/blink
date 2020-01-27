@@ -9020,11 +9020,11 @@ metascraper-logo-favicon@^5.10.5:
     lodash "~4.17.15"
 
 metascraper-logo@^5.10.5:
-  version "5.10.5"
-  resolved "https://registry.yarnpkg.com/metascraper-logo/-/metascraper-logo-5.10.5.tgz#5bbd3981391b0984bf85e67644a94ad65b04868b"
-  integrity sha512-ygKvX+EIuU6eCqigW+nGFPkXri1EyHeSpu6P37Sg6jXfgo+eZL8B2ophKtG4lOnc5yZjMFKdv+PaADGhXUsUWg==
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/metascraper-logo/-/metascraper-logo-5.10.6.tgz#22223ce79e4017f159b2a9ddc311d2eb636043b5"
+  integrity sha512-/uGW+X43T6Oj5DxWqAhANII9BdhQuM+e7O6/Vu116uLqW6cOJ/RDp5qp7ngKF41L0zCLd8Q2Xw2nduHi6tC4Uw==
   dependencies:
-    "@metascraper/helpers" "^5.10.5"
+    "@metascraper/helpers" "^5.10.6"
 
 metascraper-publisher@^5.10.5:
   version "5.10.6"
