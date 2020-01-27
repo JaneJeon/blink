@@ -9011,11 +9011,11 @@ metascraper-lang@^5.10.5:
     "@metascraper/helpers" "^5.10.5"
 
 metascraper-logo-favicon@^5.10.5:
-  version "5.10.5"
-  resolved "https://registry.yarnpkg.com/metascraper-logo-favicon/-/metascraper-logo-favicon-5.10.5.tgz#47c0840f183af1c263ed7f6e724e27d41be5225a"
-  integrity sha512-/uqUGrkEGH+Qr24SItQ3IRO6uFEI7B5L0nc35HVc0t4sAjZhsMks0rO3oX10geXqfbVDRrm6giMqaDLMWOQ61w==
+  version "5.10.6"
+  resolved "https://registry.yarnpkg.com/metascraper-logo-favicon/-/metascraper-logo-favicon-5.10.6.tgz#f79153a2ec17b20bfa80ba8c3e3ebcb8f3cf11f0"
+  integrity sha512-hulrKnFzd/GFyvw7FJcjuH3iRzEjuLXyhGOkZ+gIWTWZ03ycOuxykuOyzy8mbbSvhYoiyVpWExowP57zrTdsIA==
   dependencies:
-    "@metascraper/helpers" "^5.10.5"
+    "@metascraper/helpers" "^5.10.6"
     got "~9.6.0"
     lodash "~4.17.15"
 
