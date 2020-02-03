@@ -66,7 +66,7 @@
     "metascraper-title": "^5.10.5",
     "ms": "^2.1.2",
     "nanoid": "^2.1.10",
-    "normalize-url": "^4.4.1",
+    "normalize-url": "^5.0.0",
     "objection": "^2.1.2",
     "objection-authorize": "^3.1.1",
     "objection-hashid": "^1.2.0",
