@@ -8983,11 +8983,11 @@ merge2@^1.2.3:
   integrity sha512-2j4DAdlBOkiSZIsaXk4mTE3sRS02yBHAtfy127xRV3bQUFqXkjHCHLW6Scv7DwNRbIWNHH8zpnz9zMaKXIdvYw==
 
 metascraper-author@^5.10.5:
-  version "5.10.6"
-  resolved "https://registry.yarnpkg.com/metascraper-author/-/metascraper-author-5.10.6.tgz#1ceaacec776d46629300db25e17657fe35a14a20"
-  integrity sha512-L2P/Fp0npaQcowbwi1vHKJbSYc99cio58/yYRm205xGfgMCRMpYOrYB+ecizXgeSSRiv8G8SXLrLXOLJ5K+SdA==
+  version "5.10.7"
+  resolved "https://registry.yarnpkg.com/metascraper-author/-/metascraper-author-5.10.7.tgz#99b3a2b982b7a63feea41554659be3db7bf7035c"
+  integrity sha512-AdNkcqy+eqs2Eeh+6odhIWArR4pWVlrCx3jMaho0BDY6ZnKgJP44HtlPNkghQpBaueoKX6CycGKraITzwjGj1w==
   dependencies:
-    "@metascraper/helpers" "^5.10.6"
+    "@metascraper/helpers" "^5.10.7"
     lodash "~4.17.15"
 
 metascraper-date@^5.10.5:
