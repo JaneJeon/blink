@@ -9005,11 +9005,11 @@ metascraper-description@^5.10.5:
     "@metascraper/helpers" "^5.10.5"
 
 metascraper-lang@^5.10.5:
-  version "5.10.5"
-  resolved "https://registry.yarnpkg.com/metascraper-lang/-/metascraper-lang-5.10.5.tgz#8d62f8a398863b8bf785f730319f0cf0a5bff3ba"
-  integrity sha512-DzpZSkze6p/MDIrK4g+jl/lbgTIBW8FdERCD8LnmzFLtSYDr/U3e9SB+d7wLlrWSPm0JBKkVajwzkQGx6GKqGQ==
+  version "5.10.7"
+  resolved "https://registry.yarnpkg.com/metascraper-lang/-/metascraper-lang-5.10.7.tgz#fe07c359b757ef3c5ba0a330da97173945196fde"
+  integrity sha512-ulLq7g+X4F9XzoScNflkhwWUuoSycbOqJ8j7vT6E/sHYPid+BdUnw2yaxAqXOdsrsbUEWzkiDwrJiq37XWCpDA==
   dependencies:
-    "@metascraper/helpers" "^5.10.5"
+    "@metascraper/helpers" "^5.10.7"
 
 metascraper-logo-favicon@^5.10.5:
   version "5.10.6"
