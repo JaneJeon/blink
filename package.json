@@ -90,7 +90,7 @@
     "@testing-library/jest-dom": "^5.0.2",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.4",
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^25.1.2",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
