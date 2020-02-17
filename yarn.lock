@@ -1428,13 +1428,13 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@metascraper/helpers@^5.10.5", "@metascraper/helpers@^5.10.6", "@metascraper/helpers@^5.10.7":
-  version "5.10.7"
-  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.10.7.tgz#4d330204372ce5c1afedfc3ac891fb373f72c085"
-  integrity sha512-YkL4vTF4grgNTFhe9t4qsD0c5aEjxWoC0cpvMICs6JriRtedwjVfiwWhaGiTbU3pGFhmLgE9fV42wXOXGUGjMQ==
+"@metascraper/helpers@^5.10.5", "@metascraper/helpers@^5.10.6", "@metascraper/helpers@^5.10.7", "@metascraper/helpers@^5.11.1":
+  version "5.11.1"
+  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.11.1.tgz#227fdd0caf1d33f4b24a85298a355ce7ebb451df"
+  integrity sha512-oES/e6bwKBlT7WGa2ni3xbJMDx2rbFxSzbUhRX8D+Kylb8H2ThP07c7f+VXMPXWx5CPrNMai/Oyp5IczCf3v8g==
   dependencies:
     audio-extensions "0.0.0"
-    chrono-node "~1.4.2"
+    chrono-node "~1.4.3"
     condense-whitespace "~2.0.0"
     entities "~2.0.0"
     file-extension "~4.0.5"
@@ -3478,10 +3478,10 @@ chrome-trace-event@^1.0.2:
   dependencies:
     tslib "^1.9.0"
 
-chrono-node@~1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/chrono-node/-/chrono-node-1.4.2.tgz#0c7fc1f264e60a660c2b2dab753a3f285dbfd8c9"
-  integrity sha512-fsb82wPDHVZl3xtche8k4ZZtNwf81/ZMueil2ANpSfogUAEa3BuzZAar7ObLXi1ptMjBzdzA6ys/bFq1oBjO8w==
+chrono-node@~1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/chrono-node/-/chrono-node-1.4.3.tgz#4c8e24643ec5e576f6f8fe0429370c3b554491b4"
+  integrity sha512-ZyKcnTcr8i7Mt9p4+ixMHEuR6+eMTrjYCL9Rm9TZHviLleCtcZoVzmr2uSc+Vg8MX1YbNCnPbEd4rfV8WvzLcw==
   dependencies:
     dayjs "^1.8.19"
 
@@ -8947,11 +8947,11 @@ merge2@^1.2.3:
   integrity sha512-2j4DAdlBOkiSZIsaXk4mTE3sRS02yBHAtfy127xRV3bQUFqXkjHCHLW6Scv7DwNRbIWNHH8zpnz9zMaKXIdvYw==
 
 metascraper-author@^5.10.5:
-  version "5.10.7"
-  resolved "https://registry.yarnpkg.com/metascraper-author/-/metascraper-author-5.10.7.tgz#99b3a2b982b7a63feea41554659be3db7bf7035c"
-  integrity sha512-AdNkcqy+eqs2Eeh+6odhIWArR4pWVlrCx3jMaho0BDY6ZnKgJP44HtlPNkghQpBaueoKX6CycGKraITzwjGj1w==
+  version "5.11.1"
+  resolved "https://registry.yarnpkg.com/metascraper-author/-/metascraper-author-5.11.1.tgz#8abe6bcc21f5a72e481d6b4ff33b008ec740fdb0"
+  integrity sha512-VkduGrQd3baLoypCZV0zJwutdj7Dqpj3Oi8sdM6wSo0AJDiUD1oUbeQafJ6W616zqXFIeEANS35gARBFtHupog==
   dependencies:
-    "@metascraper/helpers" "^5.10.7"
+    "@metascraper/helpers" "^5.11.1"
     lodash "~4.17.15"
 
 metascraper-date@^5.10.5:
