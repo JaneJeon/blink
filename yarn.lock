@@ -1428,13 +1428,13 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@metascraper/helpers@^5.10.5", "@metascraper/helpers@^5.10.6", "@metascraper/helpers@^5.10.7":
-  version "5.10.7"
-  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.10.7.tgz#4d330204372ce5c1afedfc3ac891fb373f72c085"
-  integrity sha512-YkL4vTF4grgNTFhe9t4qsD0c5aEjxWoC0cpvMICs6JriRtedwjVfiwWhaGiTbU3pGFhmLgE9fV42wXOXGUGjMQ==
+"@metascraper/helpers@^5.10.5", "@metascraper/helpers@^5.10.6", "@metascraper/helpers@^5.10.7", "@metascraper/helpers@^5.11.1":
+  version "5.11.1"
+  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.11.1.tgz#227fdd0caf1d33f4b24a85298a355ce7ebb451df"
+  integrity sha512-oES/e6bwKBlT7WGa2ni3xbJMDx2rbFxSzbUhRX8D+Kylb8H2ThP07c7f+VXMPXWx5CPrNMai/Oyp5IczCf3v8g==
   dependencies:
     audio-extensions "0.0.0"
-    chrono-node "~1.4.2"
+    chrono-node "~1.4.3"
     condense-whitespace "~2.0.0"
     entities "~2.0.0"
     file-extension "~4.0.5"
@@ -1615,10 +1615,10 @@
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
   integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
-"@sindresorhus/is@^1.0.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-1.2.0.tgz#63ce3638cb85231f3704164c90a18ef816da3fb7"
-  integrity sha512-mwhXGkRV5dlvQc4EgPDxDxO6WuMBVymGFd1CA+2Y+z5dG9MNspoQ+AWjl/Ld1MnpCL8AKbosZlDVohqcIwuWsw==
+"@sindresorhus/is@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-2.1.0.tgz#6ad4ca610f696098e92954ab431ff83bea0ce13f"
+  integrity sha512-lXKXfypKo644k4Da4yXkPCrwcvn6SlUW2X2zFbuflKHNjf0w9htru01bo26uMhleMXsDmnZ12eJLdrAZa9MANg==
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
@@ -3237,13 +3237,6 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
-cacheable-lookup@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/cacheable-lookup/-/cacheable-lookup-1.0.0.tgz#ae877296b7b43b720e4a4554c47ec85e74d0932a"
-  integrity sha512-Te7MkBWBEPUdLjFWLoIu61osWKjrvBdBrSxEso6T9iGLTDPhcA2PI6J++lF/Hmqi5HtZmkKN3q/C7gwa+U/EUg==
-  dependencies:
-    keyv "^4.0.0"
-
 cacheable-lookup@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/cacheable-lookup/-/cacheable-lookup-2.0.0.tgz#33b1e56f17507f5cf9bb46075112d65473fb7713"
@@ -3478,10 +3471,10 @@ chrome-trace-event@^1.0.2:
   dependencies:
     tslib "^1.9.0"
 
-chrono-node@~1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/chrono-node/-/chrono-node-1.4.2.tgz#0c7fc1f264e60a660c2b2dab753a3f285dbfd8c9"
-  integrity sha512-fsb82wPDHVZl3xtche8k4ZZtNwf81/ZMueil2ANpSfogUAEa3BuzZAar7ObLXi1ptMjBzdzA6ys/bFq1oBjO8w==
+chrono-node@~1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/chrono-node/-/chrono-node-1.4.3.tgz#4c8e24643ec5e576f6f8fe0429370c3b554491b4"
+  integrity sha512-ZyKcnTcr8i7Mt9p4+ixMHEuR6+eMTrjYCL9Rm9TZHviLleCtcZoVzmr2uSc+Vg8MX1YbNCnPbEd4rfV8WvzLcw==
   dependencies:
     dayjs "^1.8.19"
 
@@ -6364,12 +6357,12 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-got@^10.2.2:
-  version "10.5.5"
-  resolved "https://registry.yarnpkg.com/got/-/got-10.5.5.tgz#9ab2702c2a6b354ff95585144546d3e304a5022f"
-  integrity sha512-B13HHkCkTA7KxyxTrFoZfrurBX1fZxjMTKpmIfoVzh0Xfs9aZV7xEfI6EKuERQOIPbomh5LE4xDkfK6o2VXksw==
+got@^10.2.2, got@~10.6.0:
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/got/-/got-10.6.0.tgz#ac3876261a4d8e5fc4f81186f79955ce7b0501dc"
+  integrity sha512-3LIdJNTdCFbbJc+h/EH0V5lpNpbJ6Bfwykk21lcQvQsEcrzdi/ltCyQehFHLzJ/ka0UMH4Slg0hkYvAZN9qUDg==
   dependencies:
-    "@sindresorhus/is" "^1.0.0"
+    "@sindresorhus/is" "^2.0.0"
     "@szmarczak/http-timer" "^4.0.0"
     "@types/cacheable-request" "^6.0.1"
     cacheable-lookup "^2.0.0"
@@ -6378,12 +6371,12 @@ got@^10.2.2:
     duplexer3 "^0.1.4"
     get-stream "^5.0.0"
     lowercase-keys "^2.0.0"
-    mimic-response "^2.0.0"
+    mimic-response "^2.1.0"
     p-cancelable "^2.0.0"
     p-event "^4.0.0"
     responselike "^2.0.0"
     to-readable-stream "^2.0.0"
-    type-fest "^0.9.0"
+    type-fest "^0.10.0"
 
 got@^6.7.1:
   version "6.7.1"
@@ -6401,26 +6394,6 @@ got@^6.7.1:
     timed-out "^4.0.0"
     unzip-response "^2.0.1"
     url-parse-lax "^1.0.0"
-
-got@~10.4.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/got/-/got-10.4.0.tgz#2bd869d3d965716a43bee89d6fc3d16b565109c4"
-  integrity sha512-yHxq0LgdLFmJcrl27wEOIvZaHbgtn1DYpYUUX/kovLZoQ8q+QwJH+i9zkldDxGUawu1cUsgNMp8Xxm5yKT2UyQ==
-  dependencies:
-    "@sindresorhus/is" "^1.0.0"
-    "@szmarczak/http-timer" "^4.0.0"
-    "@types/cacheable-request" "^6.0.1"
-    cacheable-lookup "^1.0.0"
-    cacheable-request "^7.0.1"
-    decompress-response "^5.0.0"
-    duplexer3 "^0.1.4"
-    get-stream "^5.0.0"
-    lowercase-keys "^2.0.0"
-    mimic-response "^2.0.0"
-    p-cancelable "^2.0.0"
-    responselike "^2.0.0"
-    to-readable-stream "^2.0.0"
-    type-fest "^0.9.0"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2:
   version "4.2.3"
@@ -8976,12 +8949,12 @@ metascraper-lang@^5.10.5:
     "@metascraper/helpers" "^5.10.7"
 
 metascraper-logo-favicon@^5.10.5:
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/metascraper-logo-favicon/-/metascraper-logo-favicon-5.11.0.tgz#6ddc725c47b8828fbba709d3b31a49575da0a72b"
-  integrity sha512-CM5tGDGOwil5LoG0u6wW7rxY7U+gIu8XjXxe6JfEX9Z3rhaEVk6T43rOimjxxS1+cTKqXvYZrStJih41MzfPtg==
+  version "5.11.4"
+  resolved "https://registry.yarnpkg.com/metascraper-logo-favicon/-/metascraper-logo-favicon-5.11.4.tgz#6d28f3867411d71f1bb159cf435a8df509c33b4d"
+  integrity sha512-zCFPTM47MKyUWoCKOIjyJF02QS+3/223vY/08slQv0j9sbvM2lQXH/J11IdeGdyE9HVqIwvUScGbwwLqYvnnxA==
   dependencies:
-    "@metascraper/helpers" "^5.10.7"
-    got "~10.4.0"
+    "@metascraper/helpers" "^5.11.1"
+    got "~10.6.0"
     lodash "~4.17.15"
 
 metascraper-logo@^5.10.5:
@@ -9108,6 +9081,11 @@ mimic-response@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-2.0.0.tgz#996a51c60adf12cb8a87d7fb8ef24c2f3d5ebb46"
   integrity sha512-8ilDoEapqA4uQ3TwS0jakGONKXVJqpy+RpM+3b7pLdOjghCrEiGp9SRkFbUHAmZW9vdnrENWHjaweIoTIJExSQ==
+
+mimic-response@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-2.1.0.tgz#d13763d35f613d09ec37ebb30bac0469c0ee8f43"
+  integrity sha512-wXqjST+SLt7R009ySCglWBCFpjUygmCIfD790/kVbiGmUgfYGuB14PiTd5DwVxSV4NcYHjzMkoj5LjQZwTQLEA==
 
 min-indent@^1.0.0:
   version "1.0.0"
@@ -13868,15 +13846,15 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
+type-fest@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.10.0.tgz#7f06b2b9fbfc581068d1341ffabd0349ceafc642"
+  integrity sha512-EUV9jo4sffrwlg8s0zDhP0T2WD3pru5Xi0+HTE3zTUmBaZNhfkite9PdSJwdXLwPVW0jnAHT56pZHIOYckPEiw==
+
 type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
-
-type-fest@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.9.0.tgz#3b7904821e42b26377831a6e9b5d2930ab19c99a"
-  integrity sha512-j55pzONIdg7rdtJTRZPKIbV0FosUqYdhHK1aAYJIrUvejv1VVyBokrILE8KQDT4emW/1Ev9tx+yZG+AxuSBMmA==
 
 type-is@~1.6.17, type-is@~1.6.18:
   version "1.6.18"
