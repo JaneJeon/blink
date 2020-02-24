@@ -1428,13 +1428,13 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@metascraper/helpers@^5.10.5", "@metascraper/helpers@^5.10.6", "@metascraper/helpers@^5.10.7":
-  version "5.10.7"
-  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.10.7.tgz#4d330204372ce5c1afedfc3ac891fb373f72c085"
-  integrity sha512-YkL4vTF4grgNTFhe9t4qsD0c5aEjxWoC0cpvMICs6JriRtedwjVfiwWhaGiTbU3pGFhmLgE9fV42wXOXGUGjMQ==
+"@metascraper/helpers@^5.10.5", "@metascraper/helpers@^5.10.6", "@metascraper/helpers@^5.10.7", "@metascraper/helpers@^5.11.1":
+  version "5.11.1"
+  resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.11.1.tgz#227fdd0caf1d33f4b24a85298a355ce7ebb451df"
+  integrity sha512-oES/e6bwKBlT7WGa2ni3xbJMDx2rbFxSzbUhRX8D+Kylb8H2ThP07c7f+VXMPXWx5CPrNMai/Oyp5IczCf3v8g==
   dependencies:
     audio-extensions "0.0.0"
-    chrono-node "~1.4.2"
+    chrono-node "~1.4.3"
     condense-whitespace "~2.0.0"
     entities "~2.0.0"
     file-extension "~4.0.5"
@@ -3478,10 +3478,10 @@ chrome-trace-event@^1.0.2:
   dependencies:
     tslib "^1.9.0"
 
-chrono-node@~1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/chrono-node/-/chrono-node-1.4.2.tgz#0c7fc1f264e60a660c2b2dab753a3f285dbfd8c9"
-  integrity sha512-fsb82wPDHVZl3xtche8k4ZZtNwf81/ZMueil2ANpSfogUAEa3BuzZAar7ObLXi1ptMjBzdzA6ys/bFq1oBjO8w==
+chrono-node@~1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/chrono-node/-/chrono-node-1.4.3.tgz#4c8e24643ec5e576f6f8fe0429370c3b554491b4"
+  integrity sha512-ZyKcnTcr8i7Mt9p4+ixMHEuR6+eMTrjYCL9Rm9TZHviLleCtcZoVzmr2uSc+Vg8MX1YbNCnPbEd4rfV8WvzLcw==
   dependencies:
     dayjs "^1.8.19"
 
@@ -9007,11 +9007,11 @@ metascraper-title@^5.10.5:
     lodash "~4.17.15"
 
 metascraper@^5.10.5:
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/metascraper/-/metascraper-5.11.0.tgz#bbb25eb055c0ec03992df99c10c48057751ee56b"
-  integrity sha512-IocQqdSQnOpbai0X9Cu37w/AKeSfU513MCfaFzzcvWgI8s6mGQ1DWRFPvkx0ahtixpP0/ifE4t7ycODrtepRxQ==
+  version "5.11.4"
+  resolved "https://registry.yarnpkg.com/metascraper/-/metascraper-5.11.4.tgz#91f13c9f39fd824cdd9bfe8d771576b9b856598e"
+  integrity sha512-GNYAwYuGwSm3P0p2Yi3OgYqttoYj1wgUDqbfnleN7tQRMKnTFinYw6YNYVfOniuNYl+CiJH4gg9ll2QpG8tzTw==
   dependencies:
-    "@metascraper/helpers" "^5.10.7"
+    "@metascraper/helpers" "^5.11.1"
     cheerio "~1.0.0-rc.3"
     cheerio-advanced-selectors "~2.0.1"
     lodash "~4.17.15"
