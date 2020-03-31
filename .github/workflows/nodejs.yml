@@ -16,10 +16,14 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: lynx
           POSTGRES_USER: node
+          POSTGRES_DB: lynx
         # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v2
@@ -33,12 +37,11 @@ jobs:
         id: cache
         uses: actions/cache@v1
         with:
-          path: node_modules
+          path: ~/.npm
           key: ${{ runner.os }}-node-13-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-13-
       - name: Install Dependencies
-        run: npm i --no-package-lock --no-fund --no-audit
-        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Lint
         run: npm run lint
