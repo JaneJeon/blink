@@ -1,4 +1,4 @@
-name: Build
+name: build
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       database:
-        image: postgres
+        image: postgres:alpine
         ports:
           - 5432:5432
         env:
@@ -32,19 +32,17 @@ jobs:
         uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-13-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-13-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-13-
       - name: Install Dependencies
-        run: yarn --frozen-lockfile
+        run: npm i --no-package-lock --no-fund --no-audit
         if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Test
-        run: yarn test
-        env:
-          DATABASE_URL: postgres://node@localhost/lynx
+        run: npm test
       - name: Archive Test Results
         # if: failure()
         uses: actions/upload-artifact@v1

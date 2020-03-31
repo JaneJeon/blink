@@ -14,14 +14,14 @@ This website was created with [Docusaurus](https://docusaurus.io/).
 
 ```sh
 # Install dependencies
-$ yarn
+$ npm i
 ```
 
 2. Run your dev server:
 
 ```sh
 # Start the site
-$ yarn start
+$ npm start
 ```
 
 ## Directory Structure

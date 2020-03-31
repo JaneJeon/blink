@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: lynx
+      POSTGRES_USER: node
+  # web:
+  #   build: .
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   volumes:
+  #     - .:/code
+  #   ports:
+  #     - '8000:8000'
+  #   depends_on:
+  #     - db

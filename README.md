@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to lynx 👋</h1>
 
-[![GitHub Actions](https://github.com/JaneJeon/lynx/actions)](https://github.com/JaneJeon/lynx/workflows/Build/badge.svg)
+[![GitHub Actions](https://github.com/JaneJeon/lynx/actions)](https://github.com/JaneJeon/lynx/workflows/build/badge.svg)
 [![Coverage](https://codecov.io/gh/JaneJeon/lynx/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/lynx)
 [![Dependencies](https://img.shields.io/david/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx)
 [![devDependencies](https://img.shields.io/david/dev/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx?type=dev)
@@ -46,7 +46,9 @@ The secret sauce is deep integration with CDN and aggressively caching everythin
 
 ## Usage
 
-// todo
+```sh
+docker-compose up -d --force-recreate && npm run dev # or npm start
+```
 
 ## Architecture
 
@@ -65,7 +67,7 @@ This aggressive caching of redirects should make requests instantaneous, while t
 ## Run tests
 
 ```sh
-yarn test
+npm test
 ```
 
 ## Author

@@ -1,4 +1,4 @@
 hooks:
   pre-commit: lint-staged
-  pre-push: run-s lint test
-  post-merge: yarn && yarn build-local
+  pre-push: docker-compose up -d --force-recreate && run-s lint test
+  post-merge: npm i && npm run build-local
