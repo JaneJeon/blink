@@ -7,7 +7,13 @@ services:
       - 5432:5432
     environment:
       POSTGRES_DB: lynx
-      POSTGRES_USER: node
+      POSTGRES_USER: knex
+      POSTGRES_HOST_AUTH_METHOD: trust
+    # healthcheck:
+    #   test: ['CMD-SHELL', 'pg_isready -h localhost']
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
   # web:
   #   build: .
   #   command: python manage.py runserver 0.0.0.0:8000
