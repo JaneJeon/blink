@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to lynx 👋</h1>
+<h1 align="center">Welcome to lynx (WIP) 👋</h1>
 
 [![GitHub Actions](https://github.com/JaneJeon/lynx/workflows/build/badge.svg)](https://github.com/JaneJeon/lynx/actions)
 [![Coverage](https://codecov.io/gh/JaneJeon/lynx/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/lynx)
@@ -16,9 +16,58 @@
 
 > Modern, lightweight, and planet-scale link shortener + analytics + management!
 
-The secret sauce is deep integration with CDN and aggressively caching everything.
-
 ### 🏠 [Homepage](https://github.com/JaneJeon/lynx)
+
+## Design Goals
+
+Suppose you have a domain (example.com) and a "shortened" domain (ex.co), and you don't feel particularly comfortable paying out of your ass to get bitly's features, or you just want to control the data and want to host it yourself.
+
+So you look for an open-source alternative that you can self-host. Currently, the only "feature-full" one is https://kutt.it, but you hesitate to use it for several reasons:
+
+1. It uses neo4j for its database even though link shorteners really are just supposed to be key-value stores (ex.co/foo => example.com/bar). This happened because it tried to cram in the _actual_ link shortener with the analytics part, and the end result is that it is makes hosting unnecessarily difficult and/or expensive. It's `$current_year`; hosting SQL databases have become a science, whereas neo4j... yeah.
+2. Maybe you don't like the UI or the content of the analytics. It _is_ actually pretty basic for what it offers, plus it offers no flexibility in querying. You want analytics more akin to what bitly provides.
+3. It's actually rather _heavy_, especially for what it does. And again, because it jams in analytics to the link shortener... the server _always_ gets a hit for _every_ request to the shortened domain (ex.co), so you'd need to manually scale the server/database when you suddenly get a surge in traffic.
+
+That's why lynx exists, with the goals of:
+
+1. Simplifying deployment: it's just a node server + a SQL database (my choice is pg). At `$current_year`, everyone and their mother offer some way of hosting that _for_ you. All you should have to do is to literally just click the Heroku button (see the `install` section). Even hosting it yourself would be simple, as there are fewer moving parts. And since the server gets essentially no load no matter how the traffic is (see point number 3 below), you don't have to worry about things like scaling, freeing your time.
+2. Decoupling analytics: by decoupling the analytics component from the link shortener server, we achieve several things. For one, this allows for a "basic" install where you only install the link shortener part (without the CDN), which makes deployments & maintenance brain-dead simple. For another, you can use whatever analytics solutions you want, as the link analytics is actually based on _access logs_, the thing all servers/CDNs have (well, unless you use Cloudflare)!
+3. Using CDNs: thanks to the decoupling of analytics and the link shortener, we can put CDNs in front of our server to aggressively cache redirect responses so that the server eventually has to do literally _zero_ work (this is the "secret sauce") as all requests will be served by the CDN, while making the link shortener effectively globally distributed (and thus lower response times). In addition, we can use the CDN's access logs for analysis, and at `$current_year`, clickstream analysis on access logs is essentially a solved problem, which I don't have to reinvent (plus, you can choose your own)!
+
+## Architecture
+
+As outlined above, the request path for any request on the "shortener" url (ex.co/foo) looks as follows:
+
+```
+First request (most likely you):
+user <--> CDN <--> lynx
+           ^
+           ㄴ-> access log
+
+Following requests (the redirect is cached):
+user <--> CDN --> access log
+
+If you don't want to bother with a CDN:
+user <--> lynx --> access log
+```
+
+For analytics, you have two options. You can either go with the "serverless" route (and the lynx server + postgres db should be lightweight enough to be _effectively_ serverless, making the entire stack ops-free), or the OLAP route (more traditional), where you shove everything into an OLAP database and just query it that way (there are more UIs built for this):
+
+```
+Serverless route:
+access log --> lambda ETL --> store in S3 in columnar format (e.g. parquet) --> query w/ Athena
+
+OLAP route:
+access log --> ETL --> add row to OLAP --> query w/ some prebuilt solution
+```
+
+Such is the flexibility granted by decoupling the server with the analytics!
+
+## Universal App/Isomorphism
+
+A side goal for this project (and its core dependencies, including https://github.com/JaneJeon/objection-authorize), is to keep it universal. This means _actually_ reusing code between the frontend and the backend, such as the validation (all based on standards-compliant JSON schema), or the access control (the same ACL can be integrated into the frontend while it is made transparent thru the use of objection-authorize on the backend - see `policies/`).
+
+In fact, this project is essentially a "proving ground" for such a concept, which would allow for _rapid_ development for future applications and would result in fewer places to break due to the (mis)coordination between frontend and the backend teams (something I learned while building https://github.com/JaneJeon/bazaar-backend).
 
 ## Install
 
@@ -49,20 +98,6 @@ The secret sauce is deep integration with CDN and aggressively caching everythin
 ```sh
 docker-compose up -d --force-recreate && npm run dev # or npm start
 ```
-
-## Architecture
-
-I was originally going to build this using Cloudflare workers + Cloudflare K/V,
-**BUT** then I found out I can't have access logs without paying for the Enterprise plan, so here's Plan B:
-
-### AWS
-
-CloudFront allows access log to be stored in S3, and with that we can do any sort of analysis on that.
-An additional benefit of this approach is that you can use whatever tool you already have that analyzes access logs on S3, so you don't have to be locked in to the analytics of your link shortener!
-
-And the plan here is to have CloudFront trigger lambdas on any URLs, the lambdas would check DynamoDB for any records, and then instruct CloudFront to cache the results!
-
-This aggressive caching of redirects should make requests instantaneous, while the use of Lambda and DynamoDB would make it 1. serverless (you don't have to maintain anything), and 2. planet-scale!
 
 ## Run tests
 
