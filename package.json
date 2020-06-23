@@ -102,7 +102,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.0",
     "is-ci": "^2.0.0",
-    "jest-junit": "^10.0.0",
+    "jest-junit": "^11.0.1",
     "keygrip": "^1.1.0",
     "lint-staged": "^10.0.1",
     "morgan": "^1.9.1",
