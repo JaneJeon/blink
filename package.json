@@ -112,7 +112,7 @@
     "objection-swagger": "^3.1.2",
     "onchange": "^7.0.2",
     "pino-pretty": "^3.2.1",
-    "prettier": "^1.18.2",
+    "prettier": "^2.0.5",
     "ra-data-fakerest": "^3.0.1",
     "supertest": "^4.0.2"
   },
