@@ -34,7 +34,9 @@ jobs:
       - *install
       - run:
           name: Test CRA
-          command: npm run test:nowatch:frontend -- -- --ci --runInBand
+          command: npm run test:nowatch:frontend -- -- --ci --runInBand --reporters=jest-junit --reporters=default
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: reports/jest-frontend
       - *retrieve-junit
       - slack/notify-on-failure
   test-backend:
@@ -53,7 +55,9 @@ jobs:
           command: npm run pretest
       - run:
           name: Test Express
-          command: npm run test:nowatch:backend -- --ci --runInBand
+          command: npm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
       - *retrieve-junit
       - slack/notify-on-failure
 
