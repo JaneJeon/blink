@@ -4,13 +4,21 @@ orbs:
   node: circleci/node@3
   slack: circleci/slack@3
 
-jobs:
-  lint:
+aliases:
+  - &runner
     executor:
       name: node/default
+  - &install
+    node/install-packages:
+      include-branch-in-cache-key: false
+      override-ci-command: npm ci --prefer-offline --no-audit
+
+jobs:
+  lint:
+    <<: *runner
     steps:
       - checkout
-      - node/install-packages
+      - *install
       - run:
           name: Lint (Prettier)
           command: npm run lint:prettier
@@ -23,15 +31,18 @@ jobs:
     parameters:
       test-suite:
         type: string
-    executor:
-      name: node/default
+    <<: *runner
     steps:
       - checkout
-      - node/install-packages
+      - *install
       - setup_remote_docker
       - run:
+          # todo: do we need to stand up containers even for frontend?
           name: Stand up containers
           command: docker-compose up -d
+      - run:
+          name: Build
+          command: npm run pretest
       - run:
           name: Test
           command: npm run test:nowatch:<< parameters.test-suite >> -- --ci --runInBand --reporters=default --reporters=jest-junit
