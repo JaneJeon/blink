@@ -46,6 +46,8 @@ jobs:
           name: Test
           command: npm run test:nowatch:<< parameters.test-suite >> -- --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
+            # TODO: jest called with react-scripts does not generate reports, wtf
+            # this is even if you specify reporters *within* jest.config.js, fucking CRA
             JEST_JUNIT_OUTPUT_NAME: results.xml
             JEST_JUNIT_OUTPUT_DIR: reports/jest-<< parameters.test-suite >>
       - store_test_results:

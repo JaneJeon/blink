@@ -2,7 +2,7 @@ version: '3'
 
 services:
   database:
-    image: postgres:alpine
+    image: circleci/postgres:alpine-ram
     ports:
       - 5432:5432
     environment:
