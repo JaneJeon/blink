@@ -5,30 +5,39 @@ orbs:
   slack: circleci/slack@3
 
 aliases:
-  - &install
-    node/install-packages:
-      include-branch-in-cache-key: false
-      override-ci-command: npm ci --prefer-offline --no-audit
+  - &runner
+    executor:
+      name: node/default
 
 jobs:
   lint:
-    executor:
-      name: node/default
+    <<: *runner
     steps:
       - checkout
-      - *install
+      - &install
+        node/install-packages:
+          include-branch-in-cache-key: false
+          override-ci-command: npm ci --prefer-offline --no-audit
       - run:
           name: Lint (Prettier)
           command: npm run lint:prettier
       - run:
           name: Lint (ESLint)
           command: npm run lint:eslint -- --format junit --output-file reports/eslint/results.xml
-      - store_test_results:
+      - &retrieve-junit
+        store_test_results:
           path: reports
-  test:
-    parameters:
-      test-suite:
-        type: string
+  test-frontend:
+    <<: *runner
+    steps:
+      - checkout
+      - *install
+      - run:
+          name: Test CRA
+          command: npm run test:nowatch:frontend -- -- --ci --runInBand
+      - *retrieve-junit
+      - slack/notify-on-failure
+  test-backend:
     docker:
       - image: cimg/node:lts
       - image: circleci/postgres:alpine-ram
@@ -43,27 +52,20 @@ jobs:
           name: Build
           command: npm run pretest
       - run:
-          name: Test
-          command: npm run test:nowatch:<< parameters.test-suite >> -- --ci --runInBand --reporters=default --reporters=jest-junit
-          environment:
-            # TODO: jest called with react-scripts does not generate reports, wtf
-            # this is even if you specify reporters *within* jest.config.js, fucking CRA
-            JEST_JUNIT_OUTPUT_NAME: results.xml
-            JEST_JUNIT_OUTPUT_DIR: reports/jest-<< parameters.test-suite >>
-      - store_test_results:
-          path: reports
+          name: Test Express
+          command: npm run test:nowatch:backend -- --ci --runInBand
+      - *retrieve-junit
       - slack/notify-on-failure
 
 workflows:
   build-and-test:
     jobs:
       - lint
-      - test:
+      - test-frontend:
           context: shared-vars
           requires:
             - lint
-          matrix:
-            parameters:
-              test-suite:
-                - frontend
-                - backend
+      - test-backend:
+          context: shared-vars
+          requires:
+            - lint
