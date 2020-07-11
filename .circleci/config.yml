@@ -36,7 +36,7 @@ jobs:
           command: npm run test:nowatch:<< parameters.test-suite >> -- --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT_NAME: results.xml
-            JEST_JUNIT_OUTPUT_DIR: reports/jest-<< parameters.node-version >>
+            JEST_JUNIT_OUTPUT_DIR: reports/jest-<< parameters.test-suite >>
       - store_test_results:
           path: reports
       - slack/notify-on-failure
