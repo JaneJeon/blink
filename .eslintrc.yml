@@ -1,21 +1,5 @@
-extends:
-  - standard
-  - prettier
-  - prettier/standard
-
-plugins:
-  - prettier
-  - standard
-
-rules:
-  no-console: error
+extends: '@janejeon'
 
 overrides:
-  - files: '*.test.js'
-    env:
-      jest: true
-  - files: '**/__utils__/**'
-    env:
-      jest: true
   - files: src/*.js
     extends: react-app

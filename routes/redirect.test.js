@@ -13,22 +13,16 @@ describe('/', () => {
       .delete()
       .where({ originalURL })
       .orWhere({ creatorId: id })
-    await User.query()
-      .delete()
-      .where({ id })
+    await User.query().delete().where({ id })
     const user = await User.query().insert({ id })
     await user.$relatedQuery('links').insert({ originalURL, hash })
   })
 
   test('GET /', done => {
-    request(app)
-      .get('/')
-      .expect(301, done)
+    request(app).get('/').expect(301, done)
   })
 
   test('GET /:id', done => {
-    request(app)
-      .get(`/${hash}`)
-      .expect(301, done)
+    request(app).get(`/${hash}`).expect(301, done)
   })
 })

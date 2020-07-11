@@ -2,10 +2,7 @@ const { tableName } = require('../models/user')
 
 exports.up = knex =>
   knex.schema.createTable(tableName, table => {
-    table
-      .text('id')
-      .notNullable()
-      .primary()
+    table.text('id').notNullable().primary()
     table.text('role').notNullable()
 
     table.text('name')

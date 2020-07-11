@@ -11,9 +11,7 @@ module.exports = Router()
     res.send(users)
   })
   .get('/:id', async (req, res) => {
-    const user = await User.query()
-      .authorize(req.user)
-      .findById(req.params.id)
+    const user = await User.query().authorize(req.user).findById(req.params.id)
 
     res.send(user)
   })

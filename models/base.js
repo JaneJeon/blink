@@ -49,10 +49,7 @@ class BaseModel extends visibility(authorize(tableName(Model))) {
       }
 
       patchAndFetchById(id, body) {
-        return this.findById(id)
-          .patch(body)
-          .returning('*')
-          .first()
+        return this.findById(id).patch(body).returning('*').first()
       }
 
       patchAndFetch(body) {

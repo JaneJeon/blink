@@ -9,15 +9,11 @@ describe.skip('/api/users', () => {
   })
 
   test('GET /', done => {
-    request(app)
-      .get('/api/users')
-      .expect(200, done)
+    request(app).get('/api/users').expect(200, done)
   })
 
   test('GET /:id', done => {
-    request(app)
-      .get(`/api/users/${id}`)
-      .expect(200, done)
+    request(app).get(`/api/users/${id}`).expect(200, done)
   })
 
   describe('GET /:id/links', () => {

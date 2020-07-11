@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to lynx (WIP) 👋</h1>
 
-[![GitHub Actions](https://github.com/JaneJeon/lynx/workflows/build/badge.svg)](https://github.com/JaneJeon/lynx/actions)
+[![CircleCI](https://circleci.com/gh/JaneJeon/lynx.svg?style=shield)](https://circleci.com/gh/JaneJeon/lynx)
 [![Coverage](https://codecov.io/gh/JaneJeon/lynx/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/lynx)
 [![Dependencies](https://img.shields.io/david/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx)
 [![devDependencies](https://img.shields.io/david/dev/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx?type=dev)

@@ -46,19 +46,13 @@ module.exports = Router()
   })
   .patch('/:id', async (req, res) => {
     let link = await Link.query().findByHashId(req.params.id)
-    link = await link
-      .$query()
-      .authorize(req.user)
-      .patchAndFetch(req.body)
+    link = await link.$query().authorize(req.user).patchAndFetch(req.body)
 
     res.send(link)
   })
   .delete('/:id', async (req, res) => {
     const link = await Link.query().findByHashId(req.params.id)
-    await link
-      .$query()
-      .authorize(req.user)
-      .delete()
+    await link.$query().authorize(req.user).delete()
 
     res.sendStatus(204)
   })

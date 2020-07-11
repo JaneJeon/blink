@@ -13,9 +13,7 @@ const slack = require('../lib/slack')
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (req, id, done) => {
   try {
-    const user = await User.query()
-      .findById(id)
-      .filterDeleted()
+    const user = await User.query().findById(id).filterDeleted()
 
     // sticky sessions
     req.sessionOptions.maxAge = ms(process.env.SESSION_DURATION)
@@ -50,17 +48,13 @@ passport.use(
           throw httpError(400, 'Cannot sign in with this team')
 
         // See if the user is already registered.
-        let user = await User.query()
-          .findById(profile.user.id)
-          .filterDeleted()
+        let user = await User.query().findById(profile.user.id).filterDeleted()
 
         // The user isn't registered, so register them.
         if (!user) {
           // Note: when there's no one else in the team, i.e. you're the first user,
           // you're automatically promoted to owner status.
-          const otherUsersExist = await User.query()
-            .filterDeleted()
-            .first()
+          const otherUsersExist = await User.query().filterDeleted().first()
 
           user = await User.query().insertAndFetch({
             id: profile.user.id,
