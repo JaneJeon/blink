@@ -1,4 +1,4 @@
 hooks:
   pre-commit: lint-staged
-  pre-push: skip-ci && echo "Skipping test..." || run-s lint test
+  pre-push: docker-compose up -d --force-recreate && skip-ci && echo "Skipping test..." || run-s lint test
   post-merge: npm i && npm run build-local

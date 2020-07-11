@@ -27,7 +27,7 @@
     "lint": "run-s lint:*",
     "lint:prettier": "prettier --check .",
     "lint:eslint": "eslint .",
-    "pretest": "docker-compose up -d --force-recreate && npm run build-local",
+    "pretest": "npm run build-local",
     "test": "run-s test:nowatch:*",
     "test:watch": "npm run pretest && run-s test:watch:*",
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",

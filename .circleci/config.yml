@@ -29,6 +29,9 @@ jobs:
       - checkout
       - node/install-packages
       - run:
+          name: Stand up containers
+          command: docker-compose up -d
+      - run:
           name: Test
           command: npm run test:nowatch:<< parameters.test-suite >> -- --ci --runInBand --reporters=default --reporters=jest-junit
           environment:
