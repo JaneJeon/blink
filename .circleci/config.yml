@@ -28,6 +28,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages
+      - setup_remote_docker
       - run:
           name: Stand up containers
           command: docker-compose up -d
