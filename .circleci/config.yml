@@ -5,9 +5,6 @@ orbs:
   slack: circleci/slack@3
 
 aliases:
-  - &runner
-    executor:
-      name: node/default
   - &install
     node/install-packages:
       include-branch-in-cache-key: false
@@ -15,7 +12,8 @@ aliases:
 
 jobs:
   lint:
-    <<: *runner
+    executor:
+      name: node/default
     steps:
       - checkout
       - *install
@@ -31,15 +29,16 @@ jobs:
     parameters:
       test-suite:
         type: string
-    <<: *runner
+    docker:
+      - image: cimg/node
+      - image: circleci/postgres
+        environment:
+          POSTGRES_DB: lynx
+          POSTGRES_USER: knex
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
       - *install
-      - setup_remote_docker
-      - run:
-          # todo: do we need to stand up containers even for frontend?
-          name: Stand up containers
-          command: docker-compose up -d
       - run:
           name: Build
           command: npm run pretest
