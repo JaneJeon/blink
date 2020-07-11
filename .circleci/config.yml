@@ -30,8 +30,8 @@ jobs:
       test-suite:
         type: string
     docker:
-      - image: cimg/node
-      - image: circleci/postgres
+      - image: cimg/node:lts
+      - image: circleci/postgres:alpine-ram
         environment:
           POSTGRES_DB: lynx
           POSTGRES_USER: knex
