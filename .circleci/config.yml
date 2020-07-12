@@ -48,7 +48,7 @@ jobs:
     steps:
       - checkout
       - node/install:
-          node-version: lts
+          node-version: lts # wtf the doc sucks and it doesn't say that you had to specify node-version
       - *install
       - run:
           name: Stand up containers
