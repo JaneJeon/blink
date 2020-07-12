@@ -55,7 +55,7 @@ jobs:
           command: docker-compose up -d
       - run:
           name: Literally wait
-          command: wait 5s
+          command: sleep 5s
       - run:
           name: Debug
           command: docker ps
