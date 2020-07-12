@@ -44,21 +44,14 @@ jobs:
       - *retrieve-junit
       - slack/notify-on-failure
   test-backend:
-    <<: *runner
-    <<: *size
+    machine: true
     steps:
       - checkout
+      - node/install
       - *install
-      - setup_remote_docker
       - run:
           name: Stand up containers
           command: docker-compose up -d
-      - run:
-          name: Literally wait
-          command: sleep 5s
-      - run:
-          name: Debug
-          command: docker ps
       - run:
           name: Build
           command: npm run pretest
