@@ -8,10 +8,13 @@ aliases:
   - &runner
     executor:
       name: node/default
+  - &size
+    resource_class: small
 
 jobs:
   lint:
     <<: *runner
+    <<: *size
     steps:
       - checkout
       - &install
@@ -29,6 +32,7 @@ jobs:
           path: reports
   test-frontend:
     <<: *runner
+    <<: *size
     steps:
       - checkout
       - *install
@@ -40,6 +44,7 @@ jobs:
       - *retrieve-junit
       - slack/notify-on-failure
   test-backend:
+    <<: *size
     docker:
       - image: cimg/node:lts
       - image: circleci/postgres:alpine-ram
