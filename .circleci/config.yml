@@ -44,17 +44,15 @@ jobs:
       - *retrieve-junit
       - slack/notify-on-failure
   test-backend:
+    <<: *runner
     <<: *size
-    docker:
-      - image: cimg/node:lts
-      - image: circleci/postgres:alpine-ram
-        environment:
-          POSTGRES_DB: lynx
-          POSTGRES_USER: knex
-          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
       - *install
+      - setup_remote_docker
+      - run:
+          name: Stand up containers
+          command: docker-compose up -d
       - run:
           name: Build
           command: npm run pretest
@@ -70,11 +68,9 @@ workflows:
   build-and-test:
     jobs:
       - lint
-      - test-frontend:
+      - test-frontend: &test-config
           context: shared-vars
           requires:
             - lint
       - test-backend:
-          context: shared-vars
-          requires:
-            - lint
+          <<: *test-config
