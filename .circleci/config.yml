@@ -47,7 +47,8 @@ jobs:
     machine: true
     steps:
       - checkout
-      - node/install
+      - node/install:
+          node-version: lts
       - *install
       - run:
           name: Stand up containers
