@@ -1,5 +1,5 @@
 extends: '@janejeon'
 
 overrides:
-  - files: src/*.js
+  - files: src/**/*.js
     extends: react-app

@@ -1,8 +1,6 @@
 const passport = require('passport')
 const SlackStrategy = require('passport-slack-fixed').Strategy
-const { NotFoundError } = require('objection')
 const httpError = require('http-errors')
-const ms = require('ms')
 
 const User = require('../models/user')
 const slack = require('../lib/slack')
@@ -15,11 +13,9 @@ passport.deserializeUser(async (req, id, done) => {
   try {
     const user = await User.query().findById(id).filterDeleted()
 
-    // sticky sessions
-    req.sessionOptions.maxAge = ms(process.env.SESSION_DURATION)
-    done(null, user)
+    done(null, user || false)
   } catch (err) {
-    err instanceof NotFoundError ? done(null, false) : done(err)
+    done(err)
   }
 })
 
@@ -64,9 +60,9 @@ passport.use(
           })
         }
 
-        done(null, user)
+        done(null, user || false)
       } catch (err) {
-        err instanceof NotFoundError ? done(null, false) : done(err)
+        done(err)
       }
     }
   )

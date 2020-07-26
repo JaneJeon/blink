@@ -12,11 +12,11 @@ User:
       default: user
     name:
       type: string
-      maxLength: 100
+      # maxLength: 100
     avatar:
       type: string
       format: uri
-      maxLength: 100
+      # maxLength: 100
     deleted:
       type: boolean
       default: false
@@ -27,40 +27,48 @@ User:
 Link:
   type: object
   properties:
+    # id:
+    #   type: string
+    #   readOnly: true
     hash:
       type: string
       minLength: 4
       maxLength: 25
-      pattern: ^\w+$
-    originalURL:
+    originalUrl:
       type: string
-      maxLength: 100
+      # maxLength: 100
+    shortenedUrl:
+      type: string
+      readOnly: true
+    brandedUrl:
+      type: string
+      readOnly: true
     meta:
       type: object
       properties:
         author:
           type: string
-          maxLength: 100
+          # maxLength: 100
         date:
           type: string
           format: date
         description:
           type: string
-          maxLength: 100
+          # maxLength: 100
         lang:
           type: string
-          maxLength: 10
+          # maxLength: 10
         logo:
           type: string
           format: uri
           maxLength: 100
         publisher:
           type: string
-          maxLength: 100
+          # maxLength: 100
         title:
           type: string
-          maxLength: 100
+          # maxLength: 100
       additionalProperties: false
   required:
-    - originalURL
+    - originalUrl
   additionalProperties: false
