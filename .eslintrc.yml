@@ -3,3 +3,5 @@ extends: '@janejeon'
 overrides:
   - files: src/**/*.js
     extends: react-app
+  - files: website/src/**/*.js
+    extends: react-app
