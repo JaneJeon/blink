@@ -1,0 +1,6 @@
+{
+  "ignore": ["src/", "public/", "build/", "*.test.js"],
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

@@ -4,18 +4,18 @@ const Link = require('../models/link')
 const User = require('../models/user')
 
 describe('/', () => {
-  const originalURL = 'medium.com'
-  const hash = 'HeLlOwOrLd'
+  const originalUrl = 'medium.com'
+  const hash = 'HeLlOwOrLd' // =3
 
   beforeAll(async () => {
     const id = 'redirectUser'
     await Link.query()
       .delete()
-      .where({ originalURL })
+      .where({ originalUrl })
       .orWhere({ creatorId: id })
     await User.query().delete().where({ id })
     const user = await User.query().insert({ id })
-    await user.$relatedQuery('links').insert({ originalURL, hash })
+    await user.$relatedQuery('links').insert({ originalUrl, hash })
   })
 
   test('GET /', done => {

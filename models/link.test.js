@@ -1,11 +1,12 @@
 const Link = require('./link')
 const User = require('./user')
-const normalizeURL = require('normalize-url')
+const normalizeUrl = require('normalize-url')
+const { ValidationError, UniqueViolationError } = require('objection')
 
 describe('Link', () => {
-  const originalURLs = ['www.nodejs.org', 'example.com', 'http://google.com']
-  const normalizedURLs = originalURLs.map(url =>
-    normalizeURL(url, { forceHttps: true })
+  const originalUrls = ['www.nodejs.org', 'example.com', 'http://google.com']
+  const normalizedUrls = originalUrls.map(url =>
+    normalizeUrl(url, { forceHttps: true })
   )
 
   const links = []
@@ -18,7 +19,7 @@ describe('Link', () => {
   it('shortens URL', async () => {
     let link = await user
       .$relatedQuery('links')
-      .insert({ originalURL: originalURLs[0] })
+      .insert({ originalUrl: originalUrls[0] })
     link = link.toJSON()
     links.push(link)
 
@@ -27,55 +28,55 @@ describe('Link', () => {
       Link.jsonSchema.properties.hash.minLength
     )
 
-    expect(link.originalURL).toEqual(normalizedURLs[0])
-    expect(link.shortenedURL).toBeDefined()
-    expect(link.brandedURL).toBeUndefined()
+    expect(link.originalUrl).toEqual(normalizedUrls[0])
+    expect(link.shortenedUrl).toBeDefined()
+    expect(link.brandedUrl).toBeUndefined()
     expect(link.meta).toBeDefined()
   })
 
   it('prevents duplicate URLs', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalURL: originalURLs[0] })
-    ).rejects.toThrow()
+      user.$relatedQuery('links').insert({ originalUrl: originalUrls[0] })
+    ).rejects.toThrow(UniqueViolationError)
   })
 
   it('prevents URL redirect loop', async () => {
     await expect(
       user
         .$relatedQuery('links')
-        .insert({ originalURL: process.env.BASE_URL + '/hello' })
-    ).rejects.toThrow()
+        .insert({ originalUrl: process.env.BASE_URL + '/hello' })
+    ).rejects.toThrow(ValidationError)
   })
 
   it('rejects invalid URLs', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalURL: '1234 0' })
-    ).rejects.toThrow()
+      user.$relatedQuery('links').insert({ originalUrl: '1234 0' })
+    ).rejects.toThrow(ValidationError)
   })
 
   it('rejects valid but nonexistent URLs', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalURL: 'www.timeout.com' })
-    ).rejects.toThrow()
+      user.$relatedQuery('links').insert({ originalUrl: 'www.timeout.com' })
+    ).rejects.toThrow(ValidationError)
   })
 
   const hash = 'FooBar'
   it('can set custom hash', async () => {
     const link = await user.$relatedQuery('links').insert({
-      originalURL: originalURLs[1],
+      originalUrl: originalUrls[1],
       hash
     })
 
     expect(link.hash).toEqual(hash)
-    expect(link.brandedURL).toBeDefined()
+    expect(link.brandedUrl).toBeDefined()
 
     links.push(link.toJSON())
   })
 
   it('prevents duplicate custom hash', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalURL: originalURLs[2], hash })
-    ).rejects.toThrow()
+      user.$relatedQuery('links').insert({ originalUrl: originalUrls[2], hash })
+    ).rejects.toThrow(UniqueViolationError)
   })
 
   it('prevents custom hash that clashes with hashIds', async () => {
@@ -83,8 +84,8 @@ describe('Link', () => {
     await expect(
       user
         .$relatedQuery('links')
-        .insert({ originalURL: originalURLs[2], hash: generatedHash })
-    ).rejects.toThrow()
+        .insert({ originalUrl: originalUrls[2], hash: generatedHash })
+    ).rejects.toThrow(UniqueViolationError)
   })
 
   describe('QueryBuilder', () => {
@@ -94,8 +95,8 @@ describe('Link', () => {
         user.$relatedQuery('links').findByHashId(links[1].id)
       ])
 
-      expect(link0.originalURL).toEqual(links[0].originalURL)
-      expect(link1.originalURL).toEqual(links[1].originalURL)
+      expect(link0.originalUrl).toEqual(links[0].originalUrl)
+      expect(link1.originalUrl).toEqual(links[1].originalUrl)
     })
   })
 })

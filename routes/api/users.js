@@ -3,15 +3,19 @@ const User = require('../../models/user')
 
 module.exports = Router()
   .get('/', async (req, res) => {
-    const users = await User.query()
+    const { total, results } = await User.query()
       .authorize(req.user)
-      .paginate(req.query.after)
+      .paginate(req.query)
       .filterDeleted(req.query.deleted)
 
-    res.send(users)
+    res.header('Content-Range', `/${total}`)
+    res.send(results)
   })
   .get('/:id', async (req, res) => {
-    const user = await User.query().authorize(req.user).findById(req.params.id)
+    const user = await User.query()
+      .authorize(req.user)
+      .findById(req.params.id)
+      .throwIfNotFound()
 
     res.send(user)
   })
@@ -23,13 +27,14 @@ module.exports = Router()
     res.send(links)
   })
   .patch('/:id', async (req, res) => {
-    // load the full user context since admins' ability to edit a user's role
-    // is affected by his/her role (but otherwise the user.id suffices)
-    let user = await User.query().findById(req.params.id)
-    user = await user
-      .$query()
-      .authorize(req.user, undefined, { resourceAugments: { admin: 'admin' } })
-      .patchAndFetch(req.body)
+    const user = await User.transaction(async trx => {
+      // load the full user context since admins' ability to edit a user's role
+      // is affected by his/her role (but otherwise the user.id suffices)
+      const user = await User.query(trx)
+        .findById(req.params.id)
+        .throwIfNotFound()
+      return user.$query(trx).authorize(req.user).patchAndFetch(req.body)
+    })
 
     res.send(user)
   })

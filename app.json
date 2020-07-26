@@ -13,17 +13,7 @@
       "quantity": 1
     }
   },
-  "addons": [
-    {
-      "plan": "heroku-redis"
-    },
-    {
-      "plan": "heroku-postgresql"
-    },
-    {
-      "plan": "papertrail:choklad"
-    }
-  ],
+  "addons": ["heroku-postgresql", "heroku-redis"],
   "env": {
     "BASE_URL": {
       "description": "the custom domain of this app; e.g. https://bit.ly (protocol required)"

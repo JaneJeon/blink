@@ -45,6 +45,5 @@ exports.delete = (allow, forbid, user, body) => {
 
 exports.undelete = (allow, forbid, user, body) => {
   // Admins and owners can recover 'deleted' accounts
-  // TODO: when deleted, back to user
   if (user.role === 'admin' || user.role === 'owner') allow('undelete', 'User')
 }
