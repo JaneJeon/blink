@@ -92,9 +92,7 @@ module.exports = {
           homePageId: 'doc1',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
-          showReadingTime: true
+          editUrl: 'https://bitbucket.org/JaneErr/lynx/edit/master/website/'
         },
         // blog: {
         //   showReadingTime: true,
