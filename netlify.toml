@@ -1,0 +1,6 @@
+# note: this netlify.toml is only for serving up the documentation for Lynx!
+# To host the Lynx dashboard, see: https://create-react-app.dev/docs/deployment
+[build]
+base = 'website/'
+command = 'npm run build'
+publish = 'build/'

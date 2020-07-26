@@ -1,6 +1,0 @@
-coverage/
-reports/
-website/build
-website
-build/
-config/**/*.json

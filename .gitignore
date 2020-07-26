@@ -62,7 +62,9 @@ typings/
 # Built files
 config/**/*.json
 reports/
-.yarn/
-.cache/
-reports/
 build/
+
+# Website
+website/build
+website/.docusaurus
+website/.cache-loader

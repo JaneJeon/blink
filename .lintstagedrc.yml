@@ -2,5 +2,5 @@
   - eslint --fix
   - prettier --write
 
-'*.{md,json,yml,yaml,css,html}':
+'*.{md,json,yml,yaml,css,html,toml}':
   - prettier --write
