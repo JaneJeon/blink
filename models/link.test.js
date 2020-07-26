@@ -57,7 +57,7 @@ describe('Link', () => {
   it('rejects valid but nonexistent URLs', async () => {
     await expect(
       user.$relatedQuery('links').insert({ originalUrl: 'www.timeout.com' })
-    ).rejects.toThrow(ValidationError)
+    ).rejects.toThrow()
   })
 
   const hash = 'FooBar'
@@ -85,7 +85,7 @@ describe('Link', () => {
       user
         .$relatedQuery('links')
         .insert({ originalUrl: originalUrls[2], hash: generatedHash })
-    ).rejects.toThrow(UniqueViolationError)
+    ).rejects.toThrow(ValidationError)
   })
 
   describe('QueryBuilder', () => {

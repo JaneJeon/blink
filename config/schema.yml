@@ -27,9 +27,9 @@ User:
 Link:
   type: object
   properties:
-    id:
-      type: string
-      readOnly: true
+    # id:
+    #   type: string
+    #   readOnly: true
     hash:
       type: string
       minLength: 4
