@@ -13,10 +13,10 @@ User:
     name:
       type: string
       # maxLength: 100
-    avatar:
-      type: string
-      format: uri
-      # maxLength: 100
+    # avatar:
+    #   type: string
+    #   format: uri
+    #   # maxLength: 100
     deleted:
       type: boolean
       default: false

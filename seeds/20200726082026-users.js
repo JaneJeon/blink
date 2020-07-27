@@ -20,7 +20,7 @@ exports.seed = async knex => {
 
     for (let i = 0; i < 5; i++) {
       const user = Object.assign(generate(schema), {
-        avatar: `https://picsum.photos/200.jpg?random=${i}`,
+        // avatar: `https://picsum.photos/200.jpg?random=${i}`,
         deleted: false
       })
       users.push(user)

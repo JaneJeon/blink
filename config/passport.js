@@ -3,7 +3,6 @@ const SlackStrategy = require('passport-slack-fixed').Strategy
 const httpError = require('http-errors')
 
 const User = require('../models/user')
-const slack = require('../lib/slack')
 
 // Note that in all these strategies, we're filtering out deleted users,
 // since we don't want deleted users to be able to login.
@@ -55,7 +54,6 @@ passport.use(
           user = await User.query().insertAndFetch({
             id: profile.user.id,
             name: profile.user.name,
-            avatar: slack.largestIcon(profile.user),
             role: otherUsersExist ? 'user' : 'owner'
           })
         }

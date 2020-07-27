@@ -6,7 +6,6 @@ exports.up = knex =>
     table.text('role').notNullable()
 
     table.text('name')
-    table.text('avatar')
 
     table.boolean('deleted').notNullable()
 
