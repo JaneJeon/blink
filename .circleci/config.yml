@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   node: circleci/node@3
   slack: circleci/slack@3
+  jira: circleci/jira@1
 
 aliases:
   - &runner
@@ -43,6 +44,7 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-frontend
       - *retrieve-junit
       - slack/notify-on-failure
+      - jira/notify
   test-backend:
     machine: true
     steps:
@@ -63,6 +65,7 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
       - *retrieve-junit
       - slack/notify-on-failure
+      - jira/notify
 
 workflows:
   build-and-test:
