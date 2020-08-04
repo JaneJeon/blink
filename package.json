@@ -49,7 +49,7 @@
     "http-errors": "^1.7.3",
     "knex": "^0.21.2",
     "lodash": "^4.17.19",
-    "metascraper": "^5.10.5",
+    "metascraper": "^5.13.2",
     "metascraper-author": "^5.10.5",
     "metascraper-date": "^5.10.5",
     "metascraper-description": "^5.10.5",
