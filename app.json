@@ -2,7 +2,7 @@
   "name": "Lynx",
   "description": "Modern, lightweight, and planet-scale link shortener + analytics + management!",
   "repository": "https://github.com/JaneJeon/lynx",
-  "website": "https://janejeon.github.io/lynx",
+  "website": "https://lynx.rest",
   "buildpacks": [
     {
       "url": "heroku/nodejs"

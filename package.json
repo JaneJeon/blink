@@ -1,6 +1,6 @@
 {
   "description": "Modern, lightweight, planet-scale link shortener for teams 🎉",
-  "repository": "bitbucket:JaneErr/lynx",
+  "repository": "JaneJeon/lynx",
   "author": "Jane Jeon <JaneJeon9719@gmail.com>",
   "license": "AGPL-3.0",
   "scripts": {

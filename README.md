@@ -1,20 +1,19 @@
 <h1 align="center">Welcome to lynx (WIP) 👋</h1>
 
 [![CircleCI](https://circleci.com/gh/JaneJeon/lynx.svg?style=shield)](https://circleci.com/gh/JaneJeon/lynx)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/79902508-5551-43d7-8341-64b24678de96/deploy-status)](https://app.netlify.com/sites/musing-swirles-013dd5/deploys)
-[![Coverage](https://codecov.io/gh/JaneJeon/lynx/branch/master/graph/badge.svg)](https://codecov.io/gh/JaneJeon/lynx)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/322a491a-6a6f-4d6d-b213-80f6d22f4db1/deploy-status)](https://app.netlify.com/sites/vigorous-golick-84bd53/deploys)
 [![Dependencies](https://img.shields.io/david/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx)
 [![devDependencies](https://img.shields.io/david/dev/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx?type=dev)
 [![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaneJeon/lynx)](https://snyk.io//test/github/JaneJeon/lynx?targetFile=package.json)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=JaneJeon/lynx)](https://dependabot.com)
 [![License](https://img.shields.io/npm/l/myurl)](https://github.com/JaneJeon/myURL/blob/master/LICENSE)
 [![Standard code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Prettier code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
-[![Issues](https://img.shields.io/badge/issues-trello-blue)](https://trello.com/b/QCCf001W)
-[![Issues](https://img.shields.io/badge/issues-github-blue)](https://github.com/JaneJeon/lynx/issues)
+[![Issues](https://img.shields.io/badge/issues-jira-blue)](https://janedev.atlassian.net/jira/software/projects/LYNX/boards/3)
 
-> Modern, lightweight, and planet-scale link shortener + analytics + management!
+> Modern, lightweight, planet-scale link shortener for teams 🎉
+>
+> Easy to setup, connect with your org's SSO, and hook up analytics!
 
 ### 🏠 [Homepage](https://github.com/JaneJeon/lynx)
 
