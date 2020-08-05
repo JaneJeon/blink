@@ -14,7 +14,7 @@ module.exports = async () => {
     .map(model => {
       const modelClass = require(`../models/${model}`)
       if (!(modelClass instanceof Model)) return
-      log.info(`Initializing model ${model}`)
+      log.info(`Initializing model %s`, model)
 
       return modelClass.fetchTableMetadata()
     })
