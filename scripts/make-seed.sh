@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# A hack for prepending the timestamp to seed names until the knex guy
-# gets off his high horse: https://github.com/knex/knex/issues/3623
-knex seed:make "$(date '+%Y%m%d%H%M%S')-$@"
+# I probably should have a way of auto-incrementing seed prefixes... but me lazy
+NODE_ENV=development knex seed:make "$@"
+NODE_ENV=test knex seed:make "$@"

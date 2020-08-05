@@ -1,5 +1,5 @@
-const Link = require('../models/link')
-const User = require('../models/user')
+const Link = require('../../models/link')
+const User = require('../../models/user')
 
 exports.seed = async knex => {
   // Deletes ALL existing entries
