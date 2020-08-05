@@ -87,6 +87,7 @@
     "@testing-library/react": "^10.4.5",
     "@testing-library/user-event": "^12.0.6",
     "@types/jest": "^26.0.4",
+    "clarify": "^2.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
@@ -110,7 +111,8 @@
     "prettier": "^2.0.5",
     "prettier-plugin-toml": "^0.3.1",
     "skip-ci": "^1.0.3",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "trace": "^3.1.1"
   },
   "prettier": "@janejeon/prettier-config",
   "browserslist": {

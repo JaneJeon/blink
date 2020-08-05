@@ -1,6 +1,12 @@
 require('./config')
 require('express-async-errors')
 
+if (process.env.NODE_ENV !== 'production') {
+  // cleaner stacks for debugging
+  require('trace')
+  require('clarify')
+}
+
 const express = require('express')
 const app = express()
 const passport = require('./config/passport')

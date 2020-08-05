@@ -14,8 +14,7 @@ module.exports = {
     error: msg => log.error(msg),
     debug: msg => log.debug(msg)
   },
-  // TODO: do this for ALL knex projects
-  asyncStackTraces: true,
-  debug: process.env.NODE_ENV === 'production',
+  asyncStackTraces: process.env.NODE_ENV !== 'production',
+  debug: process.env.NODE_ENV !== 'production',
   ...knexSnakeCaseMappers()
 }

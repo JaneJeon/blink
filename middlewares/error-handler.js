@@ -36,7 +36,6 @@ module.exports = (err, req, res, next) => {
     return res.sendStatus(err.statusCode)
   }
 
-  err.stack = err.stack.substring(0, err.stack.indexOf('at newFn')).trimRight()
   req.log[err.statusCode < 500 ? 'warn' : 'error'](err)
 
   res.status(err.statusCode).send({
