@@ -1,4 +1,4 @@
 hooks:
   pre-commit: lint-staged && ./scripts/check-branch-name.sh
   pre-push: skip-ci && echo "Skipping test..." || npm test
-  post-merge: npm i && npm run build-local
+  post-merge: npm i
