@@ -2,6 +2,7 @@
 require('./config')
 require('pg').types.setTypeParser(20, parseInt) // cast SELECT COUNT(*) to integer
 
+const log = require('./lib/logger')
 const { knexSnakeCaseMappers } = require('objection')
 
 const env = process.env.NODE_ENV || 'development'
@@ -15,6 +16,12 @@ module.exports = {
   },
   seeds: {
     directory: `./seeds/${env}`
+  },
+  log: {
+    warn: msg => log.warn(msg),
+    error: msg => log.error(msg),
+    deprecate: msg => log.warn(msg),
+    debug: msg => log.debug(msg)
   },
   asyncStackTraces: env !== 'production',
   debug: env !== 'production',

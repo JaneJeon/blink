@@ -3,21 +3,24 @@
 /**
  * Module dependencies.
  */
-var http = require('http')
-var app = require('../app')
-var log = require('../lib/logger')
-var initModels = require('../scripts/init-models')
+const http = require('http')
+const app = require('../app')
+const log = require('../lib/logger')
+const BaseModel = require('../models/base')
+const initModels = require('../scripts/init-models')
+
+log.info('Starting server under %s environment...', process.env.NODE_ENV)
 
 /**
  * Get port from environment.
  */
-var port = normalizePort(process.env.PORT)
+const port = normalizePort(process.env.PORT)
 app.set('port', port)
 
 /**
  * Create HTTP server.
  */
-var server = http.createServer(app)
+const server = http.createServer(app)
 
 /**
  * Listen on provided port, on all network interfaces...
@@ -32,14 +35,25 @@ server.on('listening', onListening)
 /**
  * Graceful shutdown for pm2
  */
-process.on('SIGINT', () => server.close())
-process.on('SIGTERM', () => server.close())
+const gracefulShutdown = () => {
+  log.info('Received shutdown signal. Closing connections...')
+  server.close(async () => {
+    log.info(
+      'Closed all connections. Tearing down database connection pools...'
+    )
+    await BaseModel.knex().destroy()
+    log.info('Shutdown successful!')
+    process.exit(0)
+  })
+}
+process.on('SIGINT', gracefulShutdown)
+process.on('SIGTERM', gracefulShutdown)
 
 /**
  * Normalize a port into a number, string, or false.
  */
 function normalizePort(val) {
-  var port = parseInt(val, 10)
+  const port = parseInt(val, 10)
 
   if (isNaN(port)) {
     // named pipe
@@ -62,7 +76,7 @@ function onError(error) {
     throw error
   }
 
-  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -81,7 +95,7 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 function onListening() {
-  var addr = server.address()
-  var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
+  const addr = server.address()
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
   log.info('Server listening on ' + bind)
 }
