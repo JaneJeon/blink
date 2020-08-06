@@ -1,1 +1,1 @@
-exports.knex = () => {}
+exports.seed = () => {}
