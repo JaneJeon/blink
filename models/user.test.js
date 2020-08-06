@@ -8,6 +8,10 @@ describe('User', () => {
     ])
   })
 
+  afterAll(async () => {
+    await User.knex().destroy()
+  })
+
   describe('QueryBuilder', () => {
     test('#filterDeleted', async () => {
       let [defaultUsers, deletedUsers] = await Promise.all([

@@ -4,8 +4,13 @@ const User = require('../../models/user')
 
 describe.skip('/api/users', () => {
   const id = 'userRouteTest'
+
   beforeAll(async () => {
     await User.query().insert({ id })
+  })
+
+  afterAll(async () => {
+    await User.knex().destroy()
   })
 
   test('GET /', done => {
