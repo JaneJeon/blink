@@ -37,7 +37,8 @@ server.on('listening', onListening)
  */
 const gracefulShutdown = () => {
   log.info('Received shutdown signal. Closing connections...')
-  server.close(async () => {
+  server.close(async err => {
+    if (err) log.error(err) // https://nodejs.org/api/net.html#net_server_close_callback
     log.info(
       'Closed all connections. Tearing down database connection pools...'
     )
