@@ -6,6 +6,7 @@
 const http = require('http')
 const app = require('../app')
 const log = require('../lib/logger')
+const { awaitSubscribe } = require('../lib/redis')
 const BaseModel = require('../models/base')
 const initModels = require('../scripts/init-models')
 
@@ -26,7 +27,7 @@ const server = http.createServer(app)
  * Listen on provided port, on all network interfaces...
  * after initializing all of the model classes.
  */
-initModels()
+Promise.all([initModels(), awaitSubscribe])
   .then(() => server.listen(port))
   .catch(err => log.error(err))
 server.on('error', onError)

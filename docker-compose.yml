@@ -12,12 +12,14 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
-  # web:
-  #   build: .
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   volumes:
-  #     - .:/code
-  #   ports:
-  #     - '8000:8000'
-  #   depends_on:
-  #     - db
+  redis:
+    image: circleci/redis:alpine
+    ports:
+      - 6379:6379
+    env_file:
+      - .redis.env
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 3s
+      retries: 3
