@@ -21,21 +21,28 @@ class Setting extends visibility(BaseModel) {
     return ['value']
   }
 
+  // Automatically transform the setting value to its "native" type -
+  // the frontend can get the other settings information (e.g. valueType, choices)
+  // from the JSONschema.
   get value() {
-    return this.valueData + ''
+    if (this.valueType === 'number') return this.valueData - 0
+    if (this.valueType === 'boolean') return this.valueData === 'true'
+    return this.valueData
   }
 
-  $parseJson(json, opt) {
-    json = super.$parseJson(json, opt)
-    if (!('value' in json)) return json
+  static async beforeUpdate(args) {
+    await super.beforeUpdate(args)
+    const { inputItems, asFindQuery, cancelQuery } = args // relation not supported
 
-    // cast settings value into its correct type
-    if (json.valueType === 'number') json.valueData = json.value - 0
-    else if (json.valueType === 'boolean')
-      json.valueData = json.value.trim().toLowerCase() === 'true'
+    // hijack the query and run individual update
+    await asFindQuery().patch({
+      // transform the value into string -
+      // note that we don't have to "normalize" the value in any way
+      // since it's already been checked by the schema!
+      valueData: inputItems[0].value + ''
+    })
 
-    delete json.value
-    return json
+    cancelQuery()
   }
 
   // TODO: look up cache, then proceed with the query

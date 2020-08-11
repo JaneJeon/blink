@@ -79,16 +79,28 @@ Setting:
       enum:
         - user
         - link
-    valueData:
-      type: string
-    valueType:
-      type: string
-      readOnly: true
-      enum:
+    value:
+      type:
         - string
         - boolean
         - number
   allOf:
+    - if:
+        properties:
+          id:
+            enum:
+              - canAdminsDeleteAnyUser
+              - canAdminsDeleteAnyAdmin
+              - canUsersPromoteGuestToUser
+              - canAdminsPromoteAnyoneToAdmin
+              - canAdminsDemoteAnyAdmin
+              - canUsersSetCustomHashForOwnLink
+              - canAdminsSetCustomHashForAnyLink
+              - canAdminsOverrideCustomHashForAnyLink
+      then:
+        properties:
+          value:
+            type: boolean
     - if:
         properties:
           id:
@@ -98,7 +110,8 @@ Setting:
               - whoCanCreateLink
       then:
         properties:
-          valueData:
+          value:
+            type: string
             enum:
               - guest
               - user
@@ -111,11 +124,12 @@ Setting:
               - whoCanDeleteAnyLink
       then:
         properties:
-          valueData:
+          value:
+            type: string
             enum:
               - user
               - admin
               - never
   required:
-    - valueData
+    - value
   additionalProperties: false

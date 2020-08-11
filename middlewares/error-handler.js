@@ -29,17 +29,10 @@ module.exports = (err, req, res, next) => {
     } else err.statusCode = 500
   }
 
-  // We *really* don't need to log 401 errors with much detail since there 401s can only come
+  // We *really* don't need to log 401 errors with much detail since 401s can only come
   // from the ensure-login middleware so any error stack is pretty much useless.
-  if (err.statusCode === 401) {
-    req.log.warn(err.message)
-    return res.sendStatus(err.statusCode)
-  }
-
-  req.log[err.statusCode < 500 ? 'warn' : 'error'](err)
-
-  res.status(err.statusCode).send({
-    message: err.message,
-    name: err.name
-  })
+  const severity = err.statusCode < 500 ? 'warn' : 'error'
+  const errInfo = err.statusCode === 401 ? err.message : err
+  req.log[severity](errInfo)
+  res.sendStatus(err.statusCode)
 }
