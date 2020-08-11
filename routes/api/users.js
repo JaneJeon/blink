@@ -6,7 +6,6 @@ module.exports = Router()
     const { total, results } = await User.query()
       .authorize(req.user)
       .paginate(req.query)
-      .filterDeleted(req.query.deleted)
 
     res.header('Content-Range', `/${total}`)
     res.send(results)
