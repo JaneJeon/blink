@@ -20,8 +20,8 @@ class BaseModel extends authorize(tableName(Model)) {
     return Model.JoinEagerAlgorithm
   }
 
-  static get pageSize() {
-    return 25
+  static get channel() {
+    return `lynx:${this.name}`
   }
 
   static get jsonSchema() {

@@ -4,6 +4,7 @@
 // By skipping user authorization checks for shortened link creation,
 // we can use $relatedQuery() in the POST /api/links route even though
 // it's not supported by objection-authorize (yet).
+// TODO: exports.create
 
 exports.read = (allow, forbid, user, body) => {
   // Everyone can read each other's links.

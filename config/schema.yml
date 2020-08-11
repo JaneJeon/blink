@@ -1,3 +1,5 @@
+# The schema definitions here typically include fields that are *accessible* from the frontend.
+
 User:
   type: object
   properties:
@@ -6,17 +8,12 @@ User:
     role:
       type: string
       enum:
+        - guest
         - user
         - admin
-        - owner
-      default: user
     name:
       type: string
       # maxLength: 100
-    # avatar:
-    #   type: string
-    #   format: uri
-    #   # maxLength: 100
     deleted:
       type: boolean
       default: false
@@ -27,9 +24,6 @@ User:
 Link:
   type: object
   properties:
-    # id:
-    #   type: string
-    #   readOnly: true
     hash:
       type: string
       minLength: 4
@@ -71,4 +65,68 @@ Link:
       additionalProperties: false
   required:
     - originalUrl
+  additionalProperties: false
+
+Setting:
+  type: object
+  properties:
+    id:
+      type: string
+      readOnly: true
+    category:
+      type: string
+      readOnly: true
+      enum:
+        - user
+        - link
+    valueData:
+      type: string
+    valueType:
+      type: string
+      readOnly: true
+      enum:
+        - string
+        - boolean
+        - number
+  allOf:
+    # TODO: simplify schema options
+    - if:
+        properties:
+          id:
+            const: defaultRole
+      then: &userOptions
+        properties:
+          valueData:
+            enum:
+              - guest
+              - user
+              - admin
+    - if:
+        properties:
+          id:
+            const: whoCanSeeAllLinks
+      then: *userOptions
+    - if:
+        properties:
+          id:
+            const: whoCanCreateLink
+      then: *userOptions
+    - if:
+        properties:
+          id:
+            const: whoCanDeleteOwnLink
+      then: &permissionOptions
+        properties:
+          valueData:
+            enum:
+              - user
+              - admin
+              - never
+    - if:
+        properties:
+          id:
+            const: whoCanDeleteAnyLink
+      then: *permissionOptions
+  required:
+    - value_data
   additionalProperties: false
