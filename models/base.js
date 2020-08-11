@@ -1,9 +1,9 @@
 // istanbul ignore file
-const { Model, AjvValidator } = require('objection')
+const { Model, AjvValidator, ValidationError } = require('objection')
 const tableName = require('objection-table-name')()
 const authorize = require('objection-authorize')(require('../policies'), 'casl')
+const getPath = require('lodash/get')
 const schema = require('../config/schema.json')
-const httpError = require('http-errors')
 
 Model.knex(require('knex')(require('../knexfile')))
 
@@ -41,6 +41,31 @@ class BaseModel extends authorize(tableName(Model)) {
     })
   }
 
+  // prevent writes to readOnly fields
+  static enforceReadOnly(inputItems) {
+    inputItems.forEach(inputItem => {
+      Object.keys(inputItem).forEach(field => {
+        const path = `properties.${field}.readOnly`
+        const readOnly = getPath(this.jsonSchema, path)
+
+        if (readOnly)
+          throw new ValidationError({ message: 'Cannot edit readOnly field' })
+      })
+    })
+  }
+
+  static async beforeInsert(args) {
+    await super.beforeInsert(args)
+
+    this.enforceReadOnly(args.inputItems)
+  }
+
+  static async beforeUpdate(args) {
+    await super.beforeUpdate(args)
+
+    this.enforceReadOnly(args.inputItems)
+  }
+
   static get QueryBuilder() {
     return class extends super.QueryBuilder {
       insertAndFetch(body) {
@@ -57,8 +82,7 @@ class BaseModel extends authorize(tableName(Model)) {
       }
 
       patchAndFetch(body) {
-        const q = this.patch(body).returning('*')
-        return Array.isArray(body) ? q : q.first()
+        return this.patch(body).returning('*')
       }
 
       paginate(query = {}) {
@@ -93,7 +117,7 @@ class BaseModel extends authorize(tableName(Model)) {
             if (typeof filter !== 'object') throw new Error()
           }
         } catch (err) {
-          throw httpError(400, 'Invalid query!')
+          throw new ValidationError({ message: 'Invalid query!' })
         }
 
         let q = this.page(page, pageSize).orderBy(column, direction)
