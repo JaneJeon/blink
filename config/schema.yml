@@ -89,12 +89,14 @@ Setting:
         - boolean
         - number
   allOf:
-    # TODO: simplify schema options
     - if:
         properties:
           id:
-            const: defaultRole
-      then: &userOptions
+            enum:
+              - defaultRole
+              - whoCanSeeAllLinks
+              - whoCanCreateLink
+      then:
         properties:
           valueData:
             enum:
@@ -104,29 +106,16 @@ Setting:
     - if:
         properties:
           id:
-            const: whoCanSeeAllLinks
-      then: *userOptions
-    - if:
-        properties:
-          id:
-            const: whoCanCreateLink
-      then: *userOptions
-    - if:
-        properties:
-          id:
-            const: whoCanDeleteOwnLink
-      then: &permissionOptions
+            enum:
+              - whoCanDeleteOwnLink
+              - whoCanDeleteAnyLink
+      then:
         properties:
           valueData:
             enum:
               - user
               - admin
               - never
-    - if:
-        properties:
-          id:
-            const: whoCanDeleteAnyLink
-      then: *permissionOptions
   required:
-    - value_data
+    - valueData
   additionalProperties: false
