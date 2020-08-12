@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db-admin:
+    image: dpage/pgadmin4
+    ports:
+      - 5000:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@lynx.rest
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_LOGIN_BANNER: >-
+        "username: admin@lynx.rest<br>
+        password: admin<br>
+        Once you log into the admin panel, add new server with a name, hostname 'database', and user 'knex'."
+      # TODO: automatically connect to database
+      # https://www.pgadmin.org/docs/pgadmin4/development/import_export_servers.html#importing-servers

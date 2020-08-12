@@ -101,17 +101,15 @@ react-scripts build # to build production frontend
 ## Development
 
 ```sh
-docker-compose up -d # run this before you start development
-npm start # boot up backend express server and frontend react "live-loader"
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml -d && open http://localhost:5000 # run this before you start development
+npm start # run on separate window to boot up backend express server and frontend react "live-loader"
 ```
 
 NOTE: when you run `npm start` and try to exit by pressing `Ctrl+C`, because create-react-app is fucking retarded, it will eat the signal and exit as if something went wrong. This improper handling of exit signal causes `npm-run-all` to _also_ shutdown as if something _actually_ went wrong, and the TLDR is that you have to press `Ctrl+C` _again_ to fully exit.
 
 Yes, it's fucking weird, but it's expected behaviour, so don't panic (_unlike the process ayooooo_)!
 
-```sh
-docker-compose down # to clean up and shut down containers
-```
+The docker-compose command will stand up the databases, plus a nice little GUI for looking at the database! Press `Ctrl+C` to shut down the containers.
 
 ## Run tests
 
