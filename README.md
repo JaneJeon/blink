@@ -101,7 +101,7 @@ react-scripts build # to build production frontend
 ## Development
 
 ```sh
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml -d && open http://localhost:5000 # run this before you start development
+docker-compose up -d && open http://localhost:5000 # run this before you start development
 npm start # run on separate window to boot up backend express server and frontend react "live-loader"
 ```
 

@@ -5,8 +5,6 @@ require('pg').types.setTypeParser(20, parseInt) // cast SELECT COUNT(*) to integ
 const log = require('./lib/logger')
 const { knexSnakeCaseMappers } = require('objection')
 
-const env = process.env.NODE_ENV || 'development'
-
 module.exports = {
   client: 'pg',
   connection: process.env.DATABASE_URL || {
@@ -15,7 +13,7 @@ module.exports = {
     user: process.env.POSTGRES_USER
   },
   seeds: {
-    directory: `./seeds/${env}`
+    directory: `./seeds/${process.env.NODE_ENV}`
   },
   log: {
     warn: msg => log.warn(msg),
@@ -23,7 +21,7 @@ module.exports = {
     deprecate: msg => log.warn(msg),
     debug: msg => log.debug(msg)
   },
-  asyncStackTraces: env !== 'production',
-  debug: env !== 'production',
+  asyncStackTraces: process.env.NODE_ENV !== 'production',
+  debug: process.env.NODE_ENV !== 'production',
   ...knexSnakeCaseMappers()
 }

@@ -54,7 +54,7 @@ jobs:
       - *install
       - run:
           name: Stand up containers
-          command: docker-compose up -d
+          command: docker-compose -f docker-commpose.yml up -d
       - run:
           name: Build
           command: npm run pretest
