@@ -51,9 +51,7 @@ jobs:
     <<: *size
     docker:
       - image: circleci/postgres:alpine-ram
-        command:
-          - source .db.env
-          - postgres
+        command: source .db.env && postgres
     steps:
       - checkout
       - *install
