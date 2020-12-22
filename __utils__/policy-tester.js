@@ -6,7 +6,7 @@ module.exports = (user, resourceName) => {
     resource = resource || resourceName
     const policy = policies(user, resource, action, body)
 
-    return policy.can(action, resource, fields, body)
+    return policy.can(action, resource, fields)
   }
 
   const can = (action, resource, fields, body) =>
