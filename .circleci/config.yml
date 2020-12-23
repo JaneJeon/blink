@@ -5,6 +5,8 @@ orbs:
   slack: circleci/slack@3
   jira: circleci/jira@1
 
+resource_class: small
+
 aliases:
   - &runner
     executor:
@@ -47,11 +49,11 @@ jobs:
       - slack/notify-on-failure
       - jira/notify
   test-backend:
-    <<: *runner
     <<: *size
     docker:
+      - image: cimg/node:lts
       - image: circleci/postgres:alpine-ram
-        environment:
+        environment: # need to keep this synced with .db.env because circleci is fucking retarded
           POSTGRES_DB: lynx
           POSTGRES_USER: knex
           POSTGRES_HOST_AUTH_METHOD: trust
