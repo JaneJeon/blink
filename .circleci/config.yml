@@ -1,14 +1,17 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@3
+  node: circleci/node@4
   slack: circleci/slack@3
   jira: circleci/jira@1
+
+resource_class: small
 
 aliases:
   - &runner
     executor:
       name: node/default
+      tag: lts
   - &size
     resource_class: small
 
@@ -46,15 +49,17 @@ jobs:
       - slack/notify-on-failure
       - jira/notify
   test-backend:
-    machine: true
+    <<: *size
+    docker:
+      - image: cimg/node:lts
+      - image: circleci/postgres:alpine-ram
+        environment: # need to keep this synced with .db.env because circleci is fucking retarded
+          POSTGRES_DB: lynx
+          POSTGRES_USER: knex
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
-      - node/install:
-          node-version: lts # wtf the doc sucks and it doesn't say that you had to specify node-version
       - *install
-      - run:
-          name: Stand up containers
-          command: docker-compose up -d
       - run:
           name: Build
           command: npm run pretest
