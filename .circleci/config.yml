@@ -51,7 +51,10 @@ jobs:
     <<: *size
     docker:
       - image: circleci/postgres:alpine-ram
-        command: /bin/bash -c 'source .db.env && postgres'
+        environment:
+          POSTGRES_DB: lynx
+          POSTGRES_USER: knex
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
       - *install
