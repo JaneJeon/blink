@@ -5,7 +5,7 @@ const authorize = require('objection-authorize')(require('../policies'), 'casl')
 const schema = require('../config/schema.json')
 const httpError = require('http-errors')
 
-Model.knex(require('knex')(require('../knexfile')))
+Model.knex(require('../lib/knex'))
 
 class BaseModel extends authorize(tableName(Model)) {
   static get modelPaths() {
