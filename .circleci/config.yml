@@ -59,7 +59,7 @@ jobs:
           POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - checkout
-      - *install
+      - node/install-packages
       - run:
           name: Build
           command: npm run pretest
