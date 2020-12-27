@@ -7,17 +7,14 @@ services:
       - 5432:5432
     env_file:
       - .db.env
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -h localhost']
-      interval: 10s
-      timeout: 3s
-      retries: 5
-  # web:
-  #   build: .
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   volumes:
-  #     - .:/code
-  #   ports:
-  #     - '8000:8000'
-  #   depends_on:
-  #     - db
+  pgadmin:
+    # use hostname host.docker.internal to connect instead of localhost
+    # and use db user "knex"
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    ports:
+      - 5000:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    restart: unless-stopped
