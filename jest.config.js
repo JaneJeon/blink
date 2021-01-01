@@ -16,6 +16,5 @@ module.exports = {
   ],
   errorOnDeprecated: true,
   testEnvironment: 'node',
-  globalSetup: '<rootDir>/scripts/init-models.js',
   testPathIgnorePatterns: ['node_modules/', 'src/']
 }

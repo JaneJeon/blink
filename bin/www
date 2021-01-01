@@ -7,7 +7,6 @@ const http = require('http')
 const app = require('../app')
 const log = require('../lib/logger')
 const BaseModel = require('../models/base')
-const initModels = require('../scripts/init-models')
 
 log.info('Starting server under %s environment...', process.env.NODE_ENV)
 
@@ -23,14 +22,9 @@ app.set('port', port)
 const server = http.createServer(app)
 
 /**
- * Listen on provided port, on all network interfaces...
- * after initializing all of the model classes.
+ * Listen on provided port, on all network interfaces
  */
-initModels()
-  .then(() => server.listen(port))
-  .catch(err => log.error(err))
-server.on('error', onError)
-server.on('listening', onListening)
+server.listen(port).on('error', onError).on('listening', onListening)
 
 /**
  * Graceful shutdown for pm2
