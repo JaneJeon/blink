@@ -16,9 +16,8 @@ exports.update = (allow, forbid, user, body) => {
     allow('update', 'User', 'role')
   } else if (user.role === 'admin' && body.role !== 'owner') {
     // An admin can promote a user to admin, or recuse itself
-    allow('update', 'User', 'role', {
-      $or: [{ role: 'user' }, { id: user.id }]
-    })
+    allow('update', 'User', 'role', { role: 'user' })
+    allow('update', 'User', 'role', { id: user.id })
   }
 
   // disable updates to a deleted user

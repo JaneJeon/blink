@@ -36,7 +36,7 @@
     "test:watch:backend": "npm run test:nowatch:backend --watch"
   },
   "dependencies": {
-    "@casl/ability": "^3.4.0",
+    "@casl/ability": "^5.1.1",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -47,7 +47,7 @@
     "got": "^11.5.1",
     "helmet": "^4.0.0",
     "http-errors": "^1.7.3",
-    "knex": "^0.21.2",
+    "knex": "^0.21.15",
     "lodash": "^4.17.19",
     "metascraper": "^5.13.2",
     "metascraper-author": "^5.13.2",
@@ -61,7 +61,7 @@
     "ms": "^2.1.2",
     "normalize-url": "^5.1.0",
     "objection": "^2.2.2",
-    "objection-authorize": "^3.1.1",
+    "objection-authorize": "4.0.0-alpha.2",
     "objection-hashid": "^1.2.0",
     "objection-table-name": "^1.2.0",
     "passport": "^0.4.1",

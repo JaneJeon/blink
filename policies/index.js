@@ -6,7 +6,7 @@ const { AbilityBuilder, Ability } = require('@casl/ability')
 const policyMap = { User: require('./user'), Link: require('./link') }
 
 module.exports = (user, resource, action, body = {}) => {
-  const { rules, can: allow, cannot: forbid } = AbilityBuilder.extract()
+  const { rules, can: allow, cannot: forbid } = new AbilityBuilder(Ability)
   const resourceName =
     typeof resource === 'string' ? resource : resource.constructor.name
   const policies = policyMap[resourceName]
