@@ -3,7 +3,6 @@ const app = require('../../app')
 const mockSession = require('../../__utils__/mock-user-session')
 const session = supertest.agent(app)
 const cookie = mockSession('owner')
-const BaseModel = require('../../models/base')
 
 describe('/api/links', () => {
   let link
@@ -65,9 +64,5 @@ describe('/api/links', () => {
         .set('Cookie', cookie)
       expect(status).toEqual(204)
     })
-  })
-
-  afterAll(async () => {
-    await BaseModel.knex().destroy()
   })
 })

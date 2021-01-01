@@ -16,10 +16,6 @@ describe('Link', () => {
     user = await User.fromJson({ id: 'admin' })
   })
 
-  afterAll(async () => {
-    await Link.knex().destroy()
-  })
-
   it('shortens URL', async () => {
     let link = await user
       .$relatedQuery('links')

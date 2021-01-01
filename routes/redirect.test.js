@@ -18,10 +18,6 @@ describe('/', () => {
     await user.$relatedQuery('links').insert({ originalUrl, hash })
   })
 
-  afterAll(async () => {
-    await User.knex().destroy()
-  })
-
   test('GET /', done => {
     request(app).get('/').expect(301, done)
   })

@@ -9,10 +9,6 @@ describe.skip('/api/users', () => {
     await User.query().insert({ id })
   })
 
-  afterAll(async () => {
-    await User.knex().destroy()
-  })
-
   test('GET /', done => {
     request(app).get('/api/users').expect(200, done)
   })

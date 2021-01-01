@@ -6,7 +6,7 @@
 const http = require('http')
 const app = require('../app')
 const log = require('../lib/logger')
-const BaseModel = require('../models/base')
+const knex = require('../lib/knex')
 
 log.info('Starting server under %s environment...', process.env.NODE_ENV)
 
@@ -36,7 +36,7 @@ const gracefulShutdown = () => {
     log.info(
       'Closed all connections. Tearing down database connection pools...'
     )
-    await BaseModel.knex().destroy()
+    await knex.destroy()
     log.info('Shutdown successful!')
     process.exit(0)
   })
