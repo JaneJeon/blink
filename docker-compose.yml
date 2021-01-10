@@ -10,7 +10,6 @@ services:
   pgadmin:
     # use hostname host.docker.internal to connect instead of localhost
     # and use db user "knex"
-    container_name: pgadmin_container
     image: dpage/pgadmin4
     ports:
       - 5000:80
