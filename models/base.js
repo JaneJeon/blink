@@ -1,13 +1,16 @@
 // istanbul ignore file
 const { Model, AjvValidator } = require('objection')
 const tableName = require('objection-table-name')()
-const authorize = require('objection-authorize')(require('../policies'), 'casl')
+const authorize = require('objection-authorize')
+const policies = require('../policies')
 const schema = require('../config/schema.json')
 const httpError = require('http-errors')
 
 Model.knex(require('../lib/knex'))
 
-class BaseModel extends authorize(tableName(Model)) {
+class BaseModel extends authorize(policies, 'casl', {
+  casl: { useInputItemAsResourceForRelation: true }
+})(tableName(Model)) {
   static get modelPaths() {
     return [__dirname]
   }
@@ -48,19 +51,19 @@ class BaseModel extends authorize(tableName(Model)) {
         return Array.isArray(body) ? q : q.first()
       }
 
-      patchAndFetchById(id, body) {
-        return this.findById(id)
-          .throwIfNotFound()
-          .patch(body)
-          .returning('*')
-          .first()
+      updateAndFetch(body) {
+        return this.update(body).returning('*')
       }
 
-      patchAndFetch(body) {
-        const q = this.patch(body).returning('*')
-        return Array.isArray(body) ? q : q.first()
+      updateAndFetchById(id, body) {
+        return this.findById(id).throwIfNotFound().updateAndFetch(body).first()
       }
 
+      deleteById(id, body) {
+        return this.findById(id).throwIfNotFound().delete(body)
+      }
+
+      // Massage .page() in a way that react-admin likes
       paginate(query = {}) {
         // defaults
         let page = 0
@@ -96,6 +99,7 @@ class BaseModel extends authorize(tableName(Model)) {
           throw httpError(400, 'Invalid query!')
         }
 
+        // I really don't want to be using offset...
         let q = this.page(page, pageSize).orderBy(column, direction)
 
         for (const [key, value] of Object.entries(filter))

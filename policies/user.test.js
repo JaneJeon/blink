@@ -1,6 +1,6 @@
 const policyTester = require('../__utils__/policy-tester')
 
-describe('user policy', () => {
+describe.skip('user policy', () => {
   let i = 0
   class User {
     constructor({ role, deleted = false }) {

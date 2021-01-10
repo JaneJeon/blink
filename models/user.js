@@ -13,14 +13,6 @@ class User extends BaseModel {
       }
     }
   }
-
-  static get QueryBuilder() {
-    return class extends BaseModel.QueryBuilder {
-      filterDeleted(deleted = false) {
-        return this.where({ deleted })
-      }
-    }
-  }
 }
 
 module.exports = User

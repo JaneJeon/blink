@@ -10,7 +10,7 @@ const User = require('../models/user')
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (req, id, done) => {
   try {
-    const user = await User.query().findById(id).filterDeleted()
+    const user = await User.query().findById(id)
 
     done(null, user || false)
   } catch (err) {

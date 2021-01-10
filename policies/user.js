@@ -1,12 +1,12 @@
 // "Creating" a user does not make sense in the context of user authorization,
 // because you "create" a user by simply signing in with your team's slack account.
 
-exports.read = (allow, forbid, user, body) => {
+exports.read = (allow, forbid, user, body, relation) => {
   // everyone in a team can read each other
   allow('read', 'User')
 }
 
-exports.update = (allow, forbid, user, body) => {
+exports.update = (allow, forbid, user, body, relation) => {
   // A user can update only itself, but not some fields
   allow('update', 'User', { id: user.id })
   forbid('update', 'User', ['id', 'role', 'deleted'])
@@ -26,7 +26,7 @@ exports.update = (allow, forbid, user, body) => {
 
 // While we're not *actually* deleting a user, objection-soft-delete allows us
 // to separate out soft deletions from updates (which is what they are).
-exports.delete = (allow, forbid, user, body) => {
+exports.delete = (allow, forbid, user, body, relation) => {
   // Always require explicit confirmation whenever deleting any user by anyone
   if (!body.confirm) return
 
@@ -40,9 +40,4 @@ exports.delete = (allow, forbid, user, body) => {
     // Owners can delete anyone
     allow('delete', 'User')
   }
-}
-
-exports.undelete = (allow, forbid, user, body) => {
-  // Admins and owners can recover 'deleted' accounts
-  if (user.role === 'admin' || user.role === 'owner') allow('undelete', 'User')
 }

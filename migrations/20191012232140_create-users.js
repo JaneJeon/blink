@@ -7,8 +7,6 @@ exports.up = knex =>
 
     table.text('name')
 
-    table.boolean('deleted').notNullable()
-
     table.timestamps(true, true)
   })
 

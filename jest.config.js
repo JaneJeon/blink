@@ -18,5 +18,6 @@ module.exports = {
   notify: true,
   testEnvironment: 'node',
   testPathIgnorePatterns: ['node_modules/', 'src/'],
-  globalSetup: 'scripts/pretest.sh'
+  globalSetup: './scripts/pretest.js',
+  globalTeardown: './scripts/teardown-db.js'
 }

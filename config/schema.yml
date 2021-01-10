@@ -17,9 +17,6 @@ User:
     #   type: string
     #   format: uri
     #   # maxLength: 100
-    deleted:
-      type: boolean
-      default: false
   required:
     - id
   additionalProperties: false

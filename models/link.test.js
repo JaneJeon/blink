@@ -1,3 +1,4 @@
+require('../__utils__/knex-test')
 const Link = require('./link')
 const User = require('./user')
 const normalizeUrl = require('normalize-url')

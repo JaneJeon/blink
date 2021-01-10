@@ -5,11 +5,9 @@ const { AbilityBuilder, Ability } = require('@casl/ability')
 // This can be updated with import syntax once #128 is under way.
 const policyMap = { User: require('./user'), Link: require('./link') }
 
-module.exports = (user, resource, action, body = {}) => {
+module.exports = (user, resource, action, body, opts, relation) => {
   const { rules, can: allow, cannot: forbid } = new AbilityBuilder(Ability)
-  const resourceName =
-    typeof resource === 'string' ? resource : resource.constructor.name
-  const policies = policyMap[resourceName]
+  const policies = policyMap[body.constructor.name]
 
   // when action is specified, we can narrow the ability down to the action level
   if (action) policies[action](allow, forbid, user, body)

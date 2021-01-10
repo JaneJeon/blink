@@ -1,3 +1,4 @@
+require('../__utils__/knex-test')
 const request = require('supertest')
 const app = require('../app')
 const Link = require('../models/link')
