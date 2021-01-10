@@ -51,10 +51,10 @@ describe('/api/links', () => {
     it('works', async () => {
       const { body, status } = await session
         .put(`/api/links/${link.id}`)
-        .send({ originalUrl: 'js.org', hash: 'FooBar' })
+        .send({ originalUrl: 'js.org', hash: 'foobar' })
         .set('Cookie', cookie)
       expect(status).toEqual(200)
-      expect(body.hash).toBe('FooBar')
+      expect(body.hash).toBe('foobar')
     })
   })
 
