@@ -15,6 +15,8 @@ module.exports = {
     '!**/__mocks__/**'
   ],
   errorOnDeprecated: true,
+  notify: true,
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['node_modules/', 'src/']
+  testPathIgnorePatterns: ['node_modules/', 'src/'],
+  globalSetup: 'scripts/pretest.sh'
 }

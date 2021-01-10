@@ -61,11 +61,8 @@ jobs:
       - checkout
       - node/install-packages
       - run:
-          name: Build
-          command: npm run pretest
-      - run:
           name: Test Express
-          command: npm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default
+          command: npm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default --forceExit
           environment:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
       - *retrieve-junit
