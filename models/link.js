@@ -8,19 +8,6 @@ const normalizeUrl = require('normalize-url')
 const domain = new URL(process.env.BASE_URL).host
 
 class Link extends hashId(BaseModel) {
-  static get relationMappings() {
-    return {
-      creator: {
-        type: BaseModel.BelongsToOneRelation,
-        modelClass: 'user',
-        join: {
-          from: 'links.creatorId',
-          to: 'users.id'
-        }
-      }
-    }
-  }
-
   // process JSON from user input synchronously
   $parseJson(json, opt) {
     json = super.$parseJson(json, opt)

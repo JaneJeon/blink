@@ -4,7 +4,7 @@ const User = require('./user')
 const normalizeUrl = require('normalize-url')
 const { ValidationError, UniqueViolationError } = require('objection')
 
-describe('Link', () => {
+describe.skip('Link', () => {
   const originalUrls = ['www.nodejs.org', 'example.com', 'http://google.com']
   const normalizedUrls = originalUrls.map(url =>
     normalizeUrl(url, { forceHttps: true })

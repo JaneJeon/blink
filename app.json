@@ -21,20 +21,6 @@
     "HOMEPAGE": {
       "description": "where the root domain should redirect to; e.g. https://bitly.com (protocol required)"
     },
-    "SLACK_CLIENT_ID": {
-      "description": ""
-    },
-    "SLACK_CLIENT_SECRET": {
-      "description": ""
-    },
-    "SLACK_TEAM_ID": {
-      "description": "",
-      "required": false
-    },
-    "SLACK_TEAM_DOMAIN": {
-      "description": "",
-      "required": false
-    },
     "SESSION_SECRET": {
       "description": "the session encryption key",
       "generator": "secret"
