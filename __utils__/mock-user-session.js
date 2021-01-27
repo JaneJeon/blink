@@ -1,6 +1,6 @@
 const Keygrip = require('keygrip')
 const kg = Keygrip([process.env.SESSION_SECRET])
-const sessKey = 'session'
+const sessKey = 'appSession'
 
 // We rely on sessions for req.user, and it's not exactly easy to mock out the session.
 // This module allows you to fake cookies and set any custom req.user you want.

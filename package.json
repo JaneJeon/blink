@@ -32,11 +32,12 @@
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
     "test:watch:frontend": "SKIP_KNEX=true react-scripts test",
     "test:nowatch:backend": "jest",
-    "test:watch:backend": "npm run test:nowatch:backend --watch"
+    "test:watch:backend": "npm run test:nowatch:backend --watch",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "@casl/ability": "^5.1.1",
-    "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
@@ -56,7 +57,6 @@
     "metascraper-logo-favicon": "^5.13.2",
     "metascraper-publisher": "^5.13.2",
     "metascraper-title": "^5.13.2",
-    "ms": "^2.1.2",
     "normalize-url": "^5.1.0",
     "objection": "^2.2.5",
     "objection-authorize": "^4.1.0",
@@ -84,7 +84,6 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.20.5",
-    "fsevents": "^2.2.1",
     "husky": "^4.2.0",
     "jest-junit": "^12.0.0",
     "json-schema-faker": "^0.5.0-rc23",
@@ -97,7 +96,6 @@
     "pino-pretty": "^4.1.0",
     "prettier": "^2.0.5",
     "prettier-plugin-toml": "^0.3.1",
-    "qawolf": "^1.2.1",
     "ra-data-simple-rest": "^3.1.0",
     "react": "^17.0.1",
     "react-admin": "^3.1.3",
@@ -106,7 +104,8 @@
     "react-scripts": "^4.0.1",
     "skip-ci": "^1.0.3",
     "supertest": "^6.0.1",
-    "trace": "^3.1.1"
+    "trace": "^3.1.1",
+    "vuepress": "^1.8.0"
   },
   "prettier": "@janejeon/prettier-config",
   "browserslist": {
