@@ -10,8 +10,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express')
 const { auth: oidc } = require('express-openid-connect')
-const session = require('cookie-session')
-const ms = require('ms')
 const get = require('lodash/get')
 const { ValidationError, NotFoundError, DBError } = require('objection')
 const logger = require('./lib/logger')
@@ -22,14 +20,6 @@ module.exports = express()
     next()
   })
   .use(require('helmet')())
-  .use(
-    session({
-      name: 'session',
-      secret: process.env.SESSION_SECRET,
-      sameSite: 'lax',
-      maxAge: ms(process.env.SESSION_DURATION)
-    })
-  )
   .use(express.json())
   .use(
     oidc({
