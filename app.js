@@ -25,12 +25,14 @@ module.exports = express()
     oidc({
       enableTelemetry: false,
       attemptSilentLogin: false,
-      authRequired: false
+      authRequired: false,
+      routes: {
+        callback: '/app'
+      }
     })
   )
   .use((req, res, next) => {
-    req.log.info(req.oidc.user)
-    if (req.oidc.user)
+    if (get(req, 'oidc.user'))
       req.user = {
         id: req.oidc.user.sub,
         name: get(req.oidc.user, process.env.USER_NAME_FIELD),

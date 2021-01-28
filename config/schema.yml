@@ -1,9 +1,8 @@
 Link:
   type: object
   properties:
-    # id:
-    #   type: string
-    #   readOnly: true
+    creatorId:
+      type: string
     hash:
       type: string
       minLength: 4
@@ -44,5 +43,6 @@ Link:
           # maxLength: 100
       additionalProperties: false
   required:
+    - creatorId
     - originalUrl
   additionalProperties: false

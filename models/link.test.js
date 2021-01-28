@@ -1,26 +1,23 @@
 require('../__utils__/knex-test')
+
 const Link = require('./link')
-const User = require('./user')
 const normalizeUrl = require('normalize-url')
 const { ValidationError, UniqueViolationError } = require('objection')
 
-describe.skip('Link', () => {
+describe('Link', () => {
   const originalUrls = ['www.nodejs.org', 'example.com', 'http://google.com']
   const normalizedUrls = originalUrls.map(url =>
     normalizeUrl(url, { forceHttps: true })
   )
 
   const links = []
-  let user
-
-  beforeAll(async () => {
-    user = await User.fromJson({ id: 'admin' })
-  })
+  const user = { id: 'superuser', role: 'superuser' }
 
   it('shortens URL', async () => {
-    let link = await user
-      .$relatedQuery('links')
-      .insert({ originalUrl: originalUrls[0] })
+    let link = await Link.query().insert({
+      originalUrl: originalUrls[0],
+      creatorId: user.id
+    })
     link = link.toJSON()
     links.push(link)
 
@@ -37,35 +34,40 @@ describe.skip('Link', () => {
 
   it('prevents duplicate URLs', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalUrl: originalUrls[0] })
+      Link.query().insert({ originalUrl: originalUrls[0], creatorId: user.id })
     ).rejects.toThrow(UniqueViolationError)
   })
 
   it('prevents URL redirect loop', async () => {
     await expect(
-      user
-        .$relatedQuery('links')
-        .insert({ originalUrl: process.env.BASE_URL + '/hello' })
+      Link.query().insert({
+        originalUrl: process.env.BASE_URL + '/hello',
+        creatorId: user.id
+      })
     ).rejects.toThrow(ValidationError)
   })
 
   it('rejects invalid URLs', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalUrl: '1234 0' })
+      Link.query().insert({ originalUrl: '1234 0', creatorId: user.id })
     ).rejects.toThrow(ValidationError)
   })
 
   it('rejects valid but nonexistent URLs', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalUrl: 'www.timeout.com' })
+      Link.query().insert({
+        originalUrl: 'www.timeout.com',
+        creatorId: user.id
+      })
     ).rejects.toThrow()
   })
 
   const hash = 'FooBar'
   it('can set custom hash', async () => {
-    const link = await user.$relatedQuery('links').insert({
+    const link = await Link.query().insert({
       originalUrl: originalUrls[1],
-      hash
+      hash,
+      creatorId: user.id
     })
 
     expect(link.hash).toEqual(hash)
@@ -76,24 +78,30 @@ describe.skip('Link', () => {
 
   it('prevents duplicate custom hash', async () => {
     await expect(
-      user.$relatedQuery('links').insert({ originalUrl: originalUrls[2], hash })
+      Link.query().insert({
+        originalUrl: originalUrls[2],
+        hash,
+        creatorId: user.id
+      })
     ).rejects.toThrow(UniqueViolationError)
   })
 
   it('prevents custom hash that clashes with hashIds', async () => {
     const generatedHash = Link._hashIdInstance.encode(500)
     await expect(
-      user
-        .$relatedQuery('links')
-        .insert({ originalUrl: originalUrls[2], hash: generatedHash })
+      Link.query().insert({
+        originalUrl: originalUrls[2],
+        hash: generatedHash,
+        creatorId: user.id
+      })
     ).rejects.toThrow(ValidationError)
   })
 
   describe('QueryBuilder', () => {
     test('#findByHashId', async () => {
       const [link0, link1] = await Promise.all([
-        user.$relatedQuery('links').findByHashId(links[0].id),
-        user.$relatedQuery('links').findByHashId(links[1].id)
+        Link.query().findByHashId(links[0].id),
+        Link.query().findByHashId(links[1].id)
       ])
 
       expect(link0.originalUrl).toEqual(links[0].originalUrl)
