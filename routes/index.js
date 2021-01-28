@@ -1,7 +1,7 @@
 const { Router } = require('express')
+const ensureLogin = require('../middlewares/ensure-login')
 
 module.exports = Router()
-  .use('/api', require('./api'))
+  .use('/api', ensureLogin, require('./api'))
   .use('/app', require('./app'))
-  .use('/auth', require('./auth'))
   .use('/', require('./redirect'))

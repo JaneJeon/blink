@@ -14,9 +14,6 @@ module.exports = {
     database: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER
   },
-  seeds: {
-    directory: `./seeds/${env}`
-  },
   log: {
     warn: msg => log.warn(msg),
     error: msg => log.error(msg),

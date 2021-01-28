@@ -21,6 +21,6 @@ exports.update = (allow, forbid, user, body) => {
 }
 
 exports.delete = (allow, forbid, user, body) => {
-  // Only an owner can delete a link, since it involves CDN cache busting.
-  if (user.role === 'owner') allow('delete', 'Link')
+  // Prevent link deletion to regular users since it involves CDN cache busting.
+  if (user.role === 'superuser') allow('delete', 'Link')
 }

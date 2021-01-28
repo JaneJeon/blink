@@ -1,22 +1,17 @@
 require('../__utils__/knex-test')
+require('../__utils__/trxify-test')
+
 const request = require('supertest')
 const app = require('../app')
 const Link = require('../models/link')
-const User = require('../models/user')
 
 describe('/', () => {
-  const originalUrl = 'medium.com'
-  const hash = 'HeLlOwOrLd' // =3
+  const originalUrl = 'redirect-test.com'
+  const hash = 'redirectTest'
 
   beforeAll(async () => {
-    const id = 'redirectUser'
-    await Link.query()
-      .delete()
-      .where({ originalUrl })
-      .orWhere({ creatorId: id })
-    await User.query().delete().where({ id })
-    const user = await User.query().insert({ id })
-    await user.$relatedQuery('links').insert({ originalUrl, hash })
+    await Link.query().delete().where({ originalUrl })
+    await Link.query().insert({ originalUrl, hash, creatorId: 'test user' })
   })
 
   test('GET /', done => {

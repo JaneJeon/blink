@@ -5,7 +5,7 @@ exports.up = knex =>
     table.increments()
     table.text('hash').unique()
     table.text('original_url').notNullable().unique()
-    table.text('creator_id').references('users.id').notNullable()
+    table.text('creator_id').notNullable().index()
 
     table.jsonb('meta')
 

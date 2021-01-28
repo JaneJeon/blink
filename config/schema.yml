@@ -1,32 +1,8 @@
-User:
-  type: object
-  properties:
-    id:
-      type: string
-    role:
-      type: string
-      enum:
-        - user
-        - admin
-        - owner
-      default: user
-    name:
-      type: string
-      # maxLength: 100
-    # avatar:
-    #   type: string
-    #   format: uri
-    #   # maxLength: 100
-  required:
-    - id
-  additionalProperties: false
-
 Link:
   type: object
   properties:
-    # id:
-    #   type: string
-    #   readOnly: true
+    creatorId:
+      type: string
     hash:
       type: string
       minLength: 4
@@ -67,5 +43,6 @@ Link:
           # maxLength: 100
       additionalProperties: false
   required:
+    - creatorId
     - originalUrl
   additionalProperties: false

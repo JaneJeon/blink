@@ -5,8 +5,6 @@
 [![Dependencies](https://img.shields.io/david/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx)
 [![devDependencies](https://img.shields.io/david/dev/JaneJeon/lynx)](https://david-dm.org/JaneJeon/lynx?type=dev)
 [![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaneJeon/lynx)](https://snyk.io//test/github/JaneJeon/lynx?targetFile=package.json)
-[![License](https://img.shields.io/npm/l/myurl)](https://github.com/JaneJeon/myURL/blob/master/LICENSE)
-[![Standard code style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Prettier code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
 [![Issues](https://img.shields.io/badge/issues-jira-blue)](https://janedev.atlassian.net/jira/software/projects/LYNX/boards/3)
@@ -70,33 +68,17 @@ In fact, this project is essentially a "proving ground" for such a concept, whic
 
 ## Install
 
-### The server
-
-#### Heroku
-
-##### 1-click Button
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-##### Updating (setting remote, fetching releases, etc)
+### Updating Heroku source for the server
 
     heroku git:remote -a YOURAPPNAME
     git fetch origin v1.X.Y
     git push heroku master
-
-#### npm
-
-    npm i -g lynx-app
 
 ### CDN/DNS
 
 ### Analytics
 
 ## Usage
-
-```sh
-react-scripts build # to build production frontend
-```
 
 ## Development
 
@@ -136,8 +118,8 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2019 [Jane Jeon](https://github.com/JaneJeon).<br />
-This project is [AGPL-3.0](https://github.com/JaneJeon/lynx/blob/master/LICENSE) licensed.
+Copyright © 2021 [Jane Jeon](https://github.com/JaneJeon).<br />
+This project is [AGPL-3.0](https://github.com/JaneJeon/lynx/blob/master/LICENSE) licensed (TL;DR: please contribute back improvements to this application).
 
 ---
 
