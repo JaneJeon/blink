@@ -1,6 +1,5 @@
-const Link = require('../models/link')
+const knexCleaner = require('knex-cleaner')
 
 exports.seed = async knex => {
-  // Deletes ALL existing entries
-  await Link.query().delete()
+  return knexCleaner.clean(knex, { mode: 'truncate', restartIdentity: 'true' })
 }

@@ -34,7 +34,7 @@ Link:
         logo:
           type: string
           format: uri
-          maxLength: 100
+          # maxLength: 100
         publisher:
           type: string
           # maxLength: 100
