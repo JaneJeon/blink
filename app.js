@@ -2,12 +2,6 @@
 require('./config')
 require('express-async-errors')
 
-if (process.env.NODE_ENV !== 'production') {
-  // cleaner stacks for debugging
-  require('trace')
-  require('clarify')
-}
-
 const express = require('express')
 const { auth: oidc } = require('express-openid-connect')
 const get = require('lodash/get')
@@ -27,7 +21,8 @@ module.exports = express()
       attemptSilentLogin: false,
       authRequired: false,
       routes: {
-        callback: '/app'
+        callback: '/app',
+        postLogoutRedirect: '/'
       }
     })
   )
