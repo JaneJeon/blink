@@ -10,7 +10,6 @@ import {
   TextField,
   RichTextField
 } from 'react-admin'
-
 import Typography from '@material-ui/core/Typography'
 
 const LinkTitle = ({ record }) => {

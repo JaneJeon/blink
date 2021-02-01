@@ -3,6 +3,7 @@ Link:
   properties:
     creatorId:
       type: string
+      readOnly: true
     hash:
       type: string
       minLength: 4

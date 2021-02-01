@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@casl/ability": "^5.1.1",
-    "dotenv": "^8.2.0",
+    "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-openid-connect": "^2.1.0",

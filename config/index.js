@@ -1,6 +1,3 @@
-const dotenv = require('dotenv')
-dotenv.config()
-dotenv.config({ path: '.default.env' })
-dotenv.config({ path: '.db.env' })
+require('dotenv-flow').config()
 
 module.exports = {}

@@ -5,5 +5,8 @@ services:
     image: circleci/postgres:alpine-ram
     ports:
       - 5432:5432
-    env_file:
-      - .db.env
+    environment:
+      # keep this in sync w/ DATABASE_URL in your environment file/variable
+      POSTGRES_DB: lynx
+      POSTGRES_USER: knex
+      POSTGRES_HOST_AUTH_METHOD: trust
