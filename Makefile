@@ -1,4 +1,4 @@
-.PHONY: up, up-all, down
+.PHONY: up, up-all, down, logs
 up:
 	docker-compose -f docker-compose.yml up -d
 
@@ -7,3 +7,6 @@ up-all:
 
 down:
 	docker-compose down
+
+logs:
+	docker-compose logs -f
