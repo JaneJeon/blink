@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import pick from 'lodash/pick'
 import Dialog from '@material-ui/core/Dialog'
@@ -56,7 +56,7 @@ export default function LinkShortener() {
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       <IconButton
         aria-label="add"
         color="primary"
@@ -124,6 +124,6 @@ export default function LinkShortener() {
           </form>
         </DialogContent>
       </Dialog>
-    </React.Fragment>
+    </Fragment>
   )
 }

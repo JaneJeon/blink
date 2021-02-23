@@ -20,8 +20,8 @@ const parseUser = (req, res, next) => {
   const token = get(req, 'oidc')
   if (token)
     req.user = {
-      id: get(token, 'sub'),
-      role: get(token, process.env.OIDC_USER_ROLE)
+      id: get(token, process.env.OIDC_USER_ID_FIELD),
+      role: get(token, process.env.OIDC_USER_ROLE_FIELD)
     }
   next()
 }

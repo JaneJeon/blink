@@ -1,29 +1,19 @@
-/* eslint-disable import/no-anonymous-default-export */
+import { getUser } from '../user-manager'
+
 /* eslint-disable prefer-promise-reject-errors */
-export default {
-  // authentication
+const authProvider = {
   checkError: ({ status }) => {
+    // eslint-disable-next-line no-console
     return status === 401 || status === 403
-      ? Promise.reject()
+      ? Promise.reject() // TODO: why the FUCK does RA does not redirect to login on 401???
       : Promise.resolve()
   },
-  logout: () => {
-    window.location.href = '/logout'
-  },
-  getIdentity: async () => {
-    return Promise.resolve()
-
-    // eslint-disable-next-line no-unreachable
-    const res = await fetch('/api/user')
-    const data = await res.json()
-
-    return {
-      id: data.id,
-      fullName: data.name
-      //   avatar: 'TODO:'
-    }
-  },
-  // authorization
-  getPermissions: params => Promise.resolve(), // TODO:
-  checkAuth: () => Promise.resolve()
+  checkAuth: () => (getUser() ? Promise.resolve() : Promise.reject()),
+  // logout: () => {
+  //   return userManager.signoutRedirect()
+  // },
+  // getIdentity: getUser,
+  getPermissions: params => Promise.resolve() // TODO:
 }
+
+export default authProvider

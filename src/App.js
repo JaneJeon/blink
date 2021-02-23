@@ -1,4 +1,4 @@
-import React from 'react'
+import { useMemo } from 'react'
 import { Admin, Resource, EditGuesser, Layout, AppBar } from 'react-admin'
 import { createBrowserHistory } from 'history'
 
@@ -6,8 +6,8 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import LinkIcon from '@material-ui/icons/Link'
 
-import Shortener from './components/shortener'
-import LoginPage from './pages/SSOLogin'
+import Shortener from './components/Shortener'
+import LoginPage from './pages/LoginPage'
 import authProvider from './providers/auth'
 import dataProvider from './providers/data'
 import * as link from './resources/link'
@@ -30,7 +30,7 @@ const history = createBrowserHistory({ basename: '/app' })
 export default function App() {
   // theme that changes to dark mode according to system settings
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  const theme = React.useMemo(
+  const theme = useMemo(
     () =>
       createMuiTheme({
         palette: {

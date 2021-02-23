@@ -1,0 +1,27 @@
+{
+  "Link": {
+    "type": "object",
+    "properties": {
+      "creatorId": { "type": "string", "readOnly": true },
+      "hash": { "type": "string", "minLength": 4, "maxLength": 25 },
+      "originalUrl": { "type": "string" },
+      "shortenedUrl": { "type": "string", "readOnly": true },
+      "brandedUrl": { "type": "string", "readOnly": true },
+      "meta": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "description": { "type": "string" },
+          "lang": { "type": "string" },
+          "logo": { "type": "string", "format": "uri" },
+          "publisher": { "type": "string" },
+          "title": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required": ["creatorId", "originalUrl"],
+    "additionalProperties": false
+  }
+}
