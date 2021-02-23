@@ -54,13 +54,13 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+.env.local
+.env.*.local
 
 # next.js build output
 .next
 
 # Built files
-config/**/*.json
 reports/
 build/
 
