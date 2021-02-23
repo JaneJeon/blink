@@ -10,9 +10,8 @@ const parseToken = jwt({
     jwksUri: process.env.OIDC_JWKS_URI
   }),
 
-  // TODO: Validate the audience and the issuer.
   algorithms: process.env.OIDC_ALGORITHMS.split(','),
-
+  audience: process.env.OIDC_CLIENT_ID,
   requestProperty: 'oidc'
 })
 
