@@ -9,7 +9,8 @@ export const userManager = new UserManager({
   redirect_uri: `${window.location.origin}/app/login`,
   post_logout_redirect_uri: `${window.location.origin}/app/login`,
   response_type: 'code',
-  scope: 'openid profile'
+  scope: 'openid profile',
+  automaticSilentRenew: true
 })
 
 const USER_KEY = 'lynx-user'
@@ -35,3 +36,13 @@ export const setUser = user => {
 
 userManager.events.addUserLoaded(setUser)
 userManager.events.addUserSignedOut(setUser)
+
+// Inject the OIDC id token JWT on every request
+export const injectAuthHeaders = headers => {
+  if (!headers) headers = new Headers({ Accept: 'application/json' })
+
+  headers.set('Content-Type', 'application/json')
+  headers.set('Authorization', `Bearer ${getUser().token}`)
+
+  return headers
+}

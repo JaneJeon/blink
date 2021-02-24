@@ -6,7 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import LinkIcon from '@material-ui/icons/Link'
 
-import Shortener from './components/Shortener'
+import Shortener from './components/shortener'
 import LoginPage from './pages/LoginPage'
 import authProvider from './providers/auth'
 import dataProvider from './providers/data'

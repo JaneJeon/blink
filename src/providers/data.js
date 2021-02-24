@@ -1,15 +1,9 @@
 import simpleRestProvider from 'ra-data-simple-rest'
 import { fetchUtils } from 'react-admin'
-import { getUser } from '../user-manager'
+import { injectAuthHeaders } from '../user-manager'
 
-// Inject the OIDC id token JWT on every request
 const fetchJson = (url, options = {}) => {
-  if (!options.headers) {
-    options.headers = new Headers({ Accept: 'application/json' })
-  }
-
-  // add your own headers here
-  options.headers.set('Authorization', `Bearer ${getUser().token}`)
+  options.headers = injectAuthHeaders(options.headers)
   return fetchUtils.fetchJson(url, options)
 }
 

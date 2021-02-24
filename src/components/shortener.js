@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton'
 import AddIcon from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
+import { injectAuthHeaders } from '../user-manager'
 
 const RequestStateEnum = Object.freeze({
   READY: 0,
@@ -25,8 +26,6 @@ export default function LinkShortener() {
     brandedUrl: ''
   })
   const [error, setError] = useState('')
-  // TODO: form validation
-  // TODO: logic about whether you're allowed to set/change hash
 
   async function shortenLink(e) {
     e.preventDefault()
@@ -34,22 +33,22 @@ export default function LinkShortener() {
 
     setRequestState(RequestStateEnum.WAITING)
     const linkBody = link.hash
-      ? pick(link, ['originalUrl', 'hash'])
-      : pick(link, ['originalUrl'])
+      ? pick({ ...link }, ['originalUrl', 'hash'])
+      : pick({ ...link }, ['originalUrl'])
 
     try {
       const result = await fetch('/api/links', {
         method: 'POST',
-        body: JSON.stringify(linkBody)
+        body: JSON.stringify(linkBody),
+        headers: injectAuthHeaders()
       })
+      if (!result.ok) throw new Error(await result.text())
       const { shortenedUrl, brandedUrl } = await result.json()
 
       setLink({ ...link, shortenedUrl, brandedUrl })
       setError('')
     } catch (err) {
-      const errText = await err.text()
-      const { message } = JSON.parse(errText) // see app.js for error format
-      setError(message)
+      setError(err.message)
     } finally {
       setRequestState(RequestStateEnum.READY)
     }
@@ -77,9 +76,10 @@ export default function LinkShortener() {
           <form onSubmit={shortenLink}>
             <TextField
               autoFocus
+              variant="filled"
               label="Paste link to shorten"
               placeholder="example.com"
-              onChange={originalUrl => setLink({ ...link, originalUrl })}
+              onChange={e => setLink({ ...link, originalUrl: e.target.value })}
               error={!!error}
               helperText={error}
               InputProps={{
@@ -96,9 +96,13 @@ export default function LinkShortener() {
               }}
             ></TextField>
             <TextField
+              variant="filled"
               label="Custom URL"
               placeholder="awesome-link"
-              onChange={hash => setLink({ ...link, hash })}
+              defaultValue={
+                link.shortenedUrl ? link.shortenedUrl.split('/').pop() : null
+              }
+              onChange={e => setLink({ ...link, hash: e.target.value })}
               error={!!error}
               // TODO: clean up this fucking hack
               style={{ marginTop: '2rem', paddingBottom: '1rem' }}
