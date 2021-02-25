@@ -82,18 +82,29 @@ In fact, this project is essentially a "proving ground" for such a concept, whic
 
 ## Development
 
-```sh
-docker-compose up -d # run this before you start development
-npm start # boot up backend express server and frontend react "live-loader"
-```
+### Before you start
+
+1. Run `make up` (need docker/docker-compose installed)
+
+2. On your docker-compose logs, you should be able to see when the `keycloak` container finishes initializing (it says something like "admin panel listening at http://localhost:8080"). Once it is ready, go to said admin panel, login with `admin`/`password`.
+
+3. Click on "create new realm" on the top-left corner, and import the realm from the `config/keycloak.json` file (the name should be automatically filled out for you).
+
+4. No more configuration is needed in terms of the realm; however, you still need to create a dummy user to login as, so create one following the instructions here: https://www.keycloak.org/docs/latest/server_admin/#_create-new-user
+
+And once you're done with development, you can run `make down` to shut down and cleanup all the containers that spun up.
+
+NOTE: that you actually _do not_ have to run the cleanup every time you `npm start`; you can shut down the `npm start` server/frontend combo and re-boot it as many times as you'd like without needing to `make up` every time - the migrations and the build process will run fine even with existing data(!)
+
+### Starting Lynx
+
+Run `npm start` to boot up backend express server and frontend react "live-loader"
 
 NOTE: when you run `npm start` and try to exit by pressing `Ctrl+C`, because create-react-app is fucking retarded, it will eat the signal and exit as if something went wrong. This improper handling of exit signal causes `npm-run-all` to _also_ shutdown as if something _actually_ went wrong, and the TLDR is that you have to press `Ctrl+C` _again_ to fully exit.
 
 Yes, it's fucking weird, but it's expected behaviour, so don't panic (_unlike the process ayooooo_)!
 
-```sh
-docker-compose down # to clean up and shut down containers
-```
+Congrats, now the frontend should be available at http://localhost:4000/app and the backend at http://localhost:3000!
 
 ## Run tests
 
