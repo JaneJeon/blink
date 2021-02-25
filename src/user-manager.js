@@ -10,7 +10,8 @@ export const userManager = new UserManager({
   post_logout_redirect_uri: `${window.location.origin}/app/login`,
   response_type: 'code',
   scope: 'openid profile',
-  automaticSilentRenew: true
+  automaticSilentRenew: true,
+  revokeAccessTokenOnSignout: true
 })
 
 const USER_KEY = 'lynx-user'
@@ -36,6 +37,11 @@ export const setUser = user => {
 
 userManager.events.addUserLoaded(setUser)
 userManager.events.addUserSignedOut(setUser)
+userManager.events.addAccessTokenExpired(() => {
+  // eslint-disable-next-line no-console
+  console.log('Access token expired')
+  setUser()
+})
 
 // Inject the OIDC id token JWT on every request
 export const injectAuthHeaders = headers => {
