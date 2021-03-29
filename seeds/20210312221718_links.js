@@ -2,7 +2,7 @@ const { generate } = require('json-schema-faker')
 const { ValidationError } = require('objection')
 const Link = require('../models/link')
 
-exports.seed = async knex => {
+const seedDev = async knex => {
   const links = []
   const schema = JSON.parse(JSON.stringify(Link.jsonSchema)) // deep copy
   const userIds = await knex('users').select('id').pluck('id')
@@ -46,4 +46,13 @@ exports.seed = async knex => {
   }
 
   await knex('links').insert(links)
+}
+
+const seedTest = async knex => {
+  // noop... for now
+}
+
+exports.seed = async knex => {
+  const seeder = process.env.NODE_ENV === 'test' ? seedTest : seedDev
+  await seeder(knex)
 }
