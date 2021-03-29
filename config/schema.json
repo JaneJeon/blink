@@ -23,5 +23,20 @@
     },
     "required": ["creatorId", "originalUrl"],
     "additionalProperties": false
+  },
+  "User": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "readOnly": true },
+      "role": {
+        "type": "string",
+        "enum": ["user", "superuser"],
+        "default": "user"
+      },
+      "name": { "type": "string" },
+      "deactivated": { "type": "boolean", "default": false }
+    },
+    "required": ["id", "name"],
+    "additionalProperties": false
   }
 }

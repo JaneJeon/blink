@@ -2,12 +2,13 @@ const { generate } = require('json-schema-faker')
 const { ValidationError } = require('objection')
 const Link = require('../models/link')
 
-exports.seed = async knex => {
+const seedDev = async knex => {
   const links = []
+  const schema = JSON.parse(JSON.stringify(Link.jsonSchema)) // deep copy
+  const userIds = await knex('users').select('id').pluck('id')
 
   // make everything mandatory, including the metadata -
   // we're inserting these objects directly to the database without scraping.
-  const schema = JSON.parse(JSON.stringify(Link.jsonSchema))
   schema.required = Object.keys(schema.properties).filter(
     property => schema.properties[property].readOnly !== true
   )
@@ -20,6 +21,9 @@ exports.seed = async knex => {
 
   // and give some extra wiggle room for normalization
   schema.properties.originalUrl.maxLength = 50
+
+  // Set a random user
+  schema.properties.creatorId.enum = userIds
 
   for (let i = 0; i < 30; i++) {
     // generate the raw JSON data for the link
@@ -41,5 +45,14 @@ exports.seed = async knex => {
     links.push(link.$toDatabaseJson())
   }
 
-  await knex(Link.tableName).insert(links)
+  await knex('links').insert(links)
+}
+
+const seedTest = async knex => {
+  // noop... for now
+}
+
+exports.seed = async knex => {
+  const seeder = process.env.NODE_ENV === 'test' ? seedTest : seedDev
+  await seeder(knex)
 }

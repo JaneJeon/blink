@@ -52,11 +52,12 @@ class BaseModel extends authorize(policies, 'casl', {
       }
 
       updateAndFetch(body) {
-        return this.update(body).returning('*')
+        const q = this.update(body).returning('*')
+        return Array.isArray(body) ? q : q.first()
       }
 
       updateAndFetchById(id, body) {
-        return this.findById(id).throwIfNotFound().updateAndFetch(body).first()
+        return this.findById(id).throwIfNotFound().updateAndFetch(body)
       }
 
       deleteById(id, body) {
