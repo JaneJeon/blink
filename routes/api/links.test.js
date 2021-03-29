@@ -8,7 +8,7 @@ describe('/api/links', () => {
   let link
 
   describe('POST /', () => {
-    it('works', async () => {
+    it('"creates"/shortens link', async () => {
       const { body, status } = await session
         .post('/api/links')
         .send({ originalUrl: 'js.org' })
@@ -27,7 +27,7 @@ describe('/api/links', () => {
   })
 
   describe('GET /', () => {
-    it('works', async () => {
+    it('returns links (paginated)', async () => {
       const { body, status } = await session
         .get('/api/links')
         .set('X-Mock-Role', 'superuser')
@@ -37,7 +37,7 @@ describe('/api/links', () => {
   })
 
   describe('GET /:id', () => {
-    it('works', async () => {
+    it('returns a specific link', async () => {
       const { body, status } = await session
         .get(`/api/links/${link.id}`)
         .set('X-Mock-Role', 'superuser')
@@ -47,7 +47,7 @@ describe('/api/links', () => {
   })
 
   describe('PUT /:id', () => {
-    it('works', async () => {
+    it('updates a link', async () => {
       const { body, status } = await session
         .put(`/api/links/${link.id}`)
         .send({ originalUrl: 'js.org', hash: 'foobar' })
@@ -58,7 +58,7 @@ describe('/api/links', () => {
   })
 
   describe('DELETE /:id', () => {
-    it('works', async () => {
+    it('deletes a link (with admin approval)', async () => {
       const { status } = await session
         .delete(`/api/links/${link.id}`)
         .set('X-Mock-Role', 'superuser')

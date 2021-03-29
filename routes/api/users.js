@@ -27,24 +27,3 @@ module.exports = Router()
 
     res.send(link)
   })
-  .post('/:id', async (req, res) => {
-    // this isn't the endpoint for "creating" a user through the SSO;
-    // rather, this is where admins can reactivate users who were previously banned
-    const user = await User.query()
-      .insertAndFetch(req.body)
-      .authorize(req.user)
-      .action('reactivate')
-      .fetchResourceContextFromDB()
-
-    res.status(201).send(user)
-  })
-  .delete('/:id', async (req, res) => {
-    // Similarly, you don't "delete" a user - we deactivate them
-    await User.query()
-      .deleteById(req.params.id)
-      .authorize(req.user)
-      .action('deactivate')
-      .fetchResourceContextFromDB()
-
-    res.sendStatus(204)
-  })

@@ -8,18 +8,8 @@ exports.create = (allow, forbid, user, body) => {
 }
 
 exports.update = (allow, forbid, user, body) => {
-  forbid('update', 'User', ['id', 'role'])
+  forbid('update', 'User', ['id', 'role', 'deactivated'])
   allow('update', 'User', { id: user.id })
 
-  if (user.role === 'superuser') allow('update', 'User')
-}
-
-exports.deactivate = (allow, forbid, user, body) => {
-  allow('deactivate', 'User', { id: user.id })
-
-  if (user.role === 'superuser') allow('deactivate', 'User')
-}
-
-exports.reactivate = (allow, forbid, user, body) => {
-  if (user.role === 'superuser') allow('reactivate', 'User')
+  if (user.role === 'superuser') allow('update', 'User', ['deactivated'])
 }

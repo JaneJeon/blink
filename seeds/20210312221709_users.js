@@ -1,7 +1,7 @@
 const { generate } = require('json-schema-faker')
 const User = require('../models/user')
 
-exports.seed = async knex => {
+const seedDev = async knex => {
   const users = []
   const ids = {} // prevent duplicates
   const schema = JSON.parse(JSON.stringify(User.jsonSchema))
@@ -26,4 +26,24 @@ exports.seed = async knex => {
   }
 
   await knex(User.tableName).insert(users)
+}
+
+const seedTest = async knex => {
+  await knex(User.tableName).insert([
+    {
+      id: 'user',
+      role: 'user',
+      name: 'user'
+    },
+    {
+      id: 'superuser',
+      role: 'superuser',
+      name: 'superuser'
+    }
+  ])
+}
+
+exports.seed = async knex => {
+  const seeder = process.env.NODE_ENV === 'test' ? seedTest : seedDev
+  await seeder(knex)
 }
