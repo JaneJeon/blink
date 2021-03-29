@@ -1,11 +1,10 @@
-const { Model } = require('objection')
 const BaseModel = require('./base')
 
 class User extends BaseModel {
   static get relationMappings() {
     return {
       links: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: 'link',
         join: {
           from: 'users.id',

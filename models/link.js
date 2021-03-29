@@ -1,4 +1,3 @@
-const { Model } = require('objection')
 const BaseModel = require('./base')
 const { ValidationError } = require('objection')
 const hashId = require('objection-hashid')
@@ -12,7 +11,7 @@ class Link extends hashId(BaseModel) {
   static get relationMappings() {
     return {
       creator: {
-        relation: Model.BelongsToOneRelation,
+        relation: BaseModel.BelongsToOneRelation,
         modelClass: 'user',
         join: {
           from: 'links.creatorId',

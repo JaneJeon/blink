@@ -1,4 +1,9 @@
-const { ValidationError, NotFoundError, DBError } = require('objection')
+const {
+  ValidationError,
+  NotFoundError,
+  DBError,
+  UniqueViolationError
+} = require('objection')
 const { UnauthorizedError } = require('express-jwt')
 
 // eslint-disable-next-line no-unused-vars
@@ -12,6 +17,7 @@ module.exports = (err, req, res, next) => {
     if (err instanceof UnauthorizedError) err.statusCode = 401
     else if (err instanceof ValidationError) err.statusCode = 400
     else if (err instanceof NotFoundError) err.statusCode = 404
+    else if (err instanceof UniqueViolationError) err.statusCode = 409
     else if (err instanceof DBError) {
       err.statusCode = (() => {
         switch (err.name) {
@@ -19,10 +25,8 @@ module.exports = (err, req, res, next) => {
           case 'CheckViolationError':
           case 'DataError':
           case 'ConstraintViolationError':
-            return 400
-          case 'UniqueViolationError':
           case 'ForeignKeyViolationError':
-            return 409
+            return 400
           default:
             return 500
         }

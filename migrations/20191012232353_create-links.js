@@ -1,5 +1,7 @@
+const { tableName } = require('../models/link')
+
 exports.up = knex =>
-  knex.schema.createTable('links', table => {
+  knex.schema.createTable(tableName, table => {
     table.increments()
     table.text('hash').unique()
     table.text('original_url').notNullable().unique()
@@ -10,4 +12,4 @@ exports.up = knex =>
     table.timestamps(true, true)
   })
 
-exports.down = knex => knex.schema.dropTable('links')
+exports.down = knex => knex.schema.dropTable(tableName)

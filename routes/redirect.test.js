@@ -11,7 +11,7 @@ describe('/', () => {
 
   beforeAll(async () => {
     await Link.query().delete().where({ originalUrl })
-    await Link.query().insert({ originalUrl, hash, creatorId: 'test user' })
+    await Link.query().insert({ originalUrl, hash, creatorId: 'user' })
   })
 
   test('GET /', done => {
