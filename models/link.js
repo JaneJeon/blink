@@ -1,3 +1,4 @@
+const { Model } = require('objection')
 const BaseModel = require('./base')
 const { ValidationError } = require('objection')
 const hashId = require('objection-hashid')
@@ -8,6 +9,19 @@ const normalizeUrl = require('normalize-url')
 const domain = new URL(process.env.BASE_URL).host
 
 class Link extends hashId(BaseModel) {
+  static get relationMappings() {
+    return {
+      creator: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: 'user',
+        join: {
+          from: 'links.creatorId',
+          to: 'users.id'
+        }
+      }
+    }
+  }
+
   // process JSON from user input synchronously
   $parseJson(json, opt) {
     json = super.$parseJson(json, opt)
