@@ -11,19 +11,19 @@ module.exports = Router()
     res.send(results)
   })
   .get('/:id', async (req, res) => {
-    const link = await User.query()
+    const user = await User.query()
       .findById(req.params.id)
       .throwIfNotFound()
       .authorize(req.user)
 
-    res.send(link)
+    res.send(user)
   })
   .put('/:id', async (req, res) => {
-    const link = await User.query()
+    const user = await User.query()
       .updateAndFetchById(req.params.id, req.body)
       .authorize(req.user)
       .fetchResourceContextFromDB()
       .diffInputFromResource()
 
-    res.send(link)
+    res.send(user)
   })

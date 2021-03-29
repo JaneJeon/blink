@@ -8,8 +8,9 @@ exports.create = (allow, forbid, user, body) => {
 }
 
 exports.update = (allow, forbid, user, body) => {
-  forbid('update', 'User', ['id', 'role', 'deactivated'])
   allow('update', 'User', { id: user.id })
+  forbid('update', 'User', ['id', 'role', 'deactivated'])
 
-  if (user.role === 'superuser') allow('update', 'User', ['deactivated'])
+  if (user.role === 'superuser')
+    allow('update', 'User', ['deactivated', 'role'])
 }
