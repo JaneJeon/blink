@@ -33,12 +33,14 @@ const seedTest = async knex => {
     {
       id: 'user',
       role: 'user',
-      name: 'user'
+      name: 'user',
+      deactivated: false
     },
     {
       id: 'superuser',
       role: 'superuser',
-      name: 'superuser'
+      name: 'superuser',
+      deactivated: false
     }
   ])
 }
