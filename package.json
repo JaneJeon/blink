@@ -6,6 +6,7 @@
   "proxy": "http://localhost:3000",
   "homepage": "/app",
   "scripts": {
+    "promote-user": "node scripts/promote-user",
     "prestart": "NODE_ENV=development run-s migrate seed --print-name",
     "start": "run-p start:* --race",
     "start:frontend": "PORT=4000 react-scripts start",

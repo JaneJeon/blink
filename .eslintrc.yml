@@ -5,3 +5,6 @@ overrides:
     extends: react-app
   - files: website/src/**/*.js
     extends: react-app
+  - files: scripts/**/*.js
+    rules:
+      no-console: 0
