@@ -33,7 +33,7 @@ describe('/api/users', () => {
       deactivated: false
     }
 
-    it.only('updates user information', async () => {
+    it('updates user information', async () => {
       const { body, status } = await session
         .put('/api/users/user')
         .send(Object.assign({}, base, { name: 'hello' }))

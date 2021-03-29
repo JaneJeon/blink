@@ -7,7 +7,7 @@ const session = supertest.agent(app)
 describe('/api/links', () => {
   let link
 
-  describe.only('POST /', () => {
+  describe('POST /', () => {
     it('"creates"/shortens link', async () => {
       const { body, status } = await session
         .post('/api/links')
