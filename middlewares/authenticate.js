@@ -1,28 +1,33 @@
-const jwt = require('express-jwt')
-const jwksRsa = require('jwks-rsa')
-const get = require('lodash/get')
+const { auth, requiresAuth } = require('express-openid-connect')
+const { JWT } = require('jose')
+const { UniqueViolationError } = require('objection')
+const RedisStore = require('connect-redis')(auth)
+const User = require('../models/user')
+const client = require('../lib/redis')
 
-const parseToken = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 1,
-    jwksUri: process.env.OIDC_JWKS_URI
-  }),
+exports.requiresAuth = requiresAuth
+exports.useAuth = auth({
+  enableTelemetry: false,
+  authRequired: false,
+  afterCallback: async (req, res, session) => {
+    const { sub: id, name } = JWT.decode(session.id_token)
 
-  algorithms: process.env.OIDC_ALGORITHMS.split(','),
-  audience: process.env.OIDC_CLIENT_ID,
-  requestProperty: 'oidc'
-})
+    let user
 
-const parseUser = (req, res, next) => {
-  const token = get(req, 'oidc')
-  if (token)
-    req.user = {
-      id: get(token, process.env.OIDC_USER_ID_FIELD),
-      role: get(token, process.env.OIDC_USER_ROLE_FIELD)
+    try {
+      user = await User.query()
+        .insertAndFetch({ id, name })
+        .authorize()
+        .fetchResourceContextFromDB()
+    } catch (e) {
+      if (e instanceof UniqueViolationError)
+        user = await User.query().findById(id)
+      else throw e
     }
-  next()
-}
 
-module.exports = [parseToken, parseUser]
+    return { ...session, user }
+  },
+  session: {
+    store: new RedisStore({ client })
+  }
+})

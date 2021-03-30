@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  database:
+  postgres:
     image: circleci/postgres:alpine-ram
     ports:
       - 5432:5432
@@ -10,3 +10,7 @@ services:
       POSTGRES_DB: lynx
       POSTGRES_USER: knex
       POSTGRES_HOST_AUTH_METHOD: trust
+  redis:
+    image: circleci/redis:alpine
+    ports:
+      - 6379:6379
