@@ -18,6 +18,15 @@ module.exports = Router()
 
     res.send(user)
   })
+  .get('/:id/links', async (req, res) => {
+    const { total, results } = await User.relatedQuery('links')
+      .for(req.params.id)
+      .paginate(req.query)
+      .authorize(req.user)
+
+    res.header('Content-Range', `/${total}`)
+    res.send(results)
+  })
   .put('/:id', async (req, res) => {
     const user = await User.query()
       .updateAndFetchById(req.params.id, req.body)
