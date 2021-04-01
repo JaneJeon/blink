@@ -19,6 +19,8 @@
     "rollback:one": "knex migrate:down",
     "seed": "knex seed:run",
     "seed:make": "knex seed:make --timestamp-filename-prefix",
+    "build": "run-p build:*",
+    "build:frontend": "react-scripts build",
     "clean": "run-p clean:*",
     "clean:frontend": "rm -rf build",
     "clean:logs": "rm -rf logs/*.log",

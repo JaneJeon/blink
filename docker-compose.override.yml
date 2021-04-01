@@ -13,5 +13,7 @@ services:
     ports:
       - 8080:8080
     environment:
+      DB_VENDOR: H2
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
+      KEYCLOAK_IMPORT: config/keycloak.json

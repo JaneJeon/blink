@@ -12,22 +12,21 @@ const authProvider = {
   checkError: ({ status }) => {
     if (status === 401 || status === 403) {
       setUser()
-      return Promise.reject({ redirectTo: '/auth/login' }) // TODO: make sure this redirects to backend
+      return Promise.reject()
     }
     return Promise.resolve()
   },
-  checkAuth: () =>
-    getUser()
-      ? Promise.resolve()
-      : Promise.reject({ redirectTo: '/auth/login' }),
+  checkAuth: () => (getUser() ? Promise.resolve() : Promise.reject()),
   logout: () => {
     setUser()
     return Promise.resolve()
   },
-  getIdentity: () => {
-    const { id, name: fullName } = getUser()
-    return Promise.resolve({ id, fullName })
-  },
+  // getIdentity: () => {
+  //   const user = getUser()
+  //   return user
+  //     ? Promise.resolve({ id: user.id, fullName: user.name })
+  //     : Promise.reject()
+  // },
   getPermissions: params => Promise.resolve() // TODO:
 }
 

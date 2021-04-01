@@ -6,6 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import LinkIcon from '@material-ui/icons/Link'
 
+import Loginpage from './pages/login-page'
 import Shortener from './components/shortener'
 import authProvider from './providers/auth'
 import dataProvider from './providers/data'
@@ -42,6 +43,7 @@ export default function App() {
   return (
     <Admin
       title="Lynx Admin"
+      loginPage={Loginpage}
       authProvider={authProvider}
       dataProvider={dataProvider}
       theme={theme}
