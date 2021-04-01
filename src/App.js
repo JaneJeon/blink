@@ -7,7 +7,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import LinkIcon from '@material-ui/icons/Link'
 
 import Shortener from './components/shortener'
-import LoginPage from './pages/LoginPage'
 import authProvider from './providers/auth'
 import dataProvider from './providers/data'
 import * as link from './resources/link'
@@ -43,7 +42,6 @@ export default function App() {
   return (
     <Admin
       title="Lynx Admin"
-      loginPage={LoginPage}
       authProvider={authProvider}
       dataProvider={dataProvider}
       theme={theme}

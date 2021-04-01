@@ -1,18 +1,33 @@
-import { getUser } from '../user-manager'
+const getUser = () => {
+  const str = localStorage.getItem('user')
+  return !str || str === '{}' ? null : JSON.parse(str)
+}
+const setUser = user => {
+  if (!user) localStorage.removeItem('user')
+  else localStorage.setItem('user', JSON.stringify(user))
+}
 
 /* eslint-disable prefer-promise-reject-errors */
 const authProvider = {
   checkError: ({ status }) => {
-    // eslint-disable-next-line no-console
-    return status === 401 || status === 403
-      ? Promise.reject() // TODO: why the FUCK does RA does not redirect to login on 401???
-      : Promise.resolve()
+    if (status === 401 || status === 403) {
+      setUser()
+      return Promise.reject({ redirectTo: '/auth/login' }) // TODO: make sure this redirects to backend
+    }
+    return Promise.resolve()
   },
-  checkAuth: () => (getUser() ? Promise.resolve() : Promise.reject()),
-  // logout: () => {
-  //   return userManager.signoutRedirect()
-  // },
-  // getIdentity: getUser,
+  checkAuth: () =>
+    getUser()
+      ? Promise.resolve()
+      : Promise.reject({ redirectTo: '/auth/login' }),
+  logout: () => {
+    setUser()
+    return Promise.resolve()
+  },
+  getIdentity: () => {
+    const { id, name: fullName } = getUser()
+    return Promise.resolve({ id, fullName })
+  },
   getPermissions: params => Promise.resolve() // TODO:
 }
 
