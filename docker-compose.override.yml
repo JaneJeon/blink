@@ -12,8 +12,10 @@ services:
     image: jboss/keycloak
     ports:
       - 8080:8080
+    volumes:
+      - ./config/keycloak.json:/mnt/keycloak.json
     environment:
       DB_VENDOR: H2
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
-      KEYCLOAK_IMPORT: config/keycloak.json
+      KEYCLOAK_IMPORT: /mnt/keycloak.json
