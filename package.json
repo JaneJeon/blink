@@ -41,8 +41,8 @@
     "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "express-openid-connect": "^2.3.0",
     "express-query-boolean": "^2.0.0",
+    "express-session": "^1.17.1",
     "got": "^11.5.1",
     "helmet": "^4.4.1",
     "http-errors": "^1.7.3",
@@ -63,6 +63,8 @@
     "objection-authorize": "^4.1.2",
     "objection-hashid": "^1.4.2",
     "objection-table-name": "^1.2.3",
+    "openid-client": "^4.6.0",
+    "passport": "^0.4.1",
     "pg": "^8.3.0",
     "pino": "^6.5.0"
   },

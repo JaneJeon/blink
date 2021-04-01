@@ -1,7 +1,7 @@
 const { Router } = require('express')
-const { requiresAuth } = require('../middlewares/authenticate')
 
 module.exports = Router()
-  .use('/api', requiresAuth(), require('./api'))
+  .use('/api', require('../middlewares/require-auth'), require('./api'))
   .use('/app', require('./app'))
+  .use('/auth', require('./auth'))
   .use('/', require('./redirect'))
