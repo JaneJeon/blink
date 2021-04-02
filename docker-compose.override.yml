@@ -6,12 +6,16 @@ services:
     environment:
       # use hostname host.docker.internal to connect instead of localhost
       # and use db user "knex"
-      PGADMIN_DEFAULT_EMAIL: admin@lynx.rest
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD: password
   keycloak:
     image: jboss/keycloak
     ports:
       - 8080:8080
+    volumes:
+      - ./config/keycloak.json:/mnt/keycloak.json
     environment:
+      DB_VENDOR: H2
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
+      KEYCLOAK_IMPORT: /mnt/keycloak.json

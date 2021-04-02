@@ -53,10 +53,11 @@ jobs:
     docker:
       - image: cimg/node:lts
       - image: circleci/postgres:alpine-ram
-        environment: # need to keep this synced with .db.env because circleci is fucking retarded
-          POSTGRES_DB: lynx
+        environment:
+          POSTGRES_DB: blink
           POSTGRES_USER: knex
           POSTGRES_HOST_AUTH_METHOD: trust
+      - image: circleci/redis:alpine
     steps:
       - checkout
       - node/install-packages

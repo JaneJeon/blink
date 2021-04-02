@@ -9,7 +9,6 @@ import IconButton from '@material-ui/core/IconButton'
 import AddIcon from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
-import { injectAuthHeaders } from '../user-manager'
 
 const RequestStateEnum = Object.freeze({
   READY: 0,
@@ -39,8 +38,7 @@ export default function LinkShortener() {
     try {
       const result = await fetch('/api/links', {
         method: 'POST',
-        body: JSON.stringify(linkBody),
-        headers: injectAuthHeaders()
+        body: JSON.stringify(linkBody)
       })
       if (!result.ok) throw new Error(await result.text())
       const { shortenedUrl, brandedUrl } = await result.json()

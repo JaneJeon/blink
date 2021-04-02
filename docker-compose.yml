@@ -1,12 +1,16 @@
 version: '3'
 
 services:
-  database:
+  postgres:
     image: circleci/postgres:alpine-ram
     ports:
       - 5432:5432
     environment:
       # keep this in sync w/ DATABASE_URL in your environment file/variable
-      POSTGRES_DB: lynx
+      POSTGRES_DB: blink
       POSTGRES_USER: knex
       POSTGRES_HOST_AUTH_METHOD: trust
+  redis:
+    image: circleci/redis:alpine
+    ports:
+      - 6379:6379

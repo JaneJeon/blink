@@ -11,6 +11,10 @@ exports.update = (allow, forbid, user, body) => {
   allow('update', 'User', { id: user.id })
   forbid('update', 'User', ['id', 'role', 'deactivated'])
 
-  if (user.role === 'superuser')
+  if (user.role === 'superuser') {
     allow('update', 'User', ['deactivated', 'role'])
+
+    // force superusers to step down as user before being deactivated
+    forbid('update', 'User', ['deactivated'], { role: 'superuser' })
+  }
 }
