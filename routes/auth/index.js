@@ -6,8 +6,8 @@ module.exports = Router()
   .get(
     '/login/callback',
     passport.authenticate('oidc', {
-      successRedirect: 'http://localhost:4000/app',
-      failureRedirect: 'http://localhost:4000/app/login'
+      successRedirect: '/app', // TODO:
+      failureRedirect: '/app/login'
     })
   )
   .get('/logout', (req, res) => {
