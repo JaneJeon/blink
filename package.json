@@ -9,7 +9,7 @@
     "promote-user": "node scripts/promote-user",
     "prestart": "NODE_ENV=development run-s migrate seed --print-name",
     "start": "run-p start:* --race",
-    "start:frontend": "PORT=4000 react-scripts start",
+    "start:frontend": "FORCE_COLOR=true PORT=4000 react-scripts start | cat",
     "start:backend": "nodemon node -r __utils__/dev-test-setup bin/www",
     "migrate": "knex migrate:latest",
     "migrate:one": "knex migrate:up",
@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@casl/ability": "^5.1.1",
+    "@passport-next/passport": "^3.1.0",
     "connect-redis": "^5.1.0",
     "dotenv-flow": "^3.2.0",
     "express": "^4.17.1",
@@ -66,7 +67,6 @@
     "objection-hashid": "^1.4.2",
     "objection-table-name": "^1.2.3",
     "openid-client": "^4.6.0",
-    "passport": "^0.4.1",
     "pg": "^8.3.0",
     "pino": "^6.5.0"
   },
@@ -93,6 +93,7 @@
     "json-schema-faker": "^0.5.0-rcv.32",
     "knex-cleaner": "^1.3.1",
     "lint-staged": "^10.0.1",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.0.2",
