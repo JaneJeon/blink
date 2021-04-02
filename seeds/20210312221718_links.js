@@ -1,8 +1,10 @@
-const { generate } = require('json-schema-faker')
+const { generate, option } = require('json-schema-faker')
 const { ValidationError } = require('objection')
 const Link = require('../models/link')
 
 const seedDev = async knex => {
+  option({ random: require('seedrandom')('Some seed') })
+
   const links = []
   const schema = JSON.parse(JSON.stringify(Link.jsonSchema)) // deep copy
   const userIds = await knex('users').select('id').pluck('id')
