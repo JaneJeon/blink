@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <Admin
-      title="Lynx Admin"
+      title="Blink Portal"
       loginPage={Loginpage}
       authProvider={authProvider}
       dataProvider={dataProvider}
