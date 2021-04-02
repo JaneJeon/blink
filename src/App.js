@@ -5,6 +5,8 @@ import { createBrowserHistory } from 'history'
 import { createMuiTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import LinkIcon from '@material-ui/icons/Link'
+import blue from '@material-ui/core/colors/blue'
+import indigo from '@material-ui/core/colors/indigo'
 
 import Loginpage from './pages/login-page'
 import Shortener from './components/shortener'
@@ -34,7 +36,8 @@ export default function App() {
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? 'dark' : 'light'
+          type: prefersDarkMode ? 'dark' : 'light',
+          primary: prefersDarkMode ? blue : indigo
         }
       }),
     [prefersDarkMode]
