@@ -1,8 +1,7 @@
 {
-  "name": "Lynx",
+  "name": "Blink",
   "description": "Modern, lightweight, and planet-scale link shortener + analytics + management!",
-  "repository": "https://github.com/JaneJeon/lynx",
-  "website": "https://lynx.rest",
+  "repository": "https://github.com/JaneJeon/Blink",
   "buildpacks": [
     {
       "url": "heroku/nodejs"

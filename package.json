@@ -1,6 +1,6 @@
 {
   "description": "Lightweight, planet-scale, CDN-driven link shortener for teams 🎉",
-  "repository": "JaneJeon/lynx",
+  "repository": "JaneJeon/blink",
   "author": "Jane Jeon <me@janejeon.dev>",
   "license": "AGPL-3.0",
   "proxy": "http://localhost:3000",
@@ -33,9 +33,7 @@
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
     "test:watch:frontend": "react-scripts test",
     "test:nowatch:backend": "NODE_ENV=test run-s migrate seed --print-name && jest",
-    "test:watch:backend": "npm run test:nowatch:backend --watch",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "test:watch:backend": "npm run test:nowatch:backend --watch"
   },
   "dependencies": {
     "@casl/ability": "^5.1.1",
@@ -110,8 +108,7 @@
     "skip-ci": "^1.0.4",
     "supertest": "^6.0.1",
     "swr": "^0.4.2",
-    "trace": "^3.1.1",
-    "vuepress": "^1.8.0"
+    "trace": "^3.1.1"
   },
   "prettier": "@janejeon/prettier-config",
   "browserslist": {

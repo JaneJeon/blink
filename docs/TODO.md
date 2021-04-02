@@ -1,5 +1,0 @@
-- [x] Figure out what `req.oidc.user` looks like and adjust routes/permissions accordingly
-- [ ] Remove the need for global test seeds, seed on individual tests instead.
-- [ ] Update user mock
-- [ ] Integrate dotenv-flow w/ frontend
-- [ ] Skip all tests for now, remove the need for req.user and the user model import
