@@ -2,7 +2,7 @@ import React from 'react'
 import {
   List as DataList,
   Datagrid,
-  //   ReferenceField,
+  ReferenceField,
   DateField,
   UrlField,
   Show as SingleShow,
@@ -12,24 +12,24 @@ import {
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
 
-const LinkTitle = ({ record }) => {
-  return <span>{record.originalUrl || ''}</span>
-}
-
 export const List = props => (
   <DataList {...props}>
     <Datagrid rowClick="show">
       <UrlField source="originalUrl" label="Original URL" sortable={false} />
       <UrlField source="shortenedUrl" label="Shortened URL" sortable={false} />
       <UrlField source="brandedUrl" label="Branded URL" sortable={false} />
-      {/* <ReferenceField source="creatorId" reference="users" label="Created by">
+      <ReferenceField source="creatorId" reference="users" label="Created by">
         <TextField source="name" />
-      </ReferenceField> */}
+      </ReferenceField>
       <DateField source="createdAt" label="Created at" />
       <DateField source="updatedAt" label="Updated at" />
     </Datagrid>
   </DataList>
 )
+
+const LinkTitle = ({ record }) => {
+  return <span>{record.originalUrl || ''}</span>
+}
 
 export const Show = props => (
   <SingleShow title={<LinkTitle />} {...props}>
@@ -37,9 +37,9 @@ export const Show = props => (
       <Typography variant="h6">Shortened link information</Typography>
       <UrlField source="shortenedUrl" label="Shortened URL" />
       <UrlField source="brandedUrl" label="Branded URL" />
-      {/* <ReferenceField source="creatorId" reference="users" label="Created by">
+      <ReferenceField source="creatorId" reference="users" label="Created by">
         <TextField source="name" />
-      </ReferenceField> */}
+      </ReferenceField>
       <DateField source="createdAt" label="Created at" />
       <DateField source="updatedAt" label="Updated at" />
 
