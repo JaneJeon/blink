@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import IconButton from '@material-ui/core/IconButton'
 import AddIcon from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
@@ -82,17 +83,19 @@ export default function LinkShortener() {
               helperText={error}
               InputProps={{
                 endAdornment: (
-                  <IconButton
-                    aria-label="shorten"
-                    color="primary"
-                    disabled={requestState !== RequestStateEnum.READY}
-                    type="submit"
-                  >
-                    <SearchIcon />
-                  </IconButton>
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="shorten"
+                      color="primary"
+                      disabled={requestState !== RequestStateEnum.READY}
+                      type="submit"
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
                 )
               }}
-            ></TextField>
+            />
             <TextField
               variant="filled"
               label="Custom URL"
@@ -102,27 +105,33 @@ export default function LinkShortener() {
               }
               onChange={e => setLink({ ...link, hash: e.target.value })}
               error={!!error}
-              // TODO: clean up this fucking hack
               style={{ marginTop: '2rem', paddingBottom: '1rem' }}
               InputProps={{
                 startAdornment: (
-                  <p style={{ display: 'inline' }}>
+                  <InputAdornment
+                    position="start"
+                    style={{ marginRight: 0, marginBottom: '-2px' }}
+                  >
                     {process.env.REACT_APP_BASE_URL}/
-                  </p>
+                  </InputAdornment>
                 ),
                 endAdornment: (
-                  <CopyToClipboard text={link.brandedUrl || link.shortenedUrl}>
-                    <IconButton
-                      aria-label="copy link"
-                      color="secondary"
-                      disabled={requestState !== RequestStateEnum.WAITING}
+                  <InputAdornment position="end">
+                    <CopyToClipboard
+                      text={link.brandedUrl || link.shortenedUrl}
                     >
-                      <FileCopyIcon />
-                    </IconButton>
-                  </CopyToClipboard>
+                      <IconButton
+                        aria-label="copy link"
+                        color="secondary"
+                        disabled={requestState !== RequestStateEnum.WAITING}
+                      >
+                        <FileCopyIcon />
+                      </IconButton>
+                    </CopyToClipboard>
+                  </InputAdornment>
                 )
               }}
-            ></TextField>
+            />
           </form>
         </DialogContent>
       </Dialog>
