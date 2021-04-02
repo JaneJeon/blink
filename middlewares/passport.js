@@ -12,9 +12,9 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
 
     client = new issuer.Client({
       client_id: process.env.OIDC_CLIENT_ID,
-      client_secret: 'YOU DONT NEED CLIENT SECRET',
       redirect_uris: [`${process.env.BASE_URL}/auth/login/callback`],
-      response_types: ['code']
+      response_types: ['code'],
+      token_endpoint_auth_method: 'none'
     })
 
     passport.use(
@@ -56,7 +56,7 @@ passport.deserializeUser(async (id, done) => {
   try {
     // TODO: cache this call
     const user = await User.query().findById(id)
-    done(null, user)
+    done(null, user || false)
   } catch (e) {
     done(e)
   }

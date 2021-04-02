@@ -16,7 +16,12 @@ const authProvider = {
     }
     return Promise.resolve()
   },
-  checkAuth: () => (getUser() ? Promise.resolve() : Promise.reject()),
+  checkAuth: async () => {
+    if (getUser()) return
+    const resp = await fetch('/api/user')
+    const user = await resp.json()
+    setUser(user)
+  },
   logout: () => {
     setUser()
     return Promise.resolve()
