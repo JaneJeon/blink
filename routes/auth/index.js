@@ -11,6 +11,7 @@ module.exports = Router()
     })
   )
   .get('/logout', (req, res) => {
+    req.logout()
     req.session.destroy(err => {
       if (err) req.log.error('Failed to destroy the session during logout', err)
       req.user = null
