@@ -1,10 +1,11 @@
 import { useMemo } from 'react'
-import { Admin, Resource, EditGuesser, Layout, AppBar } from 'react-admin'
+import { Admin, Resource, Layout, AppBar, EditGuesser } from 'react-admin'
 import { createBrowserHistory } from 'history'
 
 import { createMuiTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import LinkIcon from '@material-ui/icons/Link'
+import PeopleIcon from '@material-ui/icons/People'
 import blue from '@material-ui/core/colors/blue'
 import indigo from '@material-ui/core/colors/indigo'
 
@@ -13,6 +14,7 @@ import Shortener from './components/shortener'
 import authProvider from './providers/auth'
 import dataProvider from './providers/data'
 import * as link from './resources/link'
+import * as user from './resources/user'
 
 import './App.css'
 
@@ -59,8 +61,16 @@ export default function App() {
         icon={LinkIcon}
         list={link.List}
         show={link.Show}
+        edit={link.Edit}
+      />
+      <Resource
+        name="users"
+        options={{ label: 'Users' }}
+        icon={PeopleIcon}
+        list={user.List}
+        show={user.Show}
         edit={EditGuesser}
-      ></Resource>
+      />
     </Admin>
   )
 }
