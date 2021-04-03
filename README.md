@@ -85,9 +85,7 @@ In fact, this project is essentially a "proving ground" for such a concept, whic
 
 2. On your docker-compose logs, you should be able to see when the `keycloak` container finishes initializing (it says something like "admin panel listening at http://localhost:8080"). Once it is ready, go to said admin panel, login with `admin`/`password`.
 
-3. Click on "create new realm" on the top-left corner, and import the realm from the `config/keycloak.json` file (the name should be automatically filled out for you).
-
-4. No more configuration is needed in terms of the realm; however, you still need to create a dummy user to login as, so create one following the instructions here: https://www.keycloak.org/docs/latest/server_admin/#_create-new-user
+3. Go to the "Blink Realm" (see top left corner) and create a dummy user to login as, following the instructions here: https://www.keycloak.org/docs/latest/server_admin/#_create-new-user
 
 And once you're done with development, you can run `make down` to shut down and cleanup all the containers that spun up.
 
@@ -97,11 +95,9 @@ NOTE: that you actually _do not_ have to run the cleanup every time you `npm sta
 
 Run `npm start` to boot up backend express server and frontend react "live-loader"
 
-NOTE: when you run `npm start` and try to exit by pressing `Ctrl+C`, because create-react-app is fucking retarded, it will eat the signal and exit as if something went wrong. This improper handling of exit signal causes `npm-run-all` to _also_ shutdown as if something _actually_ went wrong, and the TLDR is that you have to press `Ctrl+C` _again_ to fully exit.
-
-Yes, it's fucking weird, but it's expected behaviour, so don't panic (_unlike the process ayooooo_)!
-
 Congrats, now the frontend should be available at http://localhost:4000/app and the backend at http://localhost:3000!
+
+One thing of note: when you log in with Keycloak's SSO, you will be redirected to http://localhost:3000/app on development mode; just change that to http://localhost:4000/app and hit enter. I am NOT changing this.
 
 ## Run tests
 
