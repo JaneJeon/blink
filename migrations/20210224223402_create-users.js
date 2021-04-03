@@ -6,6 +6,8 @@ exports.up = async knex => {
     table.text('role').notNullable()
     table.text('name').notNullable()
     table.boolean('deactivated').notNullable()
+
+    table.timestamps(true, true)
   })
   await knex.schema.alterTable('links', table => {
     table.foreign('creator_id').references(`${tableName}.id`)
