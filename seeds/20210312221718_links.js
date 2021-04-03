@@ -32,7 +32,9 @@ const seedDev = async knex => {
     let link
     while (!link) {
       try {
-        link = Link.fromJson(generate(schema))
+        const obj = generate(schema)
+        delete obj.id // do not set id
+        link = Link.fromJson(obj)
       } catch (err) {
         // Sometimes, you can get unlucky and get a random hash that
         // clashes with the hashids namespace, in which case you just retry.
