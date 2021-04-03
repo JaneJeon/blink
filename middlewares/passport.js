@@ -21,8 +21,7 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
       'oidc',
       new Strategy({ client }, async (tokenSet, done) => {
         const { sub: id, preferred_username: name } = tokenSet.claims()
-        const loginLogger = log.child({ userId: id })
-        loginLogger.info('Trying to log in user')
+        log.info('Trying to log in user %s', id)
 
         let user
         try {
@@ -30,13 +29,13 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
             .insertAndFetch({ id, name })
             .authorize()
             .fetchResourceContextFromDB()
-          loginLogger.info('Provisioned user')
+          log.info('Provisioned user %s', id)
         } catch (e) {
           if (e instanceof UniqueViolationError) {
-            loginLogger.info('Found user')
+            log.info('Found user %s', id)
             user = await User.query().findById(id)
           } else {
-            loginLogger.info('User is forbidden from logging in')
+            log.warn('User %s is forbidden from logging in', id)
             return done(e)
           }
         }
@@ -44,7 +43,7 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
         // TODO: set session map on redis userSession:$userId -> [req.session.id]
         // to allow deleting sessions by user
 
-        loginLogger.info('Done logging in user')
+        log.info('Done logging in user %s', id)
         done(null, user)
       })
     )

@@ -13,7 +13,7 @@ module.exports = Router()
   .get('/logout', (req, res) => {
     req.logout()
     req.session.destroy(err => {
-      if (err) req.log.error('Failed to destroy the session during logout', err)
+      if (err) req.log.error({ err }, 'Failed to destroy session during logout')
       req.user = null
       res.sendStatus(204)
     })

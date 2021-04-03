@@ -8,7 +8,7 @@ const {
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
   if (res.headersSent) {
-    req.log.error({ req, err, res }, 'an error occurred after request was sent')
+    req.log.error({ err }, 'An error occurred after request was sent')
     return
   }
 
@@ -32,14 +32,7 @@ module.exports = (err, req, res, next) => {
     } else err.statusCode = 500
   }
 
-  // We *really* don't need to log 401 errors with much detail since there 401s can only come
-  // from the ensure-login middleware so any error stack is pretty much useless.
-  if (err.statusCode === 401 || err.statusCode === 404) {
-    req.log.warn(err.message)
-    return res.sendStatus(err.statusCode)
-  }
-
-  req.log[err.statusCode < 500 ? 'warn' : 'error'](err)
+  req.log[err.statusCode < 500 ? 'warn' : 'error']({ err })
 
   res.status(err.statusCode).send({
     message: err.message,
