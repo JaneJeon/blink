@@ -11,5 +11,5 @@ module.exports = rateLimit({
       ? process.env.RATE_LIMIT_MAX_LOGGED_IN
       : process.env.RATE_LIMIT_MAX_LOGGED_OUT) - 0,
   keyGenerator: req => req.user || req.ip,
-  store: new RedisStore({ client, passIfNotConnected: true })
+  store: new RedisStore({ client })
 })
