@@ -1,13 +1,10 @@
 <h1 align="center">Welcome to Blink (WIP) 👋</h1>
 
 [![CircleCI](https://circleci.com/gh/JaneJeon/blink.svg?style=shield)](https://circleci.com/gh/JaneJeon/blink)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/322a491a-6a6f-4d6d-b213-80f6d22f4db1/deploy-status)](https://app.netlify.com/sites/vigorous-golick-84bd53/deploys)
 [![Dependencies](https://img.shields.io/david/JaneJeon/blink)](https://david-dm.org/JaneJeon/blink)
 [![devDependencies](https://img.shields.io/david/dev/JaneJeon/blink)](https://david-dm.org/JaneJeon/blink?type=dev)
-[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/JaneJeon/blink)](https://snyk.io//test/github/JaneJeon/blink?targetFile=package.json)
 [![Prettier code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
-[![Issues](https://img.shields.io/badge/issues-jira-blue)](https://janedev.atlassian.net/jira/software/projects/blink/boards/3)
 
 > Modern, lightweight, planet-scale link shortener for teams 🎉
 >
