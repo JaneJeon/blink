@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Admin, Resource, Layout, AppBar, EditGuesser } from 'react-admin'
+import { Admin, Resource, Layout, AppBar } from 'react-admin'
 import { createBrowserHistory } from 'history'
 
 import { createMuiTheme } from '@material-ui/core/styles'
@@ -69,7 +69,7 @@ export default function App() {
         icon={PeopleIcon}
         list={user.List}
         show={user.Show}
-        edit={EditGuesser}
+        edit={user.Edit}
       />
     </Admin>
   )

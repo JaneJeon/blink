@@ -1,14 +1,17 @@
-import React from 'react'
 import {
   List as DataList,
   Datagrid,
   ReferenceField,
   DateField,
   UrlField,
-  Show as SingleShow,
+  Show as ShowHOC,
+  Edit as EditHOC,
   SimpleShowLayout,
+  SimpleForm,
   TextField,
-  RichTextField
+  RichTextField,
+  TextInput,
+  DateTimeInput
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
 
@@ -27,12 +30,8 @@ export const List = props => (
   </DataList>
 )
 
-const LinkTitle = ({ record }) => {
-  return <span>{record.originalUrl || ''}</span>
-}
-
 export const Show = props => (
-  <SingleShow title={<LinkTitle />} {...props}>
+  <ShowHOC {...props}>
     <SimpleShowLayout>
       <Typography variant="h6">Shortened link information</Typography>
       <UrlField source="shortenedUrl" label="Shortened URL" />
@@ -52,5 +51,27 @@ export const Show = props => (
       <TextField source="meta.lang" label="Language" />
       <DateField source="meta.date" label="Created at" />
     </SimpleShowLayout>
-  </SingleShow>
+  </ShowHOC>
+)
+
+export const Edit = props => (
+  <EditHOC {...props}>
+    <SimpleForm
+      submitOnEnter={false}
+      warnWhenUnsavedChanges
+      sanitizeEmptyValues={false}
+    >
+      {/* TODO: disable dynamically */}
+      <TextInput source="originalUrl" label="Original URL" tyle="url" />
+      <TextInput source="shortenedUrl" label="Shortened URL" type="url" />
+      <TextInput source="brandedUrl" label="Branded URL" type="url" />
+
+      <TextInput source="meta.title" label="Title" />
+      <TextInput multiline source="meta.description" label="Description" />
+      <TextInput source="meta.author" label="Author" />
+      <TextInput source="meta.publisher" label="Publisher" />
+      <TextInput source="meta.lang" label="Language" />
+      <DateTimeInput source="meta.date" label="Created at" />
+    </SimpleForm>
+  </EditHOC>
 )

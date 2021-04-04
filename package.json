@@ -63,7 +63,7 @@
     "metascraper-title": "^5.13.2",
     "normalize-url": "^5.1.0",
     "objection": "^2.2.14",
-    "objection-authorize": "^4.1.2",
+    "objection-authorize": "^4.2.0",
     "objection-hashid": "^2.1.0",
     "objection-table-name": "^1.2.3",
     "openid-client": "^4.6.0",

@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   List as DataList,
   Datagrid,
@@ -48,3 +47,5 @@ export const Show = props => (
     </SimpleShowLayout>
   </SingleShow>
 )
+
+export const Edit = props => <div>Edit not supported yet</div>
