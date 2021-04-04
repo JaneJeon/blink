@@ -1,6 +1,7 @@
 const BaseModel = require('./base')
 const { ValidationError } = require('objection')
 const hashId = require('objection-hashid')
+const deepCopy = require('lodash/cloneDeep')
 const scrape = require('../lib/scrape')
 
 const { URL } = require('url')
@@ -22,8 +23,8 @@ class Link extends hashId(BaseModel) {
   }
 
   // process JSON from user input synchronously
-  $parseJson(json, opt) {
-    json = super.$parseJson(json, opt)
+  $parseJson(originalJSON, opt) {
+    const json = deepCopy(super.$parseJson(originalJSON, opt))
 
     if (json.hash) {
       // Since custom and auto-generated hash are both mounted under /,
