@@ -38,8 +38,7 @@ class BaseModel extends authorize(policies, 'casl', {
       options: {
         // mutating inputs
         removeAdditional: true,
-        useDefaults: true,
-        coerceTypes: true
+        useDefaults: true
       }
     })
   }
