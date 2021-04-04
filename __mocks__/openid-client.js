@@ -6,3 +6,5 @@ exports.Issuer = {
 }
 
 exports.Strategy = function Strategy() {}
+
+exports.custom = { setHttpOptionsDefaults: () => {} }
