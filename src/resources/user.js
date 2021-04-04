@@ -4,12 +4,22 @@ import {
   TextField,
   SelectField,
   SimpleShowLayout,
-  Show as SingleShow,
+  SimpleForm,
+  Show as ShowHOC,
+  Edit as EditHOC,
   BooleanField,
-  DateField
+  DateField,
+  TextInput,
+  BooleanInput,
+  SelectInput
 } from 'react-admin'
 
 import schema from '../schema.json'
+
+const roleChoices = schema.User.properties.role.enum.map(role => ({
+  id: role,
+  name: role
+}))
 
 export const List = props => (
   <DataList {...props}>
@@ -18,10 +28,7 @@ export const List = props => (
       <SelectField
         source="role"
         name="Role"
-        choices={schema.User.properties.role.enum.map(role => ({
-          id: role,
-          name: role
-        }))}
+        choices={roleChoices}
         sortable={false}
       />
       <BooleanField source="deactivated" label="Deactivated" />
@@ -30,22 +37,28 @@ export const List = props => (
 )
 
 export const Show = props => (
-  <SingleShow {...props}>
+  <ShowHOC {...props}>
     <SimpleShowLayout>
       <TextField source="name" label="Name" />
-      <SelectField
-        source="role"
-        name="Role"
-        choices={schema.User.properties.role.enum.map(role => ({
-          id: role,
-          name: role
-        }))}
-      />
+      <SelectField source="role" name="Role" choices={roleChoices} />
       <DateField source="createdAt" label="Created at" />
       <DateField source="updatedAt" label="Updated at" />
       <BooleanField source="deactivated" label="Deactivated" />
     </SimpleShowLayout>
-  </SingleShow>
+  </ShowHOC>
 )
 
-export const Edit = props => <div>Edit not supported yet</div>
+export const Edit = props => (
+  <EditHOC {...props}>
+    <SimpleForm submitOnEnter={false} warnWhenUnsavedChanges>
+      <TextInput source="name" name="Name" />
+      <SelectInput
+        source="role"
+        name="Role"
+        choices={roleChoices}
+        sortable={false}
+      />
+      <BooleanInput source="deactivated" label="Deactivated" />
+    </SimpleForm>
+  </EditHOC>
+)

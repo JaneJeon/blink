@@ -56,11 +56,7 @@ export const Show = props => (
 
 export const Edit = props => (
   <EditHOC {...props}>
-    <SimpleForm
-      submitOnEnter={false}
-      warnWhenUnsavedChanges
-      sanitizeEmptyValues={false}
-    >
+    <SimpleForm submitOnEnter={false} warnWhenUnsavedChanges>
       {/* TODO: disable dynamically */}
       <TextInput source="originalUrl" label="Original URL" tyle="url" />
       <TextInput source="shortenedUrl" label="Shortened URL" type="url" />
