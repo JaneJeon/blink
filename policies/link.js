@@ -10,7 +10,7 @@ exports.create = (allow, forbid, user, body) => {
 
 exports.update = (allow, forbid, user, body) => {
   // You can update metadata for a link, since it's only consumed internally.
-  allow('update', 'Link', ['meta'], { creatorId: user.id })
+  allow('update', 'Link', ['meta.*'])
 
   // The only other "change" you can make is to add a hash
   allow('update', 'Link', ['hash'], {
