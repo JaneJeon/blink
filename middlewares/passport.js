@@ -1,8 +1,14 @@
-const { Issuer, Strategy } = require('openid-client')
+const { Issuer, Strategy, custom } = require('openid-client')
 const passport = require('@passport-next/passport')
 const { UniqueViolationError } = require('objection')
 const User = require('../models/user')
 const log = require('../lib/logger')
+const { version } = require('../package.json')
+
+custom.setHttpOptionsDefaults({
+  headers: { 'User-Agent': `blink/${version}` },
+  timeout: 5500
+})
 
 let client
 // TODO: need ESM conversion for top-level await
@@ -20,7 +26,10 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
     passport.use(
       'oidc',
       new Strategy({ client }, async (tokenSet, done) => {
-        const { sub: id, preferred_username: name } = tokenSet.claims()
+        const {
+          sub: id,
+          [process.env.OIDC_NAME_FIELD]: name
+        } = tokenSet.claims()
         log.info('Trying to log in user %s', id)
 
         let user
@@ -48,7 +57,10 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
       })
     )
   })
-  .catch(err => log.error(err))
+  .catch(err => {
+    log.error(err)
+    process.exit(404)
+  })
 
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (id, done) => {
