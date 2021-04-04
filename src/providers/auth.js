@@ -10,7 +10,7 @@ const setUser = user => {
 /* eslint-disable prefer-promise-reject-errors */
 const authProvider = {
   checkError: ({ status }) => {
-    if (status === 401 || status === 403) {
+    if (status === 401) {
       setUser()
       return Promise.reject()
     }
