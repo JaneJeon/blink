@@ -3,5 +3,8 @@
   "env": {
     "NODE_ENV": "development"
   },
-  "delay": 2500
+  "delay": 2500,
+  "events": {
+    "start": "clear"
+  }
 }
