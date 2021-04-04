@@ -32,7 +32,13 @@ module.exports = (err, req, res, next) => {
     } else err.statusCode = 500
   }
 
-  req.log[err.statusCode < 500 ? 'warn' : 'error']({ err })
+  const loglevel =
+    err.statusCode === 401 || err.statusCode === 404
+      ? 'debug'
+      : err.statusCode < 500
+      ? 'warn'
+      : 'error'
+  req.log[loglevel]({ err })
 
   res.status(err.statusCode).send({
     message: err.message,
