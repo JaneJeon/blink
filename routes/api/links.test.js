@@ -1,4 +1,5 @@
 require('../../__utils__/knex-test')
+const merge = require('lodash/merge')
 
 const supertest = require('supertest')
 const app = require('../../app')
@@ -50,7 +51,7 @@ describe('/api/links', () => {
     it('updates a link', async () => {
       const { body, status } = await session
         .put(`/api/links/${link.id}`)
-        .send({ originalUrl: 'js.org', hash: 'foobar' })
+        .send(merge({}, link, { hash: 'foobar' }))
         .set('X-Mock-Role', 'superuser')
       expect(status).toEqual(200)
       expect(body.hash).toBe('foobar')

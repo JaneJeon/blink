@@ -4,20 +4,20 @@
     "properties": {
       "id": { "type": ["integer", "string"], "readOnly": true },
       "creatorId": { "type": "string", "readOnly": true },
-      "hash": { "type": "string", "minLength": 4, "maxLength": 25 },
+      "hash": { "type": ["string", "null"], "minLength": 4, "maxLength": 25 },
       "originalUrl": { "type": "string" },
       "shortenedUrl": { "type": "string", "readOnly": true },
-      "brandedUrl": { "type": "string", "readOnly": true },
+      "brandedUrl": { "type": ["string", "null"], "readOnly": true },
       "meta": {
         "type": "object",
         "properties": {
-          "author": { "type": "string" },
-          "date": { "type": "string", "format": "date" },
-          "description": { "type": "string" },
-          "lang": { "type": "string" },
-          "logo": { "type": "string", "format": "uri" },
-          "publisher": { "type": "string" },
-          "title": { "type": "string" }
+          "author": { "type": ["string", "null"] },
+          "date": { "type": ["string", "null"], "format": "date" },
+          "description": { "type": ["string", "null"] },
+          "lang": { "type": ["string", "null"] },
+          "logo": { "type": ["string", "null"], "format": "uri" },
+          "publisher": { "type": ["string", "null"] },
+          "title": { "type": ["string", "null"] }
         },
         "additionalProperties": false
       }
