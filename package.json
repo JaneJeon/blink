@@ -20,7 +20,7 @@
     "rollback:one": "knex migrate:down",
     "seed": "knex seed:run",
     "seed:make": "knex seed:make --timestamp-filename-prefix",
-    "build": "run-p build:*",
+    "build": "run-p build:* migrate",
     "build:frontend": "react-scripts build",
     "clean": "run-p clean:*",
     "clean:frontend": "rm -rf build",
