@@ -46,7 +46,10 @@ class Link extends hashId(BaseModel) {
         // or enriching the error object with any status codes,
         // since we catch all errors in this block - which are all input checks -
         // and re-throw them as validation errors.
-        json.originalUrl = normalizeUrl(json.originalUrl, { forceHttps: true })
+        json.originalUrl = normalizeUrl(json.originalUrl, {
+          forceHttps: true,
+          stripHash: true
+        })
 
         if (new URL(json.originalUrl).host === domain)
           throw new Error(`Cannot shorten ${domain} URLs`)
