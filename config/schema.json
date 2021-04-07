@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json-schema.org/draft-07/schema",
   "Link": {
     "type": "object",
     "properties": {
@@ -20,7 +21,9 @@
           "title": { "type": ["string", "null"] }
         },
         "additionalProperties": false
-      }
+      },
+      "createdAt": { "type": "string", "format": "date", "readOnly": true },
+      "updatedAt": { "type": "string", "format": "date", "readOnly": true }
     },
     "required": ["creatorId", "originalUrl"],
     "additionalProperties": false
@@ -35,7 +38,9 @@
         "default": "user"
       },
       "name": { "type": "string" },
-      "deactivated": { "type": "boolean", "default": false }
+      "deactivated": { "type": "boolean", "default": false },
+      "createdAt": { "type": "string", "format": "date", "readOnly": true },
+      "updatedAt": { "type": "string", "format": "date", "readOnly": true }
     },
     "required": ["id", "name"],
     "additionalProperties": false
