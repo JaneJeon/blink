@@ -1,4 +1,4 @@
 hooks:
   pre-commit: lint-staged
   pre-push: skip-ci && echo "Skipping test..." || npm test
-  post-merge: npm i
+  post-merge: npm i --no-save
