@@ -43,18 +43,6 @@ class BaseModel extends authorize(policies, 'casl', {
     })
   }
 
-  // This may be redundant, but postgres doesn't work with knex's .timestamps(true, true)
-  // so a manual intervention is needed
-  async $beforeInsert() {
-    await super.$beforeInsert(...arguments)
-    this.createdAt = new Date().toISOString()
-  }
-
-  async $beforeUpdate() {
-    await super.$beforeUpdate(...arguments)
-    this.updatedAt = new Date().toISOString()
-  }
-
   static get QueryBuilder() {
     return class extends super.QueryBuilder {
       insertAndFetch(body) {
