@@ -15,6 +15,7 @@ import {
 } from 'react-admin'
 
 import schema from '../schema.json'
+import getJsonPath from '../utils/get-json-path'
 
 const roleChoices = schema.User.properties.role.enum.map(role => ({
   id: role,
@@ -48,17 +49,28 @@ export const Show = props => (
   </ShowHOC>
 )
 
+const schemaAt = getJsonPath('User')
+
 export const Edit = props => (
   <EditHOC {...props}>
     <SimpleForm submitOnEnter={false} warnWhenUnsavedChanges>
-      <TextInput source="name" name="Name" />
+      <TextInput
+        disabled={schemaAt('name').readOnly}
+        source="name"
+        name="Name"
+      />
       <SelectInput
+        disabled={schemaAt('role').readOnly}
         source="role"
         name="Role"
         choices={roleChoices}
         sortable={false}
       />
-      <BooleanInput source="deactivated" label="Deactivated" />
+      <BooleanInput
+        disabled={schemaAt('deactivated').readOnly}
+        source="deactivated"
+        label="Deactivated"
+      />
     </SimpleForm>
   </EditHOC>
 )

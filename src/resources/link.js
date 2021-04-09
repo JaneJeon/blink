@@ -15,7 +15,7 @@ import {
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
 import validator from '../providers/validator'
-import schema from '../schema.json'
+import getJsonPath from '../utils/get-json-path'
 
 export const List = props => (
   <DataList {...props}>
@@ -56,6 +56,8 @@ export const Show = props => (
   </ShowHOC>
 )
 
+const schemaAt = getJsonPath('Link')
+
 export const Edit = props => (
   <EditHOC {...props}>
     <SimpleForm
@@ -64,52 +66,52 @@ export const Edit = props => (
       validate={validator('Link')}
     >
       <TextInput
-        disabled={schema.Link.properties.originalUrl.readOnly}
+        disabled={schemaAt('originalUrl').readOnly}
         source="originalUrl"
         label="Original Link"
         tyle="url"
       />
       <TextInput
-        disabled={schema.Link.properties.shortenedUrl.readOnly}
+        disabled={schemaAt('shortenedUrl').readOnly}
         source="shortenedUrl"
         label="Short Link"
         type="url"
       />
       <TextInput
-        disabled={schema.Link.properties.brandedUrl.readOnly}
+        disabled={schemaAt('brandedUrl').readOnly}
         source="brandedUrl"
         label="Brand Link"
         type="url"
       />
 
       <TextInput
-        disabled={schema.Link.properties.meta.properties.title.readOnly}
+        disabled={schemaAt('meta.title').readOnly}
         source="meta.title"
         label="Title"
       />
       <TextInput
-        disabled={schema.Link.properties.meta.properties.description.readOnly}
+        disabled={schemaAt('meta.description').readOnly}
         multiline
         source="meta.description"
         label="Description"
       />
       <TextInput
-        disabled={schema.Link.properties.meta.properties.author.readOnly}
+        disabled={schemaAt('meta.author').readOnly}
         source="meta.author"
         label="Author"
       />
       <TextInput
-        disabled={schema.Link.properties.meta.properties.publisher.readOnly}
+        disabled={schemaAt('meta.publisher').readOnly}
         source="meta.publisher"
         label="Publisher"
       />
       <TextInput
-        disabled={schema.Link.properties.meta.properties.lang.readOnly}
+        disabled={schemaAt('meta.lang').readOnly}
         source="meta.lang"
         label="Language"
       />
       <DateTimeInput
-        disabled={schema.Link.properties.meta.properties.date.readOnly}
+        disabled={schemaAt('meta.date').readOnly}
         source="meta.date"
         label="Original link created at"
       />
