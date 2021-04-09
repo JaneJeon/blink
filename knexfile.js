@@ -1,6 +1,5 @@
 // istanbul ignore file
 require('./config')
-require('pg').types.setTypeParser(20, parseInt) // cast SELECT COUNT(*) to integer
 
 const log = require('./lib/logger')
 const { knexSnakeCaseMappers } = require('objection')
