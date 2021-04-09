@@ -21,7 +21,7 @@ export default function createValidator(schemaName) {
     const errors = {}
 
     if (!valid)
-      return validate.errors.forEach(ajvError => {
+      validate.errors.forEach(ajvError => {
         if (ajvError.keyword === 'required')
           set(errors, ajvError.params.missingProperty, ajvError.message)
         else errors[ajvError.dataPath.substr(1)] = ajvError.message // .foo.bar => foo.bar

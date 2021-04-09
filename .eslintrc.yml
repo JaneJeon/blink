@@ -3,6 +3,8 @@ extends: '@janejeon'
 overrides:
   - files: src/**/*.js
     extends: react-app
+    rules:
+      no-console: 1
   - files: website/src/**/*.js
     extends: react-app
   - files: scripts/**/*.js
