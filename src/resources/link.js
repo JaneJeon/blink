@@ -14,6 +14,7 @@ import {
   DateTimeInput
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import validator from '../providers/validator'
 import getJsonPath from '../utils/get-json-path'
 
@@ -72,10 +73,19 @@ export const Edit = props => (
         tyle="url"
       />
       <TextInput
-        disabled={schemaAt('shortenedUrl').readOnly}
-        source="shortenedUrl"
+        disabled={schemaAt('hash').readOnly}
+        source="hash"
         label="Short Link"
-        type="url"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment
+              position="start"
+              style={{ marginRight: 0, marginBottom: '-3px' }}
+            >
+              {process.env.REACT_APP_BASE_URL}/
+            </InputAdornment>
+          )
+        }}
       />
       <TextInput
         disabled={schemaAt('brandedUrl').readOnly}

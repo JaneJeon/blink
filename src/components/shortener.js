@@ -110,7 +110,7 @@ export default function LinkShortener() {
                 startAdornment: (
                   <InputAdornment
                     position="start"
-                    style={{ marginRight: 0, marginBottom: '-4px' }}
+                    style={{ marginRight: 0, marginBottom: '-3px' }}
                   >
                     {process.env.REACT_APP_BASE_URL}/
                   </InputAdornment>
