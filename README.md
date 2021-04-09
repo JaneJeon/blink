@@ -127,4 +127,4 @@ This project is [AGPL-3.0](https://github.com/JaneJeon/blink/blob/master/LICENSE
 
 ---
 
-This project is based off of [Express-Objection-Template](https://github.com/JaneJeon/express-objection-template)
+This project is based off of [Express-Objection-Template](https://github.com/JaneJeon/express-objection-template), and heavily uses [objection-authorize](https://github.com/JaneJeon/objection-authorize) and [objection-hashid](https://github.com/JaneJeon/objection-hashid) to drive much of "hidden" logic and make isomorphism possible.
