@@ -6,7 +6,7 @@
       "id": { "type": ["integer", "string"], "readOnly": true },
       "creatorId": { "type": "string", "readOnly": true },
       "hash": { "type": ["string", "null"], "minLength": 4, "maxLength": 25 },
-      "originalUrl": { "type": "string" },
+      "originalUrl": { "type": "string", "readOnly": true },
       "shortenedUrl": { "type": "string", "readOnly": true },
       "brandedUrl": { "type": ["string", "null"], "readOnly": true },
       "meta": {

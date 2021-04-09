@@ -14,13 +14,15 @@ import {
   DateTimeInput
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
+import validator from '../providers/validator'
+import schema from '../schema.json'
 
 export const List = props => (
   <DataList {...props}>
     <Datagrid rowClick="show">
-      <UrlField source="originalUrl" label="Original URL" sortable={false} />
-      <UrlField source="shortenedUrl" label="Shortened URL" sortable={false} />
-      <UrlField source="brandedUrl" label="Branded URL" sortable={false} />
+      <UrlField source="originalUrl" label="Original link" sortable={false} />
+      <UrlField source="shortenedUrl" label="Short link" sortable={false} />
+      <UrlField source="brandedUrl" label="Brand link" sortable={false} />
       <ReferenceField source="creatorId" reference="users" label="Created by">
         <TextField source="name" />
       </ReferenceField>
@@ -34,8 +36,8 @@ export const Show = props => (
   <ShowHOC {...props}>
     <SimpleShowLayout>
       <Typography variant="h6">Shortened link information</Typography>
-      <UrlField source="shortenedUrl" label="Shortened URL" />
-      <UrlField source="brandedUrl" label="Branded URL" />
+      <UrlField source="shortenedUrl" label="Short link" />
+      <UrlField source="brandedUrl" label="Brand link" />
       <ReferenceField source="creatorId" reference="users" label="Created by">
         <TextField source="name" />
       </ReferenceField>
@@ -49,25 +51,68 @@ export const Show = props => (
       <TextField source="meta.author" label="Author" />
       <TextField source="meta.publisher" label="Publisher" />
       <TextField source="meta.lang" label="Language" />
-      <DateField source="meta.date" label="Created at" />
+      <DateField source="meta.date" label="Original link created at" />
     </SimpleShowLayout>
   </ShowHOC>
 )
 
 export const Edit = props => (
   <EditHOC {...props}>
-    <SimpleForm submitOnEnter={false} warnWhenUnsavedChanges>
-      {/* TODO: disable dynamically */}
-      <TextInput source="originalUrl" label="Original URL" tyle="url" />
-      <TextInput source="shortenedUrl" label="Shortened URL" type="url" />
-      <TextInput source="brandedUrl" label="Branded URL" type="url" />
+    <SimpleForm
+      submitOnEnter={false}
+      warnWhenUnsavedChanges
+      validate={validator('Link')}
+    >
+      <TextInput
+        disabled={schema.Link.properties.originalUrl.readOnly}
+        source="originalUrl"
+        label="Original Link"
+        tyle="url"
+      />
+      <TextInput
+        disabled={schema.Link.properties.shortenedUrl.readOnly}
+        source="shortenedUrl"
+        label="Short Link"
+        type="url"
+      />
+      <TextInput
+        disabled={schema.Link.properties.brandedUrl.readOnly}
+        source="brandedUrl"
+        label="Brand Link"
+        type="url"
+      />
 
-      <TextInput source="meta.title" label="Title" />
-      <TextInput multiline source="meta.description" label="Description" />
-      <TextInput source="meta.author" label="Author" />
-      <TextInput source="meta.publisher" label="Publisher" />
-      <TextInput source="meta.lang" label="Language" />
-      <DateTimeInput source="meta.date" label="Created at" />
+      <TextInput
+        disabled={schema.Link.properties.meta.properties.title.readOnly}
+        source="meta.title"
+        label="Title"
+      />
+      <TextInput
+        disabled={schema.Link.properties.meta.properties.description.readOnly}
+        multiline
+        source="meta.description"
+        label="Description"
+      />
+      <TextInput
+        disabled={schema.Link.properties.meta.properties.author.readOnly}
+        source="meta.author"
+        label="Author"
+      />
+      <TextInput
+        disabled={schema.Link.properties.meta.properties.publisher.readOnly}
+        source="meta.publisher"
+        label="Publisher"
+      />
+      <TextInput
+        disabled={schema.Link.properties.meta.properties.lang.readOnly}
+        source="meta.lang"
+        label="Language"
+      />
+      <DateTimeInput
+        disabled={schema.Link.properties.meta.properties.date.readOnly}
+        source="meta.date"
+        label="Original link created at"
+      />
     </SimpleForm>
   </EditHOC>
 )
