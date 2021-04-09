@@ -15,6 +15,7 @@ import {
 } from 'react-admin'
 
 import schema from '../schema.json'
+import validator from '../providers/validator'
 import getJsonPath from '../utils/get-json-path'
 
 const roleChoices = schema.User.properties.role.enum.map(role => ({
@@ -53,7 +54,11 @@ const schemaAt = getJsonPath('User')
 
 export const Edit = props => (
   <EditHOC {...props}>
-    <SimpleForm submitOnEnter={false} warnWhenUnsavedChanges>
+    <SimpleForm
+      submitOnEnter={false}
+      warnWhenUnsavedChanges
+      validate={validator('User')}
+    >
       <TextInput
         disabled={schemaAt('name').readOnly}
         source="name"
