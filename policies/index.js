@@ -7,13 +7,23 @@ const policyMap = { Link: require('./link'), User: require('./user') }
 
 module.exports = (user, resource, action, body, opts, relation) => {
   const { rules, can: allow, cannot: forbid } = new AbilityBuilder(Ability)
-  const policies = policyMap[resource.constructor.name] // TODO: handle relations
 
-  // when action is specified, we can narrow the ability down to the action level
-  if (action) policies[action](allow, forbid, user, body)
-  // "Merge" all the rules by calling allow/forbid on all of them.
-  else
-    Object.values(policies).forEach(policy => policy(allow, forbid, user, body))
+  // https://github.com/flexdinesh/browser-or-node/blob/master/src/index.js
+  const isRunningInNode =
+    typeof process !== 'undefined' &&
+    process.versions != null &&
+    process.versions.node != null
+
+  if (isRunningInNode) {
+    // For use in objection-authorize
+    const policies = policyMap[resource.constructor.name] // TODO: handle relations
+    policies[action](allow, forbid, user, body)
+  } else {
+    // For use in frontend
+    Object.values(policyMap).forEach(policy => {
+      Object.values(policy).forEach(action => action(allow, forbid, user, body))
+    })
+  }
 
   return new Ability(rules)
 }

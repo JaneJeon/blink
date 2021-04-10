@@ -55,22 +55,24 @@ export default function App() {
       history={history}
       layout={CustomLayout}
     >
-      <Resource
-        name="links"
-        options={{ label: 'Links' }}
-        icon={LinkIcon}
-        list={link.List}
-        show={link.Show}
-        edit={link.Edit}
-      />
-      <Resource
-        name="users"
-        options={{ label: 'Users' }}
-        icon={PeopleIcon}
-        list={user.List}
-        show={user.Show}
-        edit={user.Edit}
-      />
+      {permissions => [
+        <Resource
+          name="links"
+          options={{ label: 'Links' }}
+          icon={LinkIcon}
+          list={permissions.can('read', 'Link') ? link.List : null}
+          show={permissions.can('read', 'Link') ? link.Show : null}
+          edit={permissions.can('update', 'Link') ? link.Edit : null}
+        />,
+        <Resource
+          name="users"
+          options={{ label: 'Users' }}
+          icon={PeopleIcon}
+          list={permissions.can('read', 'User') ? user.List : null}
+          show={permissions.can('read', 'User') ? user.Show : null}
+          edit={permissions.can('update', 'User') ? user.Edit : null}
+        />
+      ]}
     </Admin>
   )
 }

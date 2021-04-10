@@ -1,3 +1,5 @@
+import policies from '../policies'
+
 const getUser = () => {
   const str = localStorage.getItem('user')
   return !str || str === '{}' ? null : JSON.parse(str)
@@ -33,7 +35,9 @@ const authProvider = {
     if (!user) return Promise.reject()
     else return Promise.resolve({ id: user.id, fullName: user.name })
   },
-  getPermissions: params => Promise.resolve() // TODO:
+  getPermissions: async () => {
+    return policies(getUser()) // TODO: memo
+  }
 }
 
 export default authProvider
