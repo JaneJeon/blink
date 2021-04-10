@@ -19,6 +19,8 @@ const authProvider = {
   checkAuth: async () => {
     if (getUser()) return
     const resp = await fetch('/api/user')
+    if (!resp.ok) throw new Error('Unauthorized!')
+
     const user = await resp.json()
     setUser(user)
   },
@@ -26,12 +28,11 @@ const authProvider = {
     setUser()
     return Promise.resolve()
   },
-  // getIdentity: () => {
-  //   const user = getUser()
-  //   return user
-  //     ? Promise.resolve({ id: user.id, fullName: user.name })
-  //     : Promise.reject()
-  // },
+  getIdentity: () => {
+    const user = getUser()
+    if (!user) return Promise.reject()
+    else return Promise.resolve({ id: user.id, fullName: user.name })
+  },
   getPermissions: params => Promise.resolve() // TODO:
 }
 
