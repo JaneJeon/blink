@@ -34,6 +34,16 @@ export const List = props => (
         sortable={false}
       />
       <BooleanField source="deactivated" label="Deactivated" />
+      <DateField
+        source="createdAt"
+        label="Created at"
+        style={{ wordBreak: 'normal' }}
+      />
+      <DateField
+        source="updatedAt"
+        label="Updated at"
+        style={{ wordBreak: 'normal' }}
+      />
     </Datagrid>
   </DataList>
 )
