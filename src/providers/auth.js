@@ -13,7 +13,6 @@ const setUser = user => {
   else localStorage.setItem('user', JSON.stringify(user))
 }
 
-// TODO: make callers await for a lock to call this to avoid race condition
 const getOrSetUser = async () => {
   let user = getUser()
   if (user) return user
@@ -36,7 +35,7 @@ const authProvider = {
     }
     return Promise.resolve()
   },
-  checkAuth: getOrSetUser,
+  checkAuth: async () => {},
   logout: () => {
     setUser()
     return Promise.resolve()
