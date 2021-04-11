@@ -11,15 +11,17 @@ import {
   TextField,
   RichTextField,
   TextInput,
-  DateTimeInput
+  DateTimeInput,
+  usePermissions
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import { subject } from '@casl/ability'
 import validator from '../providers/validator'
 import getJsonPath from '../utils/get-json-path'
 
 export const List = props => (
-  <DataList {...props}>
+  <DataList {...props} perPage={15}>
     <Datagrid rowClick="show">
       <UrlField source="originalUrl" label="Original link" sortable={false} />
       <UrlField source="shortenedUrl" label="Short link" sortable={false} />
@@ -61,21 +63,48 @@ const schemaAt = getJsonPath('Link')
 
 export const Edit = props => (
   <EditHOC {...props}>
+    <EditComponent />
+  </EditHOC>
+)
+
+const EditComponent = props => {
+  const { loading, permissions } = usePermissions()
+  const resource = subject('Link', props.record)
+
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <SimpleForm
       submitOnEnter={false}
       warnWhenUnsavedChanges
       validate={validator('Link')}
+      {...props}
     >
       <TextInput
-        disabled={schemaAt('originalUrl').readOnly}
+        disabled={
+          schemaAt('originalUrl').readOnly ||
+          permissions.cannot('update', resource, 'originalUrl')
+        }
         source="originalUrl"
         label="Original Link"
         tyle="url"
       />
       <TextInput
-        disabled={schemaAt('hash').readOnly}
-        source="hash"
+        disabled={
+          schemaAt('shortenedUrl').readOnly ||
+          permissions.cannot('update', resource, 'shortenedUrl')
+        }
+        source="shortenedUrl"
         label="Short Link"
+        type="url"
+      />
+      <TextInput
+        disabled={
+          schemaAt('hash').readOnly ||
+          permissions.cannot('update', resource, 'hash')
+        }
+        source="hash"
+        label="Brand Link"
         InputProps={{
           startAdornment: (
             <InputAdornment
@@ -87,44 +116,56 @@ export const Edit = props => (
           )
         }}
       />
-      <TextInput
-        disabled={schemaAt('brandedUrl').readOnly}
-        source="brandedUrl"
-        label="Brand Link"
-        type="url"
-      />
 
       <TextInput
-        disabled={schemaAt('meta.title').readOnly}
+        disabled={
+          schemaAt('meta.title').readOnly ||
+          permissions.cannot('update', resource, 'meta.title')
+        }
         source="meta.title"
         label="Title"
       />
       <TextInput
-        disabled={schemaAt('meta.description').readOnly}
+        disabled={
+          schemaAt('meta.description').readOnly ||
+          permissions.cannot('update', resource, 'meta.description')
+        }
         multiline
         source="meta.description"
         label="Description"
       />
       <TextInput
-        disabled={schemaAt('meta.author').readOnly}
+        disabled={
+          schemaAt('meta.author').readOnly ||
+          permissions.cannot('update', resource, 'meta.author')
+        }
         source="meta.author"
         label="Author"
       />
       <TextInput
-        disabled={schemaAt('meta.publisher').readOnly}
+        disabled={
+          schemaAt('meta.publisher').readOnly ||
+          permissions.cannot('update', resource, 'meta.publisher')
+        }
         source="meta.publisher"
         label="Publisher"
       />
       <TextInput
-        disabled={schemaAt('meta.lang').readOnly}
+        disabled={
+          schemaAt('meta.lang').readOnly ||
+          permissions.cannot('update', resource, 'meta.lang')
+        }
         source="meta.lang"
         label="Language"
       />
       <DateTimeInput
-        disabled={schemaAt('meta.date').readOnly}
+        disabled={
+          schemaAt('meta.date').readOnly ||
+          permissions.cannot('update', resource, 'meta.date')
+        }
         source="meta.date"
         label="Original link created at"
       />
     </SimpleForm>
-  </EditHOC>
-)
+  )
+}

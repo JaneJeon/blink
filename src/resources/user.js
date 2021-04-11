@@ -11,8 +11,10 @@ import {
   DateField,
   TextInput,
   BooleanInput,
-  SelectInput
+  SelectInput,
+  usePermissions
 } from 'react-admin'
+import { subject } from '@casl/ability'
 
 import schema from '../schema.json'
 import validator from '../providers/validator'
@@ -24,7 +26,7 @@ const roleChoices = schema.User.properties.role.enum.map(role => ({
 }))
 
 export const List = props => (
-  <DataList {...props}>
+  <DataList {...props} perPage={15}>
     <Datagrid rowClick="show">
       <TextField source="name" name="Name" sortable={false} />
       <SelectField
@@ -56,28 +58,49 @@ const schemaAt = getJsonPath('User')
 
 export const Edit = props => (
   <EditHOC {...props}>
+    <EditComponent />
+  </EditHOC>
+)
+
+const EditComponent = props => {
+  const { loading, permissions } = usePermissions()
+  const resource = subject('User', props.record)
+
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <SimpleForm
       submitOnEnter={false}
       warnWhenUnsavedChanges
       validate={validator('User')}
+      {...props}
     >
       <TextInput
-        disabled={schemaAt('name').readOnly}
+        disabled={
+          schemaAt('name').readOnly ||
+          permissions.cannot('update', resource, 'name')
+        }
         source="name"
-        name="Name"
+        label="Name"
       />
       <SelectInput
-        disabled={schemaAt('role').readOnly}
+        disabled={
+          schemaAt('role').readOnly ||
+          permissions.cannot('update', resource, 'role')
+        }
         source="role"
-        name="Role"
+        label="Role"
         choices={roleChoices}
         sortable={false}
       />
       <BooleanInput
-        disabled={schemaAt('deactivated').readOnly}
+        disabled={
+          schemaAt('deactivated').readOnly ||
+          permissions.cannot('update', resource, 'deactivated')
+        }
         source="deactivated"
         label="Deactivated"
       />
     </SimpleForm>
-  </EditHOC>
-)
+  )
+}
