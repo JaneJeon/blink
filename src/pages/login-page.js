@@ -44,8 +44,7 @@ const useStyles = makeStyles(
 )
 
 export default function LoginPage({ theme, className }) {
-  // Photo by Paweł Czerwiński
-  const backgroundImage = process.env.PUBLIC_URL + '/public/background.jpg'
+  const backgroundImage = 'https://source.unsplash.com/random/1920x1080/daily'
 
   const classes = useStyles({ theme })
   const muiTheme = useMemo(() => createMuiTheme(theme), [theme])
