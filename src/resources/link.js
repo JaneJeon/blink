@@ -26,7 +26,12 @@ export const List = props => (
       <UrlField source="originalUrl" label="Original link" sortable={false} />
       <UrlField source="shortenedUrl" label="Short link" sortable={false} />
       <UrlField source="brandedUrl" label="Brand link" sortable={false} />
-      <ReferenceField source="creatorId" reference="users" label="Created by">
+      <ReferenceField
+        source="creatorId"
+        reference="users"
+        label="Created by"
+        link="show"
+      >
         <TextField source="name" />
       </ReferenceField>
       <DateField source="createdAt" label="Created at" />
