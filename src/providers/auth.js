@@ -36,9 +36,9 @@ const authProvider = {
     return Promise.resolve()
   },
   checkAuth: async () => {},
-  logout: () => {
+  logout: async () => {
     setUser()
-    return Promise.resolve()
+    await fetch('/auth/logout')
   },
   getIdentity: () => {
     const user = getUser()
