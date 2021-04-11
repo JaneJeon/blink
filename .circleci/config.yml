@@ -25,7 +25,7 @@ jobs:
         node/install-packages:
           include-branch-in-cache-key: false
           override-ci-command: npm ci --prefer-offline --no-audit
-          cache_path: node_modules
+          cache-path: node_modules
       - run:
           name: Lint (Prettier)
           command: npm run lint:prettier
