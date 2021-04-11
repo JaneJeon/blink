@@ -1,6 +1,8 @@
 const { Router } = require('express')
 const Link = require('../models/link')
 const schema = require('../config/schema.json')
+const ms = require('ms')
+const cacheAge = ms(process.env.CACHE_AGE) / 1000 // in seconds
 
 module.exports = Router()
   .get('/', (req, res) => res.redirect(301, process.env.HOMEPAGE))
@@ -9,5 +11,6 @@ module.exports = Router()
       .findByHashId(req.params.hash)
       .throwIfNotFound()
 
+    res.set('Cache-Control', `public, max-age=${cacheAge}`)
     res.redirect(301, link.originalUrl)
   })
