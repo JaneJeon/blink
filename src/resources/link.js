@@ -27,16 +27,8 @@ export const List = props => (
       <ReferenceField source="creatorId" reference="users" label="Created by">
         <TextField source="name" />
       </ReferenceField>
-      <DateField
-        source="createdAt"
-        label="Created at"
-        style={{ wordBreak: 'normal' }}
-      />
-      <DateField
-        source="updatedAt"
-        label="Updated at"
-        style={{ wordBreak: 'normal' }}
-      />
+      <DateField source="createdAt" label="Created at" />
+      <DateField source="updatedAt" label="Updated at" />
     </Datagrid>
   </DataList>
 )

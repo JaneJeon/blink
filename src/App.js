@@ -40,6 +40,10 @@ export default function App() {
         palette: {
           type: prefersDarkMode ? 'dark' : 'light',
           primary: prefersDarkMode ? blue : indigo
+        },
+        sidebar: {
+          width: 200,
+          closedWidth: 50
         }
       }),
     [prefersDarkMode]

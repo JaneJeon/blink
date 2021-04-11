@@ -1,3 +1,14 @@
 td {
-  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td.column-originalUrl {
+  max-width: 300px;
+}
+
+td.column-shortenedUrl,
+td.column-brandedUrl {
+  max-width: 200px;
 }
