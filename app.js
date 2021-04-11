@@ -7,6 +7,7 @@ const logger = require('./lib/logger')
 const passport = require('./middlewares/passport')
 
 module.exports = express()
+  .set('trust proxy', true)
   .use(require('helmet')())
   .use(express.json())
   .use(require('express-query-boolean')())
