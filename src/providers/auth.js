@@ -1,3 +1,7 @@
+// Do NOT touch this unless if you know EXACTLY what you're doing.
+// This is where all of react-admin's skeletons are buried.
+// Below lies a finnicky, un-testable, flaky mess (not of my own fault) forced upon by the react-admin gods...
+
 import policies from '../policies'
 
 const getUser = () => {
@@ -9,6 +13,20 @@ const setUser = user => {
   else localStorage.setItem('user', JSON.stringify(user))
 }
 
+// TODO: make callers await for a lock to call this to avoid race condition
+const getOrSetUser = async () => {
+  let user = getUser()
+  if (user) return user
+
+  const resp = await fetch('/api/user')
+  if (!resp.ok) throw new Error('Unauthorized')
+
+  user = await resp.json()
+  setUser(user)
+
+  return user
+}
+
 /* eslint-disable prefer-promise-reject-errors */
 const authProvider = {
   checkError: ({ status }) => {
@@ -18,14 +36,7 @@ const authProvider = {
     }
     return Promise.resolve()
   },
-  checkAuth: async () => {
-    if (getUser()) return
-    const resp = await fetch('/api/user')
-    if (!resp.ok) throw new Error('Unauthorized!')
-
-    const user = await resp.json()
-    setUser(user)
-  },
+  checkAuth: getOrSetUser,
   logout: () => {
     setUser()
     return Promise.resolve()
@@ -36,7 +47,8 @@ const authProvider = {
     else return Promise.resolve({ id: user.id, fullName: user.name })
   },
   getPermissions: async () => {
-    return policies(getUser()) // TODO: memo
+    const user = await getOrSetUser()
+    return policies(user)
   }
 }
 
