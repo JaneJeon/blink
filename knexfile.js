@@ -8,11 +8,14 @@ const { knexSnakeCaseMappers } = require('objection')
 
 const env = process.env.NODE_ENV || 'development'
 
+const connection = parse(process.env.DATABASE_URL)
+if (env === 'production')
+  // heroku requires this
+  Object.assign(connection, { ssl: { rejectUnauthorized: false } })
+
 module.exports = {
   client: 'pg',
-  connection: Object.assign(parse(process.env.DATABASE_URL), {
-    ssl: env === 'production'
-  }),
+  connection,
   log: {
     warn: msg => log.warn(msg),
     error: msg => log.error(msg),
