@@ -39,7 +39,10 @@ export default function LinkShortener() {
     try {
       const result = await fetch('/api/links', {
         method: 'POST',
-        body: JSON.stringify(linkBody)
+        body: JSON.stringify(linkBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
       if (!result.ok) throw new Error(await result.text())
       const { shortenedUrl, brandedUrl } = await result.json()
