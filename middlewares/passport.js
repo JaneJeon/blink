@@ -25,34 +25,37 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
 
     passport.use(
       'oidc',
-      new Strategy({ client }, async (tokenSet, done) => {
-        const claims = tokenSet.claims()
-        const { sub: id, [process.env.OIDC_NAME_FIELD]: name } = claims
-        log.info('Trying to log in user %s with claims %o', id, claims)
+      new Strategy(
+        { client, params: { scope: ['openid profile'] } },
+        async (tokenSet, done) => {
+          const claims = tokenSet.claims()
+          const { sub: id, [process.env.OIDC_NAME_FIELD]: name } = claims
+          log.info('Trying to log in user %s with claims %o', id, claims)
 
-        let user
-        try {
-          user = await User.query()
-            .insertAndFetch({ id, name })
-            .authorize()
-            .fetchResourceContextFromDB()
-          log.info('Provisioned user %s', id)
-        } catch (e) {
-          if (e instanceof UniqueViolationError) {
-            log.info('Found user %s', id)
-            user = await User.query().findById(id)
-          } else {
-            log.warn('User %s is forbidden from logging in', id)
-            return done(e)
+          let user
+          try {
+            user = await User.query()
+              .insertAndFetch({ id, name })
+              .authorize()
+              .fetchResourceContextFromDB()
+            log.info('Provisioned user %s', id)
+          } catch (e) {
+            if (e instanceof UniqueViolationError) {
+              log.info('Found user %s', id)
+              user = await User.query().findById(id)
+            } else {
+              log.warn('User %s is forbidden from logging in', id)
+              return done(e)
+            }
           }
+
+          // TODO: set session map on redis userSession:$userId -> [req.session.id]
+          // to allow deleting sessions by user
+
+          log.info('Done logging in user %s', id)
+          done(null, user)
         }
-
-        // TODO: set session map on redis userSession:$userId -> [req.session.id]
-        // to allow deleting sessions by user
-
-        log.info('Done logging in user %s', id)
-        done(null, user)
-      })
+      )
     )
   })
   .catch(err => {
