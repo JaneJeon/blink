@@ -18,10 +18,9 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
 
     client = new issuer.Client({
       client_id: process.env.OIDC_CLIENT_ID,
-      client_secret: process.env.OIDC_CLIENT_SECRET,
       redirect_uris: [`${process.env.BASE_URL}/auth/login/callback`],
       response_types: ['code'], // can't use implicit flow because #this-part-gets-stripped-away
-      token_endpoint_auth_method: process.env.OIDC_TOKEN_ENDPOINT_AUTH_METHOD
+      token_endpoint_auth_method: 'none'
     })
 
     passport.use(
