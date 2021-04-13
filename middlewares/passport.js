@@ -27,11 +27,9 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
     passport.use(
       'oidc',
       new Strategy({ client }, async (tokenSet, done) => {
-        const {
-          sub: id,
-          [process.env.OIDC_NAME_FIELD]: name
-        } = tokenSet.claims()
-        log.info('Trying to log in user %s', id)
+        const claims = tokenSet.claims()
+        const { sub: id, [process.env.OIDC_NAME_FIELD]: name } = claims
+        log.info('Trying to log in user %s with claims %o', id, claims)
 
         let user
         try {
