@@ -11,27 +11,23 @@ import AddIcon from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
 
-const RequestStateEnum = Object.freeze({
-  READY: 0,
-  WAITING: 1
-})
-
 export default function LinkShortener() {
-  const [open, setOpen] = useState(false)
-  const [requestState, setRequestState] = useState(RequestStateEnum.READY)
+  const [isOpen, setIsOpen] = useState(false)
   const [link, setLink] = useState({
     hash: '',
     originalUrl: '',
     shortenedUrl: '',
     brandedUrl: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
   async function shortenLink(e) {
     e.preventDefault()
-    if (requestState !== RequestStateEnum.READY) return
 
-    setRequestState(RequestStateEnum.WAITING)
+    if (isLoading) return // wait until request is done
+    setIsLoading(true)
+
     const linkBody = link.hash
       ? pick({ ...link }, ['originalUrl', 'hash'])
       : pick({ ...link }, ['originalUrl'])
@@ -52,7 +48,7 @@ export default function LinkShortener() {
     } catch (err) {
       setError(err.message)
     } finally {
-      setRequestState(RequestStateEnum.READY)
+      setIsLoading(false)
     }
   }
 
@@ -61,14 +57,14 @@ export default function LinkShortener() {
       <IconButton
         aria-label="add"
         color="primary"
-        onClick={() => setOpen(true)}
+        onClick={() => setIsOpen(true)}
       >
         <AddIcon />
       </IconButton>
 
       <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
         aria-labelledby="form-dialog-title"
         fullWidth="60vw"
       >
@@ -84,13 +80,14 @@ export default function LinkShortener() {
               onChange={e => setLink({ ...link, originalUrl: e.target.value })}
               error={!!error}
               helperText={error}
+              disabled={isLoading}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="shorten"
-                      color="primary"
-                      disabled={requestState !== RequestStateEnum.READY}
+                      color="secondary"
+                      disabled={isLoading} // TODO: json schema check originalUrl
                       type="submit"
                     >
                       <SearchIcon />
@@ -102,12 +99,14 @@ export default function LinkShortener() {
             <TextField
               variant="filled"
               label="Custom URL"
-              placeholder="awesome-link"
-              defaultValue={
-                link.shortenedUrl ? link.shortenedUrl.split('/').pop() : null
+              placeholder={
+                link.shortenedUrl
+                  ? link.shortenedUrl.split('/').pop()
+                  : 'awesome-link'
               }
               onChange={e => setLink({ ...link, hash: e.target.value })}
               error={!!error}
+              disabled={isLoading || link.brandedUrl} // TODO: disable when you can't change
               style={{ marginTop: '2rem', paddingBottom: '1rem' }}
               InputProps={{
                 startAdornment: (
@@ -126,7 +125,7 @@ export default function LinkShortener() {
                       <IconButton
                         aria-label="copy link"
                         color="secondary"
-                        disabled={requestState !== RequestStateEnum.WAITING}
+                        disabled={isLoading || !link.shortenedUrl}
                       >
                         <FileCopyIcon />
                       </IconButton>
