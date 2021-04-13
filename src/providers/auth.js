@@ -18,7 +18,7 @@ const getOrSetUser = async () => {
   if (user) return user
 
   const resp = await fetch('/api/user')
-  if (!resp.ok) throw new Error('Unauthorized')
+  if (!resp.ok) throw new Error(await resp.text())
 
   user = await resp.json()
   setUser(user)
