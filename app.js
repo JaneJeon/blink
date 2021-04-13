@@ -8,7 +8,7 @@ const passport = require('./middlewares/passport')
 
 module.exports = express()
   .set('trust proxy', true)
-  .use(require('helmet')())
+  .use(require('./middlewares/security'))
   .use(express.json())
   .use(require('express-query-boolean')())
   .use(require('./middlewares/session'))
