@@ -15,6 +15,7 @@ module.exports = express()
   .use(passport.initialize())
   .use(passport.session())
   .use((req, res, next) => {
+    req.id = req.header('X-Request-Id')
     req.log = logger.child({ req })
     next()
   })
