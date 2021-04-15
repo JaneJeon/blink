@@ -1,4 +1,5 @@
 extends: '@janejeon'
+
 ignorePatterns:
   - 'docs/'
 
