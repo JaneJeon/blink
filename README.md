@@ -1,8 +1,6 @@
 <h1 align="center">Welcome to Blink (WIP) 👋</h1>
 
 [![CircleCI](https://circleci.com/gh/JaneJeon/blink.svg?style=shield)](https://circleci.com/gh/JaneJeon/blink)
-[![Dependencies](https://img.shields.io/david/JaneJeon/blink)](https://david-dm.org/JaneJeon/blink)
-[![devDependencies](https://img.shields.io/david/dev/JaneJeon/blink)](https://david-dm.org/JaneJeon/blink?type=dev)
 [![Prettier code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Deploy to Heroku](https://img.shields.io/badge/deploy%20to-heroku-6762a6)](https://heroku.com/deploy)
 
