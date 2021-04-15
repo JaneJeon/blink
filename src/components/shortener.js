@@ -47,8 +47,10 @@ export default function LinkShortener() {
 
       setLink({ ...link, shortenedUrl, brandedUrl })
       setError('')
+      notify('Shortened link!')
     } catch (err) {
       setError(err.message)
+      notify('Failed to shorten link')
     } finally {
       setIsLoading(false)
     }
