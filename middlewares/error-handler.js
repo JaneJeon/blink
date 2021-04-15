@@ -40,8 +40,5 @@ module.exports = (err, req, res, next) => {
       : 'error'
   req.log[loglevel]({ err })
 
-  res.status(err.statusCode).send({
-    message: err.message,
-    name: err.name
-  })
+  res.status(err.statusCode).send(err.message)
 }

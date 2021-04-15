@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import { useNotify } from 'react-admin'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import pick from 'lodash/pick'
 import Dialog from '@material-ui/core/Dialog'
@@ -21,6 +22,7 @@ export default function LinkShortener() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const notify = useNotify()
 
   async function shortenLink(e) {
     e.preventDefault()
@@ -58,6 +60,7 @@ export default function LinkShortener() {
         aria-label="add"
         color="primary"
         onClick={() => setIsOpen(true)}
+        data-testid="open-button"
       >
         <AddIcon />
       </IconButton>
@@ -66,7 +69,8 @@ export default function LinkShortener() {
         open={isOpen}
         onClose={() => setIsOpen(false)}
         aria-labelledby="form-dialog-title"
-        fullWidth="60vw"
+        maxWidth="sm"
+        fullWidth={true}
       >
         <DialogTitle id="form-dialog-title">Shorten Link</DialogTitle>
 
@@ -81,11 +85,13 @@ export default function LinkShortener() {
               error={!!error}
               helperText={error}
               disabled={isLoading}
+              data-testid="originalUrl-field"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="shorten"
+                      data-testid="shorten-button"
                       color="secondary"
                       disabled={isLoading} // TODO: json schema check originalUrl
                       type="submit"
@@ -104,9 +110,11 @@ export default function LinkShortener() {
                   ? link.shortenedUrl.split('/').pop()
                   : 'awesome-link'
               }
+              value={link.brandedUrl ? link.brandedUrl.split('/').pop() : ''}
+              data-testid="hash-field"
               onChange={e => setLink({ ...link, hash: e.target.value })}
               error={!!error}
-              disabled={isLoading || link.brandedUrl} // TODO: disable when you can't change
+              disabled={isLoading || !!link.brandedUrl} // TODO: disable when you can't change
               style={{ marginTop: '2rem', paddingBottom: '1rem' }}
               InputProps={{
                 startAdornment: (
@@ -121,11 +129,13 @@ export default function LinkShortener() {
                   <InputAdornment position="end">
                     <CopyToClipboard
                       text={link.brandedUrl || link.shortenedUrl}
+                      data-testid="copy-button"
                     >
                       <IconButton
                         aria-label="copy link"
                         color="secondary"
                         disabled={isLoading || !link.shortenedUrl}
+                        onClick={() => notify('Link copied!')}
                       >
                         <FileCopyIcon />
                       </IconButton>
