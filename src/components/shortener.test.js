@@ -4,13 +4,10 @@ import userEvent from '@testing-library/user-event'
 import Shortener from './shortener'
 
 describe('Shortener component', () => {
-  beforeAll(() => {
-    const spy = jest.spyOn(redux, 'useDispatch')
-    spy.mockReturnValue(() => {})
-  })
-
   beforeEach(() => {
     fetch.resetMocks()
+    const spy = jest.spyOn(redux, 'useDispatch')
+    spy.mockReturnValue(() => {})
   })
 
   test('Shorten with no hash/button activation', async () => {
