@@ -61,21 +61,29 @@ Such is the flexibility granted by decoupling the server with the analytics!
 
 A side goal for this project (and its core dependencies, including https://github.com/JaneJeon/objection-authorize), is to keep it universal. This means _actually_ reusing code between the frontend and the backend, such as the validation (all based on standards-compliant JSON schema), or the access control (the same ACL can be integrated into the frontend while it is made transparent thru the use of objection-authorize on the backend - see `policies/`).
 
-In fact, this project is essentially a "proving ground" for such a concept, which would allow for _rapid_ development for future applications and would result in fewer places to break due to the (mis)coordination between frontend and the backend teams (something I learned while building https://github.com/JaneJeon/bazaar-backend).
+In fact, this project is essentially a "proving ground" for such a concept, which would allow for _rapid_ development for future applications and would result in fewer places to break due to the (mis)coordination between frontend and the backend teams.
 
-## Install
+## Deploy
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+This is a basic 12-factor node app, so you could also just run it on your server directly with `pm2`. If you're hosting on your own environment, take care to configure the Redis and Postgres URLs correctly.
 
 ### Updating Heroku source for the server
 
-    heroku git:remote -a YOURAPPNAME
-    git fetch origin v1.X.Y
+In your clone of this repo, run:
+
+    heroku git:remote -a $YOURAPPNAME
+    git fetch origin vX.Y.Z
     git push heroku master
 
 ### CDN/DNS
 
+Under development
+
 ### Analytics
 
-## Usage
+Under development
 
 ## Development
 
