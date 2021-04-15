@@ -1,4 +1,4 @@
-if (process.argv.length !== 2 || process.argv.length !== 3) {
+if (!(process.argv.length === 2 || process.argv.length === 3)) {
   console.error('usage: npm run promote-user [$userIdToPromote]')
   process.exit(1)
 }
