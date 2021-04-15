@@ -1,4 +1,6 @@
 extends: '@janejeon'
+ignorePatterns:
+  - 'docs/'
 
 overrides:
   - files: src/**/*.js
