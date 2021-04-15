@@ -67,6 +67,8 @@ In fact, this project is essentially a "proving ground" for such a concept, whic
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+After you're done deploying, visit the dashboard at $YOURAPPNAME.herokuapp.com/app
+
 This is a basic 12-factor node app, so you could also just run it on your server directly with `pm2`. If you're hosting on your own environment, take care to configure the Redis and Postgres URLs correctly.
 
 ### Updating Heroku source for the server
