@@ -71,6 +71,8 @@ After you're done deploying, visit the dashboard at $YOURAPPNAME.herokuapp.com/a
 
 This is a basic 12-factor node app, so you could also just run it on your server directly with `pm2`. If you're hosting on your own environment, take care to configure the Redis and Postgres URLs correctly.
 
+Once you sign in with your SSO, make sure to give yourself admin privileges by running `npm run promote-user`. Note that this only works if you have signed up with SSO already and you're the only user; if someone else already signed up, find your user id and run `npm run promote-user $yourUserId`.
+
 ### Updating Heroku source for the server
 
 In your clone of this repo, run:
