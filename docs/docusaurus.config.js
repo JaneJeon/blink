@@ -18,7 +18,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/',
+          to: '/',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left'
@@ -33,15 +33,15 @@ module.exports = {
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Getting Started',
-              to: 'docs/'
-            }
-          ]
-        },
+        // {
+        //   title: 'Docs',
+        //   items: [
+        //     {
+        //       label: 'Getting Started',
+        //       to: 'docs/'
+        //     }
+        //   ]
+        // },
         // {
         //   title: 'Community',
         //   items: [
@@ -59,17 +59,17 @@ module.exports = {
         //     }
         //   ]
         // },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/JaneJeon/blink'
-            }
-          ]
-        }
-      ]
-      // copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`
+        // {
+        //   title: 'More',
+        //   items: [
+        //     {
+        //       label: 'GitHub',
+        //       href: 'https://github.com/JaneJeon/blink'
+        //     }
+        //   ]
+        // }
+      ],
+      copyright: `Copyright © ${new Date().getFullYear()} Jane Jeon`
     }
   },
   presets: [
