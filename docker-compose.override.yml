@@ -10,20 +10,3 @@ services:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
       KEYCLOAK_IMPORT: /mnt/keycloak.json
-  pgweb:
-    image: sosedoff/pgweb
-    ports:
-      - 8081:8081
-    volumes:
-      - ./scripts/wait-for.sh:/mnt/wait-for.sh
-    environment:
-      - DATABASE_URL=postgres://knex@postgres/blink?sslmode=disable
-    depends_on:
-      - postgres
-    command:
-      - /mnt/wait-for.sh
-      - postgres:5432
-      - --
-      - /usr/bin/pgweb
-      - --bind=0.0.0.0
-      - --listen=8081
