@@ -1,15 +1,13 @@
 extends: '@janejeon'
 
 ignorePatterns:
-  - 'docs/'
+  - 'website/'
 
 overrides:
   - files: src/**/*.js
     extends: react-app
     rules:
       no-console: 1
-  - files: website/src/**/*.js
-    extends: react-app
   - files: scripts/**/*.js
     rules:
       no-console: 0
