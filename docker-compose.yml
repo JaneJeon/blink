@@ -1,12 +1,15 @@
 version: '3'
 
 services:
-  blink-app:
+  app:
     build:
       context: .
       target: deps
     environment:
       NODE_ENV: dev
+    volumes:
+      - ./node_modules:/app/node_modules
+      - ./logs:/app/logs
   postgres:
     image: circleci/postgres:alpine-ram
     ports:
