@@ -10,7 +10,7 @@
     "promote-user": "node scripts/promote-user",
     "prestart": "NODE_ENV=development run-s migrate seed --print-name",
     "start": "run-p start:* --race",
-    "start:frontend": "FORCE_COLOR=true PORT=4000 react-scripts start | cat",
+    "start:frontend": "BROWSER=none FORCE_COLOR=true PORT=4000 react-scripts start | cat",
     "start:backend": "nodemon node -r __utils__/dev-test-setup bin/www",
     "migrate": "knex migrate:latest",
     "migrate:one": "knex migrate:up",
