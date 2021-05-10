@@ -1,35 +1,41 @@
 FROM node:lts-alpine AS deps
-USER node
-WORKDIR /app
+RUN apk add --no-cache --virtual .gyp python make g++
 
-# node-gyp
-RUN apk add --no-cache --virtual .gyp python make g++ tini
+USER node
+WORKDIR /home/node
 COPY package*.json ./
-RUN npm ci --no-fund
+RUN npm ci --no-audit
 
 # for dev/test frontend/backend
-COPY . .
+COPY --chown=node:node . .
 EXPOSE 3000 4000
 
 
 FROM node:lts-alpine AS build
-USER node
-WORKDIR /app
+# TODO: any way to cache apk installs from `deps`?
+RUN apk add --no-cache --virtual .gyp python make g++
 
-COPY . .
-COPY --from=deps /app/node_modules ./node_modules
-RUN npm run build && npm prune --production && npm clean cache --force
+USER node
+WORKDIR /home/node
+
+COPY --chown=node:node . .
+COPY --chown=node:node --from=deps /home/node/node_modules ./node_modules
+RUN npm run build
+# TODO: npm prune takes fucking FOREVER, is there any way to speed this up??
+RUN npm prune --production
 
 
 FROM node:lts-alpine AS runner
+RUN apk add --no-cache --virtual tini
+
 USER node
-WORKDIR /app
+WORKDIR /home/node
 ENV NODE_ENV production
 
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/build ./build
+COPY --from=build /home/node/package.json ./package.json
+COPY --from=build /home/node/node_modules ./node_modules
+COPY --from=build /home/node/build ./build
 
 ENTRYPOINT ["/tini", "--"]
 CMD ["node", "bin/www"]
-# no need to manually tune mem/gc for node>=12 since node heap limit will be based on available memory
+# no need to manually tune mem/gc for node>=12 since heap limit will be based on available memory
