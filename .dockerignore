@@ -12,3 +12,4 @@ LICENSE
 coverage
 **/build
 website
+.hadolint.yml
