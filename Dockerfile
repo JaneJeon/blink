@@ -9,6 +9,7 @@ RUN npm ci --no-audit
 # for dev/test frontend/backend
 COPY --chown=node:node . .
 EXPOSE 3000 4000
+CMD ["npm", "start"]
 
 
 FROM node:lts-alpine AS build
@@ -39,3 +40,6 @@ COPY --from=build /home/node/build ./build
 ENTRYPOINT ["/tini", "--"]
 CMD ["node", "bin/www"]
 # no need to manually tune mem/gc for node>=12 since heap limit will be based on available memory
+
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
