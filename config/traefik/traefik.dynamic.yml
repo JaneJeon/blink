@@ -1,0 +1,13 @@
+# dynamic configuration
+# see: https://doc.traefik.io/traefik/reference/dynamic-configuration/file/
+tls:
+  certificates:
+    - certFile: /etc/traefik/localhost.cert.pem
+      keyFile: /etc/traefik/localhost.key.pem
+
+http:
+  middlewares:
+    floc:
+      headers:
+        customResponseHeaders:
+          Permissions-Policy: interest-cohort=()

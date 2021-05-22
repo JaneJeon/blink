@@ -1,0 +1,39 @@
+# static configuration
+# see: https://doc.traefik.io/traefik/reference/static-configuration/file/
+global:
+  sendAnonymousUsage: false
+
+log:
+  level: INFO
+  format: common
+
+accessLog:
+  format: common
+
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: web-secure
+          scheme: https
+
+  web-secure:
+    address: :443
+    http:
+      middlewares:
+        - floc@file
+
+providers:
+  docker:
+    watch: true
+    exposedByDefault: false
+    network: public
+  file:
+    watch: true
+    filename: /etc/traefik/traefik.dynamic.yml
+
+api:
+  dashboard: true
+  insecure: true

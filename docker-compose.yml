@@ -8,10 +8,27 @@ services:
     environment:
       NODE_ENV: dev
     volumes:
-      - ./node_modules:/app/node_modules
-      - ./logs:/app/logs
+      - ./node_modules:/home/node/node_modules
+      - ./logs:/home/node/logs
+    networks:
+      - public
+      - internal
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frontend.tls=true
+      - traefik.http.routers.backend.tls=true
+      # Route /app -> :4000
+      - traefik.http.routers.frontend.rule=(Host(`localhost`) && PathPrefix(`/app`))
+      - traefik.http.routers.frontend.priority=2
+      - traefik.http.routers.frontend.service=frontend
+      - traefik.http.services.frontend.loadbalancer.server.port=4000
+      # Route / -> :3000
+      - traefik.http.routers.backend.rule=Host(`localhost`)
+      - traefik.http.routers.backend.priority=1
+      - traefik.http.routers.backend.service=backend
+      - traefik.http.services.backend.loadbalancer.server.port=3000
   postgres:
-    image: circleci/postgres:alpine-ram
+    image: postgres:13-alpine
     ports:
       - 5432:5432
     environment:
@@ -19,7 +36,34 @@ services:
       POSTGRES_DB: blink
       POSTGRES_USER: knex
       POSTGRES_HOST_AUTH_METHOD: trust
+    tmpfs:
+      - /var/lib/postgresql/data
+    networks:
+      - internal
   redis:
-    image: circleci/redis:alpine
+    image: redis:6-alpine
     ports:
       - 6379:6379
+    networks:
+      - internal
+  traefik:
+    image: traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/traefik:/etc/traefik:ro
+    networks:
+      - public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.rule=Host(`traefik.localhost`)
+      - traefik.http.services.api@internal.loadbalancer.server.port=8080
+
+networks:
+  public:
+    external: true
+  internal: {}
