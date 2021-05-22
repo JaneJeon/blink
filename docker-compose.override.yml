@@ -9,7 +9,7 @@ services:
       KEYCLOAK_PASSWORD: password
       KEYCLOAK_IMPORT: /mnt/keycloak.json
       PROXY_ADDRESS_FORWARDING: 'true'
-      # KEYCLOAK_FRONTEND_URL: https://
+      KEYCLOAK_FRONTEND_URL: https://keycloak.localhost/auth
     networks:
       - public
     labels:

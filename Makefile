@@ -23,4 +23,4 @@ cert:
 	mkcert -install
 	mkcert -cert-file config/traefik/localhost.cert.pem \
 		-key-file config/traefik/localhost.key.pem \
-		localhost *.localhost
+		localhost traefik.localhost keycloak.localhost
