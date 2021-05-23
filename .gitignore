@@ -70,3 +70,4 @@ website/.docusaurus
 website/.cache-loader
 
 *.pem
+.config/
