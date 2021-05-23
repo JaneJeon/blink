@@ -1,5 +1,5 @@
 FROM node:lts-alpine AS deps
-RUN apk add --no-cache --virtual .gyp python make g++
+RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat
 
 USER node
 WORKDIR /home/node
@@ -9,12 +9,10 @@ RUN npm ci --no-audit
 # for dev/test frontend/backend
 COPY --chown=node:node . .
 EXPOSE 3000 4000
-CMD ["npm", "start"]
 
 
 FROM node:lts-alpine AS build
-# TODO: any way to cache apk installs from `deps`?
-RUN apk add --no-cache --virtual .gyp python make g++
+RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat
 
 USER node
 WORKDIR /home/node
