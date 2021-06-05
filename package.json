@@ -76,7 +76,7 @@
     "@casl/react": "^2.1.1",
     "@janejeon/eslint-config": "^1.1.0",
     "@janejeon/prettier-config": "^1.0.4",
-    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.1.0",
     "@types/jest": "^26.0.8",
