@@ -79,7 +79,7 @@
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.1.0",
-    "@types/jest": "^26.0.8",
+    "@types/jest": "^26.0.23",
     "clarify": "^2.1.0",
     "eslint": "^7.16.0",
     "eslint-config-prettier": "^7.1.0",
