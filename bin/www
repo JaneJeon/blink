@@ -27,7 +27,7 @@ const server = http.createServer(app)
 server.listen(port).on('error', onError).on('listening', onListening)
 
 /**
- * Graceful shutdown for pm2
+ * Graceful shutdown for pm2/docker
  */
 const gracefulShutdown = () => {
   log.info('Received shutdown signal. Closing connections...')
