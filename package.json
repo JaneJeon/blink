@@ -101,7 +101,7 @@
     "onchange": "^7.0.2",
     "pino-multi-stream": "^5.1.1",
     "pino-pretty": "^4.1.0",
-    "prettier": "^2.0.5",
+    "prettier": "^2.3.0",
     "prettier-plugin-toml": "^0.3.1",
     "ra-data-simple-rest": "^3.1.0",
     "react": "^17.0.1",
