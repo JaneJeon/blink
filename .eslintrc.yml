@@ -8,6 +8,6 @@ overrides:
     extends: react-app
     rules:
       no-console: 1
-  - files: scripts/**/*.js
+  - files: scripts/**
     rules:
       no-console: 0
