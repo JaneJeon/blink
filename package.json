@@ -46,7 +46,7 @@
     "express-query-boolean": "^2.0.0",
     "express-rate-limit": "^5.2.6",
     "express-session": "^1.17.1",
-    "got": "^11.5.1",
+    "got": "^11.8.2",
     "helmet": "^4.4.1",
     "http-errors": "^1.7.3",
     "ioredis": "^4.24.5",
