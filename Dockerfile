@@ -31,8 +31,14 @@ WORKDIR /home/node
 COPY --chown=node:node --from=deps /home/node/node_modules ./node_modules
 COPY --chown=node:node . ./
 
-# TODO: npm prune takes fucking FOREVER, is there any way to speed this up??
-RUN npm run build && npm prune --production
+# for whatever reason, npm ci'ing from scratch is *much* faster than npm prune --production
+# Also, since we copied over ~/.npm, we can abuse the cache for even FASTER installs!!!
+RUN npm run build && \
+    npm ci --prefer-offline --no-audit --production && \
+    rm -rf .cache .npm
+# RUN npm run build && \
+#     npm prune --production && \
+#     rm -rf .cache .npm
 
 
 #----------------------------------------#
