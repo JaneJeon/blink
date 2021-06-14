@@ -1,43 +1,52 @@
+#----------------------------------------#
+# dev/test
 FROM node:lts-alpine AS deps
 RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat
 
 USER node
 WORKDIR /home/node
+
+# "Cache" node_modules first so that changes in the source code doesn't trigger a rebuild
 COPY package*.json ./
 RUN npm ci --no-audit
 
-# for dev/test frontend/backend
 COPY --chown=node:node . .
-EXPOSE 3000 4000
+
+# We want to be able to override this for testing
+ENV NODE_ENV development
+
+# without this, oidc-client will attempt to connect to keycloak literally right on startup and crash the whole app
+ENTRYPOINT [ "./scripts/wait-for", "-t", "120", "keycloak:8080/auth/realms/blink-realm", "--" ]
 
 
+#----------------------------------------#
+# We have a separate build container to persist build artifacts & production npm deps
 FROM node:lts-alpine AS build
 RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat
 
 USER node
 WORKDIR /home/node
 
-COPY --chown=node:node . .
+# idk if this *actually* caches node_modules from the deps image or not so that the first COPY is only run when package.json changes
 COPY --chown=node:node --from=deps /home/node/node_modules ./node_modules
-RUN npm run build
+COPY --chown=node:node . ./
+
 # TODO: npm prune takes fucking FOREVER, is there any way to speed this up??
-RUN npm prune --production
+RUN npm run build && npm prune --production
 
 
+#----------------------------------------#
 FROM node:lts-alpine AS runner
-RUN apk add --no-cache --virtual tini
 
 USER node
 WORKDIR /home/node
+
+COPY --from=build /home/node ./
+
 ENV NODE_ENV production
 
-COPY --from=build /home/node/package.json ./package.json
-COPY --from=build /home/node/node_modules ./node_modules
-COPY --from=build /home/node/build ./build
-
-ENTRYPOINT ["/tini", "--"]
+# No need for tini or any init scripts since we 1. don't spawn zombies, 2. already handle SIGTERM/SIGINT
 CMD ["node", "bin/www"]
-# no need to manually tune mem/gc for node>=12 since heap limit will be based on available memory
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
