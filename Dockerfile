@@ -16,7 +16,7 @@ COPY --chown=node:node . .
 ENV NODE_ENV development
 
 # without this, oidc-client will attempt to connect to keycloak literally right on startup and crash the whole app
-ENTRYPOINT [ "./scripts/wait-for", "-t", "120", "keycloak:8080/auth/realms/blink-realm", "--" ]
+ENTRYPOINT [ "./scripts/wait-for", "http://keycloak:8080/auth/realms/blink-realm", "--" ]
 
 
 #----------------------------------------#
