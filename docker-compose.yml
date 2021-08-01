@@ -64,7 +64,7 @@ services:
     networks:
       - internal
   keycloak:
-    image: jboss/keycloak:13
+    image: jboss/keycloak:13.0.1
     volumes:
       - ./config/keycloak.json:/mnt/keycloak.json:ro
     environment:
