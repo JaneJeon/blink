@@ -1,23 +1,33 @@
 .DEFAULT_GOAL := up
-.PHONY: network-up, network-down, up, up-all, down, logs
+.PHONY: build logs
+
+D=docker
+DC=docker-compose
 
 network-up:
-	docker network create public || true
+	@$(D) network create public || true
 
 network-down:
-	docker network rm public || true
+	@$(D) network rm public || true
+
+build:
+	$(DC) build
+
+rebuild:
+	$(DC) build --no-cache
 
 up: network-up
-	docker-compose -f docker-compose.yml up -d
-
-up-all: network-up
-	docker-compose up -d
+	$(DC) up --renew-anon-volumes --abort-on-container-exit --build
 
 down: network-down
-	docker-compose down --remove-orphans
+	$(DC) down --remove-orphans -v
 
+# e.g. make logs SERVICE=app
 logs:
-	docker-compose logs -f
+	$(DC) logs -f $(SERVICE)
+
+sh:
+	$(DC) exec app bash
 
 cert:
 	mkcert -install
