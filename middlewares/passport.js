@@ -29,7 +29,7 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
         { client, params: { scope: ['openid profile'] } },
         async (tokenSet, done) => {
           const claims = tokenSet.claims()
-          const { sub: id, [process.env.OIDC_NAME_FIELD]: name } = claims
+          const { sub: id, preferred_username: name } = claims
           log.info('Trying to log in user %s with claims %o', id, claims)
 
           let user
