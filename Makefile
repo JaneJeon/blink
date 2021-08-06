@@ -32,9 +32,12 @@ logs:
 sh:
 	$(DC) $(DC_APP) run app bash
 
-COMMAND ?= start
+COMMAND ?= npm run start
 run:
-	$(DC) $(DC_APP) run app npm run $(COMMAND)
+	$(DC) $(DC_APP) run app $(COMMAND)
+
+exec:
+	$(DC) $(DC_APP) exec app $(COMMAND)
 
 cert:
 	mkcert -install
