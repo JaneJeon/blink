@@ -1,0 +1,4 @@
+hooks:
+  pre-commit: lint-staged
+  pre-push: skip-ci && echo 'Skipping test...' || make run COMMAND='npm test'
+  post-merge: npm i --no-save

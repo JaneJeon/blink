@@ -115,13 +115,6 @@
     "trace": "^3.1.1"
   },
   "prettier": "@janejeon/prettier-config",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "skip-ci && echo 'Skipping test...' || npm test",
-      "post-merge": "npm i --no-save"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -144,6 +137,7 @@
     "express",
     "aws",
     "cloudfront",
+    "cloudflare",
     "cdn",
     "cache",
     "objection",
@@ -151,9 +145,9 @@
     "postgres",
     "knex",
     "react",
-    "react-bootstrap",
     "next",
     "nextjs",
-    "analytics"
+    "analytics",
+    "kutt"
   ]
 }
