@@ -1,6 +1,15 @@
 {
-  "ignore": ["src/", "public/", "build/", "*.test.js"],
-  "delay": 2500,
+  "ignore": ["src/", "public/", "build/", "*.test.js", "website/"],
+  "watch": [
+    ".env",
+    ".env.local",
+    ".env.development",
+    ".env.development.local",
+    "**/*.js",
+    "**/*.json",
+    "scripts/",
+    "bin/"
+  ],
   "events": {
     "start": "clear"
   }
