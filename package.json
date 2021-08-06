@@ -33,7 +33,7 @@
     "test:watch": "run-s test:watch:* --print-name",
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
     "test:watch:frontend": "react-scripts test",
-    "test:nowatch:backend": "NODE_ENV=test run-s migrate seed --print-name && jest",
+    "test:nowatch:backend": "NODE_ENV=test run-s migrate seed --print-name && jest --forceExit",
     "test:watch:backend": "npm run test:nowatch:backend --watch"
   },
   "dependencies": {
