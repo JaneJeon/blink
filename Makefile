@@ -34,7 +34,7 @@ sh:
 
 COMMAND ?= npm run start
 run:
-	$(DC) $(DC_APP) run app $(COMMAND)
+	$(DC) $(DC_APP) --rm run app $(COMMAND)
 
 exec:
 	$(DC) $(DC_APP) exec app $(COMMAND)
