@@ -1,8 +1,13 @@
 .DEFAULT_GOAL := up
-.PHONY: build logs
+.PHONY: build logs sh
 
 D=docker
 DC=docker-compose
+DC_SVCS=-f docker-compose.dev.yml
+DC_APP=-f docker-compose.yml
+DC_ALL=$(DC_SVCS) $(DC_APP)
+
+COMMAND=test
 
 network-up:
 	@$(D) network create public || true
@@ -11,26 +16,32 @@ network-down:
 	@$(D) network rm public || true
 
 build:
-	$(DC) build
+	$(DC) $(DC_APP) build
 
 rebuild:
-	$(DC) build --no-cache
+	$(DC) $(DC_APP) build --no-cache
 
 up: network-up
-	$(DC) up --renew-anon-volumes --abort-on-container-exit --build
+	$(DC) $(DC_ALL) up --renew-anon-volumes --build -d
 
 down: network-down
-	$(DC) down --remove-orphans -v
+	$(DC) $(DC_ALL) down --remove-orphans -v
 
 # e.g. make logs SERVICE=app
 logs:
-	$(DC) logs -f $(SERVICE)
+	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
 sh:
-	$(DC) exec app bash
+	$(DC) $(DC_APP) run app bash
+
+run:
+	$(DC) $(DC_APP) run app npm run $(COMMAND)
 
 cert:
 	mkcert -install
 	mkcert -cert-file config/traefik/localhost.cert.pem \
 		-key-file config/traefik/localhost.key.pem \
 		localhost traefik.localhost keycloak.localhost
+
+image:
+	docker build -t blink .
