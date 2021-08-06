@@ -7,8 +7,6 @@ DC_SVCS=-f docker-compose.dev.yml
 DC_APP=-f docker-compose.yml
 DC_ALL=$(DC_SVCS) $(DC_APP)
 
-COMMAND=test
-
 network-up:
 	@$(D) network create public || true
 
@@ -34,6 +32,7 @@ logs:
 sh:
 	$(DC) $(DC_APP) run app bash
 
+COMMAND ?= start
 run:
 	$(DC) $(DC_APP) run app npm run $(COMMAND)
 
