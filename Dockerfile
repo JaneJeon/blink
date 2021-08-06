@@ -1,7 +1,6 @@
 #----------------------------------------#
 # dev/test
-FROM node:lts-alpine AS deps
-RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat
+FROM node:lts AS deps
 
 USER node
 WORKDIR /home/node
