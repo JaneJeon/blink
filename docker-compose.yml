@@ -8,7 +8,6 @@ services:
     depends_on:
       - postgres
       - redis
-      - keycloak
     volumes:
       - .:/home/node
       - /home/node/node_modules/
@@ -29,21 +28,6 @@ services:
       - traefik.http.routers.backend.priority=1
       - traefik.http.routers.backend.service=backend
       - traefik.http.services.backend.loadbalancer.server.port=3000
-  traefik:
-    image: traefik
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik:/etc/traefik:ro
-    networks:
-      - public
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.traefik.tls=true
-      - traefik.http.routers.traefik.rule=Host(`traefik.localhost`)
-      - traefik.http.services.api@internal.loadbalancer.server.port=8080
   postgres:
     image: postgres:13-alpine
     ports:
@@ -63,24 +47,6 @@ services:
       - 6379:6379
     networks:
       - internal
-  keycloak:
-    image: jboss/keycloak:13.0.1
-    volumes:
-      - ./config/keycloak.json:/mnt/keycloak.json:ro
-    environment:
-      DB_VENDOR: H2
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: password
-      KEYCLOAK_IMPORT: /mnt/keycloak.json
-      PROXY_ADDRESS_FORWARDING: 'true'
-      KEYCLOAK_FRONTEND_URL: https://keycloak.localhost/auth
-    networks:
-      - public
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.keycloak.tls=true
-      - traefik.http.routers.keycloak.rule=Host(`keycloak.localhost`)
-      - traefik.http.services.keycloak.loadbalancer.server.port=8080
 
 networks:
   public:

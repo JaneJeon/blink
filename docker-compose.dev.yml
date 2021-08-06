@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/traefik:/etc/traefik:ro
+    networks:
+      - public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.rule=Host(`traefik.localhost`)
+      - traefik.http.services.api@internal.loadbalancer.server.port=8080
+  keycloak:
+    image: jboss/keycloak:13.0.1
+    volumes:
+      - ./config/keycloak.json:/mnt/keycloak.json:ro
+    environment:
+      DB_VENDOR: H2
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      KEYCLOAK_IMPORT: /mnt/keycloak.json
+      PROXY_ADDRESS_FORWARDING: 'true'
+      KEYCLOAK_FRONTEND_URL: https://keycloak.localhost/auth
+    networks:
+      - public
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.keycloak.tls=true
+      - traefik.http.routers.keycloak.rule=Host(`keycloak.localhost`)
+      - traefik.http.services.keycloak.loadbalancer.server.port=8080
+
+networks:
+  public:
+    external: true
