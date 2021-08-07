@@ -1,7 +1,6 @@
 {
   "description": "Lightweight, planet-scale, CDN-driven link shortener for teams 🎉",
   "repository": "JaneJeon/blink",
-  "version": "0.10.0",
   "author": "Jane Jeon <me@janejeon.dev>",
   "license": "AGPL-3.0",
   "proxy": "http://localhost:3000",
