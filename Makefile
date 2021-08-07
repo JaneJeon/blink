@@ -2,7 +2,7 @@
 .PHONY: build logs sh
 
 D=docker
-DC=docker-compose
+DC=$(D) compose
 DC_SVCS=-f docker-compose.dev.yml
 DC_APP=-f docker-compose.yml
 DC_ALL=$(DC_SVCS) $(DC_APP)
