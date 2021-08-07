@@ -95,4 +95,7 @@ workflows:
             - lint
       - test-backend:
           <<: *test-config
-      - publish
+      - publish:
+          requires:
+            - test-frontend
+            - test-backend
