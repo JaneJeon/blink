@@ -16,3 +16,9 @@ website
 .config/
 .cache
 .local
+.circleci/
+.github/
+.ash_history
+.npm
+config/schema/*.compiled.js
+config/schema/*.json
