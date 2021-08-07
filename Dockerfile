@@ -3,12 +3,17 @@
 FROM node:lts-alpine AS deps
 RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat
 
+# Install pnpm for faster installs
+RUN npm i -g pnpm --no-audit && \
+    pnpm config set store-dir .pnpm-store
+
 USER node
 WORKDIR /home/node
 
 # "Cache" node_modules first so that changes in the source code doesn't trigger a rebuild
-COPY package*.json ./
-RUN npm ci --no-audit
+COPY --chown=node:node pnpm-lock.yaml ./
+COPY --chown=node:node package.json ./
+RUN pnpm i --frozen-lockfile --prefer-offline
 
 COPY --chown=node:node . .
 
@@ -24,6 +29,10 @@ ENTRYPOINT [ "./scripts/wait-for", "http://keycloak:8080/auth/realms/blink-realm
 FROM node:lts-alpine AS build
 RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat
 
+# Install pnpm for faster installs
+RUN npm i -g pnpm --no-audit && \
+    pnpm config set store-dir .pnpm-store
+
 USER node
 WORKDIR /home/node
 
@@ -31,14 +40,9 @@ WORKDIR /home/node
 COPY --chown=node:node --from=deps /home/node/node_modules ./node_modules
 COPY --chown=node:node . ./
 
-# for whatever reason, npm ci'ing from scratch is *much* faster than npm prune --production
-# Also, since we copied over ~/.npm, we can abuse the cache for even FASTER installs!!!
-RUN npm run build && \
-    npm ci --prefer-offline --no-audit --production && \
-    rm -rf .cache .npm
-# RUN npm run build && \
-#     npm prune --production && \
-#     rm -rf .cache .npm
+RUN pnpm run build && \
+    pnpm i --prefer-offline -P && \
+    rm -rf .cache .pnpm-store
 
 
 #----------------------------------------#
