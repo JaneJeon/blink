@@ -22,8 +22,9 @@ rebuild:
 up: network-up
 	$(DC) $(DC_ALL) up --renew-anon-volumes --build -d
 
-down: network-down
+down:
 	$(DC) $(DC_ALL) down --remove-orphans -v
+	$(MAKE) network-down
 
 # e.g. make logs SERVICE=app
 logs:
