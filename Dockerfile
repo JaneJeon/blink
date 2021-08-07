@@ -7,7 +7,7 @@ USER node
 WORKDIR /home/node
 
 # "Cache" node_modules first so that changes in the source code doesn't trigger a rebuild
-COPY package*.json ./
+COPY --chown=node:node package*.json ./
 RUN npm ci --no-audit
 
 COPY --chown=node:node . .
