@@ -13,7 +13,7 @@ WORKDIR /home/node
 # "Cache" node_modules first so that changes in the source code doesn't trigger a rebuild
 COPY --chown=node:node pnpm-lock.yaml ./
 COPY --chown=node:node package.json ./
-RUN pnpm i --frozen-lockfile --prefer-offline
+RUN pnpm i --frozen-lockfile --prefer-offline --shamefully-hoist
 
 COPY --chown=node:node . .
 
@@ -41,7 +41,7 @@ COPY --chown=node:node --from=deps /home/node/node_modules ./node_modules
 COPY --chown=node:node . ./
 
 RUN pnpm run build && \
-    pnpm i --prefer-offline -P && \
+    pnpm i --prefer-offline -P --shamefully-hoist && \
     rm -rf .cache .pnpm-store
 
 
