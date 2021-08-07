@@ -43,6 +43,7 @@ RUN npm run build && \
 
 #----------------------------------------#
 FROM node:lts-alpine AS runner
+RUN apk add --no-cache tini
 
 USER node
 WORKDIR /home/node
@@ -51,7 +52,8 @@ COPY --from=build /home/node ./
 
 ENV NODE_ENV production
 
-# No need for tini or any init scripts since we 1. don't spawn zombies, 2. already handle SIGTERM/SIGINT
+# While we already handle SIGINT/SIGTERM directly, there is no way for us to be 100% SURE that none of our dependencies won't spawn a zombie process.
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "bin/www"]
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
