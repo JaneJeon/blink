@@ -14,3 +14,5 @@ coverage
 website
 .hadolint.yml
 .config/
+.cache
+.local

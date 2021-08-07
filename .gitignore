@@ -74,3 +74,5 @@ website/.cache-loader
 .ash_history
 config/schema/*.json
 config/schema/*.compiled.js
+.cache
+.local
