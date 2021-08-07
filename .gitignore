@@ -71,3 +71,4 @@ website/.cache-loader
 
 *.pem
 .config/
+.ash_history
