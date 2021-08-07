@@ -16,9 +16,6 @@ COPY --chown=node:node . .
 # We want to be able to override this for testing
 ENV NODE_ENV development
 
-# without this, oidc-client will attempt to connect to keycloak literally right on startup and crash the whole app
-ENTRYPOINT [ "./scripts/wait-for", "http://keycloak:8080/auth/realms/blink-realm", "--" ]
-
 
 #----------------------------------------#
 # We have a separate build container to persist build artifacts & production npm deps
