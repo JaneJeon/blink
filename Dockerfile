@@ -41,7 +41,7 @@ COPY --chown=node:node --from=deps /home/node/node_modules ./node_modules
 COPY --chown=node:node . ./
 
 RUN pnpm run build && \
-    pnpm i --prefer-offline -P --shamefully-hoist && \
+    pnpm i --prefer-offline -P --shamefully-hoist --frozen-lockfile && \
     rm -rf .cache .pnpm-store
 
 

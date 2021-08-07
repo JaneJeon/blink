@@ -26,7 +26,7 @@ jobs:
       - &install-modules
         node/install-packages:
           include-branch-in-cache-key: false
-          override-ci-command: pnpm i --prefer-offline
+          override-ci-command: pnpm i --prefer-offline --shamefully-hoist --frozen-lockfile
           cache-path: ~/.pnpm-store
       - run:
           name: Lint (Prettier)
