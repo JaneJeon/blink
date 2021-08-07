@@ -70,6 +70,21 @@ jobs:
       - *retrieve-junit
       - slack/notify-on-failure
       - jira/notify
+  publish:
+    machine:
+      image: ubuntu-2004
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: Login to GitHub Container Registry
+          command: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
+      - run:
+          name: Build Docker image
+          command: docker build -t blink .
+      - run:
+          name: Push Docker image
+          command: docker push ghcr.io/JaneJeon/blink:latest
 
 workflows:
   build-and-test:
@@ -81,3 +96,4 @@ workflows:
             - lint
       - test-backend:
           <<: *test-config
+      - publish
