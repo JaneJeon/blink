@@ -72,3 +72,5 @@ website/.cache-loader
 *.pem
 .config/
 .ash_history
+config/schema/*.json
+config/schema/*.compiled.js

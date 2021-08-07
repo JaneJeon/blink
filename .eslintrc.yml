@@ -2,6 +2,7 @@ extends: '@janejeon'
 
 ignorePatterns:
   - 'website/'
+  - config/schema/*.compiled.js
 
 overrides:
   - files: src/**/*.js
