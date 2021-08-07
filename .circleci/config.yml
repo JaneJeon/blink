@@ -83,7 +83,7 @@ jobs:
           command: docker build -t blink .
       - run:
           name: Push Docker image
-          command: docker push ghcr.io/JaneJeon/blink:latest
+          command: docker push ghcr.io/janejeon/blink:latest
 
 workflows:
   build-and-test:
