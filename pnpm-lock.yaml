@@ -5,6 +5,7 @@ specifiers:
   '@casl/react': ^2.1.1
   '@janejeon/eslint-config': ^2.0.0
   '@janejeon/prettier-config': ^1.0.4
+  '@material-ui/core': ^4.12.3
   '@passport-next/passport': ^3.1.0
   '@testing-library/jest-dom': ^5.11.2
   '@testing-library/react': ^12.0.0
@@ -119,6 +120,7 @@ devDependencies:
   '@casl/react': 2.3.0_@casl+ability@5.3.1+react@17.0.2
   '@janejeon/eslint-config': 2.0.2_0561443e2320b9b32a8528507ed08178
   '@janejeon/prettier-config': 1.0.4_prettier@2.3.2
+  '@material-ui/core': 4.12.3_react-dom@17.0.2+react@17.0.2
   '@testing-library/jest-dom': 5.14.1
   '@testing-library/react': 12.0.0_react-dom@17.0.2+react@17.0.2
   '@testing-library/user-event': 12.8.3

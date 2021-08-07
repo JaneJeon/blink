@@ -81,6 +81,7 @@
     "@casl/react": "^2.1.1",
     "@janejeon/eslint-config": "^2.0.0",
     "@janejeon/prettier-config": "^1.0.4",
+    "@material-ui/core": "^4.12.3",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^12.1.0",
