@@ -1,4 +1,4 @@
 hooks:
   pre-commit: lint-staged
-  pre-push: skip-ci && echo 'Skipping test...' || make run COMMAND='pnpm test'
+  pre-push: skip-ci && echo 'Skipping test...' || make build && make run COMMAND='pnpm test'
   post-merge: pnpm i --no-save
