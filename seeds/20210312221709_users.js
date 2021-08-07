@@ -2,7 +2,7 @@ const { generate, option } = require('json-schema-faker')
 const User = require('../models/user')
 
 const seedDev = async knex => {
-  option({ random: require('seedrandom')('1') })
+  option({ random: require('seedrandom')('deez nuts lmao') })
 
   const users = []
   const schema = JSON.parse(JSON.stringify(User.jsonSchema))
@@ -11,6 +11,7 @@ const seedDev = async knex => {
   schema.required = Object.keys(schema.properties)
 
   // sanity check on the string fields
+  schema.properties.id.minLength = 2
   schema.properties.id.maxLength = 18
   schema.properties.name.maxLength = 20
 
