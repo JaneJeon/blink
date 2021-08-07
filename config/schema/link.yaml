@@ -1,0 +1,75 @@
+$id: model:link
+type: object
+properties:
+  id:
+    type:
+      - integer
+      - string
+    readOnly: true
+  creatorId:
+    type: string
+    readOnly: true
+  hash:
+    type:
+      - string
+      - 'null'
+    minLength: 4
+    maxLength: 25
+    pattern: "\\w+"
+  originalUrl:
+    type: string
+    readOnly: true
+  shortenedUrl:
+    type: string
+    readOnly: true
+  brandedUrl:
+    type:
+      - string
+      - 'null'
+    readOnly: true
+  meta:
+    type: object
+    properties:
+      author:
+        type:
+          - string
+          - 'null'
+      date:
+        type:
+          - string
+          - 'null'
+        format: date
+      description:
+        type:
+          - string
+          - 'null'
+      lang:
+        type:
+          - string
+          - 'null'
+      logo:
+        type:
+          - string
+          - 'null'
+        format: uri
+      publisher:
+        type:
+          - string
+          - 'null'
+      title:
+        type:
+          - string
+          - 'null'
+    additionalProperties: false
+  createdAt:
+    type: string
+    format: date-time
+    readOnly: true
+  updatedAt:
+    type: string
+    format: date-time
+    readOnly: true
+required:
+  - creatorId
+  - originalUrl
+additionalProperties: false

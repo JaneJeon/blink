@@ -1,19 +1,8 @@
-import Ajv from 'ajv'
-import { set } from 'lodash'
-import memo from 'lodash/memoize'
-import schema from '../schema.json'
-
-const ajv = new Ajv({
-  allErrors: true,
-  removeAdditional: true,
-  useDefaults: true,
-  coerceTypes: true
-})
-
-const getValidatorForModel = memo(name => ajv.compile(schema[name]))
+import set from 'lodash/set'
+import validators from '../schema/validators'
 
 export default function createValidator(schemaName) {
-  const validate = getValidatorForModel(schemaName)
+  const validate = validators[schemaName]
 
   // https://gist.github.com/dalcib/d65257e07f9ef2c166ea86cd14c7c147
   return function validateForm(values) {

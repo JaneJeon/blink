@@ -3,7 +3,7 @@ const { Model, AjvValidator } = require('objection')
 const tableName = require('objection-table-name')()
 const authorize = require('objection-authorize')
 const policies = require('../policies')
-const schema = require('../config/schema.json')
+const schema = require('../config/schema/files')
 const httpError = require('http-errors')
 
 Model.knex(require('../lib/knex'))

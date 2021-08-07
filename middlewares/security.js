@@ -4,8 +4,7 @@ module.exports = helmet({
   contentSecurityPolicy: {
     directives: {
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      'img-src': ["'self'", '*.unsplash.com'],
-      'script-src': ["'self'", "'unsafe-eval'"]
+      'img-src': ["'self'", '*.unsplash.com']
     }
   }
 })

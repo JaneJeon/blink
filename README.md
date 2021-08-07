@@ -8,7 +8,7 @@
 >
 > Easy to setup, connect with your org's SSO, and hook up analytics!
 
-_See the [documentation](https://docs.blink.rest) for more information about the project itself_
+_See the [documentation](https://docs.blink.rest) for more information about the project itself (including screenshots)_
 
 ## Development
 

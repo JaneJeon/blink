@@ -1,0 +1,29 @@
+$id: model:user
+type: object
+properties:
+  id:
+    type: string
+    readOnly: true
+  role:
+    type: string
+    enum:
+      - user
+      - superuser
+    default: user
+  name:
+    type: string
+  deactivated:
+    type: boolean
+    default: false
+  createdAt:
+    type: string
+    format: date-time
+    readOnly: true
+  updatedAt:
+    type: string
+    format: date-time
+    readOnly: true
+required:
+  - id
+  - name
+additionalProperties: false
