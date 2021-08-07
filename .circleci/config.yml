@@ -96,6 +96,7 @@ workflows:
       - test-backend:
           <<: *test-config
       - publish:
+          context: shared-vars
           requires:
             - test-frontend
             - test-backend
