@@ -80,7 +80,7 @@ jobs:
           command: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
       - run:
           name: Build Docker image
-          command: docker build -t blink .
+          command: docker build -t ghcr.io/janejeon/blink:latest .
       - run:
           name: Push Docker image
           command: docker push ghcr.io/janejeon/blink:latest
