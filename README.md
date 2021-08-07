@@ -19,6 +19,8 @@ You need the following components to develop and run Blink locally:
 - [mkcert](https://github.com/FiloSottile/mkcert)
 - docker & docker-compose (note that on Linux, docker & docker-compose are two separate deps)
 
+If you want to run the project locally (without Docker), note that we use [pnpm](https://pnpm.io) - simply run `npm i -g pnpm` to install!
+
 ### Before you start
 
 1. Run `make cert` to generate the SSL certs required for HTTPS local development
