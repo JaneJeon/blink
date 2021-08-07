@@ -1,5 +1,5 @@
 // Returns json path from json schema
-import schema from '../schema.json'
+import schema from '../schema/files'
 
 export default function getJsonPath(model) {
   return function (path) {

@@ -16,7 +16,7 @@ import {
 } from 'react-admin'
 import { subject } from '@casl/ability'
 
-import schema from '../schema.json'
+import schema from '../schema/files'
 import validator from '../providers/validator'
 import getJsonPath from '../utils/get-json-path'
 
