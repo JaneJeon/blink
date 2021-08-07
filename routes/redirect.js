@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const Link = require('../models/link')
-const schema = require('../config/schema.json')
+const schema = require('../config/schema/files')
 const ms = require('ms')
 const cacheAge = ms(process.env.CACHE_MAX_AGE) / 1000 // in seconds
 
