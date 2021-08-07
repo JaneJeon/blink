@@ -90,7 +90,7 @@
     "ajv-formats": "^2.1.0",
     "clarify": "^2.1.0",
     "eslint": "^7.30.0",
-    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-prettier": "^8",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-node": "^11.0.0",

@@ -19,21 +19,16 @@ jobs:
     <<: *size
     steps:
       - checkout
-      - &install-pnpm
-        run:
-          name: Install pnpm
-          command: curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm
       - &install-modules
         node/install-packages:
           include-branch-in-cache-key: false
-          override-ci-command: pnpm i --prefer-offline --shamefully-hoist --frozen-lockfile
-          cache-path: ~/.pnpm-store
+          override-ci-command: npm ci --no-audit --prefer-offline
       - run:
           name: Lint (Prettier)
-          command: pnpm run lint:prettier
+          command: npm run lint:prettier
       - run:
           name: Lint (ESLint)
-          command: pnpm run lint:eslint -- --format junit --output-file reports/eslint/results.xml
+          command: npm run lint:eslint -- --format junit --output-file reports/eslint/results.xml
       - &retrieve-junit
         store_test_results:
           path: reports
@@ -42,11 +37,10 @@ jobs:
     <<: *size
     steps:
       - checkout
-      - *install-pnpm
       - *install-modules
       - run:
           name: Test CRA
-          command: pnpm run pretest && pnpm run test:nowatch:frontend -- -- --ci --runInBand --reporters=jest-junit --reporters=default
+          command: npm run pretest && npm run test:nowatch:frontend -- -- --ci --runInBand --reporters=jest-junit --reporters=default
           environment:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-frontend
       - *retrieve-junit
@@ -67,11 +61,10 @@ jobs:
       - image: circleci/redis:alpine
     steps:
       - checkout
-      - *install-pnpm
       - *install-modules
       - run:
           name: Test Express
-          command: pnpm run pretest && pnpm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default
+          command: npm run pretest && npm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default
           environment:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
       - *retrieve-junit
