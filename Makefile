@@ -30,9 +30,6 @@ down:
 logs:
 	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
-sh:
-	$(DC) $(DC_APP) run app bash
-
 COMMAND ?= npm run start
 run:
 	$(DC) $(DC_APP) run --rm app $(COMMAND)
