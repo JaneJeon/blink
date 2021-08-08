@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Admin, Resource, Layout, AppBar } from 'react-admin'
 import { createBrowserHistory } from 'history'
 
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import LinkIcon from '@material-ui/icons/Link'
 import PeopleIcon from '@material-ui/icons/People'
@@ -36,7 +36,7 @@ export default function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
   const theme = useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         palette: {
           type: prefersDarkMode ? 'dark' : 'light',
           primary: prefersDarkMode ? blue : indigo
