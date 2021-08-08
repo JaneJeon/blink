@@ -12,7 +12,10 @@ import {
   TextInput,
   BooleanInput,
   SelectInput,
-  usePermissions
+  usePermissions,
+  Toolbar,
+  SaveButton,
+  DeleteButton
 } from 'react-admin'
 import { subject } from '@casl/ability'
 
@@ -73,6 +76,13 @@ const EditComponent = props => {
       submitOnEnter={false}
       warnWhenUnsavedChanges
       validate={validator('User')}
+      toolbar={
+        <Toolbar {...props} style={{ display: 'flex' }}>
+          <SaveButton />
+          <div style={{ flexGrow: 1 }} />
+          <DeleteButton disabled={permissions.cannot('delete', resource)} />
+        </Toolbar>
+      }
       {...props}
     >
       <TextInput

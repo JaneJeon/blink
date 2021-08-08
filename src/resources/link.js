@@ -12,7 +12,10 @@ import {
   RichTextField,
   TextInput,
   DateTimeInput,
-  usePermissions
+  usePermissions,
+  Toolbar,
+  SaveButton,
+  DeleteButton
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
@@ -83,6 +86,13 @@ const EditComponent = props => {
       submitOnEnter={false}
       warnWhenUnsavedChanges
       validate={validator('Link')}
+      toolbar={
+        <Toolbar {...props} style={{ display: 'flex' }}>
+          <SaveButton />
+          <div style={{ flexGrow: 1 }} />
+          <DeleteButton disabled={permissions.cannot('delete', resource)} />
+        </Toolbar>
+      }
       {...props}
     >
       <TextInput
