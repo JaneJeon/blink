@@ -14,8 +14,7 @@ import {
   SelectInput,
   usePermissions,
   Toolbar,
-  SaveButton,
-  DeleteButton
+  SaveButton
 } from 'react-admin'
 import { subject } from '@casl/ability'
 
@@ -79,8 +78,6 @@ const EditComponent = props => {
       toolbar={
         <Toolbar {...props} style={{ display: 'flex' }}>
           <SaveButton />
-          <div style={{ flexGrow: 1 }} />
-          <DeleteButton disabled={permissions.cannot('delete', resource)} />
         </Toolbar>
       }
       {...props}
