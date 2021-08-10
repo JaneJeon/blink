@@ -70,6 +70,5 @@ properties:
     format: date-time
     readOnly: true
 required:
-  - creatorId
   - originalUrl
 additionalProperties: false
