@@ -14,6 +14,7 @@ const seedDev = async knex => {
   schema.required = Object.keys(schema.properties).filter(
     property => schema.properties[property].readOnly !== true
   )
+  schema.required.push('creatorId')
   schema.properties.meta.required = Object.keys(
     schema.properties.meta.properties
   )
