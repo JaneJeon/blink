@@ -26,9 +26,6 @@
     "OIDC_ISSUER_BASE_URL": {
       "description": "Base URL for your SSO's OIDC endpoint (include .well-known)"
     },
-    "OIDC_FIELD_NAME": {
-      "description": "In the OIDC's id token, the field (in dot notation) that points to the user's name"
-    },
     "SESSION_SECRET": {
       "description": "the session encryption key",
       "generator": "secret"
