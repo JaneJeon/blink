@@ -32,10 +32,10 @@ logs:
 
 COMMAND ?= npm run start
 run:
-	$(DC) $(DC_APP) run --rm app $(COMMAND)
+	$(DC) $(DC_ALL) run --rm app $(COMMAND)
 
 exec:
-	$(DC) $(DC_APP) exec app $(COMMAND)
+	$(DC) $(DC_ALL) exec app $(COMMAND)
 
 cert:
 	mkcert -install
