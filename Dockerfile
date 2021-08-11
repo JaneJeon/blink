@@ -14,7 +14,8 @@ RUN npm ci --no-audit --prefer-offline
 COPY --chown=node:node . .
 
 # We want to be able to override this for testing
-ENV NODE_ENV development
+ARG DOCKER_ENV
+ENV NODE_ENV=${DOCKER_ENV}
 
 
 #----------------------------------------#
