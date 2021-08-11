@@ -5,6 +5,8 @@ services:
     build:
       context: .
       target: deps
+    environment:
+      - NODE_ENV # pass NODE_ENV environment variable straight to Docker
     depends_on:
       - postgres
       - redis

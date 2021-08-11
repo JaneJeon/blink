@@ -50,14 +50,16 @@ Note that for performance/security reasons, the app container is built end-to-en
 ## Run tests
 
 ```sh
-make run COMMAND='npm test'
+NODE_ENV=test make run COMMAND='npm test'
 
 # or, for interactive testing:
-make run COMMAND=sh
+NODE_ENV=test make run COMMAND=sh
 $ npm run test:watch
 ```
 
-The teset also automatically runs before you push your commits.
+The test also automatically runs before you push your commits.
+
+Note that whatever `NODE_ENV` you set during... well, basically _any_ docker-compose command will be automatically passed down to the underlying dockerfile/image/container.
 
 ## Author
 

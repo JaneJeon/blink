@@ -13,12 +13,11 @@ network-up:
 network-down:
 	@$(D) network rm public || true
 
-NODE_ENV?=development
 build:
-	$(DC) $(DC_APP) build --build-arg NODE_ENV=$(NODE_ENV)
+	$(DC) $(DC_APP) build
 
 rebuild:
-	$(DC) $(DC_APP) build --build-arg NODE_ENV=$(NODE_ENV) --no-cache
+	$(DC) $(DC_APP) build --no-cache
 
 up: network-up
 	$(DC) $(DC_ALL) up --renew-anon-volumes --build -d
