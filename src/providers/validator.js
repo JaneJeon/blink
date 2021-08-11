@@ -13,7 +13,8 @@ export default function createValidator(schemaName) {
       validate.errors.forEach(ajvError => {
         if (ajvError.keyword === 'required')
           set(errors, ajvError.params.missingProperty, ajvError.message)
-        else errors[ajvError.dataPath.substr(1)] = ajvError.message // .foo.bar => foo.bar
+        else errors[ajvError.instancePath.substr(1)] = ajvError.message // .foo.bar => foo.bar
+        // motherfuckers broke my shit: https://ajv.js.org/v6-to-v8-migration.html
       })
 
     return errors
