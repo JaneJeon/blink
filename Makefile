@@ -13,11 +13,12 @@ network-up:
 network-down:
 	@$(D) network rm public || true
 
+NODE_ENV?=development
 build:
-	$(DC) $(DC_APP) build
+	$(DC) $(DC_APP) build --build-arg NODE_ENV=$(NODE_ENV)
 
 rebuild:
-	$(DC) $(DC_APP) build --no-cache
+	$(DC) $(DC_APP) build --build-arg NODE_ENV=$(NODE_ENV) --no-cache
 
 up: network-up
 	$(DC) $(DC_ALL) up --renew-anon-volumes --build -d
@@ -30,7 +31,7 @@ down:
 logs:
 	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
-COMMAND ?= npm run start
+COMMAND?=npm run start
 run:
 	$(DC) $(DC_ALL) run --rm app $(COMMAND)
 
