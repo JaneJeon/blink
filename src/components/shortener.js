@@ -18,7 +18,10 @@ import { Form, Field } from 'react-final-form'
 export default function LinkShortener() {
   const [isOpen, setIsOpen] = useState(false)
   const notify = useNotify()
-  const { loading: permissionsLoading, permissions } = usePermissions()
+  const {
+    loading: permissionsLoading,
+    permissions = { can: () => {}, cannot: () => {} } // supply defaults to tests dont fail
+  } = usePermissions()
 
   async function shortenLink(values, form) {
     try {
@@ -35,7 +38,8 @@ export default function LinkShortener() {
       form.initialize(link)
       notify('Shortened link!')
     } catch (err) {
-      notify(err.message, 'error')
+      notify('Failed to shorten link!', 'error')
+      console.log(err)
       return { [FORM_ERROR]: err.message }
     }
   }
@@ -44,11 +48,19 @@ export default function LinkShortener() {
     <Form
       validate={validator('Link')}
       onSubmit={shortenLink}
-      render={({ handleSubmit, submitting, values, pristine, invalid }) => {
+      render={({
+        handleSubmit,
+        submitting,
+        values,
+        pristine,
+        invalid,
+        submitError
+      }) => {
         const resource = subject('Link', values)
 
         return (
           <form onSubmit={handleSubmit}>
+            <h2>{submitError}</h2>
             <Field name="originalUrl">
               {({ input, meta }) => (
                 <>
@@ -65,7 +77,7 @@ export default function LinkShortener() {
                     disabled={
                       submitting || permissions.cannot('create', resource) // check if you're allowed to shorten link
                     }
-                    data-testid="originalUrl-field"
+                    inputProps={{ 'data-testid': 'originalUrl-field' }}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -99,7 +111,6 @@ export default function LinkShortener() {
                         ? values.shortenedUrl.split('/').pop()
                         : 'awesome-link'
                     }
-                    data-testid="hash-field"
                     error={!meta.pristine && meta.invalid}
                     helperText={meta.pristine ? '' : meta.error}
                     disabled={
@@ -107,6 +118,7 @@ export default function LinkShortener() {
                       permissions.cannot('create', resource, 'hash')
                     }
                     style={{ marginTop: '2rem', paddingBottom: '1rem' }}
+                    inputProps={{ 'data-testid': 'hash-field' }}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment

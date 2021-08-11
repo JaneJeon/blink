@@ -1,24 +1,36 @@
 import * as redux from 'react-redux'
-import { render, screen } from '@testing-library/react'
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Shortener from './shortener'
+import authProvider from '../providers/auth'
 
 describe('Shortener component', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     fetch.resetMocks()
-    const spy = jest.spyOn(redux, 'useDispatch')
-    spy.mockReturnValue(() => {})
+    jest.spyOn(redux, 'useDispatch').mockReturnValue(() => {})
+    jest
+      .spyOn(authProvider, 'getPermissions')
+      .mockResolvedValue({ role: 'user' })
   })
 
+  const init = async () => {
+    render(<Shortener />)
+    userEvent.click(screen.getByTestId('open-button'))
+    await waitForElementToBeRemoved(screen.getByText('Loading...'))
+  }
+
   test('Shorten with no hash/button activation', async () => {
+    await init()
+
     const HASH = 'foobar'
     fetch.once(JSON.stringify({ shortenedUrl: `shortened.com/${HASH}` }))
 
-    render(<Shortener />)
-    userEvent.click(screen.getByTestId('open-button'))
-
     // Buttons should be disabled until url is pasted
-    // expect(screen.getByTestId('shorten-button')).toBeDisabled()
+    expect(screen.getByTestId('shorten-button')).toBeDisabled()
     expect(screen.getByTestId('copy-button')).toBeDisabled()
 
     userEvent.type(screen.getByTestId('originalUrl-field'), 'nodejs.org')
@@ -39,6 +51,8 @@ describe('Shortener component', () => {
   })
 
   test('Shorten with custom hash', async () => {
+    await init()
+
     const HASH = 'foobar'
     const CUSTOM_HASH = 'asdfjkl'
     fetch.once(
@@ -48,9 +62,6 @@ describe('Shortener component', () => {
       })
     )
 
-    render(<Shortener />)
-    userEvent.click(screen.getByTestId('open-button'))
-
     userEvent.type(screen.getByTestId('originalUrl-field'), 'nodejs.org')
     userEvent.type(screen.getByTestId('hash-field'), CUSTOM_HASH)
     userEvent.click(screen.getByTestId('shorten-button'))
@@ -59,10 +70,9 @@ describe('Shortener component', () => {
   })
 
   test('Handle errors', async () => {
-    fetch.mockRejectOnce(new Error('Error Message!'))
+    await init()
 
-    render(<Shortener />)
-    userEvent.click(screen.getByTestId('open-button'))
+    fetch.mockRejectOnce(new Error('Error Message!'))
 
     userEvent.type(screen.getByTestId('originalUrl-field'), 'nodejs.org')
     userEvent.click(screen.getByTestId('shorten-button'))
