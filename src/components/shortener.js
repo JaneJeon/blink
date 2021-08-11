@@ -14,7 +14,6 @@ import { subject } from '@casl/ability'
 import validator from '../providers/validator'
 import { FORM_ERROR } from 'final-form'
 import { Form, Field } from 'react-final-form'
-// TODO: test all this shit locally
 
 export default function LinkShortener() {
   const [isOpen, setIsOpen] = useState(false)
@@ -61,8 +60,8 @@ export default function LinkShortener() {
                     variant="filled"
                     label="Paste link to shorten"
                     placeholder="example.com"
-                    error={meta.invalid}
-                    helperText={meta.error}
+                    error={!meta.pristine && meta.invalid}
+                    helperText={meta.pristine ? '' : meta.error}
                     disabled={
                       submitting || permissions.cannot('create', resource) // check if you're allowed to shorten link
                     }
@@ -101,14 +100,11 @@ export default function LinkShortener() {
                         : 'awesome-link'
                     }
                     data-testid="hash-field"
-                    error={meta.invalid}
-                    helperText={meta.error}
+                    error={!meta.pristine && meta.invalid}
+                    helperText={meta.pristine ? '' : meta.error}
                     disabled={
                       submitting ||
-                      (!values.hash &&
-                        permissions.cannot('create', resource, 'hash')) || // if the hash is not set, deny if you can't create hash
-                      (values.hash &&
-                        permissions.cannot('update', resource, 'hash')) // if the hash is set, deny if you can't update hash
+                      permissions.cannot('create', resource, 'hash')
                     }
                     style={{ marginTop: '2rem', paddingBottom: '1rem' }}
                     InputProps={{
