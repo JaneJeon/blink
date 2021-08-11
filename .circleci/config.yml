@@ -67,6 +67,7 @@ jobs:
           command: npm run pretest && npm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default
           environment:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
+            NODE_ENV: test
       - *retrieve-junit
       - slack/notify-on-failure
       - jira/notify
