@@ -9,8 +9,5 @@
     "**/*.json",
     "scripts/",
     "bin/"
-  ],
-  "events": {
-    "start": "clear"
-  }
+  ]
 }
