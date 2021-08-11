@@ -39,7 +39,6 @@ export default function LinkShortener() {
       notify('Shortened link!')
     } catch (err) {
       notify('Failed to shorten link!', 'error')
-      console.log(err)
       return { [FORM_ERROR]: err.message }
     }
   }
