@@ -104,7 +104,7 @@ export default function LinkShortener() {
                     value={input.value}
                     onChange={input.onChange}
                     variant="filled"
-                    label="Custom URL"
+                    label="Brand Link"
                     placeholder={
                       values.shortenedUrl
                         ? values.shortenedUrl.split('/').pop()
