@@ -87,7 +87,7 @@
     "@types/jest": "^26.0.8",
     "ajv": "^8.6.2",
     "ajv-cli": "^5.0.0",
-    "ajv-formats": "^2.1.0",
+    "ajv-formats": "^2.1.1",
     "clarify": "^2.1.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8",
