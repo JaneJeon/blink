@@ -56,7 +56,7 @@
     "helmet": "^4.6.0",
     "http-errors": "^1.7.3",
     "ioredis": "^4.24.5",
-    "knex": "^0.21.17",
+    "knex": "^0.21.21",
     "lodash": "^4.17.21",
     "metascraper": "^5.22.10",
     "metascraper-author": "^5.24.1",
