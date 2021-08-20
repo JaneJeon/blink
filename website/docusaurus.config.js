@@ -70,6 +70,10 @@ module.exports = {
         // }
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Jane Jeon`
+    },
+    algolia: {
+      apiKey: process.env.ALGOLIA_API_KEY,
+      indexName: 'blink'
     }
   },
   presets: [
