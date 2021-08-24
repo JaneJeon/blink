@@ -119,7 +119,7 @@
     "react-scripts": "^4.0.3",
     "seedrandom": "^3.0.5",
     "skip-ci": "^1.0.4",
-    "supertest": "^6.1.3",
+    "supertest": "^6.1.6",
     "trace": "^3.1.1",
     "yamljs": "^0.3.0"
   },
