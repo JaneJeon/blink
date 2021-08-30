@@ -113,7 +113,7 @@
     "prettier-plugin-toml": "^0.3.1",
     "ra-data-simple-rest": "^3.16.0",
     "react": "^17.0.1",
-    "react-admin": "^3.17.2",
+    "react-admin": "^3.17.3",
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
