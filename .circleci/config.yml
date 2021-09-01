@@ -9,6 +9,7 @@ aliases:
   - &runner
     executor:
       name: node/default
+      tag: current
   - &size
     resource_class: small
 
@@ -48,7 +49,7 @@ jobs:
   test-backend:
     <<: *size
     docker:
-      - image: cimg/node
+      - image: cimg/node:current
         environment:
           DATABASE_URL: postgres://knex@localhost/blink
           REDIS_URL: redis://localhost
