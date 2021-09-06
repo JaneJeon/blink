@@ -77,7 +77,7 @@
     "objection-table-name": "^1.2.5",
     "openid-client": "^4.7.5",
     "pg": "^8.7.1",
-    "pino": "^6.13.1",
+    "pino": "^6.13.2",
     "rate-limit-redis": "^2.1.0"
   },
   "devDependencies": {
