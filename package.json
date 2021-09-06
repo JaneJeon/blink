@@ -69,7 +69,7 @@
     "metascraper-logo-favicon": "^5.24.2",
     "metascraper-publisher": "^5.24.2",
     "metascraper-title": "^5.24.2",
-    "normalize-url": "^5",
+    "normalize-url": "^7",
     "normalize-url-plus": "^1.1.1",
     "objection": "^2.2.14",
     "objection-authorize": "^4.3.2",
