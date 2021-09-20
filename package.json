@@ -72,7 +72,7 @@
     "objection-authorize": "^4.3.2",
     "objection-hashid": "^2.1.0",
     "objection-table-name": "^1.2.5",
-    "openid-client": "^4.8.0",
+    "openid-client": "^4.9.0",
     "pg": "^8.7.1",
     "pino": "^6.13.2",
     "rate-limit-redis": "^2.1.0"
