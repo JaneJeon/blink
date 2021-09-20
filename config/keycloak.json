@@ -27,7 +27,7 @@
   "registrationAllowed": true,
   "registrationEmailAsUsername": false,
   "rememberMe": false,
-  "verifyEmail": true,
+  "verifyEmail": false,
   "loginWithEmailAllowed": true,
   "duplicateEmailsAllowed": false,
   "resetPasswordAllowed": true,
@@ -2082,5 +2082,18 @@
     "clientOfflineSessionIdleTimeout": "0"
   },
   "keycloakVersion": "12.0.4",
-  "userManagedAccessAllowed": false
+  "userManagedAccessAllowed": false,
+  "users": [
+    {
+      "username": "user",
+      "email": "user@blink.rest",
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Password1"
+        }
+      ]
+    }
+  ]
 }
