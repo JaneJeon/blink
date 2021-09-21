@@ -38,7 +38,8 @@ class BaseModel extends authorize(policies, 'casl', {
       options: {
         // mutating inputs
         removeAdditional: true,
-        useDefaults: true
+        useDefaults: true,
+        schemas: Object.values(schema)
       }
     })
   }

@@ -7,8 +7,7 @@ properties:
       - string
     readOnly: true
   creatorId:
-    type: string
-    readOnly: true
+    $ref: User#/properties/id
   hash:
     type:
       - string

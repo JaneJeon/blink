@@ -5,5 +5,16 @@ cd config/schema
 
 for file in *.json; do
     name=$(basename "$file" .json)
-    ajv -c ajv-formats --remove-additional --use-defaults --coerce-types --all-errors --code-es5=true compile -s "$name.json" -r "!($name).json" -o > "$name.compiled.js"
+    ajv \
+        -c ajv-formats \
+        --remove-additional \
+        --use-defaults \
+        --coerce-types \
+        --allow-union-types \
+        --all-errors \
+        --code-es5=true \
+        compile \
+        -s "$name.json" \
+        -r "!($name).json" \
+        -o > "$name.compiled.js"
 done
