@@ -1,12 +1,14 @@
 const { generate, option } = require('json-schema-faker')
 const { ValidationError } = require('objection')
+const deepCopy = require('lodash/cloneDeep')
 const Link = require('../models/link')
+const globalSchema = require('../config/schema/files')
 
 const seedDev = async knex => {
   option({ random: require('seedrandom')('Some seed') })
 
   const links = []
-  const schema = JSON.parse(JSON.stringify(Link.jsonSchema)) // deep copy
+  const schema = deepCopy(globalSchema.Link)
   const userIds = await knex('users').select('id').pluck('id')
 
   // make everything mandatory, including the metadata -
@@ -33,7 +35,7 @@ const seedDev = async knex => {
     let link
     while (!link) {
       try {
-        const obj = generate(schema)
+        const obj = generate(schema, [globalSchema.User])
         delete obj.id // do not set id
         link = Link.fromJson(obj)
       } catch (err) {
