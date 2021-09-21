@@ -1,4 +1,4 @@
-$id: model:link
+$id: Link
 type: object
 properties:
   id:

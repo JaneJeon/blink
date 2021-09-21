@@ -1,4 +1,4 @@
-$id: model:user
+$id: User
 type: object
 properties:
   id:
