@@ -5,18 +5,19 @@ services:
     build:
       context: .
       target: deps
-    container_name: app-container
+    container_name: blink_app
     environment:
       - NODE_ENV # pass NODE_ENV environment variable straight to Docker
     depends_on:
       - postgres
       - redis
     volumes:
+      # bind mount everything *except* node_modules
       - .:/home/node
       - /home/node/node_modules/
     networks:
       - public
-      - internal
+      - private
     labels:
       - traefik.enable=true
       - traefik.http.routers.frontend.tls=true
@@ -43,17 +44,15 @@ services:
     tmpfs:
       - /var/lib/postgresql/data
     networks:
-      - internal
+      - private
   redis:
     image: redis:6-alpine
     ports:
       - 6379:6379
     networks:
-      - internal
+      - private
 
 networks:
   public:
     external: true
-  internal: {}
-
-  # TODO: share the volumes w/ docker exec
+  private: {}

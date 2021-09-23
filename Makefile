@@ -6,7 +6,7 @@ DC=$(D) compose
 DC_SVCS=-f docker-compose.dev.yml
 DC_APP=-f docker-compose.yml
 DC_ALL=$(DC_SVCS) $(DC_APP)
-CONTAINER_NAME=app-container
+CONTAINER_NAME=blink_app
 
 network-up:
 	$(D) network create public || true
@@ -14,26 +14,18 @@ network-up:
 network-down:
 	$(D) network rm public || true
 
-# TODO:
-volume-up:
-	$(D) volume create
-
-# TODO:
-volume-down:
-	$(D) volume rm
-
 build:
 	$(DC) $(DC_APP) build
 
 rebuild:
 	$(DC) $(DC_APP) build --no-cache
 
-up: network-up volume-up
+up: network-up
 	$(DC) $(DC_ALL) up --renew-anon-volumes --build -d
 
 down:
 	$(DC) $(DC_ALL) down --remove-orphans -v
-	$(MAKE) network-down volume-down
+	$(MAKE) network-down
 
 # e.g. make logs SERVICE=app
 logs:
@@ -50,7 +42,7 @@ sh: start
 
 COMMAND?=npm start
 run: start
-	$(D) exec $(CONTAINER_NAME) $(COMMAND)
+	$(D) exec -it $(CONTAINER_NAME) $(COMMAND)
 
 cert:
 	mkcert -install

@@ -86,13 +86,11 @@ wait_for() {
 
         TIMEOUT=$2 QUIET=$3 PROTOCOL=$4 HOST=$5 PORT=$6 result=$7
         shift 7
-        echo "Running $@"
         exec "$@"
       fi
       exit 0
     fi
 
-    echo "TIMEOUT: $TIMEOUT"
     if [ "$TIMEOUT" -le 0 ]; then
       break
     fi
