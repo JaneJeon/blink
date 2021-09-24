@@ -15,7 +15,7 @@ services:
       - /home/node/node_modules/
     networks:
       - public
-      - internal
+      - private
     labels:
       - traefik.enable=true
       - traefik.http.routers.frontend.tls=true
@@ -42,15 +42,15 @@ services:
     tmpfs:
       - /var/lib/postgresql/data
     networks:
-      - internal
+      - private
   redis:
     image: redis:6-alpine
     ports:
       - 6379:6379
     networks:
-      - internal
+      - private
 
 networks:
   public:
     external: true
-  internal: {}
+  private: {}
