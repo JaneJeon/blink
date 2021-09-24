@@ -4,6 +4,7 @@ services:
   app:
     # without this, oidc-client will attempt to connect to keycloak literally right on startup and crash the whole app
     entrypoint: ./scripts/wait-for -t 90 http://keycloak:8080/auth/realms/blink-realm --
+    command: sleep infinity
   traefik:
     image: traefik
     ports:
