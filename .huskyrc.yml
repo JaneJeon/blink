@@ -1,4 +1,4 @@
 hooks:
   pre-commit: lint-staged
-  pre-push: skip-ci && echo 'Skipping test...' || NODE_ENV=test make build run COMMAND='npm test'
+  pre-push: skip-ci && echo 'Skipping test...' || make build run COMMAND='npm test'
   post-merge: npm i --no-save
