@@ -35,7 +35,7 @@
     "lint": "run-s lint:* --print-name",
     "lint:prettier": "prettier --check . --ignore-path .gitignore",
     "lint:eslint": "eslint . --cache --ignore-pattern website/",
-    "pretest": "NODE_ENV=test run-s build:yaml build:schema --print-name",
+    "pretest": "NODE_ENV=test run-s build:yaml build:schema migrate seed --print-name",
     "test": "run-s test:nowatch:* --print-name",
     "test:watch": "run-s pretest test:watch:* --print-name",
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
