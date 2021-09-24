@@ -31,7 +31,7 @@ logs:
 	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
 # run vs. exec:
-# run leaves behind anonymous volumes when you Ctrl+C,
+# run leaves behind anonymous volumes when you Ctrl+C as the docker-compose down -v doesn't catch the anonymous container's volume,
 # but exec IGNORES entrypoint...
 COMMAND?=npm start
 run:
