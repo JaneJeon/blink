@@ -1,13 +1,14 @@
 const { Issuer, Strategy, custom } = require('openid-client')
 const passport = require('@passport-next/passport')
 const { UniqueViolationError } = require('objection')
+const ms = require('ms')
 const User = require('../models/user')
 const log = require('../lib/logger')
 const { version } = require('../package.json')
 
 custom.setHttpOptionsDefaults({
   headers: { 'User-Agent': `blink/${version}` },
-  timeout: 5500
+  timeout: ms(process.env.OIDC_HTTP_TIMEOUT)
 })
 
 let client
