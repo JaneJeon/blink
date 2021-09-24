@@ -3,9 +3,9 @@
 
 D=docker
 DC=$(D) compose
-DC_SVCS=-f docker-compose.dev.yml
 DC_APP=-f docker-compose.yml
-DC_ALL=$(DC_SVCS) $(DC_APP)
+DC_SVCS=-f docker-compose.dev.yml
+DC_ALL=$(DC_APP) $(DC_SVCS)
 
 network-up:
 	@$(D) network create public || true
@@ -30,7 +30,10 @@ down:
 logs:
 	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
-COMMAND?=npm run start
+# run vs. exec:
+# run leaves behind anonymous volumes when you Ctrl+C,
+# but exec IGNORES entrypoint...
+COMMAND?=npm start
 run:
 	$(DC) $(DC_ALL) run --rm app $(COMMAND)
 
