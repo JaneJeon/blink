@@ -9,5 +9,8 @@
     "**/*.json",
     "scripts/",
     "bin/"
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  }
 }
