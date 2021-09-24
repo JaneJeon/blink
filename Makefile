@@ -13,7 +13,7 @@ network-up:
 network-down:
 	@$(D) network rm public || true
 
-build:
+build: network-up
 	$(DC) $(DC_APP) build
 
 rebuild:
