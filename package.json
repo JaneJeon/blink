@@ -1,4 +1,5 @@
 {
+  "name": "blink",
   "description": "Lightweight, planet-scale, CDN-driven link shortener for teams 🎉",
   "repository": "JaneJeon/blink",
   "author": "Jane Jeon <me@janejeon.dev>",
