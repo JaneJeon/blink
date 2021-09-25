@@ -16,8 +16,6 @@ COPY --chown=node:node . .
 # We want to be able to override this for testing
 ENV NODE_ENV=development
 
-ENTRYPOINT [ "./scripts/wait-for -t 90", "http://keycloak:8080/auth/realms/blink-realm", "--" ]
-
 
 #----------------------------------------#
 # We have a separate build container to persist build artifacts & production npm deps

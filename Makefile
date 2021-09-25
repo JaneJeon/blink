@@ -38,6 +38,7 @@ run:
 	$(DC) $(DC_ALL) run --rm app $(COMMAND)
 
 exec:
+	$(DC) $(DC_ALL) start app
 	$(DC) $(DC_ALL) exec app $(COMMAND)
 
 cert:
