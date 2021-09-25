@@ -8,7 +8,7 @@
   "homepage": "/app",
   "scripts": {
     "user:promote": "node scripts/promote-user",
-    "prestart": "NODE_ENV=development run-s build:yaml build:schema migrate seed --print-name",
+    "prestart": "NODE_ENV=development run-s build:yaml build:schema migrate seed --print-name && wait-on http://keycloak:8080/auth/realms/blink-realm",
     "start": "NODE_ENV=development run-p start:* watch --race",
     "start:frontend": "BROWSER=none FORCE_COLOR=true PORT=4000 react-scripts start | cat",
     "start:backend": "nodemon node -r __utils__/dev-test-setup bin/www",
@@ -35,12 +35,12 @@
     "lint": "run-s lint:* --print-name",
     "lint:prettier": "prettier --check . --ignore-path .gitignore",
     "lint:eslint": "eslint . --cache --ignore-pattern website/",
-    "pretest": "NODE_ENV=test run-s build:yaml build:schema migrate seed --print-name",
+    "pretest": "run-s build:yaml build:schema --print-name",
     "test": "run-s test:nowatch:* --print-name",
     "test:watch": "run-s pretest test:watch:* --print-name",
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
     "test:watch:frontend": "REACT_TEST=true react-scripts test",
-    "test:nowatch:backend": "run-s migrate seed --print-name && jest --forceExit",
+    "test:nowatch:backend": "NODE_ENV=test run-s migrate seed --print-name && jest --forceExit",
     "test:watch:backend": "npm run test:nowatch:backend --watch"
   },
   "dependencies": {
@@ -122,6 +122,7 @@
     "skip-ci": "^1.0.4",
     "supertest": "^6.1.6",
     "trace": "^3.1.1",
+    "wait-on": "^6.0.0",
     "yamljs": "^0.3.0"
   },
   "prettier": "@janejeon/prettier-config",
