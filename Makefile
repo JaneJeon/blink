@@ -3,9 +3,9 @@
 
 D=docker
 DC=$(D) compose
-DC_SVCS=-f docker-compose.dev.yml
 DC_APP=-f docker-compose.yml
-DC_ALL=$(DC_SVCS) $(DC_APP)
+DC_SVCS=-f docker-compose.dev.yml
+DC_ALL=$(DC_APP) $(DC_SVCS)
 
 network-up:
 	@$(D) network create public || true
@@ -13,7 +13,7 @@ network-up:
 network-down:
 	@$(D) network rm public || true
 
-build:
+build: network-up
 	$(DC) $(DC_APP) build
 
 rebuild:
@@ -30,11 +30,15 @@ down:
 logs:
 	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
-COMMAND?=npm run start
+# run vs. exec:
+# run leaves behind anonymous volumes when you Ctrl+C as the docker-compose down -v doesn't catch the anonymous container's volume,
+# but exec IGNORES entrypoint...
+COMMAND?=npm start
 run:
 	$(DC) $(DC_ALL) run --rm app $(COMMAND)
 
 exec:
+	$(DC) $(DC_ALL) start app
 	$(DC) $(DC_ALL) exec app $(COMMAND)
 
 cert:
