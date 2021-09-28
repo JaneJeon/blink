@@ -19,10 +19,8 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
 
     client = new issuer.Client({
       client_id: process.env.OIDC_CLIENT_ID,
-      redirect_uris: [`${process.env.BASE_URL}/auth/login/callback`],
-      response_types: ['code'], // can't use implicit flow because #this-part-gets-stripped-away
-      id_token_signed_response_alg: 'RS256', // since RS256 is asymmetric encryption, we can safely use
-      token_endpoint_auth_method: 'none' // this - we can verify the token w/o having the secret key!
+      client_secret: process.env.OIDC_CLIENT_SECRET,
+      redirect_uris: [`${process.env.BASE_URL}/auth/login/callback`]
     })
 
     passport.use(
