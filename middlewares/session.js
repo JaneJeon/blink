@@ -1,9 +1,10 @@
 const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
+const unless = require('express-unless')
 const client = require('../lib/redis')
 const ms = require('ms')
 
-module.exports = session({
+const sessMiddleware = session({
   store: new RedisStore({ client, prefix: 'sess:' }),
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -13,3 +14,7 @@ module.exports = session({
     sameSite: 'lax'
   }
 })
+
+sessMiddleware.unless = unless
+
+module.exports = sessMiddleware.unless(req => req.apiClient)
