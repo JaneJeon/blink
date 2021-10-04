@@ -3,6 +3,7 @@ const RedisStore = require('connect-redis')(session)
 const unless = require('express-unless')
 const client = require('../lib/redis')
 const ms = require('ms')
+const { JWT_AUTH_PROPERTY } = require('../config/constants')
 
 const sessMiddleware = session({
   store: new RedisStore({ client, prefix: 'sess:' }),
@@ -17,4 +18,4 @@ const sessMiddleware = session({
 
 sessMiddleware.unless = unless
 
-module.exports = sessMiddleware.unless(req => req.apiClient)
+module.exports = sessMiddleware.unless(req => req[JWT_AUTH_PROPERTY])

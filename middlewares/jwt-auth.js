@@ -3,6 +3,7 @@
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 const ms = require('ms')
+const { JWT_AUTH_PROPERTY } = require('../config/constants')
 
 exports.useJwtAuth =
   process.env.OAUTH2_ENABLED === 'true'
@@ -20,13 +21,14 @@ exports.useJwtAuth =
         issuer: process.env.OAUTH_JWT_ISSUER,
         algorithms: [process.env.OAUTH2_JWT_ALGORITHMS.split(',')],
         credentialsRequired: false,
-        requestProperty: 'apiClient'
+        requestProperty: JWT_AUTH_PROPERTY
       })
     : (req, res, next) => next()
 
+// kid, iss, aud, sub, scope
 // TODO:
 exports.normalizeJwtUser = (req, res, next) => {
-  if (req.apiClient) {
+  if (req[JWT_AUTH_PROPERTY]) {
     req.user.id = req.sub || 'Unknown API Token'
   }
 }
