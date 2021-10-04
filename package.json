@@ -51,7 +51,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "express-query-boolean": "^2.0.0",
-    "express-rate-limit": "^5.3.0",
+    "express-rate-limit": "^5.4.0",
     "express-session": "^1.17.1",
     "got": "^11.8.2",
     "helmet": "^4.6.0",
