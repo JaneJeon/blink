@@ -112,7 +112,7 @@
     "pino-pretty": "^7.0.1",
     "prettier": "^2.4.1",
     "prettier-plugin-toml": "^0.3.1",
-    "ra-data-simple-rest": "^3.18.2",
+    "ra-data-simple-rest": "^3.18.3",
     "react": "^17.0.1",
     "react-admin": "^3.18.2",
     "react-copy-to-clipboard": "^5.0.4",
