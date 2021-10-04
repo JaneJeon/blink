@@ -1,10 +1,10 @@
 const { Router } = require('express')
-const auth = require('../middlewares/require-auth')
+const requireAuth = require('../middlewares/require-auth')
 const rateLimit = require('../middlewares/rate-limiter')
 
 module.exports = Router()
-  .use('/api', auth, rateLimit, require('./api'))
+  .use('/api', requireAuth, rateLimit.long, require('./api'))
   .use('/app', require('./app'))
-  .use('/auth', rateLimit, require('./auth'))
+  .use('/auth', rateLimit.long, require('./auth'))
   .get('/health', (req, res) => res.sendStatus(200))
   .use('/', require('./redirect'))
