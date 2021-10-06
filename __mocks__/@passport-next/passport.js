@@ -1,8 +1,10 @@
 exports.initialize = () => (req, res, next) => {
   // Filthy little hack to "mock" req.user from headers
   const role = req.header('X-Mock-Role')
+  const id = req.header('X-Mock-Id')
+
   req.user = {
-    id: role,
+    id,
     role,
     name: role,
     deactivated: false

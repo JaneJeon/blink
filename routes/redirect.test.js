@@ -3,15 +3,27 @@ require('../__utils__/trxify-test')
 
 const request = require('supertest')
 const app = require('../app')
+const User = require('../models/user')
 const Link = require('../models/link')
 
 describe('/', () => {
   const originalUrl = 'redirect-test.com'
   const hash = 'redirectTest'
+  const TEST_USER_ID = 'user-routes-redirect-test'
 
   beforeAll(async () => {
+    await User.query().insert({
+      id: TEST_USER_ID,
+      role: 'user',
+      name: 'user',
+      deactivated: false
+    })
+    await Link.query().insert({ originalUrl, hash, creatorId: TEST_USER_ID })
+  })
+
+  afterAll(async () => {
     await Link.query().delete().where({ originalUrl })
-    await Link.query().insert({ originalUrl, hash, creatorId: 'user' })
+    await User.query().findById(TEST_USER_ID).delete()
   })
 
   test('GET /', done => {

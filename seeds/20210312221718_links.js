@@ -4,7 +4,7 @@ const deepCopy = require('lodash/cloneDeep')
 const Link = require('../models/link')
 const globalSchema = require('../config/schema/files')
 
-const seedDev = async knex => {
+exports.seed = async knex => {
   option({ random: require('seedrandom')('Some seed') })
 
   const links = []
@@ -53,13 +53,4 @@ const seedDev = async knex => {
   }
 
   await knex('links').insert(links)
-}
-
-const seedTest = async knex => {
-  // noop... for now
-}
-
-exports.seed = async knex => {
-  const seeder = process.env.NODE_ENV === 'test' ? seedTest : seedDev
-  await seeder(knex)
 }
