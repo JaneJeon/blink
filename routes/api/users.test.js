@@ -11,6 +11,7 @@ describe('/api/users', () => {
   const TEST_SUPERUSER_ID = 'superuser-routes-api-users-test'
 
   beforeAll(async () => {
+    await User.query().findByIds([TEST_SUPERUSER_ID, TEST_USER_ID]).delete()
     await User.query().insert([
       {
         id: TEST_SUPERUSER_ID,
@@ -27,10 +28,6 @@ describe('/api/users', () => {
     ])
   })
 
-  afterAll(async () => {
-    await User.query().findByIds([TEST_SUPERUSER_ID, TEST_USER_ID]).delete()
-  })
-
   describe('GET /', () => {
     it('returns a list of users', async () => {
       const { body, status } = await session
@@ -38,14 +35,14 @@ describe('/api/users', () => {
         .set('X-Mock-Role', 'user')
         .set('X-Mock-Id', TEST_USER_ID)
       expect(status).toEqual(200)
-      expect(body.map(user => user.id)).toContain('user')
+      expect(body.map(user => user.id)).toContain(TEST_USER_ID)
     })
   })
 
   describe('GET /:id', () => {
     it('returns a specific user', async () => {
       const { status } = await session
-        .get('/api/users/superuser')
+        .get(`/api/users/${TEST_SUPERUSER_ID}`)
         .set('X-Mock-Role', 'user')
         .set('X-Mock-Id', TEST_USER_ID)
       expect(status).toEqual(200)
@@ -54,7 +51,7 @@ describe('/api/users', () => {
 
   describe('PUT /:id', () => {
     const base = {
-      id: 'user',
+      id: TEST_USER_ID,
       role: 'user',
       name: 'user',
       deactivated: false
@@ -62,7 +59,7 @@ describe('/api/users', () => {
 
     it('updates user information', async () => {
       const { body, status } = await session
-        .put('/api/users/user')
+        .put(`/api/users/${TEST_USER_ID}`)
         .send(Object.assign({}, base, { name: 'hello' }))
         .set('X-Mock-Role', 'user')
         .set('X-Mock-Id', TEST_USER_ID)
@@ -72,7 +69,7 @@ describe('/api/users', () => {
 
     it('handles user deactivation', async () => {
       const { body, status } = await session
-        .put('/api/users/user')
+        .put(`/api/users/${TEST_USER_ID}`)
         .send(Object.assign({}, base, { deactivated: true }))
         .set('X-Mock-Role', 'superuser')
         .set('X-Mock-Id', TEST_SUPERUSER_ID)
@@ -82,7 +79,7 @@ describe('/api/users', () => {
 
     it('handles user reactivation', async () => {
       const { body, status } = await session
-        .put('/api/users/user')
+        .put(`/api/users/${TEST_USER_ID}`)
         .send(Object.assign({}, base, { deactivated: false }))
         .set('X-Mock-Role', 'superuser')
         .set('X-Mock-Id', TEST_SUPERUSER_ID)

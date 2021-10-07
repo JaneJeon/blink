@@ -12,6 +12,7 @@ describe('/', () => {
   const TEST_USER_ID = 'user-routes-redirect-test'
 
   beforeAll(async () => {
+    await User.query().findById(TEST_USER_ID).delete()
     await User.query().insert({
       id: TEST_USER_ID,
       role: 'user',
@@ -19,11 +20,6 @@ describe('/', () => {
       deactivated: false
     })
     await Link.query().insert({ originalUrl, hash, creatorId: TEST_USER_ID })
-  })
-
-  afterAll(async () => {
-    await Link.query().delete().where({ originalUrl })
-    await User.query().findById(TEST_USER_ID).delete()
   })
 
   test('GET /', done => {

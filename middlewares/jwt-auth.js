@@ -31,4 +31,5 @@ exports.normalizeJwtUser = (req, res, next) => {
   if (req[JWT_AUTH_PROPERTY]) {
     req.user.id = req.sub || 'Unknown API Token'
   }
+  next()
 }

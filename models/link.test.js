@@ -9,16 +9,13 @@ describe('Link', () => {
   const TEST_SUPERUSER_ID = 'superuser-model-link-test'
 
   beforeAll(async () => {
+    await User.query().findById(TEST_SUPERUSER_ID).delete()
     await User.query().insert({
       id: TEST_SUPERUSER_ID,
       role: 'superuser',
       name: 'superuser',
       deactivated: false
     })
-  })
-
-  afterAll(async () => {
-    await User.query().findById(TEST_SUPERUSER_ID).delete()
   })
 
   const originalUrls = ['www.nodejs.org', 'example.com', 'http://google.com']
