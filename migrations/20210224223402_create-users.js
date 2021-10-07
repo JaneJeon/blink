@@ -15,9 +15,13 @@ exports.up = async knex => {
       .foreign('creator_id')
       .references(`${tableName}.id`)
       .onDelete('CASCADE')
+    // we never "delete" users, only deactivate them. The only them we truly remove the user rows is during tests
   })
 }
 
 exports.down = async knex => {
+  await knex.schema.alterTable(linkTable, table => {
+    table.dropColumn('creator_id')
+  })
   await knex.schema.dropTable(tableName)
 }
