@@ -3,7 +3,7 @@
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 const ms = require('ms')
-const { JWT_AUTH_PROPERTY } = require('../config/constants')
+const { JWT_AUTH_PROPERTY, API_USER_ID } = require('../config/constants')
 
 exports.useJwtAuth =
   process.env.OAUTH2_ENABLED === 'true'
@@ -26,10 +26,14 @@ exports.useJwtAuth =
     : (req, res, next) => next()
 
 // kid, iss, aud, sub, scope
-// TODO:
 exports.normalizeJwtUser = (req, res, next) => {
   if (req[JWT_AUTH_PROPERTY]) {
-    req.user.id = req.sub || 'Unknown API Token'
+    req.user = {
+      id: API_USER_ID,
+      role: 'superuser',
+      name: 'API Client',
+      deactivated: false
+    }
   }
   next()
 }
