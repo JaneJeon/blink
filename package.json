@@ -16,6 +16,7 @@
     "migrate:one": "knex migrate:up",
     "migrate:make": "knex migrate:make",
     "migrate:list": "knex migrate:list",
+    "migrate:unlock": "knex migrate:unlock",
     "rollback": "knex migrate:rollback",
     "rollback:one": "knex migrate:down",
     "seed": "knex seed:run",
