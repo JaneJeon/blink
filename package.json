@@ -75,6 +75,7 @@
     "objection-hashid": "^2.1.0",
     "objection-table-name": "^1.2.5",
     "openid-client": "^4.9.0",
+    "p-timeout": "^4.1.0",
     "pg": "^8.7.1",
     "pino": "^6.13.3",
     "rate-limit-redis": "^2.1.0"
