@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@casl/ability": "^5.4.3",
+    "@hapi/bourne": "^2.0.0",
     "@passport-next/passport": "^3.1.0",
     "connect-redis": "^6.0.0",
     "dotenv-flow": "^3.2.0",
