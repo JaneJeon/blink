@@ -36,7 +36,7 @@ exports.normalizeJwtUser = (req, res, next) => {
         deactivated: false,
         scope: req[JWT_AUTH_PROPERTY].scope || process.env.OAUTH2_DEFAULT_SCOPE,
         kid: req[JWT_AUTH_PROPERTY].kid,
-        iss: req[JWT_AUTH_PROPERTY],
+        iss: req[JWT_AUTH_PROPERTY].iss,
         sub: req[JWT_AUTH_PROPERTY].sub
       },
       { skipValidation: true }
