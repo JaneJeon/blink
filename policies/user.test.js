@@ -1,5 +1,4 @@
 const can = require('../__utils__/policy-tester')
-const { API_USER_ID } = require('../config/constants')
 
 describe('user policies', () => {
   class User {
@@ -39,20 +38,5 @@ describe('user policies', () => {
     expect(
       can(superuser, 'update', user, { role: 'superuser', deactivated: false })
     ).toBe(true)
-  })
-
-  const apiUser = new User('superuser')
-  apiUser.id = API_USER_ID
-  apiUser.scope = process.env.OAUTH2_DEFAULT_SCOPE
-
-  test('API clients can make requests based on their scope', () => {
-    expect(can(apiUser, 'read', superuser)).toBe(true)
-    expect(can(apiUser, 'update', user, { name: 'hello' })).toBe(false)
-
-    apiUser.scope = 'user:*'
-    expect(can(apiUser, 'update', user, { name: 'hello' })).toBe(true)
-
-    // restore scope
-    apiUser.scope = process.env.OAUTH2_DEFAULT_SCOPE
   })
 })

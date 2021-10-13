@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const Link = require('../../models/link')
+const { requireScope } = require('../../middlewares/jwt-auth')
 
 module.exports = Router()
   // When "creating" a link, the user is trying to shorten a link.
@@ -7,7 +8,7 @@ module.exports = Router()
   // but when we say "oh someone else already shortened that link",
   // the user is going to want to see it anyway, so we skip the back-and-forth
   // between the frontend and the backend and handle duplicate cases right from this endpoint.
-  .post('/', async (req, res) => {
+  .post('/', requireScope('link:create'), async (req, res) => {
     // First, we "create" an instance of link from the requested JSON for two reasons:
     // 1. To put req.body through the link input validator (and throw a 400 if invalid).
     // 2. To normalize the URL so we can look up by it.
@@ -30,7 +31,7 @@ module.exports = Router()
 
     res.status(201).send(link)
   })
-  .get('/', async (req, res) => {
+  .get('/', requireScope('link:read'), async (req, res) => {
     const { total, results } = await Link.query()
       .paginate(req.query)
       .authorize(req.user)
@@ -38,7 +39,7 @@ module.exports = Router()
     res.header('Content-Range', `/${total}`)
     res.send(results)
   })
-  .get('/:id', async (req, res) => {
+  .get('/:id', requireScope('link:read'), async (req, res) => {
     const link = await Link.query()
       .findByHashId(req.params.id)
       .throwIfNotFound()
@@ -46,7 +47,7 @@ module.exports = Router()
 
     res.send(link)
   })
-  .put('/:id', async (req, res) => {
+  .put('/:id', requireScope('link:update'), async (req, res) => {
     const link = await Link.query()
       .findByHashId(req.params.id)
       .throwIfNotFound()
@@ -57,7 +58,7 @@ module.exports = Router()
 
     res.send(link)
   })
-  .delete('/:id', async (req, res) => {
+  .delete('/:id', requireScope('link:delete'), async (req, res) => {
     await Link.query()
       .findByHashId(req.params.id)
       .throwIfNotFound()

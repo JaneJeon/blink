@@ -3,8 +3,10 @@
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 const ms = require('ms')
+const httpError = require('http-errors')
 const { JWT_AUTH_PROPERTY, API_USER_ID } = require('../config/constants')
 const User = require('../models/user')
+const scope = require('../lib/scope')
 
 exports.useJwtAuth =
   process.env.OAUTH2_ENABLED === 'true'
@@ -43,4 +45,20 @@ exports.normalizeJwtUser = (req, res, next) => {
     )
   }
   next()
+}
+
+exports.requireScope = requiredScopeStr => {
+  const requiredScopes = requiredScopeStr.split(' ')
+
+  return (req, res, next) => {
+    if (req[JWT_AUTH_PROPERTY]) {
+      requiredScopes.forEach(requiredScope => {
+        if (!scope.verify(req.user.scope, requiredScope)) {
+          next(httpError(403))
+        }
+      })
+    }
+
+    next()
+  }
 }
