@@ -22,10 +22,10 @@ exports.useJwtAuth =
           }),
         audience: process.env.OAUTH_JWT_AUDIENCE,
         issuer: process.env.OAUTH_JWT_ISSUER,
-        algorithms: [process.env.OAUTH2_JWT_ALGORITHMS.split(',')],
+        algorithms: process.env.OAUTH2_JWT_ALGORITHMS.split(','),
         credentialsRequired: false,
         requestProperty: JWT_AUTH_PROPERTY
-      })
+      }).unless(req => !req.isApi)
     : (req, res, next) => next()
 
 exports.normalizeJwtUser = (req, res, next) => {

@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const passport = require('../../middlewares/passport')
+const passport = require('@passport-next/passport')
 
 module.exports = Router()
   .get('/login', passport.authenticate('oidc'))
