@@ -61,7 +61,6 @@ module.exports = Router()
   .delete('/:id', requireScope('link:delete'), async (req, res) => {
     await Link.query()
       .findByHashId(req.params.id)
-      .throwIfNotFound()
       .delete()
       .authorize(req.user)
       .fetchResourceContextFromDB()
