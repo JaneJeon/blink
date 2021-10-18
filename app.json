@@ -29,6 +29,10 @@
     "SESSION_SECRET": {
       "description": "the session encryption key",
       "generator": "secret"
+    },
+    "HEROKU": {
+      "description": "this indicates whether Blink is running in Heroku; do not change this",
+      "value": "true"
     }
   }
 }

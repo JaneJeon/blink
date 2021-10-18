@@ -1,28 +1,28 @@
 // istanbul ignore file
 require('./config')
 
-const { parse } = require('pg-connection-string')
-
-const log = require('./lib/logger')
 const { knexSnakeCaseMappers } = require('objection')
+const merge = require('lodash/merge')
+const log = require('./lib/logger')
 
-const env = process.env.NODE_ENV || 'development'
-
-const connection = parse(process.env.DATABASE_URL)
-if (env === 'production')
-  // heroku requires this
-  Object.assign(connection, { ssl: { rejectUnauthorized: false } })
+let parsedConnection
+// heroku requires this
+if (process.env.HEROKU === 'true') {
+  const { parse } = require('pg-connection-string')
+  parsedConnection = parse(process.env.DATABASE_URL)
+  merge(parsedConnection, { ssl: { rejectUnauthorized: false } })
+}
 
 module.exports = {
   client: 'pg',
-  connection,
+  connection: parsedConnection || process.env.DATABASE_URL,
   log: {
     warn: msg => log.warn(msg),
     error: msg => log.error(msg),
     deprecate: msg => log.warn(msg),
     debug: msg => log.debug(msg)
   },
-  asyncStackTraces: env !== 'production',
-  debug: env !== 'production',
+  asyncStackTraces: process.env.NODE_ENV !== 'production',
+  debug: process.env.NODE_ENV !== 'production',
   ...knexSnakeCaseMappers()
 }
