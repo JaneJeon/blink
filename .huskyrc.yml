@@ -2,4 +2,3 @@ hooks:
   pre-commit: lint-staged
   # this assumes you already ran "make up" and that containers are running
   pre-push: skip-ci && echo 'Skipping test...' || make exec COMMAND='npm test'
-  post-merge: npm i --no-save
