@@ -66,7 +66,7 @@ Note that whatever `NODE_ENV` you set during... well, basically _any_ docker-com
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!  
-Feel free to check [issues page](https://github.com/JaneJeon/blink/issues).
+Feel free to check [issues page](https://github.com/JaneJeon/blink/issues?q=is%3Aopen+is%3Aissue+-label%3Ablocked).
 
 ## Show your support
 
