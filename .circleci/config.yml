@@ -103,8 +103,8 @@ workflows:
             - test-frontend
             - test-backend
           filters:
-            branches:
-              only:
-                - master
+            # branches:
+            #   only:
+            #     - master
             tags:
               only: /^v.*/
