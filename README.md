@@ -57,6 +57,24 @@ The test also automatically runs before you push your commits.
 
 Note that whatever `NODE_ENV` you set during... well, basically _any_ docker-compose command will be automatically passed down to the underlying dockerfile/image/container.
 
+## Releasing
+
+Blink has a git tag-based semver release strategy. Once any number of PRs make it into master, we can pull it and tag it as follows:
+
+```sh
+git tag -f vX
+git tag -f vX.Y
+git tag -f vX.Y.Z
+```
+
+And then push it as follows:
+
+```sh
+git push -f --tags
+```
+
+That will trigger CI to push Docker images for vX, vX.Y, and vX.Y.Z!
+
 ## Author
 
 👤 **Jane Jeon**
