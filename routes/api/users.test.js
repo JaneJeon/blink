@@ -2,6 +2,7 @@ require('../../__utils__/knex-test')
 require('../../__utils__/trxify-test')
 
 const supertest = require('supertest')
+const merge = require('lodash/merge')
 const app = require('../../app')
 const session = supertest.agent(app)
 const User = require('../../models/user')
@@ -58,7 +59,7 @@ describe('/api/users', () => {
     it('updates user information', async () => {
       const { body, status } = await session
         .put(`/api/users/${TEST_USER_ID}`)
-        .send(Object.assign({}, base, { name: 'hello' }))
+        .send(merge({}, base, { name: 'hello' }))
         .set('X-Mock-Role', 'user')
         .set('X-Mock-Id', TEST_USER_ID)
       expect(status).toEqual(200)
@@ -70,7 +71,7 @@ describe('/api/users', () => {
 
       const { body, status } = await session
         .put(`/api/users/${TEST_USER_ID}`)
-        .send(Object.assign({}, base, { deactivated: true }))
+        .send(merge({}, base, { deactivated: true }))
         .set(FULL_SCOPE_API_HEADER)
       expect(status).toEqual(200)
       expect(body.deactivated).toBe(true)
@@ -79,7 +80,7 @@ describe('/api/users', () => {
     it('handles user reactivation', async () => {
       const { body, status } = await session
         .put(`/api/users/${TEST_USER_ID}`)
-        .send(Object.assign({}, base, { deactivated: false }))
+        .send(merge({}, base, { deactivated: false }))
         .set('X-Mock-Role', 'superuser')
         .set('X-Mock-Id', TEST_SUPERUSER_ID)
       expect(status).toEqual(200)

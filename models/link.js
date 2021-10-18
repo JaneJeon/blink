@@ -2,6 +2,7 @@ const BaseModel = require('./base')
 const { ValidationError } = require('objection')
 const hashId = require('objection-hashid')
 const deepCopy = require('lodash/cloneDeep')
+const merge = require('lodash/merge')
 const scrape = require('../lib/scrape')
 
 const { URL } = require('url')
@@ -65,7 +66,7 @@ class Link extends hashId(BaseModel) {
     await super.$beforeInsert(queryContext)
 
     // update metadata by visiting the URL
-    this.meta = Object.assign(await scrape(this.originalUrl), this.meta)
+    this.meta = merge(await scrape(this.originalUrl), this.meta)
   }
 
   static get virtualAttributes() {

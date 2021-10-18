@@ -2,11 +2,12 @@
 // This is where all of react-admin's skeletons are buried.
 // Below lies a finnicky, un-testable, flaky mess (not of my own fault) forced upon by the react-admin gods...
 
+import { parse } from '@hapi/bourne'
 import policies from '../policies'
 
 const getUser = () => {
   const str = localStorage.getItem('user')
-  return !str || str === '{}' ? null : JSON.parse(str)
+  return !str || str === '{}' ? null : parse(str)
 }
 const setUser = user => {
   if (!user) localStorage.removeItem('user')

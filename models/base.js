@@ -2,6 +2,9 @@
 const { Model, AjvValidator } = require('objection')
 const tableName = require('objection-table-name')()
 const authorize = require('objection-authorize')
+const { parse } = require('@hapi/bourne')
+const values = require('lodash/values')
+const entries = require('lodash/toPairs')
 const policies = require('../policies')
 const schema = require('../config/schema/files')
 const httpError = require('http-errors')
@@ -39,7 +42,7 @@ class BaseModel extends authorize(policies, 'casl', {
         // mutating inputs
         removeAdditional: true,
         useDefaults: true,
-        schemas: Object.values(schema)
+        schemas: values(schema)
       }
     })
   }
@@ -76,7 +79,7 @@ class BaseModel extends authorize(policies, 'casl', {
         // parse query parameters and do type checks
         try {
           if (query.range) {
-            const [start, end] = JSON.parse(query.range)
+            const [start, end] = parse(query.range)
             if (typeof start !== 'number' || typeof end !== 'number')
               throw new Error()
 
@@ -87,13 +90,13 @@ class BaseModel extends authorize(policies, 'casl', {
           }
 
           if (query.sort) {
-            ;[column, direction] = JSON.parse(query.sort)
+            ;[column, direction] = parse(query.sort)
             if (typeof column !== 'string' || typeof direction !== 'string')
               throw new Error()
           }
 
           if (query.filter) {
-            filter = JSON.parse(query.filter)
+            filter = parse(query.filter)
             if (typeof filter !== 'object') throw new Error()
           }
         } catch (err) {
@@ -103,7 +106,7 @@ class BaseModel extends authorize(policies, 'casl', {
         // I really don't want to be using offset...
         let q = this.page(page, pageSize).orderBy(column, direction)
 
-        for (const [key, value] of Object.entries(filter))
+        for (const [key, value] of entries(filter))
           q = Array.isArray(value) ? q.whereIn(key, value) : q.where(key, value)
 
         return q

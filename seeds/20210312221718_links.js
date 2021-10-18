@@ -1,6 +1,7 @@
 const { generate, option } = require('json-schema-faker')
 const { ValidationError } = require('objection')
 const deepCopy = require('lodash/cloneDeep')
+const keys = require('lodash/keys')
 const Link = require('../models/link')
 const globalSchema = require('../config/schema/files')
 
@@ -13,13 +14,11 @@ exports.seed = async knex => {
 
   // make everything mandatory, including the metadata -
   // we're inserting these objects directly to the database without scraping.
-  schema.required = Object.keys(schema.properties).filter(
+  schema.required = keys(schema.properties).filter(
     property => schema.properties[property].readOnly !== true
   )
   schema.required.push('creatorId')
-  schema.properties.meta.required = Object.keys(
-    schema.properties.meta.properties
-  )
+  schema.properties.meta.required = keys(schema.properties.meta.properties)
 
   // but we gotta make sure we still have a valid URL for every object
   schema.properties.originalUrl.format = 'uri'

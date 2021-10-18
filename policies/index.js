@@ -1,4 +1,5 @@
 const { AbilityBuilder, Ability } = require('@casl/ability')
+const values = require('lodash/values')
 
 // We have to manually build the policy map here because we're using this for
 // both frontend and backend... even being allowed to use require() is a privilege.
@@ -22,8 +23,8 @@ module.exports = (user, resource, action, body, opts, relation) => {
     policies[action](allow, forbid, user, body)
   } else {
     // For use in frontend
-    Object.values(policyMap).forEach(policy => {
-      Object.values(policy).forEach(action => action(allow, forbid, user, body))
+    values(policyMap).forEach(policy => {
+      values(policy).forEach(action => action(allow, forbid, user, body))
     })
   }
 

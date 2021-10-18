@@ -1,14 +1,16 @@
 const { generate, option } = require('json-schema-faker')
+const deepCopy = require('lodash/cloneDeep')
+const keys = require('lodash/keys')
 const User = require('../models/user')
 
 exports.up = async knex => {
   option({ random: require('seedrandom')('deez nuts lmao') })
 
   const users = []
-  const schema = JSON.parse(JSON.stringify(User.jsonSchema))
+  const schema = deepCopy(User.jsonSchema)
 
   // require every field (most importantly the username)
-  schema.required = Object.keys(schema.properties)
+  schema.required = keys(schema.properties)
 
   // sanity check on the string fields
   schema.properties.id.minLength = 2
