@@ -115,6 +115,9 @@ workflows:
           requires:
             - test-frontend
             - test-backend
+          filters:
+            branches:
+              only: master
   release:
     jobs:
       - publish-tag:
