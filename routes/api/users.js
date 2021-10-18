@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const User = require('../../models/user')
+const { requireScope } = require('../../middlewares/jwt-auth')
 
 module.exports = Router()
-  .get('/', async (req, res) => {
+  .get('/', requireScope('user:read'), async (req, res) => {
     const { total, results } = await User.query()
       .paginate(req.query)
       .authorize(req.user)
@@ -10,7 +11,7 @@ module.exports = Router()
     res.header('Content-Range', `/${total}`)
     res.send(results)
   })
-  .get('/:id', async (req, res) => {
+  .get('/:id', requireScope('user:read'), async (req, res) => {
     const user = await User.query()
       .findById(req.params.id)
       .throwIfNotFound()
@@ -18,7 +19,7 @@ module.exports = Router()
 
     res.send(user)
   })
-  .get('/:id/links', async (req, res) => {
+  .get('/:id/links', requireScope('user:read link:read'), async (req, res) => {
     const { total, results } = await User.relatedQuery('links')
       .for(req.params.id)
       .paginate(req.query)
@@ -27,7 +28,7 @@ module.exports = Router()
     res.header('Content-Range', `/${total}`)
     res.send(results)
   })
-  .put('/:id', async (req, res) => {
+  .put('/:id', requireScope('user:update'), async (req, res) => {
     const user = await User.query()
       .updateAndFetchById(req.params.id, req.body)
       .authorize(req.user)

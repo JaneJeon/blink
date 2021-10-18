@@ -29,7 +29,9 @@ module.exports = (err, req, res, next) => {
             return 500
         }
       })()
-    } else err.statusCode = 500
+    } else if (err.name === 'UnauthorizedError') err.statusCode = 401
+    else if (err.name === 'JwksRateLimitError') err.statusCode = 419
+    else err.statusCode = 500
   }
 
   const loglevel =

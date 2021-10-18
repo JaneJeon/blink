@@ -36,6 +36,26 @@ services:
       - traefik.http.routers.keycloak.tls=true
       - traefik.http.routers.keycloak.rule=Host(`keycloak.localhost`)
       - traefik.http.services.keycloak.loadbalancer.server.port=8080
+  # We spin up a separate test DB to keep it pristine and undisturbed from dev runs;
+  # crucially, the seeds should NEVER run on these test DB's!!
+  postgres-test:
+    image: postgres:13-alpine
+    ports:
+      - 54320:5432
+    environment:
+      POSTGRES_DB: blink
+      POSTGRES_USER: knex
+      POSTGRES_HOST_AUTH_METHOD: trust
+    tmpfs:
+      - /var/lib/postgresql/data
+    networks:
+      - public
+  redis-test:
+    image: redis:6-alpine
+    ports:
+      - 63790:6379
+    networks:
+      - public
 
 networks:
   public:

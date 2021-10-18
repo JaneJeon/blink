@@ -2,6 +2,7 @@ const { Issuer, Strategy, custom } = require('openid-client')
 const passport = require('@passport-next/passport')
 const { UniqueViolationError } = require('objection')
 const ms = require('ms')
+const unless = require('express-unless')
 const User = require('../models/user')
 const log = require('../lib/logger')
 const { version } = require('../package.json')
@@ -77,4 +78,11 @@ passport.deserializeUser(async (id, done) => {
   }
 })
 
-module.exports = passport
+const init = passport.initialize()
+const sess = passport.session()
+
+init.unless = unless
+sess.unless = unless
+
+exports.init = init.unless(req => req.isApi)
+exports.sess = sess.unless(req => req.isApi)
