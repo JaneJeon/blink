@@ -72,12 +72,13 @@ jobs:
       - *retrieve-junit
       - slack/notify-on-failure
       - jira/notify
-  publish:
+  publish-tag:
     machine:
       image: ubuntu-2004:202107-02
     steps:
       - checkout
-      - run:
+      - &docker-login
+        run:
           name: Login to GitHub Container Registry
           command: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
       - run:
@@ -86,6 +87,18 @@ jobs:
       - run:
           name: Push Docker image
           command: docker push "ghcr.io/janejeon/blink:$CIRCLE_TAG"
+  publish-latest:
+    machine:
+      image: ubuntu-2004:202107-02
+    steps:
+      - checkout
+      - *docker-login
+      - run:
+          name: Build Docker image
+          command: docker build -t "ghcr.io/janejeon/blink:latest" .
+      - run:
+          name: Push Docker image
+          command: docker push "ghcr.io/janejeon/blink:latest"
 
 workflows:
   build-and-test:
@@ -97,7 +110,12 @@ workflows:
             - lint
       - test-backend:
           <<: *test-config
-      - publish:
+      - publish-latest:
+          context: shared-vars
+          requires:
+            - test-frontend
+            - test-backend
+      - publish-tag:
           context: shared-vars
           filters:
             # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
