@@ -103,8 +103,8 @@ workflows:
             - test-frontend
             - test-backend
           filters:
-            # branches:
-            #   only:
-            #     - master
+            # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
+            branches:
+              ignore: /.*/
             tags:
               only: /^v.*/
