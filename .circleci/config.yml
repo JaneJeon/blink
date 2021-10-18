@@ -99,9 +99,6 @@ workflows:
           <<: *test-config
       - publish:
           context: shared-vars
-          requires:
-            - test-frontend
-            - test-backend
           filters:
             # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
             branches:
