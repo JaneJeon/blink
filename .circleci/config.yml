@@ -68,6 +68,7 @@ jobs:
           environment:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
             NODE_ENV: test
+            LINK_TIMEOUT: 4 seconds
       - *retrieve-junit
       - slack/notify-on-failure
       - jira/notify
@@ -102,6 +103,8 @@ workflows:
             - test-frontend
             - test-backend
           filters:
-            branches:
-              only:
-                - master
+            # branches:
+            #   only:
+            #     - master
+            tags:
+              only: /^v.*/
