@@ -15,14 +15,6 @@ properties:
   deactivated:
     type: boolean
     default: false
-  createdAt:
-    type: string
-    format: date-time
-    readOnly: true
-  updatedAt:
-    type: string
-    format: date-time
-    readOnly: true
 required:
   - id
   - name

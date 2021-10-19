@@ -12,7 +12,8 @@ const httpError = require('http-errors')
 Model.knex(require('../lib/knex'))
 
 class BaseModel extends authorize(policies, 'casl', {
-  casl: { useInputItemAsResourceForRelation: true }
+  casl: { useInputItemAsResourceForRelation: true },
+  ignoreFields: ['createdAt', 'updatedAt']
 })(tableName(Model)) {
   static get modelPaths() {
     return [__dirname]
@@ -32,6 +33,18 @@ class BaseModel extends authorize(policies, 'casl', {
 
   static get jsonSchema() {
     return schema[this.name]
+  }
+
+  async $beforeInsert(queryContext) {
+    await super.$beforeInsert(queryContext)
+
+    this.createdAt = new Date()
+  }
+
+  async $beforeUpdate(queryContext) {
+    await super.$beforeUpdate(queryContext)
+
+    this.updatedAt = new Date()
   }
 
   static createValidator() {

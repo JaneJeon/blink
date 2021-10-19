@@ -8,7 +8,7 @@ exports.up = async knex => {
     table.text('name').notNullable()
     table.boolean('deactivated').notNullable()
 
-    table.timestamps(true, true)
+    table.timestamps(true)
   })
   await knex.schema.alterTable(linkTable, table => {
     table

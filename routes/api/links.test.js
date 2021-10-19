@@ -34,6 +34,8 @@ describe('/api/links', () => {
         .send({ originalUrl: 'js.org' })
         .set(SUPERUSER_HEADERS)
       expect(status).toEqual(201)
+      expect(body.createdAt).toBeTruthy()
+
       link = body
     })
 
@@ -72,6 +74,8 @@ describe('/api/links', () => {
         .set(SUPERUSER_HEADERS)
       expect(status).toEqual(200)
       expect(body.hash).toBe('foobar')
+      expect(body.createdAt).toBeTruthy()
+      expect(body.updatedAt).toBeTruthy()
     })
   })
 

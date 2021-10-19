@@ -1,4 +1,4 @@
-const { tableName } = require('../models/user')
+const User = require('../models/user')
 const { API_USER_ID } = require('../config/constants')
 
 // To enable API clients to access Blink, we simply create an API user.
@@ -7,7 +7,7 @@ const { API_USER_ID } = require('../config/constants')
 // Then, with the audit log feature we can track arbitrary "immutable id & metadata -> action (subject)",
 // i.e. track API action by kid/sub of the JWT.
 exports.up = async knex => {
-  await knex(tableName).insert({
+  await User.query(knex).insert({
     id: API_USER_ID,
     role: 'superuser',
     name: 'API Client',
@@ -16,5 +16,5 @@ exports.up = async knex => {
 }
 
 exports.down = async knex => {
-  await knex(tableName).where('id', API_USER_ID).delete()
+  await knex(User.tableName).where('id', API_USER_ID).delete()
 }

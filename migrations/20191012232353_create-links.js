@@ -9,7 +9,7 @@ exports.up = knex =>
 
     table.jsonb('meta')
 
-    table.timestamps(true, true)
+    table.timestamps(true)
   })
 
 exports.down = knex => knex.schema.dropTable(tableName)

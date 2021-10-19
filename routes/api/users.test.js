@@ -64,6 +64,8 @@ describe('/api/users', () => {
         .set('X-Mock-Id', TEST_USER_ID)
       expect(status).toEqual(200)
       expect(body.name).toBe('hello')
+      expect(body.createdAt).toBeTruthy()
+      expect(body.updatedAt).toBeTruthy()
     })
 
     it('handles user deactivation', async () => {
