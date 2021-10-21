@@ -8,7 +8,7 @@ const {
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
   if (res.headersSent) {
-    req.log.error({ err }, 'An error occurred after request was sent')
+    req.log.error(err, 'An error occurred after request was sent')
     return
   }
 
@@ -40,7 +40,7 @@ module.exports = (err, req, res, next) => {
       : err.statusCode < 500
       ? 'warn'
       : 'error'
-  req.log[loglevel]({ err })
+  req.log[loglevel](err)
 
   res.status(err.statusCode).send(err.message)
 }

@@ -3,7 +3,7 @@ const deepCopy = require('lodash/cloneDeep')
 const keys = require('lodash/keys')
 const User = require('../models/user')
 
-exports.up = async knex => {
+exports.seed = async knex => {
   option({ random: require('seedrandom')('deez nuts lmao') })
 
   const users = []
