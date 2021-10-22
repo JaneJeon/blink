@@ -5,7 +5,7 @@ const Link = require('./link')
 const normalizeUrl = require('normalize-url')
 const { ValidationError, UniqueViolationError } = require('objection')
 
-describe('Link', () => {
+describe('Link model', () => {
   const TEST_SUPERUSER_ID = 'superuser-model-link-test'
 
   beforeAll(async () => {
