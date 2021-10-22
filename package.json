@@ -7,7 +7,6 @@
   "proxy": "http://localhost:3000",
   "homepage": "/app",
   "scripts": {
-    "user:promote": "node scripts/promote-user",
     "prestart": "NODE_ENV=development run-s build:yaml build:schema migrate seed --print-name && wait-on http://keycloak:8080/auth/realms/blink-realm",
     "start": "NODE_ENV=development run-p start:* watch --race",
     "start:frontend": "BROWSER=none FORCE_COLOR=true PORT=4000 react-scripts start | cat",

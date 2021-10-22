@@ -36,10 +36,12 @@ Issuer.discover(process.env.OIDC_ISSUER_BASE_URL)
           const name = claims.preferred_username || claims.name || 'No Name'
           log.info('Trying to log in user %s with claims %o', id, claims)
 
+          const role = await User.defaultRole()
+
           let user
           try {
             user = await User.query()
-              .insertAndFetch({ id, name })
+              .insertAndFetch({ id, name, role })
               .authorize()
               .fetchResourceContextFromDB()
             log.info('Provisioned user %s', id)
