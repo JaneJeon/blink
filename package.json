@@ -116,6 +116,7 @@
     "pino-pretty": "^7.1.0",
     "prettier": "^2.4.1",
     "prettier-plugin-toml": "^0.3.1",
+    "qrcode": "^1.4.4",
     "ra-data-simple-rest": "^3.19.0",
     "react": "^17.0.1",
     "react-admin": "^3.19.0",
