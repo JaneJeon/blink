@@ -4,7 +4,4 @@
 require('trace')
 require('clarify')
 
-// This is so that pino v7 doesn't break under jest (why is this shit even necessary)
-require('on-exit-leak-free')
-
 module.exports = () => {}
