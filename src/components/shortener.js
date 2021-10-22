@@ -38,7 +38,7 @@ export default function LinkShortener() {
       form.initialize(link)
       notify('Shortened link!')
     } catch (err) {
-      notify('Failed to shorten link!', 'error')
+      notify('Failed to shorten link!', { type: 'error' })
       return { [FORM_ERROR]: err.message }
     }
   }
