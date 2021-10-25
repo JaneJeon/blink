@@ -79,7 +79,7 @@
     "openid-client": "^4.9.1",
     "p-timeout": "^4.1.0",
     "pg": "^8.7.1",
-    "pino": "^7.0.3",
+    "pino": "^7.0.5",
     "rate-limit-redis": "^2.1.0"
   },
   "devDependencies": {
