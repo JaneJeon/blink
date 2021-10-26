@@ -6,7 +6,7 @@
 
 > Modern, lightweight, planet-scale link shortener for teams 🎉
 >
-> Easy to setup, connect with your org's SSO, and hook up analytics!
+> Easy to setup, connect with your org's SSO, hook up analytics, and extend!
 
 _See the [documentation](https://docs.blink.rest) for more information about the project itself (including screenshots)_
 
