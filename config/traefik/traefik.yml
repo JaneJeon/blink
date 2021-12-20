@@ -13,12 +13,7 @@ accessLog:
 entryPoints:
   web:
     address: :80
-    http:
-      redirections:
-        entryPoint:
-          to: web-secure
-          scheme: https
-
+    http: {}
   web-secure:
     address: :443
     http:

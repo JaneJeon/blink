@@ -1,8 +1,6 @@
 version: '3'
 
 services:
-  app:
-    command: sleep infinity # this is just to keep the container alive so you can exec into it
   traefik:
     image: traefik
     ports:
@@ -16,6 +14,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.entrypoints=web-secure
       - traefik.http.routers.traefik.rule=Host(`traefik.localhost`)
       - traefik.http.services.api@internal.loadbalancer.server.port=8080
   keycloak:
@@ -34,6 +33,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.keycloak.tls=true
+      - traefik.http.routers.keycloak.entrypoints=web-secure
       - traefik.http.routers.keycloak.rule=Host(`keycloak.localhost`)
       - traefik.http.services.keycloak.loadbalancer.server.port=8080
   # We spin up a separate test DB to keep it pristine and undisturbed from dev runs;
