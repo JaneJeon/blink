@@ -31,7 +31,7 @@ NOTE: that you actually _do not_ have to run the cleanup every time you `npm sta
 
 ### Starting Blink
 
-Run `make run` to boot up backend express server and frontend react "live-loader". You can access the app at https://localhost/app (or localhost/app, both works)! Both the frontend and the backend will live-reload as you make changes. You can login as the user specified at the end of `config/keycloak.json` (username: `user`, password: `Password1`).
+Run `make dev` to the development environment, which consists of a backend express server and a frontend react "live-loader". You can access the app at https://localhost/app! Both the frontend and the backend will live-reload as you make changes. You can login as the user specified at the end of `config/keycloak.json` (username: `user`, password: `Password1`).
 
 Behind the scenes, the frontend (a create-react-app app) is running at http://localhost:4000/app and is being reverse proxied from https://localhost/app, and everything else in https://localhost gets proxied to the backend at http://localhost:3000. Yes, there are two processes running in the container pretending to be one "site", but this kind of routing (thanks Traefik!) allows us to not have horrible routing issues (stemming from the fact that even though they're both http://localhost, the different port means they're effectively _two different sites_ and leads to a whole host of routing, CORS, and other integration issues), _and_ allows testing of features that are only available for HTTPS in order to simulate real-world usage as much as possible.
 
@@ -39,23 +39,17 @@ Behind the scenes, the frontend (a create-react-app app) is running at http://lo
 
 If you can't reach any service or if you suspect the routing is messed up, first check https://traefik.localhost to make sure that everything is configured correctly.
 
-If you need to run a one-off command with the app container, run `make run COMMAND=$whatever`, and if you want to _hook into_ the existing app container, run `make exec COMMAND=sh`.
-
 Note that for performance/security reasons, the app container is built end-to-end with `alpine`-based images, so you won't have access to anything fancy like, say, `bash`.
 
 ## Run tests
 
 ```sh
-NODE_ENV=test make run COMMAND='npm test'
+make test COMMAND='npm test'
 
 # or, for interactive testing:
-NODE_ENV=test make run COMMAND=sh
+make test
 $ npm run test:watch
 ```
-
-The test also automatically runs before you push your commits.
-
-Note that whatever `NODE_ENV` you set during... well, basically _any_ docker-compose command will be automatically passed down to the underlying dockerfile/image/container.
 
 ## Releasing
 
