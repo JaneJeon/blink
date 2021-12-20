@@ -30,16 +30,12 @@ down:
 logs:
 	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
-# run vs. exec:
-# run leaves behind anonymous volumes when you Ctrl+C as the docker-compose down -v doesn't catch the anonymous container's volume,
-# but exec IGNORES entrypoint...
-COMMAND?=npm start
-run:
-	$(DC) $(DC_ALL) run --rm app $(COMMAND)
+COMMAND=sh
+dev:
+	NODE_ENV=development $(DC) $(DC_ALL) run --rm app $(COMMAND)
 
-exec:
-	$(DC) $(DC_ALL) start app
-	$(DC) $(DC_ALL) exec app $(COMMAND)
+test:
+	NODE_ENV=test $(DC) $(DC_ALL) run --rm app $(COMMAND)
 
 cert:
 	mkcert -install
