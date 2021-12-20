@@ -13,7 +13,6 @@ accessLog:
 entryPoints:
   web:
     address: :80
-    http: {}
   web-secure:
     address: :443
     http:
