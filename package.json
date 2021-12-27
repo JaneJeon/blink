@@ -34,7 +34,7 @@
     "clean:db": "knex seed:run --specific=20210125230719_clean.js",
     "lint": "run-s lint:* --print-name",
     "lint:prettier": "prettier --check . --ignore-path .gitignore",
-    "lint:eslint": "eslint . --cache --ignore-pattern website/",
+    "lint:eslint": "eslint . --cache --ignore-path .gitignore",
     "pretest": "run-s build:yaml build:schema --print-name",
     "test": "run-s test:nowatch:* --print-name",
     "test:watch": "run-s pretest test:watch:* --print-name",
