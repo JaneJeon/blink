@@ -18,6 +18,7 @@ You need the following components to develop and run Blink locally:
 
 - [mkcert](https://github.com/FiloSottile/mkcert)
 - docker & docker-compose (note that on Linux, docker & docker-compose are two separate deps)
+- an x86-based machine (unfortunately, Keycloak - even in its latest version - does not work with ARM-based devices)
 
 ### Before you start
 
@@ -31,7 +32,7 @@ NOTE: that you actually _do not_ have to run the cleanup every time you `npm sta
 
 ### Starting Blink
 
-Run `make dev` to the development environment, which consists of a backend express server and a frontend react "live-loader". You can access the app at https://localhost/app! Both the frontend and the backend will live-reload as you make changes. You can login as the user specified at the end of `config/keycloak.json` (username: `user`, password: `Password1`).
+Run `make dev` to stand up the development environment (i.e. it will run the actual container in which Blink will be run in "dev mode", which is fancy term for `NODE_ENV=development`). Then, run `npm start` to run Blink, which consists of a backend express server and a frontend react "live-loader". You can access the app at https://localhost/app! Both the frontend and the backend will live-reload as you make changes. You can login as the user specified at the end of `config/keycloak.json` (username: `user`, password: `Password1`).
 
 Behind the scenes, the frontend (a create-react-app app) is running at http://localhost:4000/app and is being reverse proxied from https://localhost/app, and everything else in https://localhost gets proxied to the backend at http://localhost:3000. Yes, there are two processes running in the container pretending to be one "site", but this kind of routing (thanks Traefik!) allows us to not have horrible routing issues (stemming from the fact that even though they're both http://localhost, the different port means they're effectively _two different sites_ and leads to a whole host of routing, CORS, and other integration issues), _and_ allows testing of features that are only available for HTTPS in order to simulate real-world usage as much as possible.
 

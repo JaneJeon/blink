@@ -37,7 +37,7 @@ export default function LinkShortener() {
       const link = await result.json()
 
       form.initialize(link)
-      notify('Shortened link!')
+      notify('Shortened link!', { type: 'success' })
     } catch (err) {
       notify('Failed to shorten link!', { type: 'error' })
       return { [FORM_ERROR]: err.message }
@@ -61,7 +61,7 @@ export default function LinkShortener() {
         return (
           <>
             <form onSubmit={handleSubmit}>
-              <h2>{submitError}</h2>
+              <h2 data-testid="submission-error">{submitError}</h2>
               <Field name="originalUrl">
                 {({ input, meta }) => (
                   <>
