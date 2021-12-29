@@ -88,7 +88,7 @@
     "@janejeon/prettier-config": "^1.1.0",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.4.1",
+    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.2",
     "ajv": "^8.6.3",
     "ajv-cli": "^5.0.0",
