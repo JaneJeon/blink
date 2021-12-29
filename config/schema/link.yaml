@@ -2,9 +2,9 @@ $id: Link
 type: object
 properties:
   id:
-    type:
-      - integer # id is an integer internally, but
-      - string # is exposed as a hash externally
+    oneOf:
+      - type: integer # id is an integer internally, but
+      - type: string # is exposed as a hash externally
     readOnly: true
   creatorId:
     $ref: User#/properties/id
