@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   node: circleci/node@4
   slack: circleci/slack@3
-  jira: circleci/jira@1
 
 aliases:
   - &runner
@@ -42,15 +41,16 @@ jobs:
           name: Test CRA
           command: npm run pretest && npm run test:nowatch:frontend -- -- --ci --runInBand --reporters=jest-junit --reporters=default
           environment:
+            NODE_ENV: test
             JEST_JUNIT_OUTPUT_DIR: reports/jest-frontend
       - *retrieve-junit
       - slack/notify-on-failure
-      - jira/notify
   test-backend:
     <<: *size
     docker:
       - image: cimg/node:lts
         environment:
+          NODE_ENV: test
           DATABASE_URL: postgres://knex@localhost/blink
           REDIS_URL: redis://localhost
       - image: circleci/postgres:alpine-ram
@@ -62,7 +62,6 @@ jobs:
     steps:
       - checkout
       - *install-modules
-      - run: echo "$NODE_ENV"
       - run:
           name: Test Express
           command: npm run pretest && npm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default
@@ -72,7 +71,6 @@ jobs:
             LINK_TIMEOUT: 4 seconds
       - *retrieve-junit
       - slack/notify-on-failure
-      - jira/notify
   publish-tag:
     machine:
       image: ubuntu-2004:202107-02
