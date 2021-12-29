@@ -139,7 +139,9 @@ export default function LinkShortener() {
                                 aria-label="copy link"
                                 color="secondary"
                                 disabled={submitting || !values.shortenedUrl} // disable copy when there's nothing to copy
-                                onClick={() => notify('Link copied!')}
+                                onClick={() =>
+                                  notify('Link copied!', { type: 'success' })
+                                }
                               >
                                 <FileCopyIcon />
                               </IconButton>
