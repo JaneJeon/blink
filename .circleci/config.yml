@@ -9,13 +9,11 @@ aliases:
     executor:
       name: node/default
       tag: lts
-  - &size
-    resource_class: medium
 
 jobs:
   lint:
     <<: *runner
-    <<: *size
+    resource_class: small # can't use multiple threads anyway
     steps:
       - checkout
       - node/install-packages
@@ -23,7 +21,7 @@ jobs:
       - run: npm run lint:eslint -- --format junit --output-file reports/eslint/results.xml
   test-frontend:
     <<: *runner
-    <<: *size
+    resource_class: medium # jest is able to run tests in parallel
     steps:
       - checkout
       - node/install-packages
@@ -33,7 +31,7 @@ jobs:
           environment:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-frontend
   test-backend:
-    <<: *size
+    resource_class: medium # jest is able to run tests in parallel
     docker:
       - image: cimg/node:lts
         environment:
