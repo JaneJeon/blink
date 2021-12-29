@@ -60,7 +60,7 @@
     "http-errors": "^2.0.0",
     "ioredis": "^4.28.0",
     "jwks-rsa": "^2.0.5",
-    "knex": "^0.21.21",
+    "knex": "^0.95.0",
     "lodash": "^4.17.21",
     "metascraper": "^5.24.9",
     "metascraper-author": "^5.24.9",
