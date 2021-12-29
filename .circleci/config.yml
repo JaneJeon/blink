@@ -96,7 +96,10 @@ workflows:
             branches:
               only: master
           post-steps:
-            - *notify-failure
+            - &notify-success
+              slack/notify:
+                event: pass
+                template: success_tagged_deploy_1
   release:
     jobs:
       - publish-tag:
@@ -108,4 +111,4 @@ workflows:
             tags:
               only: /^v.*/
           post-steps:
-            - *notify-failure
+            - *notify-success
