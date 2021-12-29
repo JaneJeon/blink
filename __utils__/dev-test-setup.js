@@ -3,5 +3,3 @@
 // cleaner stacks for debugging
 require('trace')
 require('clarify')
-
-module.exports = () => {}

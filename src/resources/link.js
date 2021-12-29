@@ -15,13 +15,15 @@ import {
   usePermissions,
   Toolbar,
   SaveButton,
-  DeleteButton
+  DeleteButton,
+  useRecordContext
 } from 'react-admin'
 import Typography from '@material-ui/core/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import { subject } from '@casl/ability'
 import validator from '../providers/validator'
 import getJsonPath from '../utils/get-json-path'
+import QRCodeDisplay from '../components/qr-code'
 
 export const List = props => (
   <DataList {...props} perPage={15}>
@@ -43,6 +45,11 @@ export const List = props => (
   </DataList>
 )
 
+const QRCodeField = props => {
+  const record = useRecordContext(props)
+  return <QRCodeDisplay link={record.shortenedUrl} />
+}
+
 export const Show = props => (
   <ShowHOC {...props}>
     <SimpleShowLayout>
@@ -62,7 +69,9 @@ export const Show = props => (
       <TextField source="meta.author" label="Author" />
       <TextField source="meta.publisher" label="Publisher" />
       <TextField source="meta.lang" label="Language" />
-      <DateField source="meta.date" label="Original link created at" />
+      <DateField source="meta.date" label="created at" />
+
+      <QRCodeField />
     </SimpleShowLayout>
   </ShowHOC>
 )
@@ -131,7 +140,7 @@ const EditComponent = props => {
           )
         }}
       />
-
+      <Typography variant="h6">Original link information</Typography>
       <TextInput
         disabled={
           schemaAt('meta.title').readOnly ||

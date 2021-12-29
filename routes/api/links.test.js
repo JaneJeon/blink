@@ -1,5 +1,3 @@
-require('../../__utils__/knex-test')
-
 const apiHeaderGen = require('../../__utils__/bearer-header-gen')
 const merge = require('lodash/merge')
 

@@ -22,6 +22,7 @@ describe('Shortener component', () => {
     userEvent.click(screen.getByTestId('open-button'))
     await waitForElementToBeRemoved(screen.getByText('Loading...'))
   }
+  // TODO: test that the error field is empty
 
   test('Shorten with no hash/button activation', async () => {
     await init()
@@ -47,6 +48,7 @@ describe('Shortener component', () => {
     await screen.findByPlaceholderText(HASH)
 
     expect(screen.getByTestId('copy-button')).toBeEnabled()
+    expect(screen.getByTestId('submission-error').innerHTML).toBe('')
     // expect(screen.getByTestId('copy-clipboard')).toHaveValue()
   })
 
@@ -67,6 +69,8 @@ describe('Shortener component', () => {
     userEvent.click(screen.getByTestId('shorten-button'))
 
     await screen.findByDisplayValue(CUSTOM_HASH)
+
+    expect(screen.getByTestId('submission-error').innerHTML).toBe('')
   })
 
   test('Handle errors', async () => {

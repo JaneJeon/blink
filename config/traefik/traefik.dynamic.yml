@@ -7,6 +7,11 @@ tls:
 
 http:
   middlewares:
+    https-302:
+      redirectRegex:
+        regex: ^http://(.*)
+        replacement: 'https://${1}'
+        permanent: false
     floc:
       headers:
         customResponseHeaders:

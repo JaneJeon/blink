@@ -3,8 +3,8 @@ type: object
 properties:
   id:
     type:
-      - integer
-      - string
+      - integer # id is an integer internally, but
+      - string # is exposed as a hash externally
     readOnly: true
   creatorId:
     $ref: User#/properties/id
@@ -22,9 +22,7 @@ properties:
     type: string
     readOnly: true
   brandedUrl:
-    type:
-      - string
-      - 'null'
+    type: string
     readOnly: true
   meta:
     type: object
@@ -60,6 +58,14 @@ properties:
           - string
           - 'null'
     additionalProperties: false
-required:
+  createdAt:
+    type: string
+    format: date-time
+    readOnly: true
+  updatedAt:
+    type: string
+    format: date-time
+    readOnly: true
+required: # null vs. undefined
   - originalUrl
 additionalProperties: false
