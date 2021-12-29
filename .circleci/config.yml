@@ -50,7 +50,6 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
             LINK_TIMEOUT: 4 seconds
   publish-tag:
-    resource_class: small
     machine:
       image: ubuntu-2004:202107-02
     steps:
@@ -60,7 +59,6 @@ jobs:
       - run: docker build -t "ghcr.io/janejeon/blink:$CIRCLE_TAG" .
       - run: docker push "ghcr.io/janejeon/blink:$CIRCLE_TAG"
   publish-latest:
-    resource_class: small
     machine:
       image: ubuntu-2004:202107-02
     steps:
