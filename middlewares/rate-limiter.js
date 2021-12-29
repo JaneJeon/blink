@@ -1,4 +1,4 @@
-const rateLimit = require('express-rate-limit').default
+const rateLimit = require('express-rate-limit')
 const RedisStore = require('rate-limit-redis')
 const ms = require('ms')
 const client = require('../lib/redis')
