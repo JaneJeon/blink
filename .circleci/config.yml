@@ -4,24 +4,25 @@ orbs:
   node: circleci/node@5
   slack: circleci/slack@4
 
-aliases:
-  - &runner
-    executor:
-      name: node/default
-      tag: lts
-
 jobs:
   lint:
-    <<: *runner
     resource_class: small # can't use multiple threads anyway
+    docker:
+      - &runner
+        image: cimg/node:lts
+        environment:
+          NODE_ENV: test
+          DATABASE_URL: postgres://knex@localhost/blink
+          REDIS_URL: redis://localhost
     steps:
       - checkout
       - node/install-packages
       - run: npm run lint:prettier
       - run: npm run lint:eslint -- --format junit --output-file reports/eslint/results.xml
   test-frontend:
-    <<: *runner
     resource_class: medium # jest is able to run tests in parallel
+    docker:
+      - *runner
     steps:
       - checkout
       - node/install-packages
@@ -33,17 +34,12 @@ jobs:
   test-backend:
     resource_class: medium # jest is able to run tests in parallel
     docker:
-      - image: cimg/node:lts
-        environment:
-          NODE_ENV: test
-          DATABASE_URL: postgres://knex@localhost/blink
-          REDIS_URL: redis://localhost
-      - image: circleci/postgres:alpine-ram
+      - *runner
+      - image: cimg/postgres:14.1
         environment:
           POSTGRES_DB: blink
           POSTGRES_USER: knex
-          POSTGRES_HOST_AUTH_METHOD: trust
-      - image: circleci/redis:alpine
+      - image: cimg/redis:6.2
     steps:
       - checkout
       - node/install-packages
@@ -54,9 +50,9 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
             LINK_TIMEOUT: 4 seconds
   publish-tag:
+    resource_class: small
     machine:
       image: ubuntu-2004:202107-02
-    resource_class: small
     steps:
       - checkout
       - &docker-login
@@ -64,9 +60,9 @@ jobs:
       - run: docker build -t "ghcr.io/janejeon/blink:$CIRCLE_TAG" .
       - run: docker push "ghcr.io/janejeon/blink:$CIRCLE_TAG"
   publish-latest:
+    resource_class: small
     machine:
       image: ubuntu-2004:202107-02
-    resource_class: small
     steps:
       - checkout
       - *docker-login
