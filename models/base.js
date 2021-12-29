@@ -39,6 +39,7 @@ class BaseModel extends authorize(policies, 'casl', {
     await super.$beforeInsert(queryContext)
 
     this.createdAt = new Date()
+    this.updatedAt = new Date()
   }
 
   async $beforeUpdate(queryContext) {

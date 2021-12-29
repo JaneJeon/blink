@@ -14,3 +14,4 @@ config/schema/*.json
 # ignore all dotfiles except env files
 .*
 !*.env*
+!.npmrc

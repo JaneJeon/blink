@@ -1,26 +1,24 @@
 #----------------------------------------#
 # dev/test
 FROM node:lts-alpine AS deps
-RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat && \
+RUN apk add --no-cache --virtual .gyp python3 make g++ libc6-compat && \
     npm i -g npm
 
 USER node
 WORKDIR /home/node
 
 # "Cache" node_modules first so that changes in the source code doesn't trigger a rebuild
-COPY --chown=node:node package*.json ./
-RUN npm ci --no-audit --prefer-offline
+COPY .npmrc .
+COPY package*.json .
+RUN npm ci
 
 COPY --chown=node:node . .
-
-# We want to be able to override this for testing
-ENV NODE_ENV=development
 
 
 #----------------------------------------#
 # We have a separate build container to persist build artifacts & production npm deps
 FROM node:lts-alpine AS build
-RUN apk add --no-cache --virtual .gyp python make g++ libc6-compat && \
+RUN apk add --no-cache --virtual .gyp python3 make g++ libc6-compat && \
     npm i -g npm
 
 USER node

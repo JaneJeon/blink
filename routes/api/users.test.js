@@ -1,4 +1,3 @@
-require('../../__utils__/knex-test')
 require('../../__utils__/trxify-test')
 
 const supertest = require('supertest')

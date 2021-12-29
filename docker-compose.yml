@@ -17,20 +17,22 @@ services:
       - public
     labels:
       - traefik.enable=true
-      - traefik.http.routers.frontend.tls=true
-      - traefik.http.routers.backend.tls=true
       # Route /app -> :4000
+      - traefik.http.routers.frontend.tls=true
+      - traefik.http.routers.frontend.entrypoints=web-secure
       - traefik.http.routers.frontend.rule=(Host(`localhost`) && PathPrefix(`/app`))
       - traefik.http.routers.frontend.priority=2
       - traefik.http.routers.frontend.service=frontend
       - traefik.http.services.frontend.loadbalancer.server.port=4000
       # Route / -> :3000
+      - traefik.http.routers.backend.tls=true
+      - traefik.http.routers.backend.entrypoints=web-secure
       - traefik.http.routers.backend.rule=Host(`localhost`)
       - traefik.http.routers.backend.priority=1
       - traefik.http.routers.backend.service=backend
       - traefik.http.services.backend.loadbalancer.server.port=3000
   postgres:
-    image: postgres:13-alpine
+    image: postgres:14-alpine
     ports:
       - 5432:5432
     environment:

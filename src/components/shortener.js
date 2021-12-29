@@ -14,6 +14,7 @@ import { subject } from '@casl/ability'
 import validator from '../providers/validator'
 import { FORM_ERROR } from 'final-form'
 import { Form, Field } from 'react-final-form'
+import QRCodeDisplay from './qr-code'
 
 export default function LinkShortener() {
   const [isOpen, setIsOpen] = useState(false)
@@ -36,7 +37,7 @@ export default function LinkShortener() {
       const link = await result.json()
 
       form.initialize(link)
-      notify('Shortened link!')
+      notify('Shortened link!', { type: 'success' })
     } catch (err) {
       notify('Failed to shorten link!', { type: 'error' })
       return { [FORM_ERROR]: err.message }
@@ -58,98 +59,103 @@ export default function LinkShortener() {
         const resource = subject('Link', values)
 
         return (
-          <form onSubmit={handleSubmit}>
-            <h2>{submitError}</h2>
-            <Field name="originalUrl">
-              {({ input, meta }) => (
-                <>
-                  <TextField
-                    name={input.name}
-                    value={input.value}
-                    onChange={input.onChange}
-                    autoFocus
-                    variant="filled"
-                    label="Paste link to shorten"
-                    placeholder="example.com"
-                    error={!meta.pristine && meta.invalid}
-                    helperText={meta.pristine ? '' : meta.error}
-                    disabled={
-                      submitting || permissions.cannot('create', resource) // check if you're allowed to shorten link
-                    }
-                    inputProps={{ 'data-testid': 'originalUrl-field' }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="shorten"
-                            data-testid="shorten-button"
-                            color="secondary"
-                            disabled={submitting || pristine || invalid}
-                            type="submit"
-                          >
-                            <SearchIcon />
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                </>
-              )}
-            </Field>
-            <Field name="hash">
-              {({ input, meta }) => (
-                <>
-                  <TextField
-                    name={input.name}
-                    value={input.value}
-                    onChange={input.onChange}
-                    variant="filled"
-                    label="Brand Link"
-                    placeholder={
-                      values.shortenedUrl
-                        ? values.shortenedUrl.split('/').pop()
-                        : 'awesome-link'
-                    }
-                    error={!meta.pristine && meta.invalid}
-                    helperText={meta.pristine ? '' : meta.error}
-                    disabled={
-                      submitting ||
-                      permissions.cannot('create', resource, 'hash')
-                    }
-                    style={{ marginTop: '2rem', paddingBottom: '1rem' }}
-                    inputProps={{ 'data-testid': 'hash-field' }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment
-                          position="start"
-                          style={{ marginRight: 0, marginBottom: '-3px' }}
-                        >
-                          {process.env.REACT_APP_BASE_URL}/
-                        </InputAdornment>
-                      ),
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <CopyToClipboard
-                            text={values.brandedUrl || values.shortenedUrl}
-                            data-testid="copy-button"
-                          >
+          <>
+            <form onSubmit={handleSubmit}>
+              <h2 data-testid="submission-error">{submitError}</h2>
+              <Field name="originalUrl">
+                {({ input, meta }) => (
+                  <>
+                    <TextField
+                      name={input.name}
+                      value={input.value}
+                      onChange={input.onChange}
+                      autoFocus
+                      variant="filled"
+                      label="Paste link to shorten"
+                      placeholder="example.com"
+                      error={!meta.pristine && meta.invalid}
+                      helperText={meta.pristine ? '' : meta.error}
+                      disabled={
+                        submitting || permissions.cannot('create', resource) // check if you're allowed to shorten link
+                      }
+                      inputProps={{ 'data-testid': 'originalUrl-field' }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
                             <IconButton
-                              aria-label="copy link"
+                              aria-label="shorten"
+                              data-testid="shorten-button"
                               color="secondary"
-                              disabled={submitting || !values.shortenedUrl} // disable copy when there's nothing to copy
-                              onClick={() => notify('Link copied!')}
+                              disabled={submitting || pristine || invalid}
+                              type="submit"
                             >
-                              <FileCopyIcon />
+                              <SearchIcon />
                             </IconButton>
-                          </CopyToClipboard>
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                </>
-              )}
-            </Field>
-          </form>
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  </>
+                )}
+              </Field>
+              <Field name="hash">
+                {({ input, meta }) => (
+                  <>
+                    <TextField
+                      name={input.name}
+                      value={input.value}
+                      onChange={input.onChange}
+                      variant="filled"
+                      label="Brand Link"
+                      placeholder={
+                        values.shortenedUrl
+                          ? values.shortenedUrl.split('/').pop()
+                          : 'awesome-link'
+                      }
+                      error={!meta.pristine && meta.invalid}
+                      helperText={meta.pristine ? '' : meta.error}
+                      disabled={
+                        submitting ||
+                        permissions.cannot('create', resource, 'hash')
+                      }
+                      style={{ marginTop: '2rem', paddingBottom: '1rem' }}
+                      inputProps={{ 'data-testid': 'hash-field' }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment
+                            position="start"
+                            style={{ marginRight: 0, marginBottom: '-3px' }}
+                          >
+                            {process.env.REACT_APP_BASE_URL}/
+                          </InputAdornment>
+                        ),
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <CopyToClipboard
+                              text={values.brandedUrl || values.shortenedUrl}
+                              data-testid="copy-button"
+                            >
+                              <IconButton
+                                aria-label="copy link"
+                                color="secondary"
+                                disabled={submitting || !values.shortenedUrl} // disable copy when there's nothing to copy
+                                onClick={() =>
+                                  notify('Link copied!', { type: 'success' })
+                                }
+                              >
+                                <FileCopyIcon />
+                              </IconButton>
+                            </CopyToClipboard>
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  </>
+                )}
+              </Field>
+            </form>
+            <QRCodeDisplay link={values.shortenedUrl} />
+          </>
         )
       }}
     />
