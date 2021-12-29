@@ -9,9 +9,8 @@ properties:
   creatorId:
     $ref: User#/properties/id
   hash:
-    type:
-      - string
-      - 'null'
+    type: string
+    nullable: true
     minLength: 4
     maxLength: 25
     pattern: "\\w+"
@@ -23,41 +22,36 @@ properties:
     readOnly: true
   brandedUrl:
     type: string
+    nullable: true
     readOnly: true
   meta:
     type: object
     properties:
       author:
-        type:
-          - string
-          - 'null'
+        type: string
+        nullable: true
       date:
-        type:
-          - string
-          - 'null'
+        type: string
+        nullable: true
         format: date
       description:
-        type:
-          - string
-          - 'null'
+        type: string
+        nullable: true
       lang:
-        type:
-          - string
-          - 'null'
+        type: string
+        nullable: true
       logo:
-        type:
-          - string
-          - 'null'
+        type: string
+        nullable: true
         format: uri
       publisher:
-        type:
-          - string
-          - 'null'
+        type: string
+        nullable: true
       title:
-        type:
-          - string
-          - 'null'
+        type: string
+        nullable: true
     additionalProperties: false
+  # these will get overwritten by default timestamps anyway
   createdAt:
     type: string
     format: date-time
