@@ -62,6 +62,7 @@ jobs:
     steps:
       - checkout
       - *install-modules
+      - run: echo "$NODE_ENV"
       - run:
           name: Test Express
           command: npm run pretest && npm run test:nowatch:backend -- --ci --runInBand --reporters=jest-junit --reporters=default
