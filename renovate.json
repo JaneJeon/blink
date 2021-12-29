@@ -1,0 +1,3 @@
+{
+  "extends": ["github>JaneJeon/renovate-config"]
+}

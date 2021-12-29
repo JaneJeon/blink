@@ -3,13 +3,14 @@
 **/Dockerfile*
 **/docker-compose*
 **/README.md
-LICENSE
 **/dist
 coverage
 **/build
 website
 config/schema/*.compiled.js
 config/schema/*.json
+renovate.json
+Procfile
 
 # ignore all dotfiles except env files
 .*
