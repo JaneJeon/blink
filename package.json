@@ -74,7 +74,7 @@
     "normalize-url": "^5",
     "objection": "^2.2.17",
     "objection-authorize": "^4.4.1",
-    "objection-hashid": "^2.1.0",
+    "objection-hashid": "^3.0.0",
     "objection-table-name": "^1.2.5",
     "openid-client": "^4.9.1",
     "p-timeout": "^4.1.0",
