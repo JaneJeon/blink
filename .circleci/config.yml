@@ -10,7 +10,7 @@ aliases:
       name: node/default
       tag: lts
   - &size
-    resource_class: small
+    resource_class: medium
 
 jobs:
   lint:
