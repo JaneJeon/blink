@@ -58,7 +58,7 @@ jobs:
   publish-tag:
     machine:
       image: ubuntu-2004:202107-02
-    size: small
+    resource_class: small
     steps:
       - checkout
       - &docker-login
@@ -68,7 +68,7 @@ jobs:
   publish-latest:
     machine:
       image: ubuntu-2004:202107-02
-    size: small
+    resource_class: small
     steps:
       - checkout
       - *docker-login
