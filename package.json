@@ -7,8 +7,8 @@
   "proxy": "http://localhost:3000",
   "homepage": "/app",
   "scripts": {
-    "prestart": "NODE_ENV=development run-s build:yaml build:schema migrate seed --print-name && wait-on -l http://keycloak:8080/auth/realms/blink-realm",
-    "start": "NODE_ENV=development run-p start:* watch --race",
+    "prestart": "run-s build:yaml build:schema migrate seed --print-name && wait-on -l http://keycloak:8080/auth/realms/blink-realm",
+    "start": "run-p start:* watch --race",
     "start:frontend": "BROWSER=none FORCE_COLOR=true PORT=4000 react-scripts start | cat",
     "start:backend": "nodemon ./bin/www",
     "migrate": "knex migrate:latest",
@@ -40,7 +40,7 @@
     "test:watch": "run-s pretest test:watch:* --print-name",
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
     "test:watch:frontend": "REACT_TEST=true react-scripts test",
-    "test:nowatch:backend": "NODE_ENV=test npm run migrate && jest --forceExit"
+    "test:nowatch:backend": "npm run migrate && jest --forceExit"
   },
   "dependencies": {
     "@casl/ability": "^5.4.3",
