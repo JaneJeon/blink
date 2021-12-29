@@ -9,7 +9,6 @@ properties:
     enum:
       - user
       - superuser
-    default: user # no need to worry about gating this behind a policy - the "user creation" only happens in passportjs
   name:
     type: string
   deactivated:
