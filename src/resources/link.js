@@ -69,7 +69,7 @@ export const Show = props => (
       <TextField source="meta.author" label="Author" />
       <TextField source="meta.publisher" label="Publisher" />
       <TextField source="meta.lang" label="Language" />
-      <DateField source="meta.date" label="Original link created at" />
+      <DateField source="meta.date" label="created at" />
 
       <QRCodeField />
     </SimpleShowLayout>
@@ -140,7 +140,7 @@ const EditComponent = props => {
           )
         }}
       />
-
+      <Typography variant="h6">Original link information</Typography>
       <TextInput
         disabled={
           schemaAt('meta.title').readOnly ||
