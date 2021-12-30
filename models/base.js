@@ -8,6 +8,8 @@ const entries = require('lodash/toPairs')
 const policies = require('../policies')
 const schema = require('../config/schema/files')
 const httpError = require('http-errors')
+const addFormats = require('ajv-formats')
+const logger = require('../lib/logger')
 
 Model.knex(require('../lib/knex'))
 
@@ -50,13 +52,12 @@ class BaseModel extends authorize(policies, 'casl', {
 
   static createValidator() {
     return new AjvValidator({
-      // eslint-disable-next-line no-unused-vars
-      onCreateAjv: ajv => {}, // need an empty function
+      onCreateAjv: ajv => {
+        addFormats(ajv, { mode: 'fast' })
+      },
       options: {
-        // mutating inputs
-        removeAdditional: true,
-        useDefaults: true,
-        schemas: values(schema)
+        schemas: values(schema),
+        logger
       }
     })
   }
