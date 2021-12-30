@@ -5,10 +5,9 @@ td {
 }
 
 td.column-originalUrl {
-  max-width: 300px;
+  max-width: 15rem;
 }
 
-td.column-shortenedUrl,
-td.column-brandedUrl {
-  max-width: 200px;
+.RaSidebar-fixed-36 {
+  width: inherit;
 }

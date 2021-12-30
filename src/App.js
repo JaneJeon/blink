@@ -42,8 +42,7 @@ export default function App() {
           primary: prefersDarkMode ? blue : indigo
         },
         sidebar: {
-          width: 200,
-          closedWidth: 50
+          width: '14rem'
         }
       }),
     [prefersDarkMode]
