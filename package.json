@@ -37,7 +37,7 @@
     "lint:eslint": "eslint . --cache --ignore-path .gitignore",
     "pretest": "run-s build:yaml build:schema",
     "test": "run-s test:nowatch:*",
-    "test:watch": "run-s pretest test:watch:*",
+    "test:watch": "npm run pretest && run-p test:watch:* watch",
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
     "test:watch:frontend": "react-scripts test",
     "test:nowatch:backend": "jest --forceExit",
