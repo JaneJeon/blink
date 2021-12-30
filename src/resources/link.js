@@ -26,7 +26,7 @@ import getJsonPath from '../utils/get-json-path'
 import QRCodeDisplay from '../components/qr-code'
 
 export const List = props => (
-  <DataList {...props} perPage={15}>
+  <DataList {...props} perPage={10}>
     <Datagrid rowClick="show">
       <UrlField source="originalUrl" label="Original link" sortable={false} />
       <UrlField source="shortenedUrl" label="Short link" sortable={false} />

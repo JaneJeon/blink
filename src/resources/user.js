@@ -28,7 +28,7 @@ const roleChoices = schema.User.properties.role.enum.map(role => ({
 }))
 
 export const List = props => (
-  <DataList {...props} perPage={15}>
+  <DataList {...props} perPage={10}>
     <Datagrid rowClick="show">
       <TextField source="name" name="Name" sortable={false} />
       <SelectField
