@@ -7,6 +7,7 @@ const http = require('http')
 const app = require('../app')
 const log = require('../lib/logger')
 const knex = require('../lib/knex')
+const setupDB = require('../scripts/setup-db')
 
 log.info('Starting server under %s environment...', process.env.NODE_ENV)
 
@@ -24,20 +25,32 @@ const server = http.createServer(app)
 /**
  * Listen on provided port, on all network interfaces
  */
-server.listen(port).on('error', onError).on('listening', onListening)
+setupDB()
+  .then(() => {
+    server.listen(port).on('error', onError).on('listening', onListening)
+  })
+  .catch(err => {
+    log.error(err)
+    process.exit(1)
+  })
 
 /**
  * Graceful shutdown for pm2/docker
  */
 const gracefulShutdown = () => {
   log.info('Received shutdown signal. Closing connections...')
+
   server.close(async err => {
-    if (err) log.error(err) // https://nodejs.org/api/net.html#net_server_close_callback
-    log.info(
-      'Closed all connections. Tearing down database connection pools...'
-    )
+    // https://nodejs.org/api/net.html#net_server_close_callback
+    if (err) {
+      log.error(err)
+      return process.exit(1)
+    }
+
+    log.info('Closed all connections. Tearing down database connections...')
     await knex.destroy()
     log.info('Shutdown successful!')
+
     process.exit(0)
   })
 }
