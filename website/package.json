@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "ALGOLIA_API_KEY=docusaurus-shits-the-bed-without-this docusaurus start",
-    "build": "docusaurus build",
+    "build": "ALGOLIA_API_KEY=docusaurus-shits-the-bed-without-this docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

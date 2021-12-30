@@ -9,7 +9,6 @@ properties:
     enum:
       - user
       - superuser
-    default: user
   name:
     type: string
   deactivated:

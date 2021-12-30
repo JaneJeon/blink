@@ -10,7 +10,6 @@ for file in *.json; do
         --remove-additional \
         --use-defaults \
         --coerce-types \
-        --allow-union-types \
         --all-errors \
         --code-es5=true \
         compile \

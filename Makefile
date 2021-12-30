@@ -31,10 +31,10 @@ logs:
 	$(DC) $(DC_ALL) logs -f $(SERVICE)
 
 COMMAND=sh
-dev:
+dev: up
 	NODE_ENV=development $(DC) $(DC_ALL) run --rm app $(COMMAND)
 
-test:
+test: up
 	NODE_ENV=test $(DC) $(DC_ALL) run --rm app $(COMMAND)
 
 cert:

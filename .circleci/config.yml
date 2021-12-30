@@ -14,6 +14,7 @@ jobs:
           NODE_ENV: test
           DATABASE_URL: postgres://knex@localhost/blink
           REDIS_URL: redis://localhost
+          NPM_CONFIG_PREFER_OFFLINE: 'true'
     steps:
       - checkout
       - node/install-packages
