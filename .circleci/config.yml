@@ -58,6 +58,7 @@ jobs:
       image: ubuntu-2004:202107-02
     steps:
       - checkout
+      - run: echo "Releasing tag << parameters.tag >>"
       - run: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
       - run: docker build -t "ghcr.io/janejeon/blink:<< parameters.tag >>" .
       - run: docker push "ghcr.io/janejeon/blink:<< parameters.tag >>"
