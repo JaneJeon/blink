@@ -69,7 +69,7 @@ jobs:
       - run: docker push "ghcr.io/janejeon/blink:latest"
 
 workflows:
-  build-and-test:
+  build:
     jobs:
       - lint:
           post-steps:
