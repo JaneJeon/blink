@@ -51,32 +51,28 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
             LINK_TIMEOUT: 4 seconds
   publish-tag:
+    parameters:
+      tag:
+        type: string
     machine:
       image: ubuntu-2004:202107-02
     steps:
       - checkout
-      - &docker-login
-        run: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
-      - run: docker build -t "ghcr.io/janejeon/blink:$CIRCLE_TAG" .
-      - run: docker push "ghcr.io/janejeon/blink:$CIRCLE_TAG"
-  publish-latest:
-    machine:
-      image: ubuntu-2004:202107-02
-    steps:
-      - checkout
-      - *docker-login
-      - run: docker build -t "ghcr.io/janejeon/blink:latest" .
-      - run: docker push "ghcr.io/janejeon/blink:latest"
+      - run: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
+      - run: docker build -t "ghcr.io/janejeon/blink:<< parameters.tag >>" .
+      - run: docker push "ghcr.io/janejeon/blink:<< parameters.tag >>"
 
 workflows:
   build:
     jobs:
-      - lint:
+      - &lint-job
+        lint:
           post-steps:
             - &retrieve-junit
               store_test_results:
                 path: reports
-      - test-frontend: &test-config
+      - &frontend-job
+        test-frontend: &test-config
           context: shared-vars
           requires:
             - lint
@@ -86,9 +82,22 @@ workflows:
               slack/notify:
                 event: fail
                 template: basic_fail_1
-      - test-backend:
+      - &backend-job
+        test-backend:
           <<: *test-config
-      - publish-latest:
+  release-nightly:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *' # every day at 12:00am UTC or around 7pm EST
+          filters:
+            branches:
+              only: master
+    jobs:
+      - *lint-job
+      - *frontend-job
+      - *backend-job
+      - publish-tag:
+          tag: nightly
           context: shared-vars
           requires:
             - test-frontend
@@ -97,13 +106,11 @@ workflows:
             branches:
               only: master
           post-steps:
-            - &notify-success
-              slack/notify:
-                event: pass
-                template: success_tagged_deploy_1
+            - *notify-failure
   release:
     jobs:
       - publish-tag:
+          tag: $CIRCLE_TAG
           context: shared-vars
           filters:
             # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
@@ -112,4 +119,4 @@ workflows:
             tags:
               only: /^v.*/
           post-steps:
-            - *notify-success
+            - *notify-failure
