@@ -39,7 +39,7 @@
     "test": "run-s test:nowatch:* --print-name",
     "test:watch": "run-s pretest test:watch:* --print-name",
     "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
-    "test:watch:frontend": "REACT_TEST=true react-scripts test",
+    "test:watch:frontend": "react-scripts test",
     "test:nowatch:backend": "npm run migrate && jest --forceExit"
   },
   "dependencies": {

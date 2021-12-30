@@ -11,8 +11,7 @@ const isRunningInNode =
   typeof process !== 'undefined' &&
   process.versions != null &&
   process.versions.node != null
-const isReactTest =
-  process.env.REACT_TEST === 'true' || process.env.REACT_TEST === '1'
+const isReactTest = typeof window !== 'undefined'
 
 module.exports = (user, resource, action, body, opts, relation) => {
   const { rules, can: allow, cannot: forbid } = new AbilityBuilder(Ability)
