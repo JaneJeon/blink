@@ -1,6 +1,7 @@
 const apiHeaderGen = require('../../__utils__/bearer-header-gen')
-const merge = require('lodash/merge')
+require('../__utils__/mock-http-requests')
 
+const merge = require('lodash/merge')
 const supertest = require('supertest')
 const app = require('../../app')
 const session = supertest.agent(app)

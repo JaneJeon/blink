@@ -1,3 +1,5 @@
+require('../__utils__/mock-http-requests')
+
 const User = require('./user')
 const Link = require('./link')
 const normalizeUrl = require('normalize-url')
