@@ -37,11 +37,11 @@
     "lint:eslint": "eslint . --cache --ignore-path .gitignore",
     "pretest": "run-s build:yaml build:schema",
     "test": "run-s test:nowatch:*",
-    "test:watch": "npm run pretest && concurrently npm:test:watch:* npm:watch",
-    "test:nowatch:frontend": "CI=true npm run test:watch:frontend",
-    "test:watch:frontend": "react-scripts test",
+    "test:watch": "npm run pretest && concurrently npm:test:watch:* npm:watch --kill-others",
+    "test:nowatch:frontend": "CI=1 react-scripts test",
+    "test:watch:frontend": "onchange -i -k '**/*.{js,json,yml}' -- npm run test:nowatch:frontend",
     "test:nowatch:backend": "jest --forceExit",
-    "test:watch:backend": "jest --watch"
+    "test:watch:backend": "onchange -i -k '**/*.{js,json,yml}' -- npm run test:nowatch:backend"
   },
   "dependencies": {
     "@casl/ability": "^5.4.3",
