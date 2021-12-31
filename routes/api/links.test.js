@@ -1,5 +1,5 @@
 const apiHeaderGen = require('../../__utils__/bearer-header-gen')
-require('../__utils__/mock-http-requests')
+require('../../__utils__/mock-http-requests')
 
 const merge = require('lodash/merge')
 const supertest = require('supertest')
