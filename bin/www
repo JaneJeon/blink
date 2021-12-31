@@ -25,12 +25,14 @@ const server = http.createServer(app)
 /**
  * Listen on provided port, on all network interfaces
  */
+log.info('Setting up DB...')
 setupDB()
   .then(() => {
+    log.info('Successfully set up DB. Starting server...')
     server.listen(port).on('error', onError).on('listening', onListening)
   })
   .catch(err => {
-    log.error(err)
+    log.error(err, 'Encountered a problem setting up DB. Shutting down...')
     process.exit(1)
   })
 
@@ -43,7 +45,7 @@ const gracefulShutdown = () => {
   server.close(async err => {
     // https://nodejs.org/api/net.html#net_server_close_callback
     if (err) {
-      log.error(err)
+      log.error(err, 'Encountered a problem shutting down server, exiting!')
       return process.exit(1)
     }
 
