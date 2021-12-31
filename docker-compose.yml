@@ -13,6 +13,7 @@ services:
     volumes:
       - .:/home/node
       - /home/node/node_modules/
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - public
     labels:
