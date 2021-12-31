@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const knex = require('../lib/knex')
 
 module.exports = async () => {
