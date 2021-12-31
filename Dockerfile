@@ -4,6 +4,7 @@ FROM node:lts-alpine AS deps
 RUN apk add --no-cache --virtual .gyp python3 make g++ libc6-compat && \
     npm i -g npm
 ENV NPM_CONFIG_PREFER_OFFLINE=true
+ENV PATH="node_modules/.bin:$PATH"
 
 USER node
 WORKDIR /home/node
