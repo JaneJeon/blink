@@ -1,18 +1,19 @@
 const nock = require('nock')
 
-nock.disableNetConnect()
+// nock.disableNetConnect()
 
-nock(/timeout\.com/)
-  .get('/')
-  .delay(100000)
-  .reply(200, '<html></html>')
-  .persist()
+// Mock HTTP timeouts
+;['timeout.com', 'www.timeout.com'].forEach(url => {
+  nock(url).get('/').delay(100000).reply(200, '<html></html>').persist()
+})
 
-nock(/^((?!timeout\.com).)*$/)
-  .get('/')
-  .reply(
-    200,
-    `<!doctype html>
+// For a couple of "stock" websites, prevent actually hitting them
+;['nodejs.org', 'google.com', 'example.com', 'js.org'].forEach(url => {
+  nock(url)
+    .get('/')
+    .reply(
+      200,
+      `<!doctype html>
     <html lang="en">
       <head>
         <meta charset="utf-8">
@@ -24,5 +25,6 @@ nock(/^((?!timeout\.com).)*$/)
         <p>Hello!</p>
       </body>
     </html>`
-  )
-  .persist()
+    )
+    .persist()
+})
