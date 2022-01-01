@@ -1,6 +1,6 @@
 const nock = require('nock')
 
-// nock.disableNetConnect()
+nock.disableNetConnect()
 
 // Mock HTTP timeouts
 ;['timeout.com', 'www.timeout.com'].forEach(url => {
