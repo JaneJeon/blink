@@ -15,17 +15,17 @@ nock.enableNetConnect('127.0.0.1')
     .reply(
       200,
       `<!doctype html>
-    <html lang="en">
-      <head>
-        <meta charset="utf-8">
-        <title>Some Title</title>
-        <meta name="description" content="Some Description">
-        <meta name="author" content="Some Author">
-      </head>
-      <body>
-        <p>Hello!</p>
-      </body>
-    </html>`
+      <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <title>Some Title</title>
+          <meta name="description" content="Some Description">
+          <meta name="author" content="Some Author">
+        </head>
+        <body>
+          <p>Hello!</p>
+        </body>
+      </html>`
     )
     .persist()
 })
