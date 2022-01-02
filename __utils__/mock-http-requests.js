@@ -4,12 +4,18 @@ nock.disableNetConnect()
 nock.enableNetConnect('127.0.0.1')
 
 // Mock HTTP timeouts
-;['timeout.com', 'www.timeout.com'].forEach(url => {
-  nock(url).get('/').delay(100000).reply(200, '<html></html>').persist()
+;['https://timeout.com', 'www.timeout.com'].forEach(url => {
+  nock(url).get('/').delay(1000000).reply(200, '<html></html>').persist()
 })
 
 // For a couple of "stock" websites, prevent actually hitting them
-;['nodejs.org', 'google.com', 'example.com', 'js.org'].forEach(url => {
+;[
+  'https://nodejs.org',
+  'https://google.com',
+  'https://example.com',
+  'https://js.org',
+  'https://redirect-test.com'
+].forEach(url => {
   nock(url)
     .get('/')
     .reply(
