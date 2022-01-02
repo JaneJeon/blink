@@ -80,7 +80,6 @@
     "objection-hashid": "^3.0.2",
     "objection-table-name": "^2.0.2",
     "openid-client": "^5.0.0",
-    "p-timeout": "^4.1.0",
     "pg": "^8.7.1",
     "pino": "^7.6.2",
     "rate-limit-redis": "^2.1.0"
@@ -105,6 +104,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex-cleaner": "^1.3.1",
     "lint-staged": "^12.1.4",
+    "nock": "^13.2.1",
     "node-notifier": "^10.0.0",
     "nodemon": "^2.0.13",
     "npm-run-all": "^4.1.5",

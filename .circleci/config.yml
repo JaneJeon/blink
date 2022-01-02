@@ -49,7 +49,6 @@ jobs:
           command: npm run test:nowatch:backend -- --ci --reporters=jest-junit --reporters=default
           environment:
             JEST_JUNIT_OUTPUT_DIR: reports/jest-backend
-            LINK_TIMEOUT: 4 seconds
   publish-tag:
     parameters:
       tag:
