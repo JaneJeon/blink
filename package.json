@@ -60,7 +60,7 @@
     "express-session": "^1.17.1",
     "express-unless": "^1.0.0",
     "got": "^11.8.2",
-    "helmet": "^4.6.0",
+    "helmet": "^5.0.0",
     "http-errors": "^2.0.0",
     "ioredis": "^4.28.0",
     "jwks-rsa": "^2.0.5",
