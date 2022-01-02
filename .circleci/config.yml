@@ -113,9 +113,9 @@ workflows:
           context: shared-vars
           filters:
             # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
-            # branches:
-            #   ignore: /.*/
+            branches:
+              ignore: /.*/
             tags:
-              only: /^v.*/
+              only: /^v[0-9]+(\.[0-9]+)*$/
           post-steps:
             - *notify-failure
