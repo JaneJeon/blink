@@ -1,13 +1,9 @@
 #!/usr/bin/env node
-const knexCleaner = require('knex-cleaner')
 const knex = require('../lib/knex')
 const log = require('../lib/logger')
 
-knexCleaner
-  .clean(knex, {
-    mode: 'truncate',
-    restartIdentity: 'true'
-  })
+knex
+  .raw('DROP SCHEMA IF EXISTS public CASCADE; CREATE SCHEMA public;')
   .then(() => {
     log.info('Cleaned the database!')
     process.exit(0)
