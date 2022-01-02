@@ -1,10 +1,8 @@
-const knex = require('../lib/knex')
+const closeConns = require('../lib/close-connections')
 
 if (typeof afterAll !== 'undefined')
   afterAll(async () => {
-    await knex.destroy()
+    await closeConns()
   })
 
-module.exports = async () => {
-  await knex.destroy()
-}
+module.exports = closeConns
