@@ -1,4 +1,5 @@
 require('../__utils__/trxify-test')
+require('../__utils__/mock-http-requests')
 
 const request = require('supertest')
 const app = require('../app')
