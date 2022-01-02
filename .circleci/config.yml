@@ -116,6 +116,19 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^v[0-9]+(\.[0-9]+)*$/
+              only: /^v.*$/
+          post-steps:
+            - *notify-failure
+  release-latest:
+    jobs:
+      - publish-tag:
+          tag: latest
+          context: shared-vars
+          filters:
+            # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*$/
           post-steps:
             - *notify-failure
