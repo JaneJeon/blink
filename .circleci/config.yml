@@ -92,9 +92,13 @@ workflows:
           post-steps:
             - *retrieve-junit
             - &notify-failure
-              slack/notify:
-                event: fail
-                template: basic_fail_1
+              when:
+                condition:
+                  equal: [master, << pipeline.git.branch >>]
+                steps:
+                  - slack/notify:
+                      event: fail
+                      template: basic_fail_1
       - &backend-job
         test-backend:
           <<: *test-config
