@@ -52,14 +52,23 @@ jobs:
     parameters:
       tag:
         type: string
-    machine:
+    machine: &docker-machine
       image: ubuntu-2004:202107-02
     steps:
       - checkout
       - run: echo "Releasing tag << parameters.tag >>"
-      - run: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
-      - run: docker build -t blink .
+      - &docker-login
+        run: echo $GHCR_TOKEN | docker login ghcr.io -u JaneJeon --password-stdin
+      - run: docker build -t ghcr.io/janejeon/blink:<< parameters.tag >> .
+      - run: docker image push ghcr.io/janejeon/blink:<< parameters.tag >>
+  publish-semver:
+    machine: *docker-machine
+    steps:
+      - checkout
       - run: ./scripts/get-tags.sh
+      - run: echo "Releasing versions $MAJOR_TAG, $MINOR_TAG, and $PATCH_TAG"
+      - *docker-login
+      - run: docker build -t blink .
       - run: docker image tag blink ghcr.io/janejeon/blink:latest
       - run: docker image tag blink ghcr.io/janejeon/blink:MAJOR_TAG
       - run: docker image tag blink ghcr.io/janejeon/blink:MINOR_TAG
@@ -113,22 +122,13 @@ workflows:
             - *notify-failure
   release:
     jobs:
-      - publish-tag:
-          tag: $CIRCLE_TAG
+      - publish-semver:
           context: shared-vars
           filters:
-            &tags-filter # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
+            # CircleCI is so fucking dumb! https://discuss.circleci.com/t/workflow-job-with-tag-filter-being-run-for-every-commit/20762/3
             branches:
               ignore: /.*/
             tags:
               only: /^v.*$/
-          post-steps:
-            - *notify-failure
-  release-latest:
-    jobs:
-      - publish-tag:
-          tag: latest
-          context: shared-vars
-          filters: *tags-filter
           post-steps:
             - *notify-failure
