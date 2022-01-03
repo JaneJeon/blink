@@ -47,7 +47,5 @@ image:
 	docker build -t blink .
 
 tag:
-	git tag -f v$(MAJOR)
-	git tag -f v$(MAJOR).$(MINOR)
-	git tag -f v$(MAJOR).$(MINOR).$(PATCH)
-	git tag -f latest
+	git tag -f $(VERSION)
+	git push --tags
