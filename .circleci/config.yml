@@ -65,7 +65,7 @@ jobs:
     machine: *docker-machine
     steps:
       - checkout
-      - run: ./scripts/get-tags.sh
+      - run: ./scripts/get-tags.sh $CIRCLECI_TAG
       - run: echo "Releasing versions $MAJOR_TAG, $MINOR_TAG, and $PATCH_TAG"
       - *docker-login
       - run: docker build -t blink .

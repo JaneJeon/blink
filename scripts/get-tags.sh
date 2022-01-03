@@ -1,6 +1,8 @@
 #!/bin/sh
 
-VERSION="${CIRCLECI_TAG#[vV]}"
+echo "CIRCLECI_TAG=$CIRCLECI_TAG, \$1=$1"
+
+VERSION="${$1#[vV]}"
 MAJOR="${VERSION%%\.*}"
 MINOR="${VERSION#*.}"
 MINOR="${MINOR%.*}"
