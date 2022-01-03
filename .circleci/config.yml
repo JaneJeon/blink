@@ -70,9 +70,9 @@ jobs:
       - *docker-login
       - run: docker build -t blink .
       - run: docker image tag blink ghcr.io/janejeon/blink:latest
-      - run: docker image tag blink ghcr.io/janejeon/blink:MAJOR_TAG
-      - run: docker image tag blink ghcr.io/janejeon/blink:MINOR_TAG
-      - run: docker image tag blink ghcr.io/janejeon/blink:PATCH_TAG
+      - run: docker image tag blink ghcr.io/janejeon/blink:$MAJOR_TAG
+      - run: docker image tag blink ghcr.io/janejeon/blink:$MINOR_TAG
+      - run: docker image tag blink ghcr.io/janejeon/blink:$PATCH_TAG
       - run: docker image push --all-tags ghcr.io/janejeon/blink
 
 workflows:
