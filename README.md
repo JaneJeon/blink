@@ -90,7 +90,7 @@ Give a ⭐️ if this project helped you!
 Copyright © 2022 [Jane Jeon](https://github.com/JaneJeon).<br />
 This project is [AGPL-3.0](https://github.com/JaneJeon/blink/blob/master/LICENSE) licensed.
 
-TL;DR: you are free to use this application "as-is" in your code or on its own, without needing to make your code source-available and license it under the same license as this application; however, if you do change this application and you distribute it (which includes using it to provide a public service over the network), please do contribute back any improvements for this application.
+TL;DR: you are free to use this application "as-is" in your code or on its own, without needing to make your code source-available or to license it under the same license as this application; however, if you do change this application or you distribute it (which includes using it to provide a public service over the network), please do contribute back any improvements for this application.
 
 ---
 
