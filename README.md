@@ -87,7 +87,7 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2021 [Jane Jeon](https://github.com/JaneJeon).<br />
+Copyright © 2022 [Jane Jeon](https://github.com/JaneJeon).<br />
 This project is [AGPL-3.0](https://github.com/JaneJeon/blink/blob/master/LICENSE) licensed (TL;DR: please contribute back improvements to this application).
 
 ---
