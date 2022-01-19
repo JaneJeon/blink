@@ -83,7 +83,7 @@
     "openid-client": "^5.0.0",
     "pg": "^8.7.1",
     "pino": "^7.6.2",
-    "rate-limit-redis": "^2.1.0"
+    "rate-limit-redis": "^3.0.0"
   },
   "devDependencies": {
     "@casl/react": "^2.1.1",
