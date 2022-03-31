@@ -90,7 +90,7 @@
     "@janejeon/eslint-config": "3.0.0-2",
     "@janejeon/prettier-config": "^1.1.0",
     "@testing-library/jest-dom": "^5.11.2",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.4.1",
     "@types/jest": "^27.0.2",
     "ajv-cli": "^5.0.0",
