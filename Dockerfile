@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 #----------------------------------------#
 # dev/test
 FROM node:lts-alpine AS deps
