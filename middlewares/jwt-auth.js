@@ -1,6 +1,6 @@
 // Use express-jwt here instead of passport-jwt because we can't really ameliorate the differences
 // between session-based user auth and JWT-based API auth.
-const jwt = require('express-jwt')
+const { expressjwt } = require('express-jwt')
 const jwks = require('jwks-rsa')
 const ms = require('ms')
 const httpError = require('http-errors')
@@ -10,7 +10,7 @@ const scope = require('../lib/scope')
 
 exports.useJwtAuth =
   process.env.OAUTH2_ENABLED === 'true'
-    ? jwt({
+    ? expressjwt({
         secret:
           process.env.OAUTH2_JWT_SECRET ||
           jwks.expressJwtSecret({
