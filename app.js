@@ -9,8 +9,14 @@ const passport = require('./middlewares/passport')
 const jwtAuth = require('./middlewares/jwt-auth')
 const rateLimit = require('./middlewares/rate-limiter')
 
+let trustProxy
+if (!process.env.TRUST_PROXY || process.env.TRUST_PROXY === 'false')
+  trustProxy = false
+else if (process.env.TRUST_PROXY === 'true') trustProxy = true
+else trustProxy = process.env.TRUST_PROXY.split(',')
+
 module.exports = express()
-  .set('trust proxy', true)
+  .set('trust proxy', trustProxy)
   .use(require('./middlewares/security'))
   .use(
     express.json({
