@@ -51,7 +51,7 @@ services:
     networks:
       - public
   redis-test:
-    image: redis:6-alpine
+    image: redis:7-alpine
     ports:
       - 63790:6379
     networks:
