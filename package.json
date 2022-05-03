@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@casl/ability": "^5.4.3",
-    "@hapi/bourne": "^2.0.0",
+    "@hapi/bourne": "^3.0.0",
     "@passport-next/passport": "^3.1.0",
     "ajv": "^8.6.3",
     "ajv-formats": "^2.1.1",
