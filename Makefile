@@ -3,8 +3,8 @@
 
 D=docker
 DC=$(D) compose
-DC_APP=-f docker-compose.yml
-DC_SVCS=-f docker-compose.dev.yml
+DC_APP=-f compose.yaml
+DC_SVCS=-f compose.dev.yaml
 DC_ALL=$(DC_APP) $(DC_SVCS)
 
 network-up:
@@ -14,17 +14,17 @@ network-down:
 	@$(D) network rm public || true
 
 build: network-up
-	$(DC) $(DC_APP) build
+	@$(DC) $(DC_APP) build
 
 rebuild:
-	$(DC) $(DC_APP) build --no-cache
+	@$(DC) $(DC_APP) build --no-cache
 
 up: network-up
-	$(DC) $(DC_ALL) up --renew-anon-volumes --build -d
+	@$(DC) $(DC_ALL) up --renew-anon-volumes --build -d
 
 down:
-	$(DC) $(DC_ALL) down --remove-orphans -v
-	$(MAKE) network-down
+	@$(DC) $(DC_ALL) down --remove-orphans -v
+	@$(MAKE) network-down
 
 # e.g. make logs SERVICE=app
 logs:
@@ -44,7 +44,7 @@ cert:
 		localhost traefik.localhost keycloak.localhost
 
 image:
-	docker build -t blink .
+	@$(D) build -t blink .
 
 tag:
 	git tag -f $(VERSION)
