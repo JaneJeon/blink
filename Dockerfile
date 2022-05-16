@@ -11,8 +11,7 @@ USER node
 WORKDIR /home/node
 
 # "Cache" node_modules first so that changes in the source code doesn't trigger a rebuild
-COPY .npmrc .
-COPY package*.json ./
+COPY --chown=node:node [ "package*.json", ".npmrc", "./" ]
 RUN npm ci
 
 COPY --chown=node:node . .
