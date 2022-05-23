@@ -39,7 +39,7 @@ jobs:
         environment:
           POSTGRES_DB: blink
           POSTGRES_USER: knex
-      - image: cimg/redis:6.2
+      - image: cimg/redis:7.0
     steps:
       - checkout
       - node/install-packages
