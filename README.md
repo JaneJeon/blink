@@ -36,14 +36,6 @@ Run `make dev` to stand up the development environment (i.e. it will run the act
 
 Behind the scenes, the frontend (a create-react-app app) is running at http://localhost:4000/app and is being reverse proxied from https://localhost/app, and everything else in https://localhost gets proxied to the backend at http://localhost:3000. Yes, there are two processes running in the container pretending to be one "site", but this kind of routing (thanks Traefik!) allows us to not have horrible routing issues (stemming from the fact that even though they're both http://localhost, the different port means they're effectively _two different sites_ and leads to a whole host of routing, CORS, and other integration issues), _and_ allows testing of features that are only available for HTTPS in order to simulate real-world usage as much as possible.
 
-### Deployment with Docker Compose
-
-Under the /Deploy/Docker-Compose/ directory in this repo is a base docker-compose.yml and .env files that you can use to deploy this with no building necessary. Just ensure the database details are entered correctly (strongly advise using a different password for the database than is currently specified) and that you've added relevent OIDC/OAUTH/SESSION config to the .env file and you should be good to go.
-
-Simply download both files, and run:
-
-`docker compose up -d`
-
 ### Troubleshooting
 
 If you can't reach any service or if you suspect the routing is messed up, first check https://traefik.localhost to make sure that everything is configured correctly.
@@ -59,6 +51,14 @@ make test COMMAND='npm test'
 make test
 $ npm run test:watch
 ```
+
+### Deployment with Docker Compose
+
+Under the /Deploy/Docker-Compose/ directory in this repo is a base docker-compose.yml and .env files that you can use to deploy this with no building necessary. Just ensure the database details are entered correctly (strongly advise using a different password for the database than is currently specified) and that you've added relevent OIDC/OAUTH/SESSION config to the .env file and you should be good to go.
+
+Simply download both files, and run:
+
+`docker compose up -d`
 
 ## Author
 
