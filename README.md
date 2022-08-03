@@ -52,6 +52,14 @@ make test
 $ npm run test:watch
 ```
 
+### Deployment with Docker Compose
+
+Under the /Deploy/Docker-Compose/ directory in this repo is a base docker-compose.yml and .env files that you can use to deploy this with no building necessary. Just ensure the database details are entered correctly (strongly advise using a different password for the database than is currently specified) and that you've added relevent OIDC/OAUTH/SESSION config to the .env file and you should be good to go.
+
+Simply download both files, and run:
+
+`docker compose up -d`
+
 ## Author
 
 👤 **Jane Jeon**
