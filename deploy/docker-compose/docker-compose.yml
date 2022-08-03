@@ -14,7 +14,6 @@ services:
     # The frontend can be accessed on this port under the /app folder, eg: if your BASE_URL is test.com, the frontend can be accessed via test.com/app
     # You can use a reverse proxy to configure the /app directory to a different port.
     # You can change the port as well using the above string and the PORT environment variable.
-    labels:
   postgres_blink:
     container_name: postgres_blink
     image: postgres:14-alpine
