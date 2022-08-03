@@ -78,3 +78,4 @@ src/schema/*.json
 src/schema/*.compiled.js
 .cache
 .local
+**/.DS_Store
