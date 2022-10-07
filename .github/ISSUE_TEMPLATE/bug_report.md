@@ -7,7 +7,12 @@ assignees: ''
 
 ---
 
-## BEFORE YOU FILE A "BUG" REPORT, PLEASE ENSURE THAT IT IS NOT A "SUPPORT REQUEST". I WILL NOT FIX YOUR MISTAKES THAT A SIMPLE READING OF THE DOCUMENTATION WOULD'VE SOLVED! IF IT IS INDEED A "SUPPORT REQUEST" THAN A "BUG REPORT", THE ISSUE *WILL* BE IGNORED AND/OR LOCKED!
+## Disclaimers
+
+- [ ] Before filing this report, I have read the documentation fully and followed it.
+- [ ] I understand that if the "issue" is something that is already answered by the documentation and/or are caused by me not reading the documentation, the issue *will* be blocked and/or locked (with the implicit explanation being to "go read the docs"), and I may not be able to open another issue for this repository ever again.
+
+## Issue Description
 
 **Describe the bug**
 A clear and concise description of what the bug is.
