@@ -30,6 +30,10 @@
       "description": "the session encryption key",
       "generator": "secret"
     },
+    "OAUTH2_ENABLED": {
+      "description": "enable this separately later once Blink is running.",
+      "value": "false"
+    },
     "HEROKU": {
       "description": "this indicates whether Blink is running in Heroku; do not change this",
       "value": "true"
