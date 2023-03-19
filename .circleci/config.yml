@@ -35,7 +35,7 @@ jobs:
     resource_class: medium # jest is able to run tests in parallel
     docker:
       - *runner
-      - image: cimg/postgres:14.2
+      - image: cimg/postgres:14.7
         environment:
           POSTGRES_DB: blink
           POSTGRES_USER: knex
