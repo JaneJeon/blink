@@ -4,6 +4,13 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github')
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 
+// Load from .env during local development
+try {
+  const dotenv = require('dotenv')
+
+  dotenv.config()
+} catch (e) {}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Blink',
@@ -123,6 +130,11 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme
+      },
+      algolia: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_API_KEY, // look for "Search API Key"
+        indexName: 'blink'
       }
     })
 }
