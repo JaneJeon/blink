@@ -42,7 +42,8 @@
     "test:nowatch:frontend": "CI=1 react-scripts test",
     "test:watch:frontend": "onchange -i -k '**/*.{js,json,yml}' -- npm run test:nowatch:frontend",
     "test:nowatch:backend": "jest --forceExit",
-    "test:watch:backend": "onchange -i -k '**/*.{js,json,yml}' -- npm run test:nowatch:backend"
+    "test:watch:backend": "onchange -i -k '**/*.{js,json,yml}' -- npm run test:nowatch:backend",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@casl/ability": "^5.4.3",
@@ -98,7 +99,7 @@
     "concurrently": "^7.0.0",
     "dayjs": "^1.10.7",
     "history": "^4.10.1",
-    "husky": "^4.3.8",
+    "husky": "^8.0.3",
     "jest-fetch-mock": "^3.0.3",
     "jest-junit": "^13.0.0",
     "json-schema-faker": "^0.5.0-rcv.40",
