@@ -1,6 +1,5 @@
 '*.js':
   - eslint --fix
-  - prettier --write
 
 '*':
   - prettier --ignore-unknown --write
