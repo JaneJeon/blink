@@ -13,7 +13,7 @@ properties:
     nullable: true
     minLength: 4
     maxLength: 25
-    pattern: "\\w+"
+    pattern: "^[\\w-]+$"
   originalUrl:
     type: string
     readOnly: true
