@@ -14,7 +14,9 @@ module.exports = Router()
     if (
       req.params.hash.length < schema.Link.properties.hash.minLength ||
       req.params.hash.length > schema.Link.properties.hash.maxLength ||
-      !new RegExp(schema.Link.properties.hash.pattern, 'u').test(req.params)
+      !new RegExp(schema.Link.properties.hash.pattern, 'u').test(
+        req.params.hash
+      )
     )
       return res.sendStatus(404)
 
