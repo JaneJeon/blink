@@ -9,10 +9,12 @@ module.exports = Router()
     res.set('Cache-Control', `public, max-age=${cacheAge}`)
     res.redirect(301, process.env.HOMEPAGE)
   })
-  .get(`/:hash(${schema.Link.properties.hash.pattern})`, async (req, res) => {
+  .get(`/:hash`, async (req, res) => {
+    // Just do the validation in the route; ^pattern$ doesn't work well with express routes.
     if (
       req.params.hash.length < schema.Link.properties.hash.minLength ||
-      req.params.hash.length > schema.Link.properties.hash.maxLength
+      req.params.hash.length > schema.Link.properties.hash.maxLength ||
+      !new RegExp(schema.Link.properties.hash.pattern, 'u').test(req.params)
     )
       return res.sendStatus(404)
 
