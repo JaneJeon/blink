@@ -10,6 +10,12 @@ module.exports = Router()
     res.redirect(301, process.env.HOMEPAGE)
   })
   .get(`/:hash(${schema.Link.properties.hash.pattern})`, async (req, res) => {
+    if (
+      req.params.hash.length < schema.Link.properties.hash.minLength ||
+      req.params.hash.length > schema.Link.properties.hash.maxLength
+    )
+      return res.sendStatus(404)
+
     const link = await Link.query()
       .findByHashId(req.params.hash)
       .throwIfNotFound()
