@@ -5,7 +5,11 @@ nock.enableNetConnect('127.0.0.1')
 
 // Mock HTTP timeouts
 ;['https://timeout.com', 'www.timeout.com'].forEach(url => {
-  nock(url).get('/').delay(1000000).reply(200, '<html></html>').persist()
+  nock(url)
+    .get('/')
+    .delay(1_000_000)
+    .reply(200, '<html></html>', { 'Content-Type': 'text/html' })
+    .persist()
 })
 
 // For a couple of "stock" websites, prevent actually hitting them
@@ -31,7 +35,8 @@ nock.enableNetConnect('127.0.0.1')
         <body>
           <p>Hello!</p>
         </body>
-      </html>`
+      </html>`,
+      { 'Content-Type': 'text/html' }
     )
     .persist()
 })
