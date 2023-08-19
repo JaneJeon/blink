@@ -66,7 +66,8 @@ class Link extends hashId(BaseModel) {
     await super.$beforeInsert(queryContext)
 
     // update metadata by visiting the URL
-    this.meta = merge(await scrape(this.originalUrl), this.meta)
+    const scrapedMetadata = await scrape(this.originalUrl)
+    this.meta = merge({}, this.meta, scrapedMetadata)
   }
 
   static get virtualAttributes() {
