@@ -93,7 +93,7 @@
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.4.1",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^29.0.0",
     "ajv-cli": "^5.0.0",
     "clarify": "^2.1.0",
     "concurrently": "^7.0.0",
