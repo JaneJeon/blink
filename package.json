@@ -98,7 +98,7 @@
     "clarify": "^2.1.0",
     "concurrently": "^7.0.0",
     "dayjs": "^1.10.7",
-    "history": "^4.10.1",
+    "history": "^5.0.0",
     "husky": "^8.0.3",
     "jest-fetch-mock": "^3.0.3",
     "jest-junit": "^13.0.0",
