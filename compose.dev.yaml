@@ -16,7 +16,7 @@ services:
       - traefik.http.routers.traefik.rule=Host(`traefik.localhost`)
       - traefik.http.services.api@internal.loadbalancer.server.port=8080
   keycloak:
-    image: jboss/keycloak:13.0.1
+    image: jboss/keycloak:16.1.1
     volumes:
       - ./config/keycloak.json:/mnt/keycloak.json:ro
     environment:
