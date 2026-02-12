@@ -59,7 +59,7 @@
     "express-query-boolean": "^2.0.0",
     "express-rate-limit": "^6.4.0",
     "express-session": "^1.17.1",
-    "express-unless": "^1.0.0",
+    "express-unless": "^2.0.0",
     "got": "^11.8.5",
     "helmet": "^5.0.0",
     "http-errors": "^2.0.0",
